@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <!-- Indicates that a rebuild is required if this file changes. -->
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+
+    <!-- Indicates that we've imported this targets file. -->
+    <SourceDirectoryBuildPropsIncluded>True</SourceDirectoryBuildPropsIncluded>
+  </PropertyGroup>
+
+  <Import Project="..\Directory.Build.props" />
+
+    <ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)\CommonAssemblyInfo.cs" />
+    </ItemGroup>
+</Project>

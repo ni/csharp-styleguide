@@ -1,0 +1,80 @@
+<Project>
+    <PropertyGroup>
+        <!-- Indicates that a rebuild is required if this file changes. -->
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+
+        <!-- Indicates that we've imported this targets file. -->
+        <SourceDirectoryBuildPropsIncluded>True</SourceDirectoryBuildPropsIncluded>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <NILibraryTargetFramework>netstandard2.0</NILibraryTargetFramework>
+        <NIExecutableTargetFramework>netcoreapp3.1</NIExecutableTargetFramework>
+        <NIAnalyzersTargetFramework>netstandard1.3</NIAnalyzersTargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <AssemblyName>NationalInstruments.Tools.$(MSBuildProjectName)</AssemblyName>
+        <RootNamespace>NationalInstruments.Tools.$(MSBuildProjectName)</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory).objs\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+        <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)</IntermediateOutputPath>
+        <NugetPackageDir>$(USERPROFILE)\.nuget\packages</NugetPackageDir>
+        <OutputPath>$(MSBuildThisFileDirectory).binaries\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+        <PublishDir>$(MSBuildThisFileDirectory).publish\$(Configuration)\$(MSBuildProjectName)</PublishDir>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <VersionPrefix>10.0.0.0</VersionPrefix>
+        <Company>National Instruments</Company>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <Copyright>Copyright (C) National Instruments $([System.DateTime]::Now.ToString(`yyyy`)).  All Rights Reserved.</Copyright>
+        <CLSCompliant>True</CLSCompliant>
+    </PropertyGroup>
+
+<!--
+    <PropertyGroup>
+        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\.BuildTools\StrongNameKey\NationalInstruments.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
+        <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
+    </PropertyGroup>
+-->
+
+    <PropertyGroup>
+        <IncludeCompatabilityAnalyzer Condition=" '$(IncludeCompatabilityAnalyzer)' == '' ">True</IncludeCompatabilityAnalyzer>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+        <DebugType>full</DebugType>
+        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+        <RunAnalyzers>false</RunAnalyzers>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DefineConstants>$(DefineConstants)</DefineConstants>
+        <DebugType>pdbonly</DebugType>
+        <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">True</TreatWarningsAsErrors>
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\tools\Labview.Tools.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="2.10.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.10.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3" />
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.0.102" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Condition=" '$(IncludeCompatabilityAnalyzer)' == 'True' " Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)\tools\stylecop.json" />
+    </ItemGroup>
+</Project>

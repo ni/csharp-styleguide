@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Style\Dictionary.dic" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Style\Dictionary.dic" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Analyzers.Utilities\Analyzers.Utilities.csproj" />
   </ItemGroup>
 

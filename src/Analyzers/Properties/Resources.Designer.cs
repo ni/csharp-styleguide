@@ -62,11 +62,200 @@ namespace NationalInstruments.Tools.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Naming.
+        /// </summary>
+        internal static string CategoryNaming {
+            get {
+                return ResourceManager.GetString("CategoryNaming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NationalInstruments.
         /// </summary>
         internal static string CategoryNI {
             get {
                 return ResourceManager.GetString("CategoryNI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of an externally visible identifier contains one or more words that are not recognized by the Microsoft spelling checker library..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyDescription {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error parsing dictionary &apos;{0}&apos;: {1}.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyFileParse {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyFileParse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in assembly name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageAssembly {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider providing a more meaningful name than assembly name {0}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageAssemblyMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageAssemblyMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In delegate {0}, correct the spelling of &apos;{1}&apos; in parameter name {2}.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameter {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In delegate {0}, consider providing a more meaningful name than parameter name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameterMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameterMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in member name {1}.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMember {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider providing a more meaningful name than member name {0}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMemberMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMemberMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In method {0}, correct the spelling of &apos;{1}&apos; in parameter name {2}.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMemberParameter {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMemberParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In method {0}, consider providing a more meaningful name than parameter name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMemberParameterMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMemberParameterMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On method {0}, correct the spelling of &apos;{1}&apos; in generic type parameter name {2}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameter {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On method {0}, consider providing a more meaningful name than generic type parameter name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameterMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameterMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in namespace name &apos;{1}&apos;..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageNamespace {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageNamespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider providing a more meaningful name than namespace name &apos;{0}&apos;..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageNamespaceMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageNamespaceMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in type name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageType {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider providing a more meaningful name than type name {0}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageTypeMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageTypeMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On type {0}, correct the spelling of &apos;{1}&apos; in generic type parameter name {2}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameter {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On type {0}, consider providing a more meaningful name than generic type parameter name {1}..
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameterMoreMeaningfulName {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameterMoreMeaningfulName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in variable name {1}.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyMessageVariable {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyMessageVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifiers should be spelled correctly.
+        /// </summary>
+        internal static string IdentifiersShouldBeSpelledCorrectlyTitle {
+            get {
+                return ResourceManager.GetString("IdentifiersShouldBeSpelledCorrectlyTitle", resourceCulture);
             }
         }
         

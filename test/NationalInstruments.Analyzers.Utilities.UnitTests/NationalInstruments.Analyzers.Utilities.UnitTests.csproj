@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NIAnalyzersTargetFramework)</TargetFramework>
+    <AssemblyName>NationalInstruments.Analyzers.Utilities.UnitTests</AssemblyName>
+    <RootNamespace>NationalInstruments.Analyzers.Utilities.UnitTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="16.0.102" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NationalInstruments.Analyzers.Utilities\NationalInstruments.Analyzers.Utilities.csproj" />
+    <ProjectReference Include="..\NationalInstruments.Analyzers.TestUtilities\NationalInstruments.Analyzers.TestUtilities.csproj" />
+  </ItemGroup>
+
+</Project>

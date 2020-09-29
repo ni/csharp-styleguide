@@ -70,12 +70,12 @@ namespace NationalInstruments.Analyzers.Correctness
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule, FileParseRule);
 
-        public override void Initialize(AnalysisContext analysisContext)
+        public override void Initialize(AnalysisContext context)
         {
-            analysisContext.EnableConcurrentExecutionIf(IsRunningInProduction);
-            analysisContext.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            context.EnableConcurrentExecutionIf(IsRunningInProduction);
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            analysisContext.RegisterCompilationStartAction(compilationStartContext =>
+            context.RegisterCompilationStartAction(compilationStartContext =>
             {
                 var additionalFileService = new AdditionalFileService(compilationStartContext.Options.AdditionalFiles, FileParseRule);
                 var analyzer = new BannedMethodsAnalyzer(additionalFileService, compilationStartContext.CancellationToken);
@@ -225,14 +225,9 @@ namespace NationalInstruments.Analyzers.Correctness
                     EntryRegex = GetEscapedRegex(EntryName);
                     Justification = options.Justification;
                     Alternative = options.Alternative;
-                    if (!string.IsNullOrWhiteSpace(options.Assemblies))
-                    {
-                        AssemblyRegexes = options.Assemblies.Trim().Split(',').Select(x => GetEscapedRegex(x));
-                    }
-                    else
-                    {
-                        AssemblyRegexes = new List<Regex>();
-                    }
+                    AssemblyRegexes = !string.IsNullOrWhiteSpace(options.Assemblies)
+                        ? options.Assemblies.Trim().Split(',').Select(x => GetEscapedRegex(x))
+                        : new List<Regex>();
                 }
 
                 public string EntryName { get; }

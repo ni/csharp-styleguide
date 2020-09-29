@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!--
+      Tracked by Dev Efficiency: https://trello.com/b/gtoe4Of2/iteration-board
+
+      Remove this file when there is nothing left in these sections.
+  -->
+  <ItemGroup>
+    <RoslynTransition_DisabledRule Include="0419" />
+    <RoslynTransition_DisabledRule Include="1574" />
+    <RoslynTransition_DisabledRule Include="1580" />
+    <RoslynTransition_DisabledRule Include="1587" />
+    <RoslynTransition_DisabledRule Include="1589" />
+    <RoslynTransition_DisabledRule Include="1658" />
+    <RoslynTransition_DisabledRule Include="1712" />
+    <RoslynTransition_DisabledRule Include="1998" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TemporaryWarningsNotAsErrors Condition="'$(TemporaryWarningsNotAsErrors)' == ''"></TemporaryWarningsNotAsErrors>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors),@(RoslynTransition_DisabledRule),$(TemporaryWarningsNotAsErrors)</WarningsNotAsErrors>
+    <NoWarn>$(NoWarn),@(RoslynTransition_DisabledRule)</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <HashFiles Include="$(MSBuildThisFileFullPath)" />
+  </ItemGroup>
+</Project>

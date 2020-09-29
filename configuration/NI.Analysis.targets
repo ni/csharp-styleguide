@@ -1,0 +1,95 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSetDirectory>$(PkgNI_DotNet_Analyzers)\content</CodeAnalysisRuleSetDirectory>
+    <NuGetPackagesDirectory>$(NuGetPackageRoot)</NuGetPackagesDirectory>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<!-- this would more correctly be: assemblyname contains .Test. We have an issue with test utilities projects, and test.testutilities projects. -->
+		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("Tests."))</IsNITestProject>
+		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.EndsWith(".Tests"))</IsNITestProject>
+		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("!Tests."))</IsNITestProject>
+		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("TestUtilities."))</IsNITestUtilitiesProject>
+		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("!TestUtilities."))</IsNITestUtilitiesProject>
+		<!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
+		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True' and '$(IsNITestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</IsNITestUtilitiesProject>
+		<ProjectNameContainsTests>$(MSBuildProjectName.Contains("Tests"))</ProjectNameContainsTests>
+
+		<CodeAnalysisRuleSet>$(CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet Condition="'$(IsNITestProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet Condition="'$(IsNITestUtilitiesProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Enable Roslyn analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->
+    <EnableRoslynAnalyzers>True</EnableRoslynAnalyzers>
+    <IncludeStyleAnalyzers>True</IncludeStyleAnalyzers>
+    <IncludeCodeAnalyzers>True</IncludeCodeAnalyzers>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <StyleCopConfig>$(CodeAnalysisRuleSetDirectory)\stylecop.json</StyleCopConfig>
+    <NI1006_BannedMethods>$(CodeAnalysisRuleSetDirectory)\BannedMethods.xml</NI1006_BannedMethods>
+    <NI1004_LiteralExemptions>$(CodeAnalysisRuleSetDirectory)\LiteralExemptions.xml</NI1004_LiteralExemptions>
+
+    <!-- TODO: Determine whether we want to use the solution directory, the project directory, or both?-->
+    <NI1704_GlobalExceptions>$(SolutionDir)\CodeAnalysisDictionary.xml</NI1704_GlobalExceptions>
+
+    <!--AdditionalSpellingDictionary.dic contains the differences in words between the hunspell and Microsoft dictionaries-->
+    <NI1704_AdditionalSpellingDictionary>$(CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IncludeStyleAnalyzers)' == 'True'">
+    <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->
+    <AdditionalFiles Include="$(StyleCopConfig)" Condition="Exists('$(StyleCopConfig)')">
+      <Link>$(CodeAnalysisRuleSet)</Link>
+    </AdditionalFiles>
+
+    <!-- Microsoft's SA analyzers -->
+    <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>
+    <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IncludeCodeAnalyzers)' == 'True'">
+    <RoslynAnalyzer Include="Microsoft.CodeQuality" />
+    <RoslynAnalyzer Include="Microsoft.NetCore" />
+    <RoslynAnalyzer Include="Microsoft.NetFramework" />
+    <RoslynAnalyzer Include="Text" />
+
+    <!-- Microsoft's CA analyzers -->
+    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).Analyzers.dll')"/>
+    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).CSharp.Analyzers.dll')"/>
+    <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
+
+    <!-- NI's CA analyzers -->
+    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\NI.CodeAnalysis.Analyzers.dll"/>
+    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
+    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\NI.CodeQuality.Analyzers.dll"/>
+    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
+    <Analyzer Include="$(NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Naming.dll"/>
+    <Analyzer Include="$(NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Utilities.dll"/>
+
+    <!-- Configuration files for our analyzers -->
+    <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->
+    <AdditionalFiles Include="$(NI1006_BannedMethods)" Condition="Exists('$(NI1006_BannedMethods)')">
+      <Link>$(NI1006_BannedMethods)</Link>
+    </AdditionalFiles>
+    <AdditionalFiles Include="$(NI1004_LiteralExemptions)" Condition="Exists('$(NI1004_LiteralExemptions)')">
+     <Link>$(NI1004_LiteralExemptions)</Link>
+    </AdditionalFiles>
+    <AdditionalFiles Include="$(NI1704_AdditionalSpellingDictionary)" Condition="Exists('$(NI1704_AdditionalSpellingDictionary)')">
+      <Link>$(CodeAnalysisRuleSet)</Link>
+    </AdditionalFiles>
+    <AdditionalFiles Include="$(CodeAnalysisRuleSet)" Condition="Exists('$(CodeAnalysisRuleSet)')">
+     <Link>$(CodeAnalysisRuleSet)</Link>
+    </AdditionalFiles>
+
+    <AdditionalFiles Include="$(NI1704_GlobalExceptions)" Condition="Exists('$(NI1704_GlobalExceptions)')" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

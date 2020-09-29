@@ -246,12 +246,12 @@ namespace NationalInstruments.Analyzers.Style
             TypeTypeParameterMoreMeaningfulNameRule,
             MethodTypeParameterMoreMeaningfulNameRule);
 
-        public override void Initialize(AnalysisContext analysisContext)
+        public override void Initialize(AnalysisContext context)
         {
-            analysisContext.EnableConcurrentExecutionIf(IsRunningInProduction && !InDebugMode);
-            analysisContext.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            context.EnableConcurrentExecutionIf(IsRunningInProduction && !InDebugMode);
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            analysisContext.RegisterCompilationStartAction(OnCompilationStart);
+            context.RegisterCompilationStartAction(OnCompilationStart);
         }
 
         private static CodeAnalysisDictionary GetMainDictionary()
@@ -275,50 +275,6 @@ namespace NationalInstruments.Analyzers.Style
 
         private static string RemovePrefixIfPresent(string prefix, string name)
             => name.StartsWith(prefix, StringComparison.Ordinal) ? name.Substring(1) : name;
-
-        private static IEnumerable<Diagnostic> GetUnmeaningfulIdentifierDiagnostics(ISymbol symbol, string symbolName)
-        {
-            switch (symbol.Kind)
-            {
-                case SymbolKind.Assembly:
-                    yield return Diagnostic.Create(AssemblyMoreMeaningfulNameRule, Location.None, symbolName);
-                    break;
-
-                case SymbolKind.Namespace:
-                    yield return Diagnostic.Create(NamespaceMoreMeaningfulNameRule, symbol.Locations.First(), symbolName);
-                    break;
-
-                case SymbolKind.NamedType:
-                    foreach (var location in symbol.Locations)
-                    {
-                        yield return Diagnostic.Create(TypeMoreMeaningfulNameRule, location, symbolName);
-                    }
-
-                    break;
-
-                case SymbolKind.Method:
-                case SymbolKind.Property:
-                case SymbolKind.Event:
-                case SymbolKind.Field:
-                    yield return Diagnostic.Create(MemberMoreMeaningfulNameRule, symbol.Locations.First(), symbolName);
-                    break;
-
-                case SymbolKind.Parameter:
-                    yield return symbol.ContainingType.TypeKind == TypeKind.Delegate
-                        ? Diagnostic.Create(DelegateParameterMoreMeaningfulNameRule, symbol.Locations.First(), symbol.ContainingType.ToDisplayString(), symbolName)
-                        : Diagnostic.Create(MemberParameterMoreMeaningfulNameRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), symbolName);
-                    break;
-
-                case SymbolKind.TypeParameter:
-                    yield return symbol.ContainingSymbol.Kind == SymbolKind.Method
-                        ? Diagnostic.Create(MethodTypeParameterMoreMeaningfulNameRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), symbol.Name)
-                        : Diagnostic.Create(TypeTypeParameterMoreMeaningfulNameRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), symbol.Name);
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Unknown SymbolKind: {symbol.Kind}");
-            }
-        }
 
         private static IEnumerable<Diagnostic> GetMisspelledWordDiagnostics(ISymbol symbol, string misspelledWord)
         {

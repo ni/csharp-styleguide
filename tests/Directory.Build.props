@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <!-- Indicates that a rebuild is required if this file changes. -->
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+
+    <!-- Indicates that we've imported this targets file. -->
+    <SourceDirectoryBuildPropsIncluded>True</SourceDirectoryBuildPropsIncluded>
+  </PropertyGroup>
+
+  <Import Project="..\Directory.Build.props" />
+
+  <PropertyGroup>
+    <NILibraryTargetFramework>netcoreapp3.1</NILibraryTargetFramework>
+    <NIAnalyzersTargetFramework>net46</NIAnalyzersTargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <NoWarn>1701;1702;1705;CA1707</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TestFiles Include="$(MSBuildProjectDirectory)\TestFiles\**\*" />
+  </ItemGroup>
+
+  <Target Name="CopyTestFiles" AfterTargets="Build">
+    <Copy SourceFiles="@(TestFiles)" DestinationFolder="$(OutputPath)\TestFiles\%(RecursiveDir)"></Copy>
+  </Target>
+</Project>

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NIAnalyzersTargetFramework)</TargetFramework>
+    <AssemblyName>NationalInstruments.Analyzers.Utilities</AssemblyName>
+    <RootNamespace>NationalInstruments.Analyzers.Utilities</RootNamespace>
+  </PropertyGroup>
+
+</Project>

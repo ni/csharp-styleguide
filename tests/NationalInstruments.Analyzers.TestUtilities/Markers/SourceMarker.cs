@@ -5,7 +5,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Markers
     /// </summary>
     public abstract class SourceMarker
     {
-        public SourceMarker(int line, int column)
+        protected SourceMarker(int line, int column)
         {
             Line = line;
             Column = column;

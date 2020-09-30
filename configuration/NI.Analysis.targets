@@ -67,6 +67,9 @@
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->
+    <AdditionalFiles Include="$(NI1006_BannedMethods)" Condition="Exists('$(NI1006_BannedMethods)')">
+      <Link>$(NI1006_BannedMethods)</Link>
+    </AdditionalFiles>
     <AdditionalFiles Include="$(NI1704_AdditionalSpellingDictionary)" Condition="Exists('$(NI1704_AdditionalSpellingDictionary)')">
       <Link>$(CodeAnalysisRuleSet)</Link>
     </AdditionalFiles>

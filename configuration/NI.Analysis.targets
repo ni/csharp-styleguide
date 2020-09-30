@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <!-- TODO: This location of 'content' needs to get updated once we build our package if we decide to put the files elsewhere, outside of a 'content' directory -->
-    <CodeAnalysisRuleSetDirectory>$(PkgNI_DotNet_Analyzers)\content</CodeAnalysisRuleSetDirectory>
-    <NuGetPackagesDirectory>$(NuGetPackageRoot)</NuGetPackagesDirectory>
+    <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_DotNet_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
+    <NI_NuGetPackagesDirectory>$(NuGetPackageRoot)</NI_NuGetPackagesDirectory>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -15,18 +15,16 @@
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("!TestUtilities."))</NI_IsTestUtilitiesProject>
     <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
-    <ProjectNameContainsTests>$(MSBuildProjectName.Contains("Tests"))</ProjectNameContainsTests>
+    <NI_ProjectNameContainsTests>$(MSBuildProjectName.Contains("Tests"))</NI_ProjectNameContainsTests>
 
-    <CodeAnalysisRuleSet>$(CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- Enable Roslyn analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->
-    <EnableRoslynAnalyzers>True</EnableRoslynAnalyzers>
-    <IncludeStyleAnalyzers>True</IncludeStyleAnalyzers>
-    <IncludeCodeAnalyzers>True</IncludeCodeAnalyzers>
+    <!-- Enable analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->
+    <NI_EnableAnalyzers Condition="'$(NI_EnableAnalyzers)' == ''">True</NI_EnableAnalyzers>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -36,34 +34,32 @@
     <NI1704_GlobalExceptions>$(SolutionDir)\CodeAnalysisDictionary.xml</NI1704_GlobalExceptions>
 
     <!--AdditionalSpellingDictionary.dic contains the differences in words between the hunspell and Microsoft dictionaries-->
-    <NI1704_AdditionalSpellingDictionary>$(CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
+    <NI1704_AdditionalSpellingDictionary>$(NI_CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(IncludeStyleAnalyzers)' == 'True'">
+  <ItemGroup Condition="'$(NI_EnableAnalyzers)' == 'True'">
     <!-- Microsoft's SA analyzers -->
     <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>
     <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
-  </ItemGroup>
 
-  <ItemGroup Condition="'$(IncludeCodeAnalyzers)' == 'True'">
     <RoslynAnalyzer Include="Microsoft.CodeQuality" />
     <RoslynAnalyzer Include="Microsoft.NetCore" />
     <RoslynAnalyzer Include="Microsoft.NetFramework" />
     <RoslynAnalyzer Include="Text" />
 
     <!-- Microsoft's CA analyzers -->
-    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).Analyzers.dll')"/>
-    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).CSharp.Analyzers.dll')"/>
+    <Analyzer Include="@(RoslynAnalyzer->'$(NI_NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).Analyzers.dll')"/>
+    <Analyzer Include="@(RoslynAnalyzer->'$(NI_NuGetPackagesDirectory)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).CSharp.Analyzers.dll')"/>
     <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
 
     <!-- NI's CA analyzers -->
-    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\NI.CodeAnalysis.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\NI.CodeQuality.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Naming.dll"/>
-    <Analyzer Include="$(NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\NI.CodeAnalysis.Analyzers.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\NI.CodeQuality.Analyzers.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Naming.dll"/>
+    <Analyzer Include="$(NI_NuGetPackagesDirectory)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Utilities.dll"/>
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->
@@ -104,7 +100,4 @@
     <WarningsNotAsErrors>$(WarningsNotAsErrors),@(RoslynTransition_DisabledRule),$(TemporaryWarningsNotAsErrors)</WarningsNotAsErrors>
     <NoWarn>$(NoWarn),@(RoslynTransition_DisabledRule)</NoWarn>
   </PropertyGroup>
-  <ItemGroup>
-    <HashFiles Include="$(MSBuildThisFileFullPath)" />
-  </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@
     <Rule Id="CA1709" Action="None" />
     <Rule Id="CA1710" Action="None" />
     <Rule Id="CA1711" Action="None" />
-    <Rule Id="CA1712" Action="None" /> <!-- RoslynTransition: Should be "Warning". Tracked by Dev Efficiency: https://trello.com/b/gtoe4Of2/iteration-board -->
+    <Rule Id="CA1712" Action="None" />
     <Rule Id="CA1715" Action="None" />
     <Rule Id="CA1716" Action="None" />
     <Rule Id="CA1720" Action="None" />
@@ -51,7 +51,7 @@
     <Rule Id="CA2001" Action="None" />
     <Rule Id="CA2002" Action="None" />
     <Rule Id="CA2004" Action="None" />
-    <Rule Id="CA2008" Action="None" /> <!-- CA2008: Do not create tasks without passing a TaskScheduler -->
+    <Rule Id="CA2008" Action="None" />
     <Rule Id="CA2105" Action="None" />
     <Rule Id="CA2201" Action="None" />
     <Rule Id="CA2202" Action="None" />

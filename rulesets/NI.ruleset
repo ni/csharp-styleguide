@@ -39,7 +39,7 @@
     <Rule Id="CA1047" Action="Warning" />
     <Rule Id="CA1049" Action="Warning" />
     <Rule Id="CA1050" Action="Warning" />
-    <Rule Id="CA1051" Action="Warning" /> <!-- CA1051: Do not declare visible instance fields -->
+    <Rule Id="CA1051" Action="Warning" />
     <Rule Id="CA1052" Action="Warning" />
     <Rule Id="CA1053" Action="Warning" />
     <Rule Id="CA1054" Action="Warning" />
@@ -53,7 +53,7 @@
     <Rule Id="CA1063" Action="Warning" />
     <Rule Id="CA1064" Action="Warning" />
     <Rule Id="CA1065" Action="Warning" />
-    <Rule Id="CA1200" Action="None" /> <!-- CA1200: Avoid using cref tags with a prefix -->
+    <Rule Id="CA1200" Action="None" />
     <Rule Id="CA1300" Action="Warning" />
     <Rule Id="CA1301" Action="Warning" />
     <Rule Id="CA1303" Action="None" />
@@ -63,7 +63,7 @@
     <Rule Id="CA1307" Action="None" />
     <Rule Id="CA1308" Action="Warning" />
     <Rule Id="CA1309" Action="None" />
-    <Rule Id="CA1401" Action="Warning" /> <!-- CA1401: P/Invoke method should not be visible -->
+    <Rule Id="CA1401" Action="Warning" />
     <Rule Id="CA1402" Action="Warning" />
     <Rule Id="CA1403" Action="Warning" />
     <Rule Id="CA1404" Action="Warning" />
@@ -82,7 +82,7 @@
     <Rule Id="CA1502" Action="None" />
     <Rule Id="CA1505" Action="None" />
     <Rule Id="CA1506" Action="None" />
-    <Rule Id="CA1507" Action="None" /> <!-- CA1507: Use nameof in place of string literal -->
+    <Rule Id="CA1507" Action="None" />
     <Rule Id="CA1600" Action="Warning" />
     <Rule Id="CA1601" Action="Warning" />
     <Rule Id="CA1700" Action="Warning" />
@@ -95,10 +95,10 @@
     <Rule Id="CA1711" Action="Warning" />
     <Rule Id="CA1712" Action="Warning" />
     <Rule Id="CA1713" Action="Warning" />
-    <Rule Id="CA1714" Action="None" /> <!-- CA1714: Flags enums should have plural names -->
+    <Rule Id="CA1714" Action="None" />
     <Rule Id="CA1715" Action="Warning" />
     <Rule Id="CA1716" Action="Warning" />
-    <Rule Id="CA1717" Action="None" /> <!-- CA1717: Only FlagsAttribute enums should have plural names -->
+    <Rule Id="CA1717" Action="None" />
     <Rule Id="CA1719" Action="Warning" />
     <Rule Id="CA1720" Action="Warning" />
     <Rule Id="CA1721" Action="Warning" />
@@ -121,14 +121,14 @@
     <Rule Id="CA1822" Action="None" />
     <Rule Id="CA1823" Action="Warning" />
     <Rule Id="CA1824" Action="Warning" />
-    <Rule Id="CA1826" Action="None" /> <!-- CA1826: RoslynTransition: Should be "Warning". Tracked by Dev Efficiency: https://ni.visualstudio.com/DevCentral/_workitems/edit/35895 -->
+    <Rule Id="CA1826" Action="None" />
     <Rule Id="CA1900" Action="Warning" />
     <Rule Id="CA2000" Action="None" />
     <Rule Id="CA2001" Action="Warning" />
     <Rule Id="CA2002" Action="Warning" />
     <Rule Id="CA2004" Action="Warning" />
     <Rule Id="CA2006" Action="Warning" />
-    <Rule Id="CA2008" Action="Warning" /> <!-- CA2008: Do not create tasks without passing a TaskScheduler -->
+    <Rule Id="CA2008" Action="Warning" />
     <Rule Id="CA2100" Action="None" />
     <Rule Id="CA2101" Action="Warning" />
     <Rule Id="CA2109" Action="None" />
@@ -149,9 +149,9 @@
     <Rule Id="CA2218" Action="Warning" />
     <Rule Id="CA2219" Action="Warning" />
     <Rule Id="CA2224" Action="Warning" />
-    <Rule Id="CA2225" Action="None" /> <!-- Disable per Cifra https://ni.visualstudio.com/DevCentral/_git/ASW/pullrequest/18176?discussionId=366483 -->
+    <Rule Id="CA2225" Action="None" />
     <Rule Id="CA2226" Action="Warning" />
-    <Rule Id="CA2227" Action="None" /> <!-- Disable per Cifra https://ni.visualstudio.com/DevCentral/_git/ASW/pullrequest/18176?discussionId=366483 -->
+    <Rule Id="CA2227" Action="None" />
     <Rule Id="CA2229" Action="Warning" />
     <Rule Id="CA2231" Action="Warning" />
     <Rule Id="CA2232" Action="Warning" />
@@ -265,7 +265,7 @@
     <Rule Id="CA1043" Action="Warning" />
     <Rule Id="CA1044" Action="Warning" />
     <Rule Id="CA1050" Action="Warning" />
-    <Rule Id="CA1051" Action="Warning" /> <!-- CA1051: Do not declare visible instance fields -->
+    <Rule Id="CA1051" Action="Warning" />
     <Rule Id="CA1052" Action="Warning" />
     <Rule Id="CA1054" Action="Warning" />
     <Rule Id="CA1055" Action="Warning" />
@@ -283,10 +283,10 @@
     <Rule Id="CA1710" Action="Warning" />
     <Rule Id="CA1711" Action="Warning" />
     <Rule Id="CA1712" Action="Warning" />
-    <Rule Id="CA1714" Action="None" /> <!-- CA1714: Flags enums should have plural names -->
+    <Rule Id="CA1714" Action="None" />
     <Rule Id="CA1715" Action="Warning" />
     <Rule Id="CA1716" Action="Warning" />
-    <Rule Id="CA1717" Action="None" /> <!-- CA1717: Only FlagsAttribute enums should have plural names -->
+    <Rule Id="CA1717" Action="None" />
     <Rule Id="CA1720" Action="Warning" />
     <Rule Id="CA1721" Action="Warning" />
     <Rule Id="CA1724" Action="Warning" />
@@ -296,9 +296,9 @@
     <Rule Id="CA2007" Action="None" />
     <Rule Id="CA2211" Action="Warning" />
     <Rule Id="CA2217" Action="Warning" />
-    <Rule Id="CA2225" Action="None" /> <!-- Disable per Cifra https://ni.visualstudio.com/DevCentral/_git/ASW/pullrequest/18176?discussionId=366483 -->
+    <Rule Id="CA2225" Action="None" />
     <Rule Id="CA2226" Action="Warning" />
-    <Rule Id="CA2227" Action="None" /> <!-- Disable per Cifra https://ni.visualstudio.com/DevCentral/_git/ASW/pullrequest/18176?discussionId=366483 -->
+    <Rule Id="CA2227" Action="None" />
     <Rule Id="CA2231" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="Microsoft.ApiDesignGuidelines.CSharp.Analyzers" RuleNamespace="Microsoft.ApiDesignGuidelines.CSharp.Analyzers">
@@ -445,7 +445,7 @@
     <Rule Id="SA1122" Action="Warning" />
     <Rule Id="SA1123" Action="Warning" />
     <Rule Id="SA1124" Action="None" />
-    <Rule Id="SA1125" Action="None" /> <!-- RoslynTransition: Should be "Warning". Tracked by Dev Efficiency: https://trello.com/b/gtoe4Of2/iteration-board -->
+    <Rule Id="SA1125" Action="None" />
     <Rule Id="SA1127" Action="None" />
     <Rule Id="SA1128" Action="None" />
     <Rule Id="SA1129" Action="None" />
@@ -479,14 +479,13 @@
     <Rule Id="SA1302" Action="Warning" />
     <Rule Id="SA1303" Action="Warning" />
     <Rule Id="SA1304" Action="Warning" />
-    <!-- cifra, gregr decided to kill this dec 5, 2016, hungarian -->
     <Rule Id="SA1305" Action="None" />
     <Rule Id="SA1306" Action="Warning" />
     <Rule Id="SA1307" Action="Warning" />
     <Rule Id="SA1308" Action="Warning" />
     <Rule Id="SA1309" Action="None" />
     <Rule Id="SA1310" Action="Warning" />
-    <Rule Id="SA1311" Action="None" /> <!-- Conventions state that static readonly fields should be _camelCase -->
+    <Rule Id="SA1311" Action="None" />
     <Rule Id="SA1312" Action="Warning" />
     <Rule Id="SA1313" Action="Warning" />
     <Rule Id="SA1314" Action="None" />
@@ -561,24 +560,10 @@
     <Rule Id="SA1642" Action="None" />
     <Rule Id="SA1643" Action="None" />
     <Rule Id="SA1648" Action="None" />
-    <!-- SA1649 per gregr: disabled, better than having suppressions, update rule -->
     <Rule Id="SA1649" Action="None" />
     <Rule Id="SA1651" Action="None" />
     <Rule Id="SA1652" Action="None" />
-    <!-- Keep SX1309 as "None" until read-only fields are excluded -->
     <Rule Id="SX1309" Action="None" />
-
-    <!-- These need to be manually implemented -->
-    <!--
-    <Rule Id="SA1126" Action="Warning" />
-    <Rule Id="SA1409" Action="Warning" />
-    <Rule Id="SA1301" Action="Warning" />
-    <Rule Id="SA1215" Action="Warning" />
-    <Rule Id="SA1646" Action="Warning" />
-    <Rule Id="SA1647" Action="Warning" />
-    <Rule Id="SA1650" Action="Warning" />
-    <Rule Id="SA1109" Action="Warning" />
-    -->
   </Rules>
   <Rules AnalyzerId="System.Collections.Immutable.Analyzers" RuleNamespace="System.Collections.Immutable.Analyzers">
     <Rule Id="RS0012" Action="None" />
@@ -586,7 +571,6 @@
   <Rules AnalyzerId="System.Resources.CSharp.Analyzers" RuleNamespace="System.Resources.CSharp.Analyzers">
     <Rule Id="CA1824" Action="Warning" />
   </Rules>
-  <!--System.Runtime.Analyzers crashes and is disabled in NI.Analysis.targets-->
   <Rules AnalyzerId="System.Runtime.Analyzers" RuleNamespace="System.Runtime.Analyzers">
     <Rule Id="CA1304" Action="Warning" />
     <Rule Id="CA1305" Action="Warning" />
@@ -613,7 +597,7 @@
     <Rule Id="CA2215" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="System.Runtime.InteropServices.Analyzers" RuleNamespace="System.Runtime.InteropServices.Analyzers">
-    <Rule Id="CA1401" Action="Warning" /> <!-- CA1401: P/Invoke method should not be visible -->
+    <Rule Id="CA1401" Action="Warning" />
     <Rule Id="CA2101" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="System.Runtime.InteropServices.CSharp.Analyzers" RuleNamespace="System.Runtime.InteropServices.CSharp.Analyzers">

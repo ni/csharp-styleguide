@@ -1,0 +1,60 @@
+<!--
+    README: https://nitalk.jiveon.com/docs/DOC-455694
+-->
+<BannedMethods>
+  <EntryGroup Justification="Unless you are a standalone application, you should use the logging API" Alternative="NationalInstruments.Core.Logging.Log">
+    <Entry>System.Console</Entry>
+    <Entry Alternative="use ETW events instead">System.Diagnostics.Trace</Entry>
+    <Entry>System.Diagnostics.Debug</Entry>
+  </EntryGroup>
+  <Entry>System.Diagnostics.Debugger.Launch</Entry>
+  <EntryGroup Alternative="a method that takes a TextFormattingMode"
+              Justification="This method may not calculate widths correctly for manual word-wrapping and FastControls, see CAR 574943">
+    <Entry>System.Windows.Media.FormattedText.FormattedText(System.String, System.Globalization.CultureInfo, System.Windows.FlowDirection, System.Windows.Media.Typeface, System.Double, System.Windows.Media.Brush)</Entry>
+    <Entry>System.Windows.Media.FormattedText.FormattedText(System.String, System.Globalization.CultureInfo, System.Windows.FlowDirection, System.Windows.Media.Typeface, System.Double, System.Windows.Media.Brush, System.Double)</Entry>
+    <Entry>System.Windows.Media.FormattedText.FormattedText(System.String, System.Globalization.CultureInfo, System.Windows.FlowDirection, System.Windows.Media.Typeface, System.Double, System.Windows.Media.Brush, System.Windows.Media.NumberSubstitution)</Entry>
+    <Entry>System.Windows.Media.FormattedText.FormattedText(System.String, System.Globalization.CultureInfo, System.Windows.FlowDirection, System.Windows.Media.Typeface, System.Double, System.Windows.Media.Brush, System.Windows.Media.NumberSubstitution, System.Double)</Entry>
+  </EntryGroup>
+  <EntryGroup Justification="This method does not support long paths.">
+    <Entry Alternative="NationalInstruments.Core.IO.LongPath">System.IO.Path.</Entry>
+    <Entry Alternative="NationalInstruments.Core.IO.LongPathFile">System.IO.File.</Entry>
+    <Entry Alternative="methods on NationalInstruments.Core.IO.LongPathFile">System.IO.FileInfo</Entry>
+    <Entry Alternative="NationalInstruments.Core.IO.LongPathDirectory">System.IO.Directory.</Entry>
+    <Entry Alternative="methods on NationalInstruments.Core.IO.LongPathDirectory">System.IO.DirectoryInfo</Entry>
+    <Entry Alternative="LongPathFile.Open()">System.IO.FileStream.FileStream</Entry>
+    <EntryGroup Alternative="an overload that takes a FileStream">
+      <Entry>System.Xml.Linq.XDocument.Load(System.String)</Entry>
+      <Entry>System.Xml.Linq.XDocument.Load(System.String, System.Xml.Linq.LoadOptions)</Entry>
+      <Entry>System.Xml.Linq.XDocument.Save(System.String)</Entry>
+      <Entry>System.Xml.Linq.XDocument.Save(System.String, System.Xml.Linq.SaveOptions)</Entry>
+      <Entry>System.Xml.Linq.XElement.Load(System.String)</Entry>
+      <Entry>System.Xml.Linq.XElement.Load(System.String, System.Xml.Linq.LoadOptions)</Entry>
+      <Entry>System.Xml.Linq.XElement.Save(System.String)</Entry>
+      <Entry>System.Xml.Linq.XElement.Save(System.String, System.Xml.Linq.SaveOptions)</Entry>
+    </EntryGroup>
+    <Entry Alternative="NationalInstruments.SourceModel.SqliteExtensions.CreateSqliteConnection()">System.Data.SQLite.SQLiteConnection.SQLiteConnection</Entry>
+  </EntryGroup>
+  <Entry Assemblies="NationalInstruments.VersionManagement"
+         Alternative="ComparisonDocumentManager.GetDocumentFileNameFilter()"
+         Justification="This method does not handle .lvproject files correctly">
+    NationalInstruments.Shell.DocumentExtensions.GetDocumentFileNameFilter
+  </Entry>
+  <Entry Alternative="EventArgs.Empty"
+         Justification="Performance - we don't need to create an empty object each time we raise a standard event.">
+    System.EventArgs.EventArgs
+  </Entry>
+  <Entry Justification="This attribute is only a debugging aid, it should not be submitted">
+    NationalInstruments.TestUtilities.Core.RepeatTestTheoryAttribute
+  </Entry>
+  <Entry Alternative="NationalInstrumenst.Core.RegistryKeyExtensions.NIGetSubKeyNames" Justification="See documentation of alternative for details.">
+    Microsoft.Win32.RegistryKey.GetSubKeyNames
+  </Entry>
+  <EntryGroup Alternative="NationalInstruments.Composition.ThreadSafeCompositionContainer" Justification="The default CompositionContainer constructors are not thread safe.">
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer()</Entry>
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer(System.ComponentModel.Composition.Hosting.ExportProvider[])</Entry>
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer(System.ComponentModel.Composition.Hosting.CompositionOptions, System.ComponentModel.Composition.Hosting.ExportProvider[])</Entry>
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer(System.ComponentModel.Composition.Primitives.ComposablePartCatalog, System.ComponentModel.Composition.Hosting.ExportProvider[])</Entry>
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer(System.ComponentModel.Composition.Primitives.ComposablePartCatalog, System.Boolean, System.ComponentModel.Composition.Hosting.ExportProvider[])</Entry>
+      <Entry>System.ComponentModel.Composition.Hosting.CompositionContainer.CompositionContainer(System.ComponentModel.Composition.Primitives.ComposablePartCatalog, System.ComponentModel.Composition.Hosting.CompositionOptions, System.ComponentModel.Composition.Hosting.ExportProvider[])</Entry>
+  </EntryGroup>
+</BannedMethods>

@@ -35,12 +35,12 @@ namespace NationalInstruments.Analyzers.Style
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override void Initialize(AnalysisContext analysisContext)
+        public override void Initialize(AnalysisContext context)
         {
-            analysisContext.EnableConcurrentExecutionIf(IsRunningInProduction);
-            analysisContext.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            context.EnableConcurrentExecutionIf(IsRunningInProduction);
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            analysisContext.RegisterSymbolAction(AnalyzeField, SymbolKind.Field);
+            context.RegisterSymbolAction(AnalyzeField, SymbolKind.Field);
         }
 
         private static bool IsCamelCasePrefixedWithUnderscore(string value)

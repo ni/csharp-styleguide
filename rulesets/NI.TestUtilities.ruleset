@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="NI.Tests.ruleset" Description="Code analysis rule overrides for NI Test projects." ToolsVersion="14.0">
+<RuleSet Name="NI.TestUtilities.ruleset" Description="Code analysis rule overrides for NI Test projects." ToolsVersion="14.0">
   <IncludeAll Action="Warning" />
   <Include Path=".\NI.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">

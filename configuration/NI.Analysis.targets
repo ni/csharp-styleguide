@@ -73,7 +73,9 @@
      <Link>$(CodeAnalysisRuleSet)</Link>
     </AdditionalFiles>
 
-    <AdditionalFiles Include="$(NI1704_GlobalExceptions)" Condition="Exists('$(NI1704_GlobalExceptions)')" />
+    <AdditionalFiles Include="$(NI1704_GlobalExceptions)" Condition="Exists('$(NI1704_GlobalExceptions)')">
+      <Link>$(NI1704_GlobalExceptions)</Link>
+    </AdditionalFiles>
   </ItemGroup>
 
   <!-- By default, the NI.ruleset reports violations as warnings instead of errors. 

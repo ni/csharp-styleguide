@@ -4,7 +4,7 @@ NI1006 is an analyzer rule that prevents specific methods from being used in sou
 
 # Process
 
-The analyzer works by looking through "BannedMethods" [additional files](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md). A project can contain any number of files as long as:
+The analyzer works by looking through "BannedMethods" [additional files](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md). An additional file's contents will be parsed if the following conditions are true:
 
 
 1. The filename contains the text "BannedMethods"

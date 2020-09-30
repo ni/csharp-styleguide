@@ -27,6 +27,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
+          
+      - name: Resotre Nuget Packages
+        run: dotnet restore NationalInstruments.Analyzers.sln
      
       - name: Build App
         run: dotnet build NationalInstruments.Analyzers.sln --configuration release

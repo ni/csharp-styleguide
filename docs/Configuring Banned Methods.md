@@ -8,8 +8,7 @@ The analyzer works by looking through "BannedMethods" [additional files](https:/
 
 
 1. The filename contains the text "BannedMethods"
-2. The contents of the file are XML with the appropriate schema
-3. The files are added to the build as an [additional file](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md)
+2. The files are added to the build as an [additional file](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md)
 
 ## Determine the Entry to be Banned
 

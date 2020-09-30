@@ -6,21 +6,21 @@
     <NuGetPackagesDirectory>$(NuGetPackageRoot)</NuGetPackagesDirectory>
   </PropertyGroup>
 
-	<PropertyGroup>
-		<!-- this would more correctly be: assemblyname contains .Test. We have an issue with test utilities projects, and test.testutilities projects. -->
-		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("Tests."))</IsNITestProject>
-		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.EndsWith(".Tests"))</IsNITestProject>
-		<IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("!Tests."))</IsNITestProject>
-		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("TestUtilities."))</IsNITestUtilitiesProject>
-		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("!TestUtilities."))</IsNITestUtilitiesProject>
-		<!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
-		<IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True' and '$(IsNITestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</IsNITestUtilitiesProject>
-		<ProjectNameContainsTests>$(MSBuildProjectName.Contains("Tests"))</ProjectNameContainsTests>
+  <PropertyGroup>
+    <!-- this would more correctly be: assemblyname contains .Test. We have an issue with test utilities projects, and test.testutilities projects. -->
+    <IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("Tests."))</IsNITestProject>
+    <IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.EndsWith(".Tests"))</IsNITestProject>
+    <IsNITestProject Condition="'$(IsNITestProject)' != 'True'">$(MSBuildProjectName.StartsWith("!Tests."))</IsNITestProject>
+    <IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("TestUtilities."))</IsNITestUtilitiesProject>
+    <IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("!TestUtilities."))</IsNITestUtilitiesProject>
+    <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
+    <IsNITestUtilitiesProject Condition="'$(IsNITestUtilitiesProject)' != 'True' and '$(IsNITestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</IsNITestUtilitiesProject>
+    <ProjectNameContainsTests>$(MSBuildProjectName.Contains("Tests"))</ProjectNameContainsTests>
 
-		<CodeAnalysisRuleSet>$(CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
-		<CodeAnalysisRuleSet Condition="'$(IsNITestProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-		<CodeAnalysisRuleSet Condition="'$(IsNITestUtilitiesProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
-	</PropertyGroup>
+    <CodeAnalysisRuleSet>$(CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(IsNITestProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(IsNITestUtilitiesProjectCondition)' == 'True'">$(CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 
   <PropertyGroup>
     <!-- Enable Roslyn analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->

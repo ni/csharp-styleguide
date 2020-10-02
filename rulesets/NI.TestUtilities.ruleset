@@ -62,13 +62,6 @@
     <Rule Id="CA2217" Action="None" />
     <Rule Id="CA2235" Action="None" />
     <Rule Id="CA2242" Action="None" />
-    <Rule Id="LRA004" Action="None" />
-    <Rule Id="LRE003" Action="None" />
-    <Rule Id="LRF003" Action="None" />
-    <Rule Id="LRF005" Action="None" />
-    <Rule Id="LRT015" Action="None" />
-    <Rule Id="LRT017" Action="None" />
-    <Rule Id="LRT018" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="Desktop.Analyzers" RuleNamespace="Desktop.Analyzers">
     <Rule Id="CA2235" Action="None" />

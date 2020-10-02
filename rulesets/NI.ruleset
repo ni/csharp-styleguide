@@ -165,61 +165,6 @@
     <Rule Id="CA2241" Action="None" />
     <Rule Id="CA2242" Action="Warning" />
     <Rule Id="CA2243" Action="None" />
-    <Rule Id="LRA001" Action="None" />
-    <Rule Id="LRA002" Action="Warning" />
-    <Rule Id="LRA003" Action="Warning" />
-    <Rule Id="LRA004" Action="Warning" />
-    <Rule Id="LRA005" Action="Warning" />
-    <Rule Id="LRA006" Action="None" />
-    <Rule Id="LRA007" Action="None" />
-    <Rule Id="LRA008" Action="None" />
-    <Rule Id="LRA009" Action="None" />
-    <Rule Id="LRA010" Action="None" />
-    <Rule Id="LRA011" Action="None" />
-    <Rule Id="LRA012" Action="None" />
-    <Rule Id="LRA013" Action="None" />
-    <Rule Id="LRA014" Action="None" />
-    <Rule Id="LRE001" Action="Warning" />
-    <Rule Id="LRE002" Action="Warning" />
-    <Rule Id="LRE003" Action="Warning" />
-    <Rule Id="LRF001" Action="None" />
-    <Rule Id="LRF002" Action="Warning" />
-    <Rule Id="LRF003" Action="Warning" />
-    <Rule Id="LRF004" Action="None" />
-    <Rule Id="LRF005" Action="Warning" />
-    <Rule Id="LRM001" Action="Warning" />
-    <Rule Id="LRM002" Action="None" />
-    <Rule Id="LRM003" Action="Warning" />
-    <Rule Id="LRM004" Action="None" />
-    <Rule Id="LRM005" Action="None" />
-    <Rule Id="LRM007" Action="None" />
-    <Rule Id="LRM008" Action="Warning" />
-    <Rule Id="LRM009" Action="None" />
-    <Rule Id="LRN001" Action="Warning" />
-    <Rule Id="LRP001" Action="Warning" />
-    <Rule Id="LRP002" Action="Warning" />
-    <Rule Id="LRP003" Action="None" />
-    <Rule Id="LRP004" Action="Warning" />
-    <Rule Id="LRP005" Action="Warning" />
-    <Rule Id="LRP006" Action="None" />
-    <Rule Id="LRP007" Action="Warning" />
-    <Rule Id="LRT001" Action="Warning" />
-    <Rule Id="LRT002" Action="Warning" />
-    <Rule Id="LRT003" Action="Warning" />
-    <Rule Id="LRT004" Action="Warning" />
-    <Rule Id="LRT005" Action="Warning" />
-    <Rule Id="LRT006" Action="None" />
-    <Rule Id="LRT007" Action="None" />
-    <Rule Id="LRT008" Action="Warning" />
-    <Rule Id="LRT009" Action="Warning" />
-    <Rule Id="LRT010" Action="None" />
-    <Rule Id="LRT011" Action="Warning" />
-    <Rule Id="LRT012" Action="None" />
-    <Rule Id="LRT013" Action="Warning" />
-    <Rule Id="LRT014" Action="Warning" />
-    <Rule Id="LRT015" Action="Warning" />
-    <Rule Id="LRT017" Action="None" />
-    <Rule Id="LRT018" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="Desktop.Analyzers" RuleNamespace="Desktop.Analyzers">
     <Rule Id="CA1058" Action="Warning" />

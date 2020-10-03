@@ -1,5 +1,3 @@
-[[_TOC_]]
-
 # Namespaces
 
 ## When to create a new namespace

@@ -740,7 +740,7 @@ Properties should never contain the word `Get`. A getter already is implied when
 
 ## [C.1] Namespaces
 
-For information on when to create or not create a namespace, read [CSharp Coding Conventions Appendix: Namespaces](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#namespaces).
+For information on when to create or not create a namespace, read [CSharp Coding Conventions Appendix: Namespaces](CSharp-Coding-Conventions-Appendix.md#namespaces).
 
 ### [C.1.1] :heavy_check_mark: **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name
 

@@ -36,8 +36,6 @@ Changes to the rules or significant examples must be reviewed by the chapter/dis
 
 ---
 
-<!-- Begin Auto-ID -->
-
 # Formatting
 
 ## [F.1] Character Spacing

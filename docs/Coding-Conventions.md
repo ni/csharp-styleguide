@@ -38,7 +38,7 @@ Changes to the rules or significant examples must be reviewed by the chapter/dis
 
 <!-- Begin Auto-ID -->
 
-# Formatting
+# [F] Formatting
 
 ## [F.1] Character Spacing
 
@@ -492,7 +492,7 @@ public void Given_When_Then()
 ```
 
 ---
-# Naming
+# [N] Naming
 
 ## [N.1] Casing Style
 
@@ -616,7 +616,7 @@ Properties should never contain the word `Get`. A getter already is implied when
 
 --------
 
-# Code Organization
+# [C] Code Organization
 
 ## [C.1] Namespaces
 
@@ -741,7 +741,7 @@ Create multiple local functions within the containing method instead of nesting 
 
 --------
 
-# Language Features
+# [L] Language Features
 
 ## [L.1] ✔️ **DO** Use primitive C# types instead of Framework Class Library (FCL) types
 
@@ -1000,7 +1000,7 @@ Developers change teams, organizations or companies. Not only do names become st
 
 Code tends to last longer than work item tracking systems. Each reference should declare what system it came from. The `AB#` prefix is the [standard adopted by GitHub](https://docs.microsoft.com/en-us/azure/devops/boards/github/link-to-from-github?view=azure-devops#use-ab-mention-to-link-from-github-to-azure-boards-work-items) for this purpose.
 
-# Maintainability
+# [M] Maintainability
 
 ## [M.1] External dependencies
 

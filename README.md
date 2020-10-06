@@ -177,7 +177,7 @@ This is a living document that represents our coding conventions. Rules that are
 
 ## [F.1] Character Spacing
 
-### [F.1.1] :heavy_check_mark: **DO** Use a single space after commas separating parameters :computer:
+### [F.1.1] ✔️ **DO** Use a single space after commas separating parameters :computer:
 
 ```csharp
 // Bad

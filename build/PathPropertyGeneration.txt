@@ -1,0 +1,4 @@
+In order to prevent everyone from requiring adding 
+[GeneratePathProperty](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#generatepathproperty) 
+to their PackageReference, we have included a tools directory in the NuGet package. 
+NuGet packages with a tools directory automatically get their path generated as an MSBuild variable.

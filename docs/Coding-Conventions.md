@@ -2,124 +2,124 @@
 - [How to Read This Document](#how-to-read-this-document)
 - [Formatting](#formatting)
   - [[F.1] Character Spacing](#f1-character-spacing)
-    - [[F.1.1] :heavy_check_mark: **DO** Use a single space after commas separating parameters :computer:](#f11-heavy_check_mark-do-use-a-single-space-after-commas-separating-parameters-computer)
-    - [[F.1.2] :x: **DO NOT** Use spaces between parentheses and parameters :computer:](#f12-x-do-not-use-spaces-between-parentheses-and-parameters-computer)
-    - [[F.1.3] :x: **DO NOT** Use spaces between index operator brackets and the index expression :computer:](#f13-x-do-not-use-spaces-between-index-operator-brackets-and-the-index-expression-computer)
-    - [[F.1.4] :x: **DO NOT** Use spaces between method names and parentheses :computer:](#f14-x-do-not-use-spaces-between-method-names-and-parentheses-computer)
-    - [[F.1.5] :heavy_check_mark: **DO** Use a single space after control flow keywords :computer:](#f15-heavy_check_mark-do-use-a-single-space-after-control-flow-keywords-computer)
-    - [[F.1.6] :heavy_check_mark: **DO** Use a single space before and after comparison operators :computer:](#f16-heavy_check_mark-do-use-a-single-space-before-and-after-comparison-operators-computer)
+    - [[F.1.1] ✔️ **DO** Use a single space after commas separating parameters 💻](#f11-️-do-use-a-single-space-after-commas-separating-parameters-)
+    - [[F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters 💻](#f12--do-not-use-spaces-between-parentheses-and-parameters-)
+    - [[F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression 💻](#f13--do-not-use-spaces-between-index-operator-brackets-and-the-index-expression-)
+    - [[F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses 💻](#f14--do-not-use-spaces-between-method-names-and-parentheses-)
+    - [[F.1.5] ✔️ **DO** Use a single space after control flow keywords 💻](#f15-️-do-use-a-single-space-after-control-flow-keywords-)
+    - [[F.1.6] ✔️ **DO** Use a single space before and after comparison operators 💻](#f16-️-do-use-a-single-space-before-and-after-comparison-operators-)
   - [[F.2] Line Spacing](#f2-line-spacing)
-    - [[F.2.1] :heavy_check_mark: **DO** Separate type members with a single blank line, except private fields](#f21-heavy_check_mark-do-separate-type-members-with-a-single-blank-line-except-private-fields)
-    - [[F.2.2] :heavy_check_mark: **CONSIDER** Use single blank lines to split method bodies into logically-related lines](#f22-heavy_check_mark-consider-use-single-blank-lines-to-split-method-bodies-into-logically-related-lines)
-    - [[F.2.3] :x: **DO NOT** Place a blank line immediately inside curly braces :computer:](#f23-x-do-not-place-a-blank-line-immediately-inside-curly-braces-computer)
-    - [[F.2.4] :x: **DO NOT** Place multiple blank lines together :computer:](#f24-x-do-not-place-multiple-blank-lines-together-computer)
-    - [[F.2.5] :heavy_check_mark: **DO** Separate unrelated control flow blocks with a blank line](#f25-heavy_check_mark-do-separate-unrelated-control-flow-blocks-with-a-blank-line)
+    - [[F.2.1] ✔️ **DO** Separate type members with a single blank line, except private fields](#f21-️-do-separate-type-members-with-a-single-blank-line-except-private-fields)
+    - [[F.2.2] ✔️ **CONSIDER** Use single blank lines to split method bodies into logically-related lines](#f22-️-consider-use-single-blank-lines-to-split-method-bodies-into-logically-related-lines)
+    - [[F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces 💻](#f23--do-not-place-a-blank-line-immediately-inside-curly-braces-)
+    - [[F.2.4] ❌ **DO NOT** Place multiple blank lines together 💻](#f24--do-not-place-multiple-blank-lines-together-)
+    - [[F.2.5] ✔️ **DO** Separate unrelated control flow blocks with a blank line](#f25-️-do-separate-unrelated-control-flow-blocks-with-a-blank-line)
   - [[F.3] Statement Complexity](#f3-statement-complexity)
-    - [[F.3.1] :x: **AVOID** Adding excessive complexity in compound statements](#f31-x-avoid-adding-excessive-complexity-in-compound-statements)
-    - [[F.3.2] :heavy_check_mark: **CONSIDER** Extracting methods from complex nested expressions](#f32-heavy_check_mark-consider-extracting-methods-from-complex-nested-expressions)
-    - [[F.3.3] :heavy_check_mark: **CONSIDER** Splitting long parameter lists](#f33-heavy_check_mark-consider-splitting-long-parameter-lists)
-    - [[F.3.4] :heavy_check_mark: **CONSIDER** Splitting long chains of dotted method/property invocations](#f34-heavy_check_mark-consider-splitting-long-chains-of-dotted-methodproperty-invocations)
-    - [[F.3.5] :heavy_check_mark: **DO** Apply consistent formatting on split statements](#f35-heavy_check_mark-do-apply-consistent-formatting-on-split-statements)
+    - [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#f31--avoid-adding-excessive-complexity-in-compound-statements)
+    - [[F.3.2] ✔️ **CONSIDER** Extracting methods from complex nested expressions](#f32-️-consider-extracting-methods-from-complex-nested-expressions)
+    - [[F.3.3] ✔️ **CONSIDER** Splitting long parameter lists](#f33-️-consider-splitting-long-parameter-lists)
+    - [[F.3.4] ✔️ **CONSIDER** Splitting long chains of dotted method/property invocations](#f34-️-consider-splitting-long-chains-of-dotted-methodproperty-invocations)
+    - [[F.3.5] ✔️ **DO** Apply consistent formatting on split statements](#f35-️-do-apply-consistent-formatting-on-split-statements)
   - [[F.4] Indents and Braces](#f4-indents-and-braces)
-    - [[F.4.1] :heavy_check_mark: **DO** Use 4 space characters for indentation, never tab characters](#f41-heavy_check_mark-do-use-4-space-characters-for-indentation-never-tab-characters)
-    - [[F.4.2] :x: **DO NOT** Use single-line statements with control flow keywords :computer:](#f42-x-do-not-use-single-line-statements-with-control-flow-keywords-computer)
-    - [[F.4.3] :heavy_check_mark: **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line :computer:](#f43-heavy_check_mark-do-use-braces-around-statement-blocks-governed-by-a-control-flow-keyword-if-else-while-even-if-statement-block-is-one-line-computer)
-    - [[F.4.4] :heavy_check_mark: **DO** Place open curly braces on the next line after the opening statement of an embedded scope block :computer:](#f44-heavy_check_mark-do-place-open-curly-braces-on-the-next-line-after-the-opening-statement-of-an-embedded-scope-block-computer)
-    - [[F.4.5] :x: **Avoid** Placing multiple statements in a `switch` `case` block](#f45-x-avoid-placing-multiple-statements-in-a-switch-case-block)
-    - [[F.4.6] :x: **DO NOT** Use single-line scopes EXCEPT for single-item initializers or auto-implemented properties](#f46-x-do-not-use-single-line-scopes-except-for-single-item-initializers-or-auto-implemented-properties)
-    - [[F.4.7] :heavy_check_mark: **DO** Format multiple array or object property initializer statements into a multi-line embedded scope block](#f47-heavy_check_mark-do-format-multiple-array-or-object-property-initializer-statements-into-a-multi-line-embedded-scope-block)
-    - [[F.4.8] :heavy_check_mark: **CONSIDER** Using C# lambda syntax for simple property and method implementations](#f48-heavy_check_mark-consider-using-c-lambda-syntax-for-simple-property-and-method-implementations)
-    - [[F.4.9] :heavy_check_mark: **DO** Use braces with lambda expressions that span multiple lines](#f49-heavy_check_mark-do-use-braces-with-lambda-expressions-that-span-multiple-lines)
+    - [[F.4.1] ✔️ **DO** Use 4 space characters for indentation, never tab characters](#f41-️-do-use-4-space-characters-for-indentation-never-tab-characters)
+    - [[F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords 💻](#f42--do-not-use-single-line-statements-with-control-flow-keywords-)
+    - [[F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line 💻](#f43-️-do-use-braces-around-statement-blocks-governed-by-a-control-flow-keyword-if-else-while-even-if-statement-block-is-one-line-)
+    - [[F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block 💻](#f44-️-do-place-open-curly-braces-on-the-next-line-after-the-opening-statement-of-an-embedded-scope-block-)
+    - [[F.4.5] ❌ **Avoid** Placing multiple statements in a `switch` `case` block](#f45--avoid-placing-multiple-statements-in-a-switch-case-block)
+    - [[F.4.6] ❌ **DO NOT** Use single-line scopes EXCEPT for single-item initializers or auto-implemented properties](#f46--do-not-use-single-line-scopes-except-for-single-item-initializers-or-auto-implemented-properties)
+    - [[F.4.7] ✔️ **DO** Format multiple array or object property initializer statements into a multi-line embedded scope block](#f47-️-do-format-multiple-array-or-object-property-initializer-statements-into-a-multi-line-embedded-scope-block)
+    - [[F.4.8] ✔️ **CONSIDER** Using C# lambda syntax for simple property and method implementations](#f48-️-consider-using-c-lambda-syntax-for-simple-property-and-method-implementations)
+    - [[F.4.9] ✔️ **DO** Use braces with lambda expressions that span multiple lines](#f49-️-do-use-braces-with-lambda-expressions-that-span-multiple-lines)
 - [Naming](#naming)
   - [[N.1] Casing Style](#n1-casing-style)
-    - [[N.1.1] :heavy_check_mark: **DO** Apply consistent casing style for identifiers :computer:](#n11-heavy_check_mark-do-apply-consistent-casing-style-for-identifiers-computer)
-    - [[N.1.2] :heavy_check_mark: **DO** Use underscore + camelCase for private fields and member variables](#n12-heavy_check_mark-do-use-underscore--camelcase-for-private-fields-and-member-variables)
-    - [[N.1.3] :heavy_check_mark: **DO** Capitalize both letters of two-letter acronyms](#n13-heavy_check_mark-do-capitalize-both-letters-of-two-letter-acronyms)
-    - [[N.1.4] :heavy_check_mark: **DO** Apply PascalCase style when using 3+letter acronyms](#n14-heavy_check_mark-do-apply-pascalcase-style-when-using-3letter-acronyms)
-    - [[N.1.5] :x: **DO NOT** Use ALL CAPS for any name](#n15-x-do-not-use-all-caps-for-any-name)
+    - [[N.1.1] ✔️ **DO** Apply consistent casing style for identifiers 💻](#n11-️-do-apply-consistent-casing-style-for-identifiers-)
+    - [[N.1.2] ✔️ **DO** Use underscore + camelCase for private fields and member variables](#n12-️-do-use-underscore--camelcase-for-private-fields-and-member-variables)
+    - [[N.1.3] ✔️ **DO** Capitalize both letters of two-letter acronyms](#n13-️-do-capitalize-both-letters-of-two-letter-acronyms)
+    - [[N.1.4] ✔️ **DO** Apply PascalCase style when using 3+letter acronyms](#n14-️-do-apply-pascalcase-style-when-using-3letter-acronyms)
+    - [[N.1.5] ❌ **DO NOT** Use ALL CAPS for any name](#n15--do-not-use-all-caps-for-any-name)
   - [[N.2] Acronyms and Abbreviations](#n2-acronyms-and-abbreviations)
-    - [[N.2.1] :x: **DO NOT** Use acronyms unless they are generally accepted within NI or our client domains](#n21-x-do-not-use-acronyms-unless-they-are-generally-accepted-within-ni-or-our-client-domains)
-    - [[N.2.2] :x: **DO NOT** Use abbreviations unless they are commonly accepted terms](#n22-x-do-not-use-abbreviations-unless-they-are-commonly-accepted-terms)
-  - [[N.3] :x: **DO NOT** Use product names in APIs unless those APIs are truly exclusive to that product](#n3-x-do-not-use-product-names-in-apis-unless-those-apis-are-truly-exclusive-to-that-product)
-  - [[N.4] :heavy_check_mark: **CONSIDER** Using parameter/property names that imply usage, not structure. In general, do not embed type information into names](#n4-heavy_check_mark-consider-using-parameterproperty-names-that-imply-usage-not-structure-in-general-do-not-embed-type-information-into-names)
+    - [[N.2.1] ❌ **DO NOT** Use acronyms unless they are generally accepted within NI or our client domains](#n21--do-not-use-acronyms-unless-they-are-generally-accepted-within-ni-or-our-client-domains)
+    - [[N.2.2] ❌ **DO NOT** Use abbreviations unless they are commonly accepted terms](#n22--do-not-use-abbreviations-unless-they-are-commonly-accepted-terms)
+  - [[N.3] ❌ **DO NOT** Use product names in APIs unless those APIs are truly exclusive to that product](#n3--do-not-use-product-names-in-apis-unless-those-apis-are-truly-exclusive-to-that-product)
+  - [[N.4] ✔️ **CONSIDER** Using parameter/property names that imply usage, not structure. In general, do not embed type information into names](#n4-️-consider-using-parameterproperty-names-that-imply-usage-not-structure-in-general-do-not-embed-type-information-into-names)
   - [[N.5] Identifier Prefixing](#n5-identifier-prefixing)
-    - [[N.5.1] :heavy_check_mark: **DO** Prefix interfaces with `I` :computer:](#n51-heavy_check_mark-do-prefix-interfaces-with-i-computer)
-    - [[N.5.2] :x: **DO NOT** Prefix enums, classes or delegates with any letter](#n52-x-do-not-prefix-enums-classes-or-delegates-with-any-letter)
-    - [[N.5.3] :heavy_check_mark: **DO** Prefix private fields and member variables with an underscore `_`](#n53-heavy_check_mark-do-prefix-private-fields-and-member-variables-with-an-underscore-_)
+    - [[N.5.1] ✔️ **DO** Prefix interfaces with `I` 💻](#n51-️-do-prefix-interfaces-with-i-)
+    - [[N.5.2] ❌ **DO NOT** Prefix enums, classes or delegates with any letter](#n52--do-not-prefix-enums-classes-or-delegates-with-any-letter)
+    - [[N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_`](#n53-️-do-prefix-private-fields-and-member-variables-with-an-underscore-_)
   - [[N.6] Properties and Methods](#n6-properties-and-methods)
-    - [[N.6.1] :heavy_check_mark: **DO** Name properties with nouns instead of verbs](#n61-heavy_check_mark-do-name-properties-with-nouns-instead-of-verbs)
-    - [[N.6.2] :heavy_check_mark: **DO** Name methods with verbs instead of nouns](#n62-heavy_check_mark-do-name-methods-with-verbs-instead-of-nouns)
-    - [[N.6.3] :heavy_check_mark: **DO** Use the proper words to imply performance/allocation characteristics](#n63-heavy_check_mark-do-use-the-proper-words-to-imply-performanceallocation-characteristics)
+    - [[N.6.1] ✔️ **DO** Name properties with nouns instead of verbs](#n61-️-do-name-properties-with-nouns-instead-of-verbs)
+    - [[N.6.2] ✔️ **DO** Name methods with verbs instead of nouns](#n62-️-do-name-methods-with-verbs-instead-of-nouns)
+    - [[N.6.3] ✔️ **DO** Use the proper words to imply performance/allocation characteristics](#n63-️-do-use-the-proper-words-to-imply-performanceallocation-characteristics)
 - [Code Organization](#code-organization)
   - [[C.1] Namespaces](#c1-namespaces)
-    - [[C.1.1] :heavy_check_mark: **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name](#c11-heavy_check_mark-do-prefix-namespace-names-with-a-company-name-to-prevent-namespaces-from-different-companies-from-having-the-same-name)
-    - [[C.1.2] :heavy_check_mark: **DO** Organize the hierarchy of namespaces around groups of related technologies](#c12-heavy_check_mark-do-organize-the-hierarchy-of-namespaces-around-groups-of-related-technologies)
-    - [[C.1.3] :heavy_check_mark: **DO** Use PascalCasing and separate namespace components with periods](#c13-heavy_check_mark-do-use-pascalcasing-and-separate-namespace-components-with-periods)
-    - [[C.1.4] :heavy_check_mark: **CONSIDER** Using plural namespace names where appropriate](#c14-heavy_check_mark-consider-using-plural-namespace-names-where-appropriate)
-    - [[C.1.5] :x: **DO NOT** Use the same name for a namespace and a type in that namespace](#c15-x-do-not-use-the-same-name-for-a-namespace-and-a-type-in-that-namespace)
-    - [[C.1.6] :heavy_check_mark: **DO** Create namespaces of the form `NationalInstruments.<ComponentName>.<SubComponentName>.xxx`](#c16-heavy_check_mark-do-create-namespaces-of-the-form-nationalinstrumentscomponentnamesubcomponentnamexxx)
-    - [[C.1.7] :heavy_check_mark: **DO** Place modeling types in a `NationalInstruments.<ComponentName>.SourceModel` namespace](#c17-heavy_check_mark-do-place-modeling-types-in-a-nationalinstrumentscomponentnamesourcemodel-namespace)
-    - [[C.1.8] :heavy_check_mark: **DO** Place View Models / Views of a Model Type in a `NationalInstruments.<ComponentName>.Design` namespace](#c18-heavy_check_mark-do-place-view-models--views-of-a-model-type-in-a-nationalinstrumentscomponentnamedesign-namespace)
-    - [[C.1.9] :heavy_check_mark: **DO** Place Dfir types in a `NationalInstruments.<ComponentName>.Dfir` namespace](#c19-heavy_check_mark-do-place-dfir-types-in-a-nationalinstrumentscomponentnamedfir-namespace)
-    - [[C.1.10] :heavy_check_mark: **DO** Place types which are common to both SourceModel and Dfir in a `NationalInstruments.<ComponentName>.CommonModel` namespace](#c110-heavy_check_mark-do-place-types-which-are-common-to-both-sourcemodel-and-dfir-in-a-nationalinstrumentscomponentnamecommonmodel-namespace)
-    - [[C.1.11] :heavy_check_mark: **DO** Ensure files in an assembly are under the assembly's root namespace and the namespace matches the folder hierarchy on disk](#c111-heavy_check_mark-do-ensure-files-in-an-assembly-are-under-the-assemblys-root-namespace-and-the-namespace-matches-the-folder-hierarchy-on-disk)
-    - [[C.1.12] :heavy_check_mark: **CONSIDER** Naming the assembly to match the root namespace](#c112-heavy_check_mark-consider-naming-the-assembly-to-match-the-root-namespace)
-  - [[C.2] :heavy_check_mark: **DO** Place public types not intended for use outside the defining assembly's component in a `Restricted` namespace](#c2-heavy_check_mark-do-place-public-types-not-intended-for-use-outside-the-defining-assemblys-component-in-a-restricted-namespace)
-  - [[C.3] :heavy_check_mark: **CONSIDER** Having one public or internal type per file and its name should match the file's name](#c3-heavy_check_mark-consider-having-one-public-or-internal-type-per-file-and-its-name-should-match-the-files-name)
+    - [[C.1.1] ✔️ **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name](#c11-️-do-prefix-namespace-names-with-a-company-name-to-prevent-namespaces-from-different-companies-from-having-the-same-name)
+    - [[C.1.2] ✔️ **DO** Organize the hierarchy of namespaces around groups of related technologies](#c12-️-do-organize-the-hierarchy-of-namespaces-around-groups-of-related-technologies)
+    - [[C.1.3] ✔️ **DO** Use PascalCasing and separate namespace components with periods](#c13-️-do-use-pascalcasing-and-separate-namespace-components-with-periods)
+    - [[C.1.4] ✔️ **CONSIDER** Using plural namespace names where appropriate](#c14-️-consider-using-plural-namespace-names-where-appropriate)
+    - [[C.1.5] ❌ **DO NOT** Use the same name for a namespace and a type in that namespace](#c15--do-not-use-the-same-name-for-a-namespace-and-a-type-in-that-namespace)
+    - [[C.1.6] ✔️ **DO** Create namespaces of the form `NationalInstruments.<ComponentName>.<SubComponentName>.xxx`](#c16-️-do-create-namespaces-of-the-form-nationalinstrumentscomponentnamesubcomponentnamexxx)
+    - [[C.1.7] ✔️ **DO** Place modeling types in a `NationalInstruments.<ComponentName>.SourceModel` namespace](#c17-️-do-place-modeling-types-in-a-nationalinstrumentscomponentnamesourcemodel-namespace)
+    - [[C.1.8] ✔️ **DO** Place View Models / Views of a Model Type in a `NationalInstruments.<ComponentName>.Design` namespace](#c18-️-do-place-view-models--views-of-a-model-type-in-a-nationalinstrumentscomponentnamedesign-namespace)
+    - [[C.1.9] ✔️ **DO** Place Dfir types in a `NationalInstruments.<ComponentName>.Dfir` namespace](#c19-️-do-place-dfir-types-in-a-nationalinstrumentscomponentnamedfir-namespace)
+    - [[C.1.10] ✔️ **DO** Place types which are common to both SourceModel and Dfir in a `NationalInstruments.<ComponentName>.CommonModel` namespace](#c110-️-do-place-types-which-are-common-to-both-sourcemodel-and-dfir-in-a-nationalinstrumentscomponentnamecommonmodel-namespace)
+    - [[C.1.11] ✔️ **DO** Ensure files in an assembly are under the assembly's root namespace and the namespace matches the folder hierarchy on disk](#c111-️-do-ensure-files-in-an-assembly-are-under-the-assemblys-root-namespace-and-the-namespace-matches-the-folder-hierarchy-on-disk)
+    - [[C.1.12] ✔️ **CONSIDER** Naming the assembly to match the root namespace](#c112-️-consider-naming-the-assembly-to-match-the-root-namespace)
+  - [[C.2] ✔️ **DO** Place public types not intended for use outside the defining assembly's component in a `Restricted` namespace](#c2-️-do-place-public-types-not-intended-for-use-outside-the-defining-assemblys-component-in-a-restricted-namespace)
+  - [[C.3] ✔️ **CONSIDER** Having one public or internal type per file and its name should match the file's name](#c3-️-consider-having-one-public-or-internal-type-per-file-and-its-name-should-match-the-files-name)
   - [[C.4] Usings](#c4-usings)
-    - [[C.4.1] :heavy_check_mark: **DO** Place `using` directives at top of file, outside `namespace`](#c41-heavy_check_mark-do-place-using-directives-at-top-of-file-outside-namespace)
-    - [[C.4.2] :heavy_check_mark: **DO** Sort `using` directives :computer:](#c42-heavy_check_mark-do-sort-using-directives-computer)
-  - [[C.5] :x: **DO NOT** Expose nested types as `public` or `internal`](#c5-x-do-not-expose-nested-types-as-public-or-internal)
-  - [[C.6] :heavy_check_mark: **CONSIDER** Arranging types and members in logical layers](#c6-heavy_check_mark-consider-arranging-types-and-members-in-logical-layers)
+    - [[C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`](#c41-️-do-place-using-directives-at-top-of-file-outside-namespace)
+    - [[C.4.2] ✔️ **DO** Sort `using` directives 💻](#c42-️-do-sort-using-directives-)
+  - [[C.5] ❌ **DO NOT** Expose nested types as `public` or `internal`](#c5--do-not-expose-nested-types-as-public-or-internal)
+  - [[C.6] ✔️ **CONSIDER** Arranging types and members in logical layers](#c6-️-consider-arranging-types-and-members-in-logical-layers)
   - [[C.7] Local Functions](#c7-local-functions)
-    - [[C.7.1] :heavy_check_mark: **DO** Place local functions at the end of the containing method](#c71-heavy_check_mark-do-place-local-functions-at-the-end-of-the-containing-method)
-    - [[C.7.2] :x: **DO NOT** Nest local functions](#c72-x-do-not-nest-local-functions)
-  - [[C.8] :x: **AVOID** Using regions](#c8-x-avoid-using-regions)
+    - [[C.7.1] ✔️ **DO** Place local functions at the end of the containing method](#c71-️-do-place-local-functions-at-the-end-of-the-containing-method)
+    - [[C.7.2] ❌ **DO NOT** Nest local functions](#c72--do-not-nest-local-functions)
+  - [[C.8] ❌ **AVOID** Using regions](#c8--avoid-using-regions)
 - [Language Features](#language-features)
-  - [[L.1] :heavy_check_mark: **DO** Use primitive C# types instead of Framework Class Library (FCL) types](#l1-heavy_check_mark-do-use-primitive-c-types-instead-of-framework-class-library-fcl-types)
+  - [[L.1] ✔️ **DO** Use primitive C# types instead of Framework Class Library (FCL) types](#l1-️-do-use-primitive-c-types-instead-of-framework-class-library-fcl-types)
   - [[L.2] Casting](#l2-casting)
-    - [[L.2.1] :heavy_check_mark: **DO** Null-check the result of an `as` cast](#l21-heavy_check_mark-do-null-check-the-result-of-an-as-cast)
-    - [[L.2.2] :heavy_check_mark: **CONSIDER** Using `is` type matching to `as` plus null check](#l22-heavy_check_mark-consider-using-is-type-matching-to-as-plus-null-check)
-    - [[L.2.3] :heavy_check_mark: **CONSIDER** Using C-style casting if failed cast should throw an exception](#l23-heavy_check_mark-consider-using-c-style-casting-if-failed-cast-should-throw-an-exception)
-  - [[L.3] :x: **AVOID** Using `var` when it hinders the understanding of the code, or if the type cannot be inferred on the line it's declared on](#l3-x-avoid-using-var-when-it-hinders-the-understanding-of-the-code-or-if-the-type-cannot-be-inferred-on-the-line-its-declared-on)
+    - [[L.2.1] ✔️ **DO** Null-check the result of an `as` cast](#l21-️-do-null-check-the-result-of-an-as-cast)
+    - [[L.2.2] ✔️ **CONSIDER** Using `is` type matching to `as` plus null check](#l22-️-consider-using-is-type-matching-to-as-plus-null-check)
+    - [[L.2.3] ✔️ **CONSIDER** Using C-style casting if failed cast should throw an exception](#l23-️-consider-using-c-style-casting-if-failed-cast-should-throw-an-exception)
+  - [[L.3] ❌ **AVOID** Using `var` when it hinders the understanding of the code, or if the type cannot be inferred on the line it's declared on](#l3--avoid-using-var-when-it-hinders-the-understanding-of-the-code-or-if-the-type-cannot-be-inferred-on-the-line-its-declared-on)
   - [[L.4] Constructors](#l4-constructors)
-    - [[L.4.1] :heavy_check_mark: **CONSIDER** Having one public constructor per class](#l41-heavy_check_mark-consider-having-one-public-constructor-per-class)
-    - [[L.4.2] :x: **AVOID** Doing work in more than one constructor overload (ideally constructors don't do any work)](#l42-x-avoid-doing-work-in-more-than-one-constructor-overload-ideally-constructors-dont-do-any-work)
-    - [[L.4.3] :heavy_check_mark: **CONSIDER** Having only required parameters for constructors](#l43-heavy_check_mark-consider-having-only-required-parameters-for-constructors)
+    - [[L.4.1] ✔️ **CONSIDER** Having one public constructor per class](#l41-️-consider-having-one-public-constructor-per-class)
+    - [[L.4.2] ❌ **AVOID** Doing work in more than one constructor overload (ideally constructors don't do any work)](#l42--avoid-doing-work-in-more-than-one-constructor-overload-ideally-constructors-dont-do-any-work)
+    - [[L.4.3] ✔️ **CONSIDER** Having only required parameters for constructors](#l43-️-consider-having-only-required-parameters-for-constructors)
   - [[L.5] Exceptions](#l5-exceptions)
-    - [[L.5.1] :heavy_check_mark: **DO** Write exception-safe code](#l51-heavy_check_mark-do-write-exception-safe-code)
-    - [[L.5.2] :heavy_check_mark: **DO** Throw exceptions instead of returning error codes or null](#l52-heavy_check_mark-do-throw-exceptions-instead-of-returning-error-codes-or-null)
+    - [[L.5.1] ✔️ **DO** Write exception-safe code](#l51-️-do-write-exception-safe-code)
+    - [[L.5.2] ✔️ **DO** Throw exceptions instead of returning error codes or null](#l52-️-do-throw-exceptions-instead-of-returning-error-codes-or-null)
   - [[L.6] Events](#l6-events)
-    - [[L.6.1] :heavy_check_mark: **CONSIDER** Following standard conventions for event handlers (naming, inheritance and implementation)](#l61-heavy_check_mark-consider-following-standard-conventions-for-event-handlers-naming-inheritance-and-implementation)
-    - [[L.6.2] :x: **AVOID** Using multi-threaded events](#l62-x-avoid-using-multi-threaded-events)
-  - [[L.7] :heavy_check_mark: **CONSIDER** Handling out of range values for enumerations](#l7-heavy_check_mark-consider-handling-out-of-range-values-for-enumerations)
-  - [[L.8] :heavy_check_mark: **CONSIDER** Checking input parameters to a function that can be null or out of range](#l8-heavy_check_mark-consider-checking-input-parameters-to-a-function-that-can-be-null-or-out-of-range)
-  - [[L.9] :x: **AVOID** Using tuples in public APIs in product code](#l9-x-avoid-using-tuples-in-public-apis-in-product-code)
-  - [[L.10] :x: **DO NOT** Prefix numeric literals with `_`](#l10-x-do-not-prefix-numeric-literals-with-_)
-  - [[L.11] :x: **DO NOT** Use `this.` to access member of a class](#l11-x-do-not-use-this-to-access-member-of-a-class)
+    - [[L.6.1] ✔️ **CONSIDER** Following standard conventions for event handlers (naming, inheritance and implementation)](#l61-️-consider-following-standard-conventions-for-event-handlers-naming-inheritance-and-implementation)
+    - [[L.6.2] ❌ **AVOID** Using multi-threaded events](#l62--avoid-using-multi-threaded-events)
+  - [[L.7] ✔️ **CONSIDER** Handling out of range values for enumerations](#l7-️-consider-handling-out-of-range-values-for-enumerations)
+  - [[L.8] ✔️ **CONSIDER** Checking input parameters to a function that can be null or out of range](#l8-️-consider-checking-input-parameters-to-a-function-that-can-be-null-or-out-of-range)
+  - [[L.9] ❌ **AVOID** Using tuples in public APIs in product code](#l9--avoid-using-tuples-in-public-apis-in-product-code)
+  - [[L.10] ❌ **DO NOT** Prefix numeric literals with `_`](#l10--do-not-prefix-numeric-literals-with-_)
+  - [[L.11] ❌ **DO NOT** Use `this.` to access member of a class](#l11--do-not-use-this-to-access-member-of-a-class)
   - [[L.12] Properties and Methods](#l12-properties-and-methods)
-    - [[L.12.1] :x: **DO NOT** Introduce side effects when calling properties](#l121-x-do-not-introduce-side-effects-when-calling-properties)
-    - [[L.12.2] :x: **DO NOT** Allocate each time a property is called](#l122-x-do-not-allocate-each-time-a-property-is-called)
+    - [[L.12.1] ❌ **DO NOT** Introduce side effects when calling properties](#l121--do-not-introduce-side-effects-when-calling-properties)
+    - [[L.12.2] ❌ **DO NOT** Allocate each time a property is called](#l122--do-not-allocate-each-time-a-property-is-called)
 - [Documentation and Comments](#documentation-and-comments)
-  - [[D.1] :heavy_check_mark: **DO** Document public and protected members of APIs](#d1-heavy_check_mark-do-document-public-and-protected-members-of-apis)
+  - [[D.1] ✔️ **DO** Document public and protected members of APIs](#d1-️-do-document-public-and-protected-members-of-apis)
       - [Public API Documentation Example](#public-api-documentation-example)
       - [Private API Documentation Example](#private-api-documentation-example)
-  - [[D.2] :x: **DO NOT** Duplicate documentation from methods with the same name but different signatures](#d2-x-do-not-duplicate-documentation-from-methods-with-the-same-name-but-different-signatures)
-  - [[D.3] :x: **DO NOT** Nest `<remarks>` and `<exceptions>` inside `<summary>` tags](#d3-x-do-not-nest-remarks-and-exceptions-inside-summary-tags)
-  - [[D.4] :heavy_check_mark: **DO** Place a link to an actual task/user story in `TODO` comments](#d4-heavy_check_mark-do-place-a-link-to-an-actual-taskuser-story-in-todo-comments)
-  - [[D.5] :x: **DO NOT** Put names, initials or anything pertaining to individual developers into a `TODO` comment](#d5-x-do-not-put-names-initials-or-anything-pertaining-to-individual-developers-into-a-todo-comment)
-  - [[D.6] :heavy_check_mark: **DO** Use "AB#nnnnnn" format to reference AzDO (Azure Boards) work items in comments](#d6-heavy_check_mark-do-use-abnnnnnn-format-to-reference-azdo-azure-boards-work-items-in-comments)
+  - [[D.2] ❌ **DO NOT** Duplicate documentation from methods with the same name but different signatures](#d2--do-not-duplicate-documentation-from-methods-with-the-same-name-but-different-signatures)
+  - [[D.3] ❌ **DO NOT** Nest `<remarks>` and `<exceptions>` inside `<summary>` tags](#d3--do-not-nest-remarks-and-exceptions-inside-summary-tags)
+  - [[D.4] ✔️ **DO** Place a link to an actual task/user story in `TODO` comments](#d4-️-do-place-a-link-to-an-actual-taskuser-story-in-todo-comments)
+  - [[D.5] ❌ **DO NOT** Put names, initials or anything pertaining to individual developers into a `TODO` comment](#d5--do-not-put-names-initials-or-anything-pertaining-to-individual-developers-into-a-todo-comment)
+  - [[D.6] ✔️ **DO** Use "AB#nnnnnn" format to reference AzDO (Azure Boards) work items in comments](#d6-️-do-use-abnnnnnn-format-to-reference-azdo-azure-boards-work-items-in-comments)
 - [Maintainability](#maintainability)
   - [[M.1] External dependencies](#m1-external-dependencies)
-    - [[M.1.1] :x: **AVOID** Rewriting Framework Class Library (FCL) API implementations](#m11-x-avoid-rewriting-framework-class-library-fcl-api-implementations)
-  - [[M.2] :heavy_check_mark: **DO** Place English localizable strings into a resource file](#m2-heavy_check_mark-do-place-english-localizable-strings-into-a-resource-file)
-  - [[M.3] :heavy_check_mark: **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#m3-heavy_check_mark-do-ensure-projects-have-check-for-arithmetic-overflowunderflow-enabled-for-debugrelease-builds-and-disabled-for-distribution-builds)
+    - [[M.1.1] ❌ **AVOID** Rewriting Framework Class Library (FCL) API implementations](#m11--avoid-rewriting-framework-class-library-fcl-api-implementations)
+  - [[M.2] ✔️ **DO** Place English localizable strings into a resource file](#m2-️-do-place-english-localizable-strings-into-a-resource-file)
+  - [[M.3] ✔️ **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#m3-️-do-ensure-projects-have-check-for-arithmetic-overflowunderflow-enabled-for-debugrelease-builds-and-disabled-for-distribution-builds)
 
 - [Maintainability](#maintainability)
   - [[M.1] External dependencies](#%5Bm.1%5D-external-dependencies)
-    - [[M.1.1] :x: **AVOID** Rewriting Framework Class Library (FCL) API implementations](#%5Bm.1.1%5D-%3Ax%3A-**avoid**-rewriting-framework-class-library-(fcl)-api-implementations)
-  - [[M.2] :heavy_check_mark: **DO** Place English localizable strings into a resource file](#%5Bm.2%5D-%3Aheavy_check_mark%3A-**do**-place-english-localizable-strings-into-a-resource-file)
-  - [[M.3] :heavy_check_mark: **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#%5Bm.3%5D-%3Aheavy_check_mark%3A-**do**-ensure-projects-have-"check-for-arithmetic-overflow%2Funderflow"-enabled-for-debug%2Frelease-builds-and-disabled-for-distribution-builds)
+    - [[M.1.1] ❌ **AVOID** Rewriting Framework Class Library (FCL) API implementations](#%5Bm.1.1%5D-%3Ax%3A-**avoid**-rewriting-framework-class-library-(fcl)-api-implementations)
+  - [[M.2] ✔️ **DO** Place English localizable strings into a resource file](#%5Bm.2%5D-%3A&#x2714;%3A-**do**-place-english-localizable-strings-into-a-resource-file)
+  - [[M.3] ✔️ **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#%5Bm.3%5D-%3A&#x2714;%3A-**do**-ensure-projects-have-"check-for-arithmetic-overflow%2Funderflow"-enabled-for-debug%2Frelease-builds-and-disabled-for-distribution-builds)
 
 ----
 
@@ -137,15 +137,15 @@ This is a living document that represents our coding conventions. Rules that are
 
 > The conventions in this document are written using the style from _Framework Design Guidelines: Conventions, Idioms, and Patterns for Reusable .NET Libraries, 2nd Edition_, by Krzysztof Cwalina and Brad Abrams:
 > 
-> :heavy_check_mark: **DO** - a rule that should always be followed.
+> ✔️ **DO** - a rule that should always be followed.
 > 
-> :heavy_check_mark: **CONSIDER** - a rule that should generally be followed, but can be disregarded if you fully understand the reasoning behind the rule and have a good reason not to follow it.
+> ✔️ **CONSIDER** - a rule that should generally be followed, but can be disregarded if you fully understand the reasoning behind the rule and have a good reason not to follow it.
 > 
-> :x: **AVOID** - a rule indicating something is generally not a good idea, but there are known cases where breaking the rule makes sense.
+> ❌ **AVOID** - a rule indicating something is generally not a good idea, but there are known cases where breaking the rule makes sense.
 > 
-> :x: **DO NOT** - a rule that indicates something you should almost never do.
+> ❌ **DO NOT** - a rule that indicates something you should almost never do.
 >
-> :computer: - The coding convention is automatically enforced either through an .editorconfig setting or a Roslyn analyzer
+> 💻 - The coding convention is automatically enforced either through an .editorconfig setting or a Roslyn analyzer
 
 ---
 
@@ -153,7 +153,7 @@ This is a living document that represents our coding conventions. Rules that are
 
 ## [F.1] Character Spacing
 
-### [F.1.1] :heavy_check_mark: **DO** Use a single space after commas separating parameters :computer:
+### [F.1.1] ✔️ **DO** Use a single space after commas separating parameters 💻
 
 ```csharp
 // Bad
@@ -163,7 +163,7 @@ Console.In.Read(myChar,0,1);
 Console.In.Read(myChar, 0, 1);
 ```
 
-### [F.1.2] :x: **DO NOT** Use spaces between parentheses and parameters :computer:
+### [F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters 💻
 
 ```csharp
 // Bad
@@ -173,7 +173,7 @@ CreateFoo( myChar, 0, 1 )
 CreateFoo(myChar, 0, 1);
 ```
 
-### [F.1.3] :x: **DO NOT** Use spaces between index operator brackets and the index expression :computer:
+### [F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression 💻
 
 ```csharp
 // Bad
@@ -183,7 +183,7 @@ x = dataArray[ index ];
 x = dataArray[index];
 ```
 
-### [F.1.4] :x: **DO NOT** Use spaces between method names and parentheses :computer:
+### [F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses 💻
 
 ```csharp
 // Bad
@@ -193,7 +193,7 @@ CreateFoo ()
 CreateFoo()
 ```
 
-### [F.1.5] :heavy_check_mark: **DO** Use a single space after control flow keywords :computer:
+### [F.1.5] ✔️ **DO** Use a single space after control flow keywords 💻
 
 ```csharp
 // Bad
@@ -203,7 +203,7 @@ while(x == y)
 while (x == y)
 ```
 
-### [F.1.6] :heavy_check_mark: **DO** Use a single space before and after comparison operators :computer:
+### [F.1.6] ✔️ **DO** Use a single space before and after comparison operators 💻
 
 ```csharp
 // Bad
@@ -215,7 +215,7 @@ if (x == y)
 
 ## [F.2] Line Spacing
 
-### [F.2.1] :heavy_check_mark: **DO** Separate type members with a single blank line, except private fields
+### [F.2.1] ✔️ **DO** Separate type members with a single blank line, except private fields
 
 ```csharp
 // Bad
@@ -240,7 +240,7 @@ public class Foo
 }
 ```
 
-### [F.2.2] :heavy_check_mark: **CONSIDER** Use single blank lines to split method bodies into logically-related lines
+### [F.2.2] ✔️ **CONSIDER** Use single blank lines to split method bodies into logically-related lines
 
 Consider whether logical grouping of functionality can be better expressed by extracting a method.
 
@@ -275,7 +275,7 @@ EmployeeDirectory directory = UpdateDirectoryWithEmployee(employee);
 UpdateDirectoryMailingList(directory);
 ```
 
-### [F.2.3] :x: **DO NOT** Place a blank line immediately inside curly braces :computer:
+### [F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces 💻
 
 ```csharp
 // Bad
@@ -292,9 +292,9 @@ if (x == 1)
 }
 ```
 
-### [F.2.4] :x: **DO NOT** Place multiple blank lines together :computer:
+### [F.2.4] ❌ **DO NOT** Place multiple blank lines together 💻
 
-### [F.2.5] :heavy_check_mark: **DO** Separate unrelated control flow blocks with a blank line
+### [F.2.5] ✔️ **DO** Separate unrelated control flow blocks with a blank line
 
 ```csharp
 // Bad
@@ -346,7 +346,7 @@ for (int j = 0; j < 4; j++)
 
 ## [F.3] Statement Complexity
 
-### [F.3.1] :x: **AVOID** Adding excessive complexity in compound statements
+### [F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements
 
 Each C# statement should be easy to read and understand. If a line has greater than 150 characters, PREFER splitting the statement into multiple lines. Long statements often indicate complexity and can cause three problems:
 
@@ -376,7 +376,7 @@ DiagramLabel offsetAddNodeLabel = addNodesOnDiagram.Select(x => x.Bounds).Where(
 - Horizontal visibility
     - Scrolling horizontally increases the likelihood to miss incorrect code, especially in a code review
 
-### [F.3.2] :heavy_check_mark: **CONSIDER** Extracting methods from complex nested expressions
+### [F.3.2] ✔️ **CONSIDER** Extracting methods from complex nested expressions
 
 If you need to evaluate a complex expression, such as a nested numeric or boolean expression, extract that expression to a well-named method.
 
@@ -394,11 +394,11 @@ private bool IsFooFullyEnabled(Mode modeFlags)
 }
 ```
 
-### [F.3.3] :heavy_check_mark: **CONSIDER** Splitting long parameter lists
+### [F.3.3] ✔️ **CONSIDER** Splitting long parameter lists
 
 If a given method takes so many parameters that the line becomes very long, split the parameter list so that all parameters are on their own line.
 
-There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] :x: **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
+There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
 
 Indent the parameter list one level deeper than the invocation that takes the parameters.
 
@@ -415,11 +415,11 @@ ConfigureMyObject(
     downstreamDependencies: originalObjectDependencies.Where(x => x.Direction == Direction.Downstream));
 ```
 
-### [F.3.4] :heavy_check_mark: **CONSIDER** Splitting long chains of dotted method/property invocations
+### [F.3.4] ✔️ **CONSIDER** Splitting long chains of dotted method/property invocations
 
 If you invoke a chain of methods and/or properties and that single line becomes very long, split each invocation onto its own line. Use well-named local variables if needed.
 
-There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] :x: **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
+There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
 
 Indent dotted invocations one level deeper than the root object. Place the dot for each invocation at the beginning of that line. 
 
@@ -436,7 +436,7 @@ var distinctSelectedSoftware = selectedSoftwareContents
 
 If you end up indenting deeper than 2 more levels, **CONSIDER** extracting local variables.
 
-### [F.3.5] :heavy_check_mark: **DO** Apply consistent formatting on split statements
+### [F.3.5] ✔️ **DO** Apply consistent formatting on split statements
 
 If a single statement must include a long chain or nested tree of sub-statements, split the line as follows:
 1. Place operators at the beginning of lines rather than the end of the previous line.
@@ -467,18 +467,18 @@ return pathLength
 
 ## [F.4] Indents and Braces
 
-### [F.4.1] :heavy_check_mark: **DO** Use 4 space characters for indentation, never tab characters
+### [F.4.1] ✔️ **DO** Use 4 space characters for indentation, never tab characters
 
 > :information_source: Note: Elsewhere in this document, "indent one level" always means 4 spaces deeper than the previous lines.
 
-### [F.4.2] :x: **DO NOT** Use single-line statements with control flow keywords :computer:
+### [F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords 💻
 
 ```csharp
 // Bad
 if (completed) return;
 ```
 
-### [F.4.3] :heavy_check_mark: **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line :computer:
+### [F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line 💻
 
 ```csharp
 // Bad
@@ -492,15 +492,15 @@ if (completed)
 }
 ```
 
-### [F.4.4] :heavy_check_mark: **DO** Place open curly braces on the next line after the opening statement of an embedded scope block :computer:
+### [F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block 💻
 
 This applies to scope blocks for control flow keywords, `using` statements, `try-catch-finally`, etc.
 
-### [F.4.5] :x: **Avoid** Placing multiple statements in a `switch` `case` block
+### [F.4.5] ❌ **Avoid** Placing multiple statements in a `switch` `case` block
 
 If a case block requires multiple statements, extract a helper method.
 
-### [F.4.6] :x: **DO NOT** Use single-line scopes EXCEPT for single-item initializers or auto-implemented properties
+### [F.4.6] ❌ **DO NOT** Use single-line scopes EXCEPT for single-item initializers or auto-implemented properties
 
 Single-line initializers or auto-implemented properties may use single-line scopes if appropriate, but it is not required.
 
@@ -525,7 +525,7 @@ public class Foo
 }
 ```
 
-### [F.4.7] :heavy_check_mark: **DO** Format multiple array or object property initializer statements into a multi-line embedded scope block
+### [F.4.7] ✔️ **DO** Format multiple array or object property initializer statements into a multi-line embedded scope block
 
 Place each property or array element value on its own line, indented one level deeper than the curly braces.
 
@@ -550,7 +550,7 @@ If the initializer is simple enough and easily fits on one line, it can be place
 var cat = new Animal() { Noise = "Meow" };
 ```
 
-### [F.4.8] :heavy_check_mark: **CONSIDER** Using C# lambda syntax for simple property and method implementations
+### [F.4.8] ✔️ **CONSIDER** Using C# lambda syntax for simple property and method implementations
 
 The guidance for general lamdba formatting applies to this syntax as well. If the lambda does not fit on the same line as the definition, use the braced syntax.
 
@@ -565,7 +565,7 @@ public class Foo
 }
 ```
 
-### [F.4.9] :heavy_check_mark: **DO** Use braces with lambda expressions that span multiple lines
+### [F.4.9] ✔️ **DO** Use braces with lambda expressions that span multiple lines
 
 When writing a lambda, only use a non-braced version if it fits cleanly on one line. Consider extracting a method any time a lambda cannot fit on one line or takes multiple parameters. If splitting a single lambda statement onto multiple lines, always use indented braces.
 
@@ -607,7 +607,7 @@ public void Given_When_Then()
 
 ## [N.1] Casing Style
 
-### [N.1.1] :heavy_check_mark: **DO** Apply consistent casing style for identifiers :computer:
+### [N.1.1] ✔️ **DO** Apply consistent casing style for identifiers 💻
 
 | Style                     | Identifier Type             | Example             |
 |---------------------------|-----------------------------|---------------------|
@@ -626,7 +626,7 @@ public void Given_When_Then()
 
 > :exclamation: Special exception: When using product names in identifiers, match the trademarked product name. For example in an API that is exclusive to the shipping LabVIEW product, use "LabVIEW", not "LabView" or "labVIEW".
 
-### [N.1.2] :heavy_check_mark: **DO** Use underscore + camelCase for private fields and member variables
+### [N.1.2] ✔️ **DO** Use underscore + camelCase for private fields and member variables
 
 ```csharp
 private bool _inEdit;
@@ -634,7 +634,7 @@ private bool _inEdit;
 
 > NOTE: There is an IDE rule, IDE1006 that flags this but it's only in the editor. IDE rules cannot be enforced at build time.
 
-### [N.1.3] :heavy_check_mark: **DO** Capitalize both letters of two-letter acronyms
+### [N.1.3] ✔️ **DO** Capitalize both letters of two-letter acronyms
 
 Two-letter acronyms are always either all uppercase or all lowercase. For more information on what two-letter acronyms are considered accepted, refer to <<N.2>> (for general explanation)
 
@@ -645,7 +645,7 @@ Two-letter acronyms are always either all uppercase or all lowercase. For more i
 | UI                        | Ui                       | ui, UI            |
 | IO                        | Io                       | io, IO            |
 
-### [N.1.4] :heavy_check_mark: **DO** Apply PascalCase style when using 3+letter acronyms
+### [N.1.4] ✔️ **DO** Apply PascalCase style when using 3+letter acronyms
 
 Treat acronyms with more than two letters as words. For more information on what two-letter acronyms are considered accepted, refer to <<N.X>> (for general explanation)
 
@@ -655,20 +655,20 @@ Treat acronyms with more than two letters as words. For more information on what
 | HTTP                      | HTTP                        | http, Http             |
 | cRIO                      | cRIO                        | crio, Crio, CompactRio |
 
-### [N.1.5] :x: **DO NOT** Use ALL CAPS for any name
+### [N.1.5] ❌ **DO NOT** Use ALL CAPS for any name
 
 One possible exception is when using P/Invokes in a NativeMethods class, if the native method requires that specific capitalization.
 
 ## [N.2] Acronyms and Abbreviations
 
-### [N.2.1] :x: **DO NOT** Use acronyms unless they are generally accepted within NI or our client domains
+### [N.2.1] ❌ **DO NOT** Use acronyms unless they are generally accepted within NI or our client domains
 
 Examples of exceptions:
 - `NI` for National Instruments
 - `Fpga` for Field Programmable Gate Array
 - Common framework or protocol names such as `Smtp` or `Etw`
 
-### [N.2.2] :x: **DO NOT** Use abbreviations unless they are commonly accepted terms
+### [N.2.2] ❌ **DO NOT** Use abbreviations unless they are commonly accepted terms
 
 Some abbreviations and acronyms are domain-specific and are not necessarily common knowledge to all developers. Use only non-domain abbreviations to avoid confusion. Spell out all words minus a few, rare exceptions.
 
@@ -684,11 +684,11 @@ Some abbreviations and acronyms are domain-specific and are not necessarily comm
 | Identifier  | Id                 |
 | Information | Info               |
 
-## [N.3] :x: **DO NOT** Use product names in APIs unless those APIs are truly exclusive to that product
+## [N.3] ❌ **DO NOT** Use product names in APIs unless those APIs are truly exclusive to that product
 
 Example: Using the name LabVIEW in code in the `NationalInstruments.VI` namespace is not appropriate because the code for VIs is included in products not called LabVIEW.
 
-## [N.4] :heavy_check_mark: **CONSIDER** Using parameter/property names that imply usage, not structure. In general, do not embed type information into names
+## [N.4] ✔️ **CONSIDER** Using parameter/property names that imply usage, not structure. In general, do not embed type information into names
 
 | **Bad**                                                      | **Good**                                                               |
 |--------------------------------------------------------------|------------------------------------------------------------------------|
@@ -699,25 +699,25 @@ Example: Using the name LabVIEW in code in the `NationalInstruments.VI` namespac
 
 ## [N.5] Identifier Prefixing
 
-### [N.5.1] :heavy_check_mark: **DO** Prefix interfaces with `I` :computer:
+### [N.5.1] ✔️ **DO** Prefix interfaces with `I` 💻
 
-### [N.5.2] :x: **DO NOT** Prefix enums, classes or delegates with any letter
+### [N.5.2] ❌ **DO NOT** Prefix enums, classes or delegates with any letter
 
 Interfaces **must** begin with `I` but that is the only exception to this rule.
 
-### [N.5.3] :heavy_check_mark: **DO** Prefix private fields and member variables with an underscore `_`
+### [N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_`
 
 > NOTE: There is an IDE rule, IDE1006 that flags this but it's only in the editor. IDE rules cannot be enforced at build time.
 
 ## [N.6] Properties and Methods
 
-### [N.6.1] :heavy_check_mark: **DO** Name properties with nouns instead of verbs
+### [N.6.1] ✔️ **DO** Name properties with nouns instead of verbs
 
 Properties should never contain the word `Get`. A getter already is implied when using a property, so the name is redundant. Keep the name short and succinct to what the property represents.
 
-### [N.6.2] :heavy_check_mark: **DO** Name methods with verbs instead of nouns
+### [N.6.2] ✔️ **DO** Name methods with verbs instead of nouns
 
-### [N.6.3] :heavy_check_mark: **DO** Use the proper words to imply performance/allocation characteristics 
+### [N.6.3] ✔️ **DO** Use the proper words to imply performance/allocation characteristics 
 
 | **Prefix**     | **Implication**                                                      |
 |----------------|----------------------------------------------------------------------|
@@ -733,46 +733,46 @@ Properties should never contain the word `Get`. A getter already is implied when
 
 For information on when to create or not create a namespace, read [CSharp Coding Conventions Appendix: Namespaces](CSharp-Coding-Conventions-Appendix.md#namespaces).
 
-### [C.1.1] :heavy_check_mark: **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name
+### [C.1.1] ✔️ **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name
 
-### [C.1.2] :heavy_check_mark: **DO** Organize the hierarchy of namespaces around groups of related technologies
+### [C.1.2] ✔️ **DO** Organize the hierarchy of namespaces around groups of related technologies
 
-### [C.1.3] :heavy_check_mark: **DO** Use PascalCasing and separate namespace components with periods
+### [C.1.3] ✔️ **DO** Use PascalCasing and separate namespace components with periods
 
 For example: `Microsoft.Office.PowerPoint`
 
 If your brand employs nontraditional casing, you should follow the casing defined by your brand, even if it deviates from normal namespace casing.
 
-### [C.1.4] :heavy_check_mark: **CONSIDER** Using plural namespace names where appropriate
+### [C.1.4] ✔️ **CONSIDER** Using plural namespace names where appropriate
 
 For example, use `System.Collections` instead of `System.Collection`
 
 Brand names and acronyms are exceptions to this rule, however. For example, use `System.IO` instead of `System.IOs`. 
 
-### [C.1.5] :x: **DO NOT** Use the same name for a namespace and a type in that namespace
+### [C.1.5] ❌ **DO NOT** Use the same name for a namespace and a type in that namespace
 
 For example, do not use Debug as a namespace name and then also provide a class named Debug in the same namespace. Several compilers require such types to be fully qualified. 
 
-### [C.1.6] :heavy_check_mark: **DO** Create namespaces of the form `NationalInstruments.<ComponentName>.<SubComponentName>.xxx`
+### [C.1.6] ✔️ **DO** Create namespaces of the form `NationalInstruments.<ComponentName>.<SubComponentName>.xxx`
 
 > :information_source: Note: In some situations, use the product name as a replacement for `ComponentName` in the namesapce.
 
-### [C.1.7] :heavy_check_mark: **DO** Place modeling types in a `NationalInstruments.<ComponentName>.SourceModel` namespace
+### [C.1.7] ✔️ **DO** Place modeling types in a `NationalInstruments.<ComponentName>.SourceModel` namespace
 
-### [C.1.8] :heavy_check_mark: **DO** Place View Models / Views of a Model Type in a `NationalInstruments.<ComponentName>.Design` namespace
+### [C.1.8] ✔️ **DO** Place View Models / Views of a Model Type in a `NationalInstruments.<ComponentName>.Design` namespace
 
-### [C.1.9] :heavy_check_mark: **DO** Place Dfir types in a `NationalInstruments.<ComponentName>.Dfir` namespace
+### [C.1.9] ✔️ **DO** Place Dfir types in a `NationalInstruments.<ComponentName>.Dfir` namespace
 
-### [C.1.10] :heavy_check_mark: **DO** Place types which are common to both SourceModel and Dfir in a `NationalInstruments.<ComponentName>.CommonModel` namespace
+### [C.1.10] ✔️ **DO** Place types which are common to both SourceModel and Dfir in a `NationalInstruments.<ComponentName>.CommonModel` namespace
 
-### [C.1.11] :heavy_check_mark: **DO** Ensure files in an assembly are under the assembly's root namespace and the namespace matches the folder hierarchy on disk
+### [C.1.11] ✔️ **DO** Ensure files in an assembly are under the assembly's root namespace and the namespace matches the folder hierarchy on disk
 
 Everything in an assembly should be in that assembly's root namespace or a sub-namespace of that namespace. Source directory layout under the project should match the namespacing under that root namespace.
 
 > The MocCommon assembly has a root namespace NationalInstruments.MocCommon, so all types in that assembly should begin with NationalInstruments.MocCommon. 
 > For example: NationalInstruments.MocCommon.Design.ClusterViewModel should be in a folder Design in the MocCommon project.
 
-### [C.1.12] :heavy_check_mark: **CONSIDER** Naming the assembly to match the root namespace
+### [C.1.12] ✔️ **CONSIDER** Naming the assembly to match the root namespace
 
 Example: 
 The root namespace of the Fpga project is NationalInstruments.Fpga. Similarly, the root namespace of the Fpga.HelpTools project is NationalInstruments.Fpga.HelpTools.
@@ -784,7 +784,7 @@ This rule does not apply for test projects. See [Regression Test Conventions](/O
 If the root namespace results in an assembly name conflict, consider changing the namespace and/or assembly boundaries. If the conflict cannot be avoided, add an additional segment to the assembly name to avoid the conflict. Typically this would be one of the namespaces used in the assembly. 
 > An assembly that contains types in NationalInstruments.SourceModel and NationalInstruments.Designer would have a root namespace of NationalInstruments but its assembly might be named NationalInstruments.SourceModel.dll.
 
-## [C.2] :heavy_check_mark: **DO** Place public types not intended for use outside the defining assembly's component in a `Restricted` namespace
+## [C.2] ✔️ **DO** Place public types not intended for use outside the defining assembly's component in a `Restricted` namespace
 
 We can change Restricted types more easily because we know all references are within that component and can be updated together. 
 
@@ -794,7 +794,7 @@ Restricted types should be in a namespace of the form:
 
 Internal types should not go in the Restricted namespace.
 
-## [C.3] :heavy_check_mark: **CONSIDER** Having one public or internal type per file and its name should match the file's name
+## [C.3] ✔️ **CONSIDER** Having one public or internal type per file and its name should match the file's name
 
 Exceptions may be made to the one "main" type per file rule for public/internal types that are only used as part of the interface to the main type and no other types. 
 
@@ -809,9 +809,9 @@ Examples include:
 
 ## [C.4] Usings
 
-### [C.4.1] :heavy_check_mark: **DO** Place `using` directives at top of file, outside `namespace`
+### [C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`
 
-### [C.4.2] :heavy_check_mark: **DO** Sort `using` directives :computer:
+### [C.4.2] ✔️ **DO** Sort `using` directives 💻
 
 Sort `using` directives in the following order. Always sort alphabetically by namespace, except for aliases (see below).
 
@@ -821,13 +821,13 @@ Sort `using` directives in the following order. Always sort alphabetically by na
 1. `using static` types in non-system namespaces
 1. `using` alias directives; sorted alphabetically by alias name, not namespace
 
-## [C.5] :x: **DO NOT** Expose nested types as `public` or `internal`
+## [C.5] ❌ **DO NOT** Expose nested types as `public` or `internal`
 
 `public` and `internal` types should not be nested inside of classes. Create a separate file with the nested type as an outer type instead. Nesting `private` or `protected` types is allowed. Nested public types are allowed only in test assemblies as XUnit requires the types to be public for theory data.
 
 > NOTE: An analyzer partially enforces this. Public nested types are not allowed, but the rule does not flag nested internal types which our conventions also explicitly disallow.
 
-## [C.6] :heavy_check_mark: **CONSIDER** Arranging types and members in logical layers
+## [C.6] ✔️ **CONSIDER** Arranging types and members in logical layers
 
 There is no hard rule on the ordering of types within a file (fields, properties, events, constructors, methods, ...). Instead favor a logical organization where readability is the most important thing. Organize type members into logical layers that allows someone browsing the file from the top to see an overview of the functionality then decide if they need to look further into the details.
 
@@ -840,13 +840,13 @@ Suggested layers:
 
 ## [C.7] Local Functions
 
-### [C.7.1] :heavy_check_mark: **DO** Place local functions at the end of the containing method
+### [C.7.1] ✔️ **DO** Place local functions at the end of the containing method
 
-### [C.7.2] :x: **DO NOT** Nest local functions
+### [C.7.2] ❌ **DO NOT** Nest local functions
 
 Create multiple local functions within the containing method instead of nesting them within each other.
 
-## [C.8] :x: **AVOID** Using regions
+## [C.8] ❌ **AVOID** Using regions
 
 `#region`/`#endregion` may seem helpful to organize related code, but they are difficult to maintain over time. As more people modify the file and the file is merged with conflict changes, the more the regions drift and start to contain things that they weren't intended to contain. A region with incorrect contents is worse than having no regions at all as the organization of regions can no longer be trusted.
 
@@ -854,7 +854,7 @@ Create multiple local functions within the containing method instead of nesting 
 
 # Language Features
 
-## [L.1] :heavy_check_mark: **DO** Use primitive C# types instead of Framework Class Library (FCL) types
+## [L.1] ✔️ **DO** Use primitive C# types instead of Framework Class Library (FCL) types
 
 C# provides primitive types (keywords) for most of the .NET FCL types. Use primitive types instead of FCL types. The one exception to this rule is
 when specifying the bit width of an integer fields (as the FCL types do) would make the code more clear.
@@ -871,9 +871,9 @@ float, double, bool, decimal, object, string
 
 ## [L.2] Casting
 
-### [L.2.1] :heavy_check_mark: **DO** Null-check the result of an `as` cast
+### [L.2.1] ✔️ **DO** Null-check the result of an `as` cast
 
-### [L.2.2] :heavy_check_mark: **CONSIDER** Using `is` type matching to `as` plus null check
+### [L.2.2] ✔️ **CONSIDER** Using `is` type matching to `as` plus null check
 
 ```csharp
 // Consider
@@ -893,11 +893,11 @@ if (b != null)
 }
 ```
 
-### [L.2.3] :heavy_check_mark: **CONSIDER** Using C-style casting if failed cast should throw an exception
+### [L.2.3] ✔️ **CONSIDER** Using C-style casting if failed cast should throw an exception
 
 This is faster than `as` casting + null check, and standardizes the exception message.
 
-## [L.3] :x: **AVOID** Using `var` when it hinders the understanding of the code, or if the type cannot be inferred on the line it's declared on
+## [L.3] ❌ **AVOID** Using `var` when it hinders the understanding of the code, or if the type cannot be inferred on the line it's declared on
 
 ```csharp
 // Consider
@@ -911,27 +911,27 @@ foreach (var item in itemsToProcess)
 
 ## [L.4] Constructors
 
-### [L.4.1] :heavy_check_mark: **CONSIDER** Having one public constructor per class
+### [L.4.1] ✔️ **CONSIDER** Having one public constructor per class
 If your class is overridable and you want deriving classes to have access to it, make the most general constructor protected.
 If your class is not overridable and/or you want to hide it from the users of your class, make the most general constructor private (not internal).
 
-### [L.4.2] :x: **AVOID** Doing work in more than one constructor overload (ideally constructors don't do any work)
+### [L.4.2] ❌ **AVOID** Doing work in more than one constructor overload (ideally constructors don't do any work)
 
 Provide the most general constructor that encapsulates all of the functionality of the other public constructors. Have the less-general public constructors call the most general.
 If you want users to have access to all the parameters at once, make the most general constructor public.
 
-### [L.4.3] :heavy_check_mark: **CONSIDER** Having only required parameters for constructors
+### [L.4.3] ✔️ **CONSIDER** Having only required parameters for constructors
 Constructors should only contain parameters that are required and use initializers (properties) to set additional optional values.
 
 ## [L.5] Exceptions
 
-### [L.5.1] :heavy_check_mark: **DO** Write exception-safe code
+### [L.5.1] ✔️ **DO** Write exception-safe code
 
 Treat every line of code as having the potential to throw an exception. Code should be written such that exceptions cleanly abort the current operation, leaving all data structures in a consistent state that is balanced with respect to paired operations (e.g. init/cleanup).
 
 For more information about writing exception-safe code, please refer to [CSharp Coding Conventions Appendix: Writing exception-safe code](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#writing-exception-safe-code)
 
-### [L.5.2] :heavy_check_mark: **DO** Throw exceptions instead of returning error codes or null
+### [L.5.2] ✔️ **DO** Throw exceptions instead of returning error codes or null
 
 No function should return an error code or a null value. If the function cannot satisfy its contract, throw an exception.
 If there is a case where failure is common, you may provide a "Try" style function that is a mirror of the main function prefixed with the word "Try" and does not throw. For instance:
@@ -957,15 +957,15 @@ public bool TryDoSomeStuff(out MyStuff stuff)
 
 ## [L.6] Events
 
-### [L.6.1] :heavy_check_mark: **CONSIDER** Following standard conventions for event handlers (naming, inheritance and implementation)
+### [L.6.1] ✔️ **CONSIDER** Following standard conventions for event handlers (naming, inheritance and implementation)
 
 When defining an event that a C# class can raise, follow the steps outlined in [CSharp Coding Conventions Appendix: Events](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#events) regarding naming and implementation.
 
-### [L.6.2] :x: **AVOID** Using multi-threaded events
+### [L.6.2] ❌ **AVOID** Using multi-threaded events
 
 Multi-threaded events are difficult to write properly to handle all situations. If it is necessary, please read and follow the guidelines outlined in [CSharp Coding Conventions Appendix: Multi-threaded events](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#multi-threaded-events)
 
-## [L.7] :heavy_check_mark: **CONSIDER** Handling out of range values for enumerations
+## [L.7] ✔️ **CONSIDER** Handling out of range values for enumerations
 
 Do not assume that enumeration arguments will be in the defined range. Do argument checking and throw an exception if the argument is out of range. However, if an enumeration can be out of range by design (for extensibility), handle those out of range cases nicely.
 
@@ -989,29 +989,29 @@ public Styles Style
 
 Using the [Verifier](https://ngsourcebrowser.ni.corp.natinst.com:4110/#NationalInstruments.Core/Core/Verifier.cs,9560736d819dc70e,references) static class can do this for you.
 
-## [L.8] :heavy_check_mark: **CONSIDER** Checking input parameters to a function that can be null or out of range
+## [L.8] ✔️ **CONSIDER** Checking input parameters to a function that can be null or out of range
 
 Following the philosophy of [Fail-fast](https://en.wikipedia.org/wiki/Fail-fast), check all parameters using methods from the [Verifier](https://ngsourcebrowser.ni.corp.natinst.com:4110/#NationalInstruments.Core/Core/Verifier.cs,9560736d819dc70e,references) static class at the beginning of all methods in a public API. This helps to ensure that parameters outside of the expected range do not get passed in.
 
-## [L.9] :x: **AVOID** Using tuples in public APIs in product code
+## [L.9] ❌ **AVOID** Using tuples in public APIs in product code
 
 Use well-named enums, structs and classes to pass data between methods instead of tuples.
 
-## [L.10] :x: **DO NOT** Prefix numeric literals with `_`
+## [L.10] ❌ **DO NOT** Prefix numeric literals with `_`
 
 C# 7.0 added [numeric literal syntax improvements](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7#numeric-literal-syntax-improvements) where you can use underscores as digit separators. User underscores to enhance readability of large numbers, but do not prefix the number with an underscore. 
 
-## [L.11] :x: **DO NOT** Use `this.` to access member of a class
+## [L.11] ❌ **DO NOT** Use `this.` to access member of a class
 
 Reserve usage of `this.` for calling mixin methods available from test utilities. `this.` shouldn't be used anywhere in production code.
 
 ## [L.12] Properties and Methods
 
-### [L.12.1] :x: **DO NOT** Introduce side effects when calling properties
+### [L.12.1] ❌ **DO NOT** Introduce side effects when calling properties
 
 Properties should be safe to call multiple times and not affect the state of the system. It is okay to do a one-time, tiny hit and then cache the value for subsequent returns.
 
-### [L.12.2] :x: **DO NOT** Allocate each time a property is called
+### [L.12.2] ❌ **DO NOT** Allocate each time a property is called
 
 It is okay for properties to allocate objects once and then cache the value. Subsequent calls to the property should return a cached value rather than returning a new instance each time. If you need to return a few object for each call, use a method prefixed with `Create` instead.
 
@@ -1046,7 +1046,7 @@ public Foo CurrentFoo
 
 # Documentation and Comments
 
-## [D.1] :heavy_check_mark: **DO** Document public and protected members of APIs
+## [D.1] ✔️ **DO** Document public and protected members of APIs
 
 All types, and all members with public/protected scope (in production code) require documentation. Take the time to write good documentation, as external clients and first-time users of the code base often read documentation before using the API. Private/internal types, properties, and methods do not require documentation, but you should add documentation where it can ease future understanding and maintenance of the code. 
 
@@ -1092,22 +1092,22 @@ private static ModuleStatus QueryAndEnableModule(string moduleIPAddress, QueryCo
 ```
 NOTE: There are three different XML doc comments that do not conform to a fully documented public API method. However, for a private method this is okay. Removing any of these does not cause compile errors. The main issue is that people are duplicating documentation or making verbose, redundant documentation on private methods that are unnecessary.
 
-## [D.2] :x: **DO NOT** Duplicate documentation from methods with the same name but different signatures
+## [D.2] ❌ **DO NOT** Duplicate documentation from methods with the same name but different signatures
 
 If you are overriding a member (method or property) or implementing an interface member, use `<inheritdoc/>` rather than copy/pasting the base comment.
 When using `<inheritdoc/>`, you must still document any parameters that differ from the original method.
 
-## [D.3] :x: **DO NOT** Nest `<remarks>` and `<exceptions>` inside `<summary>` tags
+## [D.3] ❌ **DO NOT** Nest `<remarks>` and `<exceptions>` inside `<summary>` tags
 
-## [D.4] :heavy_check_mark: **DO** Place a link to an actual task/user story in `TODO` comments
+## [D.4] ✔️ **DO** Place a link to an actual task/user story in `TODO` comments
 
 `TODO` comments should not exist outside the scope of a feature and should therefore be associated with a concrete task or user story. Before a feature is accepted, all `TODOs` with a feature must be removed from the code.
 
-## [D.5] :x: **DO NOT** Put names, initials or anything pertaining to individual developers into a `TODO` comment
+## [D.5] ❌ **DO NOT** Put names, initials or anything pertaining to individual developers into a `TODO` comment
 
 Developers change teams, organizations or companies. Not only do names become stale, it can be very difficult translate initials to developers. As we move to more vertical teams, names in comments become less meaningful and even confusing. Work items are persistent and can be associated with teams which makes things easier to track and follow up on.
 
-## [D.6] :heavy_check_mark: **DO** Use "AB#nnnnnn" format to reference AzDO (Azure Boards) work items in comments
+## [D.6] ✔️ **DO** Use "AB#nnnnnn" format to reference AzDO (Azure Boards) work items in comments
 
 Code tends to last longer than work item tracking systems. Each reference should declare what system it came from. The `AB#` prefix is the [standard adopted by GitHub](https://docs.microsoft.com/en-us/azure/devops/boards/github/link-to-from-github?view=azure-devops#use-ab-mention-to-link-from-github-to-azure-boards-work-items) for this purpose.
 
@@ -1115,7 +1115,7 @@ Code tends to last longer than work item tracking systems. Each reference should
 
 ## [M.1] External dependencies
 
-### [M.1.1] :x: **AVOID** Rewriting Framework Class Library (FCL) API implementations
+### [M.1.1] ❌ **AVOID** Rewriting Framework Class Library (FCL) API implementations
 
 Do not write your own "better" version of classes in the FCL. Use the classes from the FCL. Adding new versions adds to developer confusion. (i.e. Which version should be used in what scenario?)
 
@@ -1123,8 +1123,8 @@ Don't use 3rd party libraries as replacement for classes in the FCL unless there
 
 If you find a need to extend a class from the FCL, prefer the use of a 3rd party libraries over writing your own. For example, consider using Wintellect's Power Collections for .NET rather than creating your own versions of that functionality.
 
-## [M.2] :heavy_check_mark: **DO** Place English localizable strings into a resource file
+## [M.2] ✔️ **DO** Place English localizable strings into a resource file
 
-## [M.3] :heavy_check_mark: **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds
+## [M.3] ✔️ **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds
 
 There are performance implications for enabling that setting for distribution builds but it will catch important issues that we want to address.

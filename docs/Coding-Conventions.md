@@ -1,6 +1,5 @@
 - [Purpose of coding conventions](#purpose-of-coding-conventions)
 - [How to Read This Document](#how-to-read-this-document)
-  - [How to Edit This Document](#how-to-edit-this-document)
 - [Formatting](#formatting)
   - [[F.1] Character Spacing](#f1-character-spacing)
     - [[F.1.1] :heavy_check_mark: **DO** Use a single space after commas separating parameters :computer:](#f11-heavy_check_mark-do-use-a-single-space-after-commas-separating-parameters-computer)
@@ -147,14 +146,6 @@ This is a living document that represents our coding conventions. Rules that are
 > :x: **DO NOT** - a rule that indicates something you should almost never do.
 >
 > :computer: - The coding convention is automatically enforced either through an .editorconfig setting or a Roslyn analyzer
-
-## How to Edit This Document
-
-This document is maintained by the code owner chapter and the software discipline team. 
-
-Minor edits (fixing typos, cleaning up formatting) can be done ad-hoc and submitted by any developer.
-
-Changes to the rules or significant examples must be reviewed by the chapter/discipline before pushing any updates. This review process and be informal by emailing the code owner chapter or the software discipline lead to have the content reviewed before publishing the changes.
 
 ---
 

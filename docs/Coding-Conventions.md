@@ -2,17 +2,17 @@
 - [How to Read This Document](#how-to-read-this-document)
 - [Formatting](#formatting)
   - [[F.1] Character Spacing](#f1-character-spacing)
-    - [[F.1.1] ✔️ **DO** Use a single space after commas separating parameters :computer:](#f11-️-do-use-a-single-space-after-commas-separating-parameters-computer)
-    - [[F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters :computer:](#f12--do-not-use-spaces-between-parentheses-and-parameters-computer)
-    - [[F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression :computer:](#f13--do-not-use-spaces-between-index-operator-brackets-and-the-index-expression-computer)
-    - [[F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses :computer:](#f14--do-not-use-spaces-between-method-names-and-parentheses-computer)
-    - [[F.1.5] ✔️ **DO** Use a single space after control flow keywords :computer:](#f15-️-do-use-a-single-space-after-control-flow-keywords-computer)
-    - [[F.1.6] ✔️ **DO** Use a single space before and after comparison operators :computer:](#f16-️-do-use-a-single-space-before-and-after-comparison-operators-computer)
+    - [[F.1.1] ✔️ **DO** Use a single space after commas separating parameters 💻](#f11-️-do-use-a-single-space-after-commas-separating-parameters-)
+    - [[F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters 💻](#f12--do-not-use-spaces-between-parentheses-and-parameters-)
+    - [[F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression 💻](#f13--do-not-use-spaces-between-index-operator-brackets-and-the-index-expression-)
+    - [[F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses 💻](#f14--do-not-use-spaces-between-method-names-and-parentheses-)
+    - [[F.1.5] ✔️ **DO** Use a single space after control flow keywords 💻](#f15-️-do-use-a-single-space-after-control-flow-keywords-)
+    - [[F.1.6] ✔️ **DO** Use a single space before and after comparison operators 💻](#f16-️-do-use-a-single-space-before-and-after-comparison-operators-)
   - [[F.2] Line Spacing](#f2-line-spacing)
     - [[F.2.1] ✔️ **DO** Separate type members with a single blank line, except private fields](#f21-️-do-separate-type-members-with-a-single-blank-line-except-private-fields)
     - [[F.2.2] ✔️ **CONSIDER** Use single blank lines to split method bodies into logically-related lines](#f22-️-consider-use-single-blank-lines-to-split-method-bodies-into-logically-related-lines)
-    - [[F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces :computer:](#f23--do-not-place-a-blank-line-immediately-inside-curly-braces-computer)
-    - [[F.2.4] ❌ **DO NOT** Place multiple blank lines together :computer:](#f24--do-not-place-multiple-blank-lines-together-computer)
+    - [[F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces 💻](#f23--do-not-place-a-blank-line-immediately-inside-curly-braces-)
+    - [[F.2.4] ❌ **DO NOT** Place multiple blank lines together 💻](#f24--do-not-place-multiple-blank-lines-together-)
     - [[F.2.5] ✔️ **DO** Separate unrelated control flow blocks with a blank line](#f25-️-do-separate-unrelated-control-flow-blocks-with-a-blank-line)
   - [[F.3] Statement Complexity](#f3-statement-complexity)
     - [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#f31--avoid-adding-excessive-complexity-in-compound-statements)
@@ -22,9 +22,9 @@
     - [[F.3.5] ✔️ **DO** Apply consistent formatting on split statements](#f35-️-do-apply-consistent-formatting-on-split-statements)
   - [[F.4] Indents and Braces](#f4-indents-and-braces)
     - [[F.4.1] ✔️ **DO** Use 4 space characters for indentation, never tab characters](#f41-️-do-use-4-space-characters-for-indentation-never-tab-characters)
-    - [[F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords :computer:](#f42--do-not-use-single-line-statements-with-control-flow-keywords-computer)
-    - [[F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line :computer:](#f43-️-do-use-braces-around-statement-blocks-governed-by-a-control-flow-keyword-if-else-while-even-if-statement-block-is-one-line-computer)
-    - [[F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block :computer:](#f44-️-do-place-open-curly-braces-on-the-next-line-after-the-opening-statement-of-an-embedded-scope-block-computer)
+    - [[F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords 💻](#f42--do-not-use-single-line-statements-with-control-flow-keywords-)
+    - [[F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line 💻](#f43-️-do-use-braces-around-statement-blocks-governed-by-a-control-flow-keyword-if-else-while-even-if-statement-block-is-one-line-)
+    - [[F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block 💻](#f44-️-do-place-open-curly-braces-on-the-next-line-after-the-opening-statement-of-an-embedded-scope-block-)
     - [[F.4.5] ❌ **Avoid** Placing multiple statements in a `switch` `case` block](#f45--avoid-placing-multiple-statements-in-a-switch-case-block)
     - [[F.4.6] ❌ **DO NOT** Use single-line scopes EXCEPT for single-item initializers or auto-implemented properties](#f46--do-not-use-single-line-scopes-except-for-single-item-initializers-or-auto-implemented-properties)
     - [[F.4.7] ✔️ **DO** Format multiple array or object property initializer statements into a multi-line embedded scope block](#f47-️-do-format-multiple-array-or-object-property-initializer-statements-into-a-multi-line-embedded-scope-block)
@@ -32,7 +32,7 @@
     - [[F.4.9] ✔️ **DO** Use braces with lambda expressions that span multiple lines](#f49-️-do-use-braces-with-lambda-expressions-that-span-multiple-lines)
 - [Naming](#naming)
   - [[N.1] Casing Style](#n1-casing-style)
-    - [[N.1.1] ✔️ **DO** Apply consistent casing style for identifiers :computer:](#n11-️-do-apply-consistent-casing-style-for-identifiers-computer)
+    - [[N.1.1] ✔️ **DO** Apply consistent casing style for identifiers 💻](#n11-️-do-apply-consistent-casing-style-for-identifiers-)
     - [[N.1.2] ✔️ **DO** Use underscore + camelCase for private fields and member variables](#n12-️-do-use-underscore--camelcase-for-private-fields-and-member-variables)
     - [[N.1.3] ✔️ **DO** Capitalize both letters of two-letter acronyms](#n13-️-do-capitalize-both-letters-of-two-letter-acronyms)
     - [[N.1.4] ✔️ **DO** Apply PascalCase style when using 3+letter acronyms](#n14-️-do-apply-pascalcase-style-when-using-3letter-acronyms)
@@ -43,7 +43,7 @@
   - [[N.3] ❌ **DO NOT** Use product names in APIs unless those APIs are truly exclusive to that product](#n3--do-not-use-product-names-in-apis-unless-those-apis-are-truly-exclusive-to-that-product)
   - [[N.4] ✔️ **CONSIDER** Using parameter/property names that imply usage, not structure. In general, do not embed type information into names](#n4-️-consider-using-parameterproperty-names-that-imply-usage-not-structure-in-general-do-not-embed-type-information-into-names)
   - [[N.5] Identifier Prefixing](#n5-identifier-prefixing)
-    - [[N.5.1] ✔️ **DO** Prefix interfaces with `I` :computer:](#n51-️-do-prefix-interfaces-with-i-computer)
+    - [[N.5.1] ✔️ **DO** Prefix interfaces with `I` 💻](#n51-️-do-prefix-interfaces-with-i-)
     - [[N.5.2] ❌ **DO NOT** Prefix enums, classes or delegates with any letter](#n52--do-not-prefix-enums-classes-or-delegates-with-any-letter)
     - [[N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_`](#n53-️-do-prefix-private-fields-and-member-variables-with-an-underscore-_)
   - [[N.6] Properties and Methods](#n6-properties-and-methods)
@@ -68,7 +68,7 @@
   - [[C.3] ✔️ **CONSIDER** Having one public or internal type per file and its name should match the file's name](#c3-️-consider-having-one-public-or-internal-type-per-file-and-its-name-should-match-the-files-name)
   - [[C.4] Usings](#c4-usings)
     - [[C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`](#c41-️-do-place-using-directives-at-top-of-file-outside-namespace)
-    - [[C.4.2] ✔️ **DO** Sort `using` directives :computer:](#c42-️-do-sort-using-directives-computer)
+    - [[C.4.2] ✔️ **DO** Sort `using` directives 💻](#c42-️-do-sort-using-directives-)
   - [[C.5] ❌ **DO NOT** Expose nested types as `public` or `internal`](#c5--do-not-expose-nested-types-as-public-or-internal)
   - [[C.6] ✔️ **CONSIDER** Arranging types and members in logical layers](#c6-️-consider-arranging-types-and-members-in-logical-layers)
   - [[C.7] Local Functions](#c7-local-functions)
@@ -145,7 +145,7 @@ This is a living document that represents our coding conventions. Rules that are
 > 
 > ❌ **DO NOT** - a rule that indicates something you should almost never do.
 >
-> :computer: - The coding convention is automatically enforced either through an .editorconfig setting or a Roslyn analyzer
+> 💻 - The coding convention is automatically enforced either through an .editorconfig setting or a Roslyn analyzer
 
 ---
 
@@ -153,7 +153,7 @@ This is a living document that represents our coding conventions. Rules that are
 
 ## [F.1] Character Spacing
 
-### [F.1.1] ✔️ **DO** Use a single space after commas separating parameters :computer:
+### [F.1.1] ✔️ **DO** Use a single space after commas separating parameters 💻
 
 ```csharp
 // Bad
@@ -163,7 +163,7 @@ Console.In.Read(myChar,0,1);
 Console.In.Read(myChar, 0, 1);
 ```
 
-### [F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters :computer:
+### [F.1.2] ❌ **DO NOT** Use spaces between parentheses and parameters 💻
 
 ```csharp
 // Bad
@@ -173,7 +173,7 @@ CreateFoo( myChar, 0, 1 )
 CreateFoo(myChar, 0, 1);
 ```
 
-### [F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression :computer:
+### [F.1.3] ❌ **DO NOT** Use spaces between index operator brackets and the index expression 💻
 
 ```csharp
 // Bad
@@ -183,7 +183,7 @@ x = dataArray[ index ];
 x = dataArray[index];
 ```
 
-### [F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses :computer:
+### [F.1.4] ❌ **DO NOT** Use spaces between method names and parentheses 💻
 
 ```csharp
 // Bad
@@ -193,7 +193,7 @@ CreateFoo ()
 CreateFoo()
 ```
 
-### [F.1.5] ✔️ **DO** Use a single space after control flow keywords :computer:
+### [F.1.5] ✔️ **DO** Use a single space after control flow keywords 💻
 
 ```csharp
 // Bad
@@ -203,7 +203,7 @@ while(x == y)
 while (x == y)
 ```
 
-### [F.1.6] ✔️ **DO** Use a single space before and after comparison operators :computer:
+### [F.1.6] ✔️ **DO** Use a single space before and after comparison operators 💻
 
 ```csharp
 // Bad
@@ -275,7 +275,7 @@ EmployeeDirectory directory = UpdateDirectoryWithEmployee(employee);
 UpdateDirectoryMailingList(directory);
 ```
 
-### [F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces :computer:
+### [F.2.3] ❌ **DO NOT** Place a blank line immediately inside curly braces 💻
 
 ```csharp
 // Bad
@@ -292,7 +292,7 @@ if (x == 1)
 }
 ```
 
-### [F.2.4] ❌ **DO NOT** Place multiple blank lines together :computer:
+### [F.2.4] ❌ **DO NOT** Place multiple blank lines together 💻
 
 ### [F.2.5] ✔️ **DO** Separate unrelated control flow blocks with a blank line
 
@@ -471,14 +471,14 @@ return pathLength
 
 > :information_source: Note: Elsewhere in this document, "indent one level" always means 4 spaces deeper than the previous lines.
 
-### [F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords :computer:
+### [F.4.2] ❌ **DO NOT** Use single-line statements with control flow keywords 💻
 
 ```csharp
 // Bad
 if (completed) return;
 ```
 
-### [F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line :computer:
+### [F.4.3] ✔️ **DO** Use braces around statement blocks governed by a control flow keyword (`if`, `else`, `while`), even if statement block is one line 💻
 
 ```csharp
 // Bad
@@ -492,7 +492,7 @@ if (completed)
 }
 ```
 
-### [F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block :computer:
+### [F.4.4] ✔️ **DO** Place open curly braces on the next line after the opening statement of an embedded scope block 💻
 
 This applies to scope blocks for control flow keywords, `using` statements, `try-catch-finally`, etc.
 
@@ -607,7 +607,7 @@ public void Given_When_Then()
 
 ## [N.1] Casing Style
 
-### [N.1.1] ✔️ **DO** Apply consistent casing style for identifiers :computer:
+### [N.1.1] ✔️ **DO** Apply consistent casing style for identifiers 💻
 
 | Style                     | Identifier Type             | Example             |
 |---------------------------|-----------------------------|---------------------|
@@ -699,7 +699,7 @@ Example: Using the name LabVIEW in code in the `NationalInstruments.VI` namespac
 
 ## [N.5] Identifier Prefixing
 
-### [N.5.1] ✔️ **DO** Prefix interfaces with `I` :computer:
+### [N.5.1] ✔️ **DO** Prefix interfaces with `I` 💻
 
 ### [N.5.2] ❌ **DO NOT** Prefix enums, classes or delegates with any letter
 
@@ -811,7 +811,7 @@ Examples include:
 
 ### [C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`
 
-### [C.4.2] ✔️ **DO** Sort `using` directives :computer:
+### [C.4.2] ✔️ **DO** Sort `using` directives 💻
 
 Sort `using` directives in the following order. Always sort alphabetically by namespace, except for aliases (see below).
 

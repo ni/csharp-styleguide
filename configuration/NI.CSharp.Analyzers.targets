@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- TODO: This location of 'content' needs to get updated once we build our package if we decide to put the files elsewhere, outside of a 'content' directory -->
-    <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_DotNet_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
+    <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_CSharp_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
   </PropertyGroup>
 
   <PropertyGroup>

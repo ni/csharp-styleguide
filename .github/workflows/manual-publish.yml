@@ -38,15 +38,10 @@ jobs:
         
       - name: Run Tests
         run: dotnet test NationalInstruments.Analyzers.sln
-        
-      - name: Setup Nuget.exe
-        # You may pin to the exact commit or the version.
-        # uses: warrenbuckley/Setup-Nuget@09c4593220c119ed8d6a811954d72bddd986e29a
-        uses: warrenbuckley/Setup-Nuget@v1
-        
+                
       - name: Pack Nuget Package
-        run: nuget pack ./build/NI.CSharp.Analyzers.nuspec
+        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build
       
       - name: Publish Nuget Package
-        run: dotnet nuget push ./*.nupkg --source "github"
+        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --source "github"
        

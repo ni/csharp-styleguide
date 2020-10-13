@@ -14,7 +14,16 @@ Welcome to NI's internal and external C# conventions and linter rules/plugins/to
 
 ## Quickstart
 
-### Introduction
+### Package Source
+Under the `packageSources` node, add a reference to the source of the package in your [`NuGet.Config`](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) file.
+
+```xml
+<packageSources>
+  <add key="<todo-tbd>" value="<todo-tbd>" />
+</packageSources>
+```
+
+### Package Reference
 Add a package reference to the package `NI.CSharp.Analyzers`.
 
 ```msbuild

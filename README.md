@@ -15,7 +15,8 @@ Welcome to NI's internal and external C# conventions and linter rules/plugins/to
 ## Quickstart
 
 ### Package Source
-Under the `packageSources` node, add a reference to the source of the package in your [`NuGet.Config`](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) file.
+Under the `packageSources` node, add a reference to the source of the package in your
+[`NuGet.Config`](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) file.
 
 ```xml
 <packageSources>
@@ -30,7 +31,8 @@ Add a package reference to the package `NI.CSharp.Analyzers`.
 <PackageReference Include="NI.CSharp.Analyzers" Version="0.1.0" />
 ```
 
-**Note**: Currently, this package only works for projects that reference it using [`PackageReference`](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files).
+**Note**: Currently, this package only works for projects that reference it using
+[`PackageReference`](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files).
 
 ### Rulesets
 Inside of the content directory of this NuGet package are the NI rulesets. `NI.ruleset` will be applied by default. 

@@ -14,10 +14,44 @@ Welcome to NI's internal and external C# conventions and linter rules/plugins/to
 
 ## Quickstart
 
-Add a package reference to the package TODO_TBD.
+### Introduction
+Add a package reference to the package `NI.CSharp.Analyzers`.
 
 ```msbuild
-<PackageReference Include="" Version="" />
+<PackageReference Include="NI.CSharp.Analyzers" Version="0.1.0" />
+```
+
+**Note**: Currently, this package only works for projects that reference it using [`PackageReference`](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files).
+
+### Rulesets
+Inside of the content directory of this NuGet package are the NI rulesets. `NI.ruleset` will be applied by default. 
+If your project starts with `Tests.` or `!Tests`, or ends with `.Tests`, the `NI.Tests.ruleset` will be used. 
+If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestUtilities.ruleset` will be used.
+
+### Spelling Rules
+By default, this package comes with a dictionary of acceptable spellings. 
+In order to add project specific spellings, create a file called `CodeAnalysisDictionary.xml` 
+in the same directory of your solution file.
+
+Below is an example:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <Words>
+    <Recognized>
+        <Word>example</Word>
+    </Recognized>
+    <Compound>
+      <Term CompoundAlternate="ExampleAlternative">examplealternative</Term>
+    </Compound>
+    <DiscreteExceptions>
+    </DiscreteExceptions>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>
 ```
 
 ## Coding Conventions

@@ -33,6 +33,8 @@ Add a package reference to the package `NI.CSharp.Analyzers`.
 
 **Note**: Currently, this package only works for projects that reference it using
 [`PackageReference`](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files).
+Using [`packages.config`](https://docs.microsoft.com/en-us/nuget/reference/packages-config) to reference the package
+is not going to work.
 
 ### Rulesets
 Inside of the content directory of this NuGet package are the NI rulesets. `NI.ruleset` will be applied by default. 

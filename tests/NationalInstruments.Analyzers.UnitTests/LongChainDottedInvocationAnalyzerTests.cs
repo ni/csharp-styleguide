@@ -12,7 +12,9 @@ namespace NationalInstruments.Analyzers.UnitTests
         public static IEnumerable<object[]> WellSplitStatementInVariousContexts =>
             new[]
             {
-                new object[] { @"
+                new object[]
+                {
+@"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,8 +37,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 "
-}, // inside a method
-                new object[] { @"
+                }, // inside a method
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,8 +63,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 "
-}, // inside a constructor
-                new object[] { @"
+                }, // inside a constructor
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -83,8 +89,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 "
-}, // inside a property getter
-                new object[] { @"
+                }, // inside a property getter
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -109,13 +117,15 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 "
-} // inside an argument
+                } // inside an argument
             };
 
         public static IEnumerable<object[]> PoorlySplitStatementInVariousContextsWithDiagnosticLocation =>
             new[]
             {
-                new object[] { @"
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -135,8 +145,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 ", (11, 44)
-}, // inside a method
-                new object[] { @"
+                }, // inside a method
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -157,8 +169,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 ", (11, 44)
-}, // inside a constructor
-                new object[] { @"
+                }, // inside a constructor
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -180,8 +194,10 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 ", (12, 10)
-}, // inside a property getter
-                new object[] { @"
+                }, // inside a property getter
+                new object[]
+                {
+                    @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -203,7 +219,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 ", (11, 47)
-} // inside an argument
+                } // inside an argument
             };
 
         [Fact]

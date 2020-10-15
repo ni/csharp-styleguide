@@ -620,6 +620,33 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NI1017_Description.
+        /// </summary>
+        internal static string NI1017_Description {
+            get {
+                return ResourceManager.GetString("NI1017_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NI1017_Message.
+        /// </summary>
+        internal static string NI1017_Message {
+            get {
+                return ResourceManager.GetString("NI1017_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NI1017_Title.
+        /// </summary>
+        internal static string NI1017_Title {
+            get {
+                return ResourceManager.GetString("NI1017_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string ParseError_Message {

@@ -345,4 +345,16 @@
   <data name="IdentifiersShouldBeSpelledCorrectlyTitle" xml:space="preserve">
     <value>Identifiers should be spelled correctly</value>
   </data>
+  <data name="NI1017_Description" xml:space="preserve">
+    <value>NI1017_Description</value>
+    <comment>NI1017_Title</comment>
+  </data>
+  <data name="NI1017_Message" xml:space="preserve">
+    <value>NI1017_Message</value>
+    <comment>NI1017_Title</comment>
+  </data>
+  <data name="NI1017_Title" xml:space="preserve">
+    <value>NI1017_Title</value>
+    <comment>NI1017_Title</comment>
+  </data>
 </root>

@@ -346,15 +346,15 @@
     <value>Identifiers should be spelled correctly</value>
   </data>
   <data name="NI1017_Description" xml:space="preserve">
-    <value>NI1017_Description</value>
-    <comment>NI1017_Title</comment>
+    <value>If you invoke a chain of methods and/or properties and that single line becomes very long, split each invocation onto its own line.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1017_Message" xml:space="preserve">
-    <value>NI1017_Message</value>
-    <comment>NI1017_Title</comment>
+    <value>Split long chains of dotted method/property invocations. Use well-named local variables if needed.</value>
+    <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1017_Title" xml:space="preserve">
-    <value>NI1017_Title</value>
-    <comment>NI1017_Title</comment>
+    <value>Split long chains of dotted method/property invocations.</value>
+    <comment>The title of the diagnostic.</comment>
   </data>
 </root>

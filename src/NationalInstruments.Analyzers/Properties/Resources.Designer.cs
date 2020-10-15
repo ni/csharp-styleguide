@@ -620,7 +620,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NI1017_Description.
+        ///   Looks up a localized string similar to If you invoke a chain of methods and/or properties and that single line becomes very long, split each invocation onto its own line..
         /// </summary>
         internal static string NI1017_Description {
             get {
@@ -629,7 +629,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NI1017_Message.
+        ///   Looks up a localized string similar to Split long chains of dotted method/property invocations. Use well-named local variables if needed..
         /// </summary>
         internal static string NI1017_Message {
             get {
@@ -638,7 +638,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NI1017_Title.
+        ///   Looks up a localized string similar to Split long chains of dotted method/property invocations..
         /// </summary>
         internal static string NI1017_Title {
             get {

@@ -26,11 +26,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NI1006_BannedMethods>$(SolutionDir)\BannedMethods.xml</NI1006_BannedMethods>
-
-    <!-- TODO: Determine whether we want to use the solution directory, the project directory, or both?-->
-    <NI1704_GlobalExceptions>$(SolutionDir)\CodeAnalysisDictionary.xml</NI1704_GlobalExceptions>
-
     <!--AdditionalSpellingDictionary.dic contains the differences in words between the hunspell and Microsoft dictionaries-->
     <NI1704_AdditionalSpellingDictionary>$(NI_CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
   </PropertyGroup>
@@ -61,18 +56,11 @@
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->
-    <AdditionalFiles Include="$(NI1006_BannedMethods)" Condition="Exists('$(NI1006_BannedMethods)')">
-      <Link>$(NI1006_BannedMethods)</Link>
-    </AdditionalFiles>
     <AdditionalFiles Include="$(NI1704_AdditionalSpellingDictionary)" Condition="Exists('$(NI1704_AdditionalSpellingDictionary)')">
-      <Link>$(CodeAnalysisRuleSet)</Link>
+      <Link>$(NI1704_AdditionalSpellingDictionary)</Link>
     </AdditionalFiles>
     <AdditionalFiles Include="$(CodeAnalysisRuleSet)" Condition="Exists('$(CodeAnalysisRuleSet)')">
      <Link>$(CodeAnalysisRuleSet)</Link>
-    </AdditionalFiles>
-
-    <AdditionalFiles Include="$(NI1704_GlobalExceptions)" Condition="Exists('$(NI1704_GlobalExceptions)')">
-      <Link>$(NI1704_GlobalExceptions)</Link>
     </AdditionalFiles>
   </ItemGroup>
 

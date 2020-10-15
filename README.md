@@ -28,7 +28,7 @@ Under the `packageSources` node, add a reference to the source of the package in
 Add a package reference to the package `NI.CSharp.Analyzers`.
 
 ```msbuild
-<PackageReference Include="NI.CSharp.Analyzers" Version="0.1.0" />
+<PackageReference Include="NI.CSharp.Analyzers" Version="<package-version>" />
 ```
 
 **Note**: Currently, this package only works for projects that reference it using

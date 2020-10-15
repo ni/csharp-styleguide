@@ -10,6 +10,10 @@ using NationalInstruments.Analyzers.Utilities.Extensions;
 
 namespace NationalInstruments.Analyzers.Style
 {
+    /// <summary>
+    /// Enforces the convention -
+    /// https://github.com/ni/csharp/blob/main/docs/Coding-Conventions.md#f34-%EF%B8%8F-consider-splitting-long-chains-of-dotted-methodproperty-invocations
+    /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class LongChainDottedInvocationAnalyzer : NIDiagnosticAnalyzer
     {
@@ -76,7 +80,7 @@ namespace NationalInstruments.Analyzers.Style
 
             if (invocationExpressionSyntax is null)
             {
-                // This does contain any invocations
+                // This does not contain any invocations, bail out
                 return;
             }
 
@@ -88,7 +92,7 @@ namespace NationalInstruments.Analyzers.Style
             // There is a none or only a single call
             if (nonNestedInvocationsWithParenthesis.Count() < 2)
             {
-                // No more refactoring required.
+                // No more refactoring required
                 return;
             }
 

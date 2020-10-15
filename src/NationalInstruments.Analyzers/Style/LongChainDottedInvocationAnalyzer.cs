@@ -33,6 +33,7 @@ namespace NationalInstruments.Analyzers.Style
             context.RegisterSyntaxNodeAction(AnalyzeExpressionStatementSyntax, SyntaxKind.ExpressionStatement);
             context.RegisterSyntaxNodeAction(AnalyzeEqualsValueClauseSyntax, SyntaxKind.EqualsValueClause);
             context.RegisterSyntaxNodeAction(AnalyzeArgumentSyntax, SyntaxKind.Argument);
+            context.RegisterSyntaxNodeAction(AnalyzeArrowExpressionClauseSyntax, SyntaxKind.ArrowExpressionClause);
         }
 
         private static void AnalyzeExpressionStatementSyntax(SyntaxNodeAnalysisContext context)
@@ -47,6 +48,13 @@ namespace NationalInstruments.Analyzers.Style
             var equalsValueClauseSyntax = (EqualsValueClauseSyntax)context.Node;
 
             AnalyzeSyntax(equalsValueClauseSyntax, context);
+        }
+
+        private static void AnalyzeArrowExpressionClauseSyntax(SyntaxNodeAnalysisContext context)
+        {
+            var expressionStatementSyntax = (ArrowExpressionClauseSyntax)context.Node;
+
+            AnalyzeSyntax(expressionStatementSyntax, context);
         }
 
         private static void AnalyzeArgumentSyntax(SyntaxNodeAnalysisContext context)

@@ -14,11 +14,32 @@ Welcome to NI's internal and external C# conventions and linter rules/plugins/to
 
 ## Quickstart
 
-Add a package reference to the package TODO_TBD.
+### Package Source
+Under the `packageSources` node, add a reference to the source of the package in your
+[`NuGet.Config`](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) file.
+
+```xml
+<packageSources>
+  <add key="<todo-tbd>" value="<todo-tbd>" />
+</packageSources>
+```
+
+### Package Reference
+Add a package reference to the package `NI.CSharp.Analyzers`.
 
 ```msbuild
-<PackageReference Include="" Version="" />
+<PackageReference Include="NI.CSharp.Analyzers" Version="<package-version>" />
 ```
+
+**Note**: Currently, this package only works for projects that reference it using
+[`PackageReference`](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files).
+Using [`packages.config`](https://docs.microsoft.com/en-us/nuget/reference/packages-config) to reference the package
+is not going to work.
+
+### Rulesets
+Inside of the content directory of this NuGet package are the NI rulesets. `NI.ruleset` will be applied by default. 
+If your project starts with `Tests.` or `!Tests`, or ends with `.Tests`, the `NI.Tests.ruleset` will be used. 
+If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestUtilities.ruleset` will be used.
 
 ## Coding Conventions
 

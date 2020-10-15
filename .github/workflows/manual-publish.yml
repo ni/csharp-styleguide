@@ -1,0 +1,45 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual Publish Nuget
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch     
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        name: Checkout code
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+          source-url: https://nuget.pkg.github.com/ni/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                    
+      - name: Resotre Nuget Packages
+        run: dotnet restore NationalInstruments.Analyzers.sln
+     
+      - name: Build App
+        run: dotnet build NationalInstruments.Analyzers.sln --configuration release
+        
+      - name: Run Tests
+        run: dotnet test NationalInstruments.Analyzers.sln
+                
+      - name: Pack Nuget Package
+        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build
+      
+      - name: Publish Nuget Package
+        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --source "github"
+       

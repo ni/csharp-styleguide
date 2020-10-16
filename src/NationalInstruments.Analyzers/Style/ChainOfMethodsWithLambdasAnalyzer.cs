@@ -84,10 +84,16 @@ namespace NationalInstruments.Analyzers.Style
                 var parentInvocation = argument.Parent;
 
                 // Find the method/delegate call
-                var memberAccessExpression = parentInvocation.ChildNodes().OfType<MemberAccessExpressionSyntax>().First();
+                var memberAccessExpression = parentInvocation?.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
+
+                if (memberAccessExpression is null)
+                {
+                    // unknown syntax, don't know what to do
+                    break;
+                }
 
                 // Get the dot operator which used to call the method/delegate
-                var dotToken = memberAccessExpression.ChildTokens().First(token => token.IsKind(SyntaxKind.DotToken));
+                var dotToken = memberAccessExpression.ChildTokens().FirstOrDefault(token => token.IsKind(SyntaxKind.DotToken));
 
                 // If the dot operator does not have leading whitespace report violation
                 if (!dotToken.LeadingTrivia.Any(trivia => trivia.IsKind(SyntaxKind.WhitespaceTrivia)))

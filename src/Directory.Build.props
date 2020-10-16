@@ -5,8 +5,6 @@
 
     <!-- Indicates that we've imported this targets file. -->
     <SourceDirectoryBuildPropsIncluded>True</SourceDirectoryBuildPropsIncluded>
-
-    <DefaultItemExcludes>$(DefaultItemExcludes);src\AnalyzerConfiguration\*.*</DefaultItemExcludes>
   </PropertyGroup>
 
   <Import Project="..\Directory.Build.props" />

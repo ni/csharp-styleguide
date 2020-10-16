@@ -609,6 +609,37 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_WhitespaceBetweenMultipleLambdasInMethodInvocations_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            <|softwareContent         .Children(x => true)          .Any(s => s.AliasName == ""T"")|>;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+", GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1017Rule()
         {
             return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);

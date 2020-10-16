@@ -22,7 +22,7 @@ jobs:
         
       - name: Correct for GitVersion
         run: |
-          git fetch --tags --unshallow
+          git fetch --prune --unshallow
           git branch master origin/main
         
       - name: Install GitVersion

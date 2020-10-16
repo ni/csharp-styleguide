@@ -75,6 +75,6 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\rulesets\NI.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\src\AnalyzerConfiguration\NI.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 </Project>

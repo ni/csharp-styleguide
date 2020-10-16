@@ -29,10 +29,10 @@
   </metadata>
   <files>
     <file src="..\.binaries\Release\NationalInstruments.Analyzers\**\*.dll" target="lib" />
-    <file src="..\AnalyzerConfiguration\NI.CSharp.Analyzers.targets" target="build" />
-    <file src="..\AnalyzerConfiguration\*.ruleset" target="content" />
-    <file src="..\AnalyzerConfiguration\NI1704_AdditionalSpellingDictionary.dic" target="content" />
-    <file src="..\AnalyzerConfiguration\stylecop.json" target="content" />
+    <file src="..\src\AnalyzerConfiguration\NI.CSharp.Analyzers.targets" target="build" />
+    <file src="..\src\AnalyzerConfiguration\*.ruleset" target="content" />
+    <file src="..\src\AnalyzerConfiguration\NI1704_AdditionalSpellingDictionary.dic" target="content" />
+    <file src="..\src\AnalyzerConfiguration\stylecop.json" target="content" />
     <file src="..\build\PathPropertyGeneration.txt" target="tools" />
     <file src="..\docs\icon.png" target="images" />
     <file src="..\LICENSE.txt" target="" />

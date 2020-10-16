@@ -94,10 +94,10 @@ namespace NationalInstruments.Analyzers.Style
                     break;
                 }
 
-                // Get the dot operator which used to call the method/delegate
+                // Get the dot operator which is used to call the method/delegate
                 var dotToken = memberAccessExpression.ChildTokens().FirstOrDefault(token => token.IsKind(SyntaxKind.DotToken));
 
-                // If the dot operator does not have leading whitespace report violation
+                // If the dot operator does not have a leading whitespace, report violation
                 if (!dotToken.LeadingTrivia.Any(trivia => trivia.IsKind(SyntaxKind.WhitespaceTrivia)))
                 {
                     var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());

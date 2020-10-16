@@ -23,8 +23,7 @@ jobs:
       - name: Correct for GitVersion
         run: |
           git fetch --tags
-          git branch -D master
-          git checkout -b master main
+          git branch master origin/main
         
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.4   
@@ -62,7 +61,5 @@ jobs:
       
       - name: Publish Nuget Package
         run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true
-        
-      - name : Remove master branch
-        run: git branch -D master
+
        

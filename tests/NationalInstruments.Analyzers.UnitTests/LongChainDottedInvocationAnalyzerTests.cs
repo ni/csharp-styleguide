@@ -183,8 +183,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         private IEnumerable<ISoftwareContent> selectedSoftwareContents = Enumerable.Empty<ISoftwareContent>();
 
         IEnumerable<ISoftwareContent> DistinctSoftwareContents =>
-         selectedSoftwareContents.GroupBy(software => software.AliasName)
-            .Select(g => g.First())
+         selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
             .Distinct();
 
         private interface ISoftwareContent
@@ -263,7 +262,8 @@ namespace NationalInstruments.Analyzers.UnitTests
     class Test
     {
         string Foo(ISoftwareContent softwareContent) => softwareContent
-            .Child().AliasName.Length
+            .Child()
+            .AliasName.Length
             .ToString();
 
         private interface ISoftwareContent
@@ -323,7 +323,75 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test, GetNI1017ResultAt(location.Line, location.Col));
         }
 
-        private DiagnosticResult GetNI1017ResultAt(int line, int column)
+        [Fact]
+        public void NI1017_PoorlySplitComplexStatement_EmitsDiagnostic()
+        {
+            var test = new TestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private void Foo(IEnumerable<int> objects)
+        {
+            objects.Where(x =>
+            {
+                if (x > 2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }).Where(x => x % 2 == 0).Select(x => $""num { x }"").First();
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test, GetNI1017ResultAt(11, 13));
+        }
+
+        [Fact]
+        public void NI1017_WellSplitComplexStatement_NoDiagnostic()
+        {
+            var test = new TestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private void Foo(IEnumerable<int> objects)
+        {
+            objects.Where(x =>
+            {
+                if (x > 2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            })
+            .Where(x => x % 2 == 0)
+            .Select(x => $""num { x }"")
+            .First();
+        }
+    }
+}
+");
+            VerifyDiagnostics(test);
+        }
+
+            private DiagnosticResult GetNI1017ResultAt(int line, int column)
         {
             return GetResultAt(line, column, LongChainDottedInvocationAnalyzer.Rule);
         }

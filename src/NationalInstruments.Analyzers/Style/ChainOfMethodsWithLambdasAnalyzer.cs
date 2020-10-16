@@ -15,7 +15,7 @@ namespace NationalInstruments.Analyzers.Style
     /// https://github.com/ni/csharp/blob/main/docs/Coding-Conventions.md#f34-%EF%B8%8F-consider-splitting-long-chains-of-dotted-methodproperty-invocations
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class LongChainDottedInvocationAnalyzer : NIDiagnosticAnalyzer
+    public sealed class ChainOfMethodsWithLambdasAnalyzer : NIDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "NI1017";
 

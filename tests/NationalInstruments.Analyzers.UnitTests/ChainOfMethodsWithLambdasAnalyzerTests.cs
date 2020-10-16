@@ -7,7 +7,7 @@ using Xunit;
 
 namespace NationalInstruments.Analyzers.UnitTests
 {
-    public class LongChainDottedInvocationAnalyzerTests : NIDiagnosticAnalyzerTests<LongChainDottedInvocationAnalyzer>
+    public class ChainOfMethodsWithLambdasAnalyzerTests : NIDiagnosticAnalyzerTests<ChainOfMethodsWithLambdasAnalyzer>
     {
         public static IEnumerable<object[]> WellSplitLambdasInVariousContexts =>
             new[]
@@ -611,7 +611,7 @@ namespace NationalInstruments.Analyzers.UnitTests
 
         private Rule GetNI1017Rule()
         {
-            return new Rule(LongChainDottedInvocationAnalyzer.Rule);
+            return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);
         }
     }
 }

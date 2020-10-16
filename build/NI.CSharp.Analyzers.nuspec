@@ -2,6 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>NI.CSharp.Analyzers</id>
+    <version>0.1.0</version>
     <!--TODO: author and owner may have to change if we go to nuget.org -->
     <authors>NI</authors>
     <owners>NI</owners>

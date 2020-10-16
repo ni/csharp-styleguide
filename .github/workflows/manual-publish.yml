@@ -24,7 +24,7 @@ jobs:
         run: |
           git fetch --tags
           git branch -D master
-          git branch -b master main
+          git checkout -b master main
         
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.4   

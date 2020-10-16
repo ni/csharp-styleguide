@@ -15,6 +15,6 @@ branches:
     track-merge-target: false
     tracks-release-branches: false
     is-release-branch: false
-    is-mainlin: true
+    is-mainline: true
 ignore:
   sha: []

@@ -1,0 +1,20 @@
+next-version: 1.0
+mode: Mainline
+legacy-semver-padding: 0
+build-metadata-padding: 0
+commits-since-version-source-padding: 0
+assembly-versioning-scheme: MajorMinorPatch
+assembly-file-versioning-scheme: MajorMinorPatchTag
+assembly-informational-format: '{LegacySemVer}'
+branches:
+  master:
+    regex: (^master$|^origin\/master$|^main$|^origin\/main$)
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    tag: 'beta'
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    is-mainlin: true
+ignore:
+  sha: []

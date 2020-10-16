@@ -9,7 +9,7 @@ namespace NationalInstruments.Analyzers.UnitTests
 {
     public class LongChainDottedInvocationAnalyzerTests : NIDiagnosticAnalyzerTests<LongChainDottedInvocationAnalyzer>
     {
-        public static IEnumerable<object[]> WellSplitStatementInVariousContexts =>
+        public static IEnumerable<object[]> WellSplitLambdasInVariousContexts =>
             new[]
             {
                 new object[]
@@ -26,8 +26,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         {
             var distinctSelectedSoftware = selectedSoftwareContents
                 .GroupBy(software => software.AliasName)
-                .Select(g => g.First())
-                .Distinct();
+                .Select(g => g.First()).Distinct();
         }
 
         private interface ISoftwareContent
@@ -52,8 +51,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         {
             var distinctSelectedSoftware = selectedSoftwareContents
                 .GroupBy(software => software.AliasName)
-                .Select(g => g.First())
-                .Distinct();
+                .Select(g => g.First()).Distinct();
         }
 
         private interface ISoftwareContent
@@ -79,8 +77,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         IEnumerable<ISoftwareContent> DistinctSoftwareContents =>
          selectedSoftwareContents
             .GroupBy(software => software.AliasName)
-            .Select(g => g.First())
-            .Distinct();
+            .Select(g => g.First()).Distinct();
 
         private interface ISoftwareContent
         {
@@ -104,8 +101,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         {
             softwareContent.Select(content => content
                 .Children.GroupBy(software => software.AliasName)
-                     .Select(g => g.First())
-                     .Distinct());
+                     .Select(g => g.First()).Distinct());
         }
 
         private interface ISoftwareContent
@@ -120,7 +116,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 } // inside an argument
             };
 
-        public static IEnumerable<object[]> PoorlySplitStatementInVariousContexts =>
+        public static IEnumerable<object[]> PoorlySplitLambdasInVariousContexts =>
             new[]
             {
                 new object[]
@@ -144,7 +140,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-"}, // inside a method
+"
+}, // inside a method
                 new object[]
                 {
                     @"
@@ -167,7 +164,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-"}, // inside a constructor
+"
+}, // inside a constructor
                 new object[]
                 {
                     @"
@@ -190,7 +188,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-"}, // inside a property getter
+"
+}, // inside a property getter
                 new object[]
                 {
                     @"
@@ -214,13 +213,15 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-"} // inside an argument
+"
+} // inside an argument
             };
 
         [Fact]
-        public void NI1017_SingleInvocationInStatement_NoDiagnostic()
+        public void NI1017_NoLambdas_NoDiagnostic()
         {
-            var test = new AutoTestFile(@"
+            var test = new AutoTestFile(
+@"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -230,37 +231,9 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(ISoftwareContent softwareContent)
         {
-            softwareContent.Child.AliasName.TrimEnd();
+            softwareContent.Child().ToString().TrimEnd();
+            softwareContent.Child().AliasName.TrimEnd().Length.ToString();
         }
-
-        private interface ISoftwareContent
-        {
-            ISoftwareContent Child { get; }
-
-            string AliasName { get; }
-        }
-    }
-}
-");
-
-            VerifyDiagnostics(test);
-        }
-
-        [Fact]
-        public void NI1017_WellSplitStatementWithDifferentKindsOfInvocations_NoDiagnostic()
-        {
-            var test = new AutoTestFile(@"
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NationalInstruments.Analyzers.UnitTests
-{
-    class Test
-    {
-        string Foo(ISoftwareContent softwareContent) => softwareContent
-            .Child()
-            .AliasName.Length
-            .ToString();
 
         private interface ISoftwareContent
         {
@@ -271,23 +244,15 @@ namespace NationalInstruments.Analyzers.UnitTests
     }
 }
 ");
-
-            VerifyDiagnostics(test);
-        }
-
-        [Theory]
-        [MemberData(nameof(WellSplitStatementInVariousContexts))]
-        public void NI1017_WellSplitStatement_NoDiagnostic(string testString)
-        {
-            var test = new AutoTestFile(testString);
-
             VerifyDiagnostics(test);
         }
 
         [Fact]
-        public void NI1017_PoorlySplitStatementWithDifferentKindsOfInvocations_EmitsDiagnostic()
+        public void NI1017_OneLambda_NoDiagnostic()
         {
-            var test = new AutoTestFile(@"
+            var test = new AutoTestFile(
+@"
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -295,11 +260,82 @@ namespace NationalInstruments.Analyzers.UnitTests
 {
     class Test
     {
-        string Foo(ISoftwareContent softwareContent) => <|softwareContent.Child().AliasName.Length.ToString()|>;
+        void Foo(ISoftwareContent softwareContent)
+        {
+            softwareContent.Children().Any(s => s.AliasName == ""T"");
+            softwareContent.Children(x => true).Any();
+            softwareContent.FirstChild.Children().First().AliasName.Any(s => s == 'A');
+            softwareContent.FirstChild.Children(x => true).First().AliasName.Any();
+        }
 
         private interface ISoftwareContent
         {
-            ISoftwareContent Child();
+            ISoftwareContent FirstChild { get; }
+
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitMultipleLambdasInMethodInvocations_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            <|softwareContent.Children(x => true).Any(s => s.AliasName == ""T"")|>;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+",  GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitMultipleLambdasAmongMixedInvocations_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            <|softwareContent.FirstChild.Children(x => true).First().AliasName.Any(s => s == 'A')|>;
+        }
+
+        private interface ISoftwareContent
+        {
+            ISoftwareContent FirstChild { get; }
+
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
 
             string AliasName { get; }
         }
@@ -310,9 +346,53 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_WellSplitMultipleLambdas_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            softwareContent.Children(x => true)
+                .Any(s => s.AliasName == ""T"");
+            softwareContent.FirstChild.Children(x => true).First().AliasName
+                .Any(s => s == 'A');
+        }
+
+        private interface ISoftwareContent
+        {
+            ISoftwareContent FirstChild { get; }
+
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+            VerifyDiagnostics(test);
+        }
+
         [Theory]
-        [MemberData(nameof(PoorlySplitStatementInVariousContexts))]
-        public void NI1017_PoorlySplitStatement_EmitsDiagnostic(string testString)
+        [MemberData(nameof(WellSplitLambdasInVariousContexts))]
+        public void NI1017_WellSplitLambdasInVariousContexts_NoDiagnostic(string testString)
+        {
+            var test = new AutoTestFile(testString);
+
+            VerifyDiagnostics(test);
+        }
+
+        [Theory]
+        [MemberData(nameof(PoorlySplitLambdasInVariousContexts))]
+        public void NI1017_PoorlySplitLambdasInVariousContexts_EmitsDiagnostic(string testString)
         {
             var test = new AutoTestFile(testString, GetNI1017Rule());
 
@@ -320,7 +400,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
 
         [Fact]
-        public void NI1017_PoorlySplitComplexStatement_EmitsDiagnostic()
+        public void NI1017_PoorlySplitMultiLineLambdas_EmitsDiagnostic()
         {
             var test = new AutoTestFile(
 @"
@@ -353,7 +433,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
 
         [Fact]
-        public void NI1017_WellSplitComplexStatement_NoDiagnostic()
+        public void NI1017_WellSplitMultiLineLambdas_NoDiagnostic()
         {
             var test = new AutoTestFile(
 @"
@@ -378,9 +458,151 @@ namespace NationalInstruments.Analyzers.UnitTests
                 }
             })
             .Where(x => x % 2 == 0)
-            .Select(x => $""num { x }"")
-            .First();
+            .Select(x => $""num { x }"").First();
         }
+    }
+}
+");
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasExtensionMethods_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            <|softwareContent.Foo(x => true).Baz(x => true)|>;
+        }
+
+    }
+    public interface ISoftwareContent
+    {
+    }
+
+    public static class ISoftwareContentExtensions
+    {
+        public static ISoftwareContent Foo(
+            this ISoftwareContent softwareContent,
+            Predicate<string> predicate) => softwareContent;
+
+        public static ISoftwareContent Baz(
+            this ISoftwareContent softwareContent,
+            Predicate<string> predicate) => softwareContent;
+    }
+}
+", GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasExtensionMethods_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        void Foo(ISoftwareContent softwareContent)
+        {
+            softwareContent.Foo(x => true)
+                .Baz(x => true);
+        }
+
+    }
+    public interface ISoftwareContent
+    {
+    }
+
+    public static class ISoftwareContentExtensions
+    {
+        public static ISoftwareContent Foo(
+            this ISoftwareContent softwareContent,
+            Predicate<string> predicate) => softwareContent;
+
+        public static ISoftwareContent Baz(
+            this ISoftwareContent softwareContent,
+            Predicate<string> predicate) => softwareContent;
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasDelegateInvocations_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    public delegate ISoftwareContent Creator(Func<ISoftwareContent, string> func);
+
+    class Test
+    {
+
+        void Foo(ISoftwareContent softwareContent)
+        {
+            <|softwareContent.Foo(soft => ""first lambda"").Foo(soft => ""second lambda"")|>;
+        }
+
+    }
+    public interface ISoftwareContent
+    {
+        Creator Foo { get; }
+    }
+}
+", GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasDelegateInvocations_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    public delegate ISoftwareContent Creator(Func<ISoftwareContent, string> func);
+
+    class Test
+    {
+
+        void Foo(ISoftwareContent softwareContent)
+        {
+            softwareContent.Foo(soft => ""first lambda"")
+                .Foo(soft => ""second lambda"");
+        }
+
+    }
+    public interface ISoftwareContent
+    {
+        Creator Foo { get; }
     }
 }
 ");

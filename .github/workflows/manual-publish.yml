@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Correct for GitVersion
-      - run: |
+        run: |
           git fetch --tags
           git branch --create-reflog master origin/master
         

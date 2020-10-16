@@ -46,12 +46,8 @@
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
 
     <!-- NI's CA analyzers -->
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\NI.CodeAnalysis.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\NI.CodeQuality.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Naming.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.dll"/>
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->

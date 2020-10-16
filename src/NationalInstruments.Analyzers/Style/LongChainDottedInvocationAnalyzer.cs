@@ -35,15 +35,14 @@ namespace NationalInstruments.Analyzers.Style
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
             context.RegisterSyntaxNodeAction(
-                AnalyzeSyntax,
+                AnalyzeSyntaxNode,
                 SyntaxKind.ExpressionStatement,
                 SyntaxKind.EqualsValueClause,
                 SyntaxKind.Argument,
-                SyntaxKind.ArrowExpressionClause
-                );
+                SyntaxKind.ArrowExpressionClause);
         }
 
-        private static void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeSyntaxNode(SyntaxNodeAnalysisContext context)
         {
             var parentSyntaxNode = context.Node;
 
@@ -61,45 +60,42 @@ namespace NationalInstruments.Analyzers.Style
                 return;
             }
 
-            // Find all invocations which involve brackets ()
-            var nonNestedInvocationsWithParenthesis = invocationExpressionSyntax
-                .DescendantNodes(syntaxNode => !syntaxNode.IsKind(SyntaxKind.Argument))
-                .OfType<ArgumentListSyntax>();
+            bool IsLambdaExpression(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.SimpleLambdaExpression);
 
-            // There is a none or only a single call
-            if (nonNestedInvocationsWithParenthesis.Count() < 2)
+            // Find all non-nested arguments which contain a lambda expression
+            var nonNestedArgumentsWithLambdas = invocationExpressionSyntax
+                .DescendantNodes(syntaxNode => !syntaxNode.IsKind(SyntaxKind.Argument))
+                .OfType<ArgumentListSyntax>()
+                .Where(argument => argument.DescendantNodes().Any(IsLambdaExpression));
+
+            // There is none or only a single call
+            if (nonNestedArgumentsWithLambdas.Count() < 2)
             {
                 // No more refactoring required
                 return;
             }
 
-            var hasViolation = false;
-            var totalInvocations = nonNestedInvocationsWithParenthesis.Count();
+            // The first argument can stay on the same line
+            var successiveArgumentsWithLambdas = nonNestedArgumentsWithLambdas.Skip(1);
 
-            // None or just one invocation
-            if (totalInvocations < 2)
+            foreach (var argument in successiveArgumentsWithLambdas)
             {
-                // Don't ask for more refactoring
-                return;
-            }
+                // Get the parent invocation expression
+                var parentInvocation = argument.Parent;
 
-            var allButFirstAndLastInvocations = nonNestedInvocationsWithParenthesis.Take(totalInvocations - 1);
+                // Find the method/delegate call
+                var memberAccessExpression = parentInvocation.ChildNodes().OfType<MemberAccessExpressionSyntax>().First();
 
-            // Check if all invocations (except the last one) has an end of line trivia
-            foreach (var nonNestedInvocationWithParenthesis in allButFirstAndLastInvocations)
-            {
-                var trailingTrivias = nonNestedInvocationWithParenthesis.CloseParenToken.TrailingTrivia;
-                if (!trailingTrivias.Any(trivia => trivia.IsKind(SyntaxKind.EndOfLineTrivia)))
+                // Get the dot operator which used to call the method/delegate
+                var dotToken = memberAccessExpression.ChildTokens().First(token => token.IsKind(SyntaxKind.DotToken));
+
+                // If the dot operator does not have leading whitespace report violation
+                if (!dotToken.LeadingTrivia.Any(trivia => trivia.IsKind(SyntaxKind.WhitespaceTrivia)))
                 {
-                    hasViolation = true;
+                    var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
+                    context.ReportDiagnostic(diagnostic);
                     break;
                 }
-            }
-
-            if (hasViolation)
-            {
-                var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
-                context.ReportDiagnostic(diagnostic);
             }
         }
     }

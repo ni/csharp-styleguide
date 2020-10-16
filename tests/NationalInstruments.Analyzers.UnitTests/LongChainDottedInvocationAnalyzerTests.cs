@@ -120,7 +120,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 } // inside an argument
             };
 
-        public static IEnumerable<object[]> PoorlySplitStatementInVariousContextsWithDiagnosticLocation =>
+        public static IEnumerable<object[]> PoorlySplitStatementInVariousContexts =>
             new[]
             {
                 new object[]
@@ -135,7 +135,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(IEnumerable<ISoftwareContent> selectedSoftwareContents)
         {
-            var distinctSelectedSoftware = selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct();
+            var distinctSelectedSoftware = <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct();|>
         }
 
         private interface ISoftwareContent
@@ -144,8 +144,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", (11, 44)
-                }, // inside a method
+"}, // inside a method
                 new object[]
                 {
                     @"
@@ -158,8 +157,8 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         Test(IEnumerable<ISoftwareContent> selectedSoftwareContents)
         {
-            var distinctSelectedSoftware = selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
-                .Distinct();
+            var distinctSelectedSoftware = <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
+                .Distinct();|>
         }
 
         private interface ISoftwareContent
@@ -168,8 +167,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", (11, 44)
-                }, // inside a constructor
+"}, // inside a constructor
                 new object[]
                 {
                     @"
@@ -183,8 +181,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         private IEnumerable<ISoftwareContent> selectedSoftwareContents = Enumerable.Empty<ISoftwareContent>();
 
         IEnumerable<ISoftwareContent> DistinctSoftwareContents =>
-         selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
-            .Distinct();
+         <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
+            .Distinct();|>
 
         private interface ISoftwareContent
         {
@@ -192,8 +190,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", (12, 10)
-                }, // inside a property getter
+"}, // inside a property getter
                 new object[]
                 {
                     @"
@@ -206,7 +203,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(IEnumerable<ISoftwareContent> softwareContent)
         {
-            softwareContent.Select(content => content.Children.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct());
+            softwareContent.Select(content => <|content.Children.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct()|>);
         }
 
         private interface ISoftwareContent
@@ -217,14 +214,13 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", (11, 47)
-                } // inside an argument
+"} // inside an argument
             };
 
         [Fact]
         public void NI1017_SingleInvocationInStatement_NoDiagnostic()
         {
-            var test = new TestFile(@"
+            var test = new AutoTestFile(@"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -253,7 +249,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         [Fact]
         public void NI1017_WellSplitStatementWithDifferentKindsOfInvocations_NoDiagnostic()
         {
-            var test = new TestFile(@"
+            var test = new AutoTestFile(@"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -283,7 +279,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         [MemberData(nameof(WellSplitStatementInVariousContexts))]
         public void NI1017_WellSplitStatement_NoDiagnostic(string testString)
         {
-            var test = new TestFile(testString);
+            var test = new AutoTestFile(testString);
 
             VerifyDiagnostics(test);
         }
@@ -291,7 +287,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         [Fact]
         public void NI1017_PoorlySplitStatementWithDifferentKindsOfInvocations_EmitsDiagnostic()
         {
-            var test = new TestFile(@"
+            var test = new AutoTestFile(@"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -299,7 +295,7 @@ namespace NationalInstruments.Analyzers.UnitTests
 {
     class Test
     {
-        string Foo(ISoftwareContent softwareContent) => softwareContent.Child().AliasName.Length.ToString();
+        string Foo(ISoftwareContent softwareContent) => <|softwareContent.Child().AliasName.Length.ToString()|>;
 
         private interface ISoftwareContent
         {
@@ -309,24 +305,24 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-");
+", GetNI1017Rule());
 
-            VerifyDiagnostics(test, GetNI1017ResultAt(9, 57));
+            VerifyDiagnostics(test);
         }
 
         [Theory]
-        [MemberData(nameof(PoorlySplitStatementInVariousContextsWithDiagnosticLocation))]
-        public void NI1017_PoorlySplitStatement_EmitsDiagnostic(string testString, (int Line, int Col) location)
+        [MemberData(nameof(PoorlySplitStatementInVariousContexts))]
+        public void NI1017_PoorlySplitStatement_EmitsDiagnostic(string testString)
         {
-            var test = new TestFile(testString);
+            var test = new AutoTestFile(testString, GetNI1017Rule());
 
-            VerifyDiagnostics(test, GetNI1017ResultAt(location.Line, location.Col));
+            VerifyDiagnostics(test);
         }
 
         [Fact]
         public void NI1017_PoorlySplitComplexStatement_EmitsDiagnostic()
         {
-            var test = new TestFile(
+            var test = new AutoTestFile(
 @"
 using System.Collections.Generic;
 using System.Linq;
@@ -337,7 +333,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         private void Foo(IEnumerable<int> objects)
         {
-            objects.Where(x =>
+            <|objects.Where(x =>
             {
                 if (x > 2)
                 {
@@ -347,19 +343,19 @@ namespace NationalInstruments.Analyzers.UnitTests
                 {
                     return false;
                 }
-            }).Where(x => x % 2 == 0).Select(x => $""num { x }"").First();
+            }).Where(x => x % 2 == 0).Select(x => $""num { x }"").First();|>
         }
     }
 }
-");
+", GetNI1017Rule());
 
-            VerifyDiagnostics(test, GetNI1017ResultAt(11, 13));
+            VerifyDiagnostics(test);
         }
 
         [Fact]
         public void NI1017_WellSplitComplexStatement_NoDiagnostic()
         {
-            var test = new TestFile(
+            var test = new AutoTestFile(
 @"
 using System.Collections.Generic;
 using System.Linq;
@@ -391,9 +387,9 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
-            private DiagnosticResult GetNI1017ResultAt(int line, int column)
+        private Rule GetNI1017Rule()
         {
-            return GetResultAt(line, column, LongChainDottedInvocationAnalyzer.Rule);
+            return new Rule(LongChainDottedInvocationAnalyzer.Rule);
         }
     }
 }

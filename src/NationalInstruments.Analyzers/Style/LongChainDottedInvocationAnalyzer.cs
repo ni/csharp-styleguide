@@ -73,20 +73,34 @@ namespace NationalInstruments.Analyzers.Style
                 return;
             }
 
-            // Find all end of lines in the expression
-            var endOfLineTrivias = invocationExpressionSyntax
-                .DescendantTrivia()
-                .Where(syntaxTrivia => syntaxTrivia.Kind() == SyntaxKind.EndOfLineTrivia);
+            var hasViolation = false;
+            var totalInvocations = nonNestedInvocationsWithParenthesis.Count();
 
-            // The expression is well split into multiple lines
-            if (endOfLineTrivias.Count() >= nonNestedInvocationsWithParenthesis.Count())
+            // None or just one invocation
+            if (totalInvocations < 2)
             {
                 // Don't ask for more refactoring
                 return;
             }
 
-            var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
-            context.ReportDiagnostic(diagnostic);
+            var allButFirstAndLastInvocations = nonNestedInvocationsWithParenthesis.Take(totalInvocations - 1);
+
+            // Check if all invocations (except the last one) has an end of line trivia
+            foreach (var nonNestedInvocationWithParenthesis in allButFirstAndLastInvocations)
+            {
+                var trailingTrivias = nonNestedInvocationWithParenthesis.CloseParenToken.TrailingTrivia;
+                if (!trailingTrivias.Any(trivia => trivia.IsKind(SyntaxKind.EndOfLineTrivia)))
+                {
+                    hasViolation = true;
+                    break;
+                }
+            }
+
+            if (hasViolation)
+            {
+                var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
+                context.ReportDiagnostic(diagnostic);
+            }
         }
     }
 }

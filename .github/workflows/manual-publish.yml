@@ -41,5 +41,5 @@ jobs:
         run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build
       
       - name: Publish Nuget Package
-        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --source "github"
+        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true
        

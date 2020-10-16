@@ -2,8 +2,12 @@
 By default, this package comes with a dictionary as acceptable spellings.
 
 # Process
-In order to add project specific spellings, create a file called `CodeAnalysisDictionary.xml` in the same directory
-of your solution file.
+
+The analyzer works by looking through `CodeAnalysisDictionary.xml` [additional files](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md). An additional file's contents will be parsed if the following conditions are true:
+
+
+1. The filename contains the text `CodeAnalysisDictionary.xml`
+2. The files are added to the build as an [additional file](https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Using%20Additional%20Files.md)
 
 # CodeAnalysisDictionary XML Schema
 

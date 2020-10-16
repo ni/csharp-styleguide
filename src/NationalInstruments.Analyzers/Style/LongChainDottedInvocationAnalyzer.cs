@@ -34,42 +34,19 @@ namespace NationalInstruments.Analyzers.Style
             context.EnableConcurrentExecutionIf(IsRunningInProduction);
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            context.RegisterSyntaxNodeAction(AnalyzeExpressionStatementSyntax, SyntaxKind.ExpressionStatement);
-            context.RegisterSyntaxNodeAction(AnalyzeEqualsValueClauseSyntax, SyntaxKind.EqualsValueClause);
-            context.RegisterSyntaxNodeAction(AnalyzeArgumentSyntax, SyntaxKind.Argument);
-            context.RegisterSyntaxNodeAction(AnalyzeArrowExpressionClauseSyntax, SyntaxKind.ArrowExpressionClause);
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                SyntaxKind.ExpressionStatement,
+                SyntaxKind.EqualsValueClause,
+                SyntaxKind.Argument,
+                SyntaxKind.ArrowExpressionClause
+                );
         }
 
-        private static void AnalyzeExpressionStatementSyntax(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
-            var expressionStatementSyntax = (ExpressionStatementSyntax)context.Node;
+            var parentSyntaxNode = context.Node;
 
-            AnalyzeSyntax(expressionStatementSyntax, context);
-        }
-
-        private static void AnalyzeEqualsValueClauseSyntax(SyntaxNodeAnalysisContext context)
-        {
-            var equalsValueClauseSyntax = (EqualsValueClauseSyntax)context.Node;
-
-            AnalyzeSyntax(equalsValueClauseSyntax, context);
-        }
-
-        private static void AnalyzeArrowExpressionClauseSyntax(SyntaxNodeAnalysisContext context)
-        {
-            var expressionStatementSyntax = (ArrowExpressionClauseSyntax)context.Node;
-
-            AnalyzeSyntax(expressionStatementSyntax, context);
-        }
-
-        private static void AnalyzeArgumentSyntax(SyntaxNodeAnalysisContext context)
-        {
-            var argumentSyntax = (ArgumentSyntax)context.Node;
-
-            AnalyzeSyntax(argumentSyntax, context);
-        }
-
-        private static void AnalyzeSyntax(SyntaxNode parentSyntaxNode, SyntaxNodeAnalysisContext context)
-        {
             // Find the invocation expression i.e
             // a method/delegate call or a property access
             // or a chain of them

@@ -23,7 +23,6 @@ jobs:
       - name: Correct for GitVersion
         run: |
           git fetch --prune --unshallow
-          git branch master origin/main
         
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.4   

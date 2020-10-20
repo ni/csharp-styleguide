@@ -15,8 +15,9 @@
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
 
     <CodeAnalysisRuleSetDefined>False</CodeAnalysisRuleSetDefined>
-    <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
+    <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != '' and '$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
   </PropertyGroup>
+  
   <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>

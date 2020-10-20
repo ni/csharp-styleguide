@@ -10,8 +10,8 @@
     <description>NI's code analyzers and rulesets for C# projects.</description>
     <summary>NI's code analyzers and rulesets for C# projects.</summary>
     <icon>images\icon.png</icon>
-    <repository type="git" url="https://github.com/ni/csharp" />
-    <projectUrl>https://github.com/ni/csharp</projectUrl>
+    <repository type="git" url="https://github.com/ni/csharp-styleguide" />
+    <projectUrl>https://github.com/ni/csharp-styleguide</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="file">LICENSE.txt</license>
     <dependencies>

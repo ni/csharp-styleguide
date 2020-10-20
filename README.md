@@ -6,7 +6,7 @@
 
 Welcome to NI's internal and external C# conventions and linter rules/plugins/tooling.
 
-`csharp-styleguide` serves several purposes:
+`ni/csharp-styleguide` serves several purposes:
 
 1. It contains our coding conventions/style guides for all C# code written for NI.
 2. It contains custom Roslyn analyzers to enforce rules in our conventions that could not be found elsewhere.

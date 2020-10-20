@@ -14,10 +14,14 @@
     <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
 
-    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDefined>False</CodeAnalysisRuleSetDefined>
+    <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>  
 
   <PropertyGroup>
     <!-- Enable analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->

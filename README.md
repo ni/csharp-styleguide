@@ -15,7 +15,7 @@ Welcome to NI's internal and external C# conventions and linter rules/plugins/to
 ## Quickstart
 
 ### Package Reference
-Add a package reference to the package `NI.CSharp.Analyzers`.
+Add a package reference to the package `NI.CSharp.Analyzers`. To find the latest versions, [look here](https://www.nuget.org/packages/NI.CSharp.Analyzers/).
 
 ```msbuild
 <PackageReference Include="NI.CSharp.Analyzers" Version="<package-version>" />

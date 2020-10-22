@@ -620,6 +620,24 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not use LINQ query syntax; use method syntax instead..
+        /// </summary>
+        internal static string NI1018_Message {
+            get {
+                return ResourceManager.GetString("NI1018_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not use LINQ query syntax..
+        /// </summary>
+        internal static string NI1018_Title {
+            get {
+                return ResourceManager.GetString("NI1018_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string ParseError_Message {

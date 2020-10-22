@@ -345,4 +345,10 @@
   <data name="IdentifiersShouldBeSpelledCorrectlyTitle" xml:space="preserve">
     <value>Identifiers should be spelled correctly</value>
   </data>
+  <data name="NI1018_Message" xml:space="preserve">
+    <value>Do not use LINQ query syntax; use method syntax instead.</value>
+  </data>
+  <data name="NI1018_Title" xml:space="preserve">
+    <value>Do not use LINQ query syntax.</value>
+  </data>
 </root>

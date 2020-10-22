@@ -135,6 +135,7 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
   - [[L.12] Properties and Methods](#l12-properties-and-methods)
     - [[L.12.1] ❌ **DO NOT** Introduce side effects when calling properties](#l121--do-not-introduce-side-effects-when-calling-properties)
     - [[L.12.2] ❌ **DO NOT** Allocate each time a property is called](#l122--do-not-allocate-each-time-a-property-is-called)
+  - [[L.13] ❌ **DO NOT** Use LINQ query syntax](#l13--do-not-use-linq-query-syntax)
 - [Documentation and Comments](#documentation-and-comments)
   - [[D.1] ✔️ **DO** Document public and protected members of APIs](#d1-️-do-document-public-and-protected-members-of-apis)
       - [Public API Documentation Example](#public-api-documentation-example)
@@ -1074,6 +1075,29 @@ public Foo CurrentFoo
 
         return _currentFoo;
     }
+}
+```
+
+## [L.13] ❌ **DO NOT** Use LINQ query syntax
+
+Do not use query/SQL syntax for LINQ expressions; use method/object syntax instead.
+Having only one way to read/write LINQ expressions increases consistency in our code.
+
+```csharp
+// Bad - do not use query syntax for LINQ expressions
+public void Foo()
+{
+    var someEnumerableItems = new[] { 1, 2, 3 };
+    var queryResult = from item in someEnumerableItems
+                      where item > 1
+                      select item;
+}
+
+// Good - use method syntax for LINQ expressions
+public void Foo()
+{
+    var someEnumerableItems = new[] { 1, 2, 3 };
+    var queryResult = someEnumerableItems.Where(item => item > 1);
 }
 ```
 

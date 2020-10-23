@@ -17,8 +17,26 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        name: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Correct for GitVersion
+        run: |
+          git fetch --prune --unshallow
+        
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.4   
+        with:
+          versionSpec: '5.3.x'    
+      
+      - name: Use GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.4
+      
+      - name: Output version
+        run: |
+          echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
+          echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
@@ -38,8 +56,10 @@ jobs:
         run: dotnet test NationalInstruments.Analyzers.sln
                 
       - name: Pack Nuget Package
-        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build
-      
-      - name: Publish Nuget Package
-        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --source "github"
+        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build -p:NuspecProperties="Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
+            
+      - name: Publish Nuget Package        
+        # run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true
+        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+
        

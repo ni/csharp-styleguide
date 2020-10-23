@@ -1,7 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <PropertyGroup>
-    <!-- TODO: This location of 'content' needs to get updated once we build our package if we decide to put the files elsewhere, outside of a 'content' directory -->
+  <PropertyGroup>    
     <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_CSharp_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
   </PropertyGroup>
 
@@ -15,10 +14,15 @@
     <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
 
-    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDefined>False</CodeAnalysisRuleSetDefined>
+    <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != '' and '$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(NI_IsTestProjectCondition)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>  
 
   <PropertyGroup>
     <!-- Enable analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->
@@ -47,12 +51,8 @@
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
 
     <!-- NI's CA analyzers -->
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\NI.CodeAnalysis.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codeanalysis.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\NI.CodeQuality.Analyzers.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\ni.codequality.analyzers\1.0.2\lib\netstandard1.3\Utilities.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Naming.dll"/>
-    <Analyzer Include="$(NuGetPackageRoot)\nationalinstruments.tools.analyzers.naming\1.0.2\lib\netstandard1.3\NationalInstruments.Tools.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.dll"/>
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="NI.TestUtilities.ruleset" Description="Code analysis rule overrides for NI Test projects." ToolsVersion="14.0">
+  <IncludeAll Action="Warning" />
+  <Include Path=".\NI.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1304" Action="None" /> <!-- Specify CultureInfo. Tests shouldn't have to worry about localizable strings. -->
+    <Rule Id="CA1305" Action="None" /> <!-- Specify IFormatProvider. Tests shouldn't have to worry about localizable strings. -->
+    <Rule Id="CA1040" Action="None" /> <!-- Avoid empty interfaces. Applying the mix-in pattern is an exception to this rule/ -->    
+  </Rules>
+</RuleSet>

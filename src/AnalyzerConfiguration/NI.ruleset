@@ -204,7 +204,10 @@
     <Rule Id="NI1005" Action="Warning" />
     <Rule Id="NI1006" Action="Warning" />
     <Rule Id="NI1007" Action="Warning" />
+    <Rule Id="NI1009" Action="Error" />
     <Rule Id="NI1015" Action="Warning" />
+    <Rule Id="NI1016" Action="Warning" />
+    <Rule Id="NI1018" Action="Warning" />
     <Rule Id="NI1704" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">

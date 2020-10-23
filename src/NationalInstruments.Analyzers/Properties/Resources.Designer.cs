@@ -620,7 +620,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you invoke a chain of methods with lambdas and that single line becomes very long, split each invocation onto its own line..
+        ///   Looks up a localized string similar to If you invoke a chain of methods with lambda expressions in a single line, split each invocation (except the first one) onto its own line..
         /// </summary>
         internal static string NI1017_Description {
             get {

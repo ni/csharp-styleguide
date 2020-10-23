@@ -345,8 +345,8 @@
   <data name="IdentifiersShouldBeSpelledCorrectlyTitle" xml:space="preserve">
     <value>Identifiers should be spelled correctly</value>
   </data>
-    <data name="NI1017_Description" xml:space="preserve">
-    <value>If you invoke a chain of methods with lambdas and that single line becomes very long, split each invocation onto its own line.</value>
+  <data name="NI1017_Description" xml:space="preserve">
+    <value>If you invoke a chain of methods with lambda expressions in a single line, split each invocation (except the first one) onto its own line.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1017_Message" xml:space="preserve">

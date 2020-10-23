@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -87,7 +88,7 @@ namespace NationalInstruments.Analyzers.Style
                 if (memberAccessExpression is null)
                 {
                     // unknown syntax, don't know what to do
-                    break;
+                    throw new NotSupportedException();
                 }
 
                 // Get the dot operator which is used to call the method/delegate

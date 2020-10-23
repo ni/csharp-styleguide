@@ -60,10 +60,6 @@ namespace NationalInstruments.Analyzers.Style
                 return;
             }
 
-            bool IsLambdaExpression(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.SimpleLambdaExpression);
-
-            bool IsNotArgumentSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.Argument);
-
             // Find all non-nested arguments which contain a lambda expression
             var nonNestedArgumentsWithLambdas = invocationExpressionSyntax
                 .DescendantNodes(IsNotArgumentSyntax)
@@ -105,6 +101,10 @@ namespace NationalInstruments.Analyzers.Style
                     break;
                 }
             }
+
+            bool IsLambdaExpression(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.SimpleLambdaExpression);
+
+            bool IsNotArgumentSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.Argument);
         }
     }
 }

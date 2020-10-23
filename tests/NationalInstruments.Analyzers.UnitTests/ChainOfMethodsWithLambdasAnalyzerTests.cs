@@ -131,7 +131,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(IEnumerable<ISoftwareContent> selectedSoftwareContents)
         {
-            var distinctSelectedSoftware = <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct();|>
+            var distinctSelectedSoftware = <|>selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct();
         }
 
         private interface ISoftwareContent
@@ -154,8 +154,8 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         Test(IEnumerable<ISoftwareContent> selectedSoftwareContents)
         {
-            var distinctSelectedSoftware = <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
-                .Distinct();|>
+            var distinctSelectedSoftware = <|>selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
+                .Distinct();
         }
 
         private interface ISoftwareContent
@@ -179,8 +179,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         private IEnumerable<ISoftwareContent> selectedSoftwareContents = Enumerable.Empty<ISoftwareContent>();
 
         IEnumerable<ISoftwareContent> DistinctSoftwareContents =>
-         <|selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
-            .Distinct();|>
+         <|>selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First())
+            .Distinct();
 
         private interface ISoftwareContent
         {
@@ -202,7 +202,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(IEnumerable<ISoftwareContent> softwareContent)
         {
-            softwareContent.Select(content => <|content.Children.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct()|>);
+            softwareContent.Select(content => <|>content.Children.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct());
         }
 
         private interface ISoftwareContent
@@ -297,7 +297,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(ISoftwareContent softwareContent)
         {
-            <|softwareContent.Children(x => true).Any(s => s.AliasName == ""T"")|>;
+            <|>softwareContent.Children(x => true).Any(s => s.AliasName == ""T"");
         }
 
         private interface ISoftwareContent
@@ -328,7 +328,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(ISoftwareContent softwareContent)
         {
-            <|softwareContent.FirstChild.Children(x => true).First().AliasName.Any(s => s == 'A')|>;
+            <|>softwareContent.FirstChild.Children(x => true).First().AliasName.Any(s => s == 'A');
         }
 
         private interface ISoftwareContent
@@ -413,7 +413,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         private void Foo(IEnumerable<int> objects)
         {
-            <|objects.Where(x =>
+            <|>objects.Where(x =>
             {
                 if (x > 2)
                 {
@@ -423,7 +423,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 {
                     return false;
                 }
-            }).Where(x => x % 2 == 0).Select(x => $""num { x }"").First();|>
+            }).Where(x => x % 2 == 0).Select(x => $""num { x }"").First();
         }
     }
 }
@@ -481,7 +481,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(ISoftwareContent softwareContent)
         {
-            <|softwareContent.Foo(x => true).Baz(x => true)|>;
+            <|>softwareContent.Foo(x => true).Baz(x => true);
         }
 
     }
@@ -563,7 +563,7 @@ namespace NationalInstruments.Analyzers.UnitTests
 
         void Foo(ISoftwareContent softwareContent)
         {
-            <|softwareContent.Foo(soft => ""first lambda"").Foo(soft => ""second lambda"")|>;
+            <|>softwareContent.Foo(soft => ""first lambda"").Foo(soft => ""second lambda"");
         }
 
     }
@@ -624,7 +624,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     {
         void Foo(ISoftwareContent softwareContent)
         {
-            <|softwareContent         .Children(x => true)          .Any(s => s.AliasName == ""T"")|>;
+            <|>softwareContent         .Children(x => true)          .Any(s => s.AliasName == ""T"");
         }
 
         private interface ISoftwareContent

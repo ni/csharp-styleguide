@@ -217,67 +217,69 @@ namespace NationalInstruments.Analyzers.UnitTests
 } // inside an argument
             };
 
-        [Fact]
-        public void NI1017_NoLambdas_NoDiagnostic()
+        [Theory]
+        [InlineData("softwareContent.Child().ToString().TrimEnd()")]
+        [InlineData("softwareContent.Child().AliasName.TrimEnd().Length.ToString()")]
+        public void NI1017_NoLambdas_NoDiagnostic(string expression)
         {
             var test = new AutoTestFile(
-@"
+$@"
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NationalInstruments.Analyzers.UnitTests
-{
+{{
     class Test
-    {
+    {{
         void Foo(ISoftwareContent softwareContent)
-        {
-            softwareContent.Child().ToString().TrimEnd();
-            softwareContent.Child().AliasName.TrimEnd().Length.ToString();
-        }
+        {{
+            {expression};
+        }}
 
         private interface ISoftwareContent
-        {
+        {{
             ISoftwareContent Child();
 
-            string AliasName { get; }
-        }
-    }
-}
+            string AliasName {{ get; }}
+        }}
+    }}
+}}
 ");
             VerifyDiagnostics(test);
         }
 
-        [Fact]
-        public void NI1017_OneLambda_NoDiagnostic()
+        [Theory]
+        [InlineData("softwareContent.Children().Any(s => s.AliasName == \"T\")")]
+        [InlineData("softwareContent.Children(x => true).Any()")]
+        [InlineData("softwareContent.FirstChild.Children().First().AliasName.Any(s => s == 'A')")]
+        [InlineData("softwareContent.FirstChild.Children(x => true).First().AliasName.Any()")]
+        public void NI1017_OneLambda_NoDiagnostic(string expression)
         {
             var test = new AutoTestFile(
-@"
+$@"
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace NationalInstruments.Analyzers.UnitTests
-{
+{{
     class Test
-    {
+    {{
         void Foo(ISoftwareContent softwareContent)
-        {
-            softwareContent.Children().Any(s => s.AliasName == ""T"");
-            softwareContent.Children(x => true).Any();
-            softwareContent.FirstChild.Children().First().AliasName.Any(s => s == 'A');
-            softwareContent.FirstChild.Children(x => true).First().AliasName.Any();
-        }
+        {{
+            {expression};
+        }}
 
         private interface ISoftwareContent
-        {
-            ISoftwareContent FirstChild { get; }
+        {{
+            ISoftwareContent FirstChild {{ get; }}
 
             IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
 
-            string AliasName { get; }
-        }
-    }
-}
+            string AliasName {{ get; }}
+        }}
+    }}
+}}
 ");
             VerifyDiagnostics(test);
         }

@@ -207,6 +207,7 @@
     <Rule Id="NI1009" Action="Warning" />
     <Rule Id="NI1015" Action="Warning" />
     <Rule Id="NI1016" Action="Warning" />
+    <Rule Id="NI1017" Action="Warning" />
     <Rule Id="NI1018" Action="Warning" />
     <Rule Id="NI1704" Action="Warning" />
   </Rules>

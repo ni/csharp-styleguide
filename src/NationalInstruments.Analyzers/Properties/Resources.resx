@@ -345,6 +345,18 @@
   <data name="IdentifiersShouldBeSpelledCorrectlyTitle" xml:space="preserve">
     <value>Identifiers should be spelled correctly</value>
   </data>
+  <data name="NI1017_Description" xml:space="preserve">
+    <value>If you invoke a chain of methods with lambda expressions in a single line, split each invocation (except the first one) onto its own line.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="NI1017_Message" xml:space="preserve">
+    <value>Split chains of dotted method invocations with lambdas. Use well-named local variables if needed.</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="NI1017_Title" xml:space="preserve">
+    <value>Split chains of dotted method invocations with lambdas.</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
   <data name="NI1018_Message" xml:space="preserve">
     <value>Do not use LINQ query syntax; use method syntax instead.</value>
   </data>

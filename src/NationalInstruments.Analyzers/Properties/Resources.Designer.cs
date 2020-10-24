@@ -620,6 +620,33 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If you invoke a chain of methods with lambda expressions in a single line, split each invocation (except the first one) onto its own line..
+        /// </summary>
+        internal static string NI1017_Description {
+            get {
+                return ResourceManager.GetString("NI1017_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas. Use well-named local variables if needed..
+        /// </summary>
+        internal static string NI1017_Message {
+            get {
+                return ResourceManager.GetString("NI1017_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas..
+        /// </summary>
+        internal static string NI1017_Title {
+            get {
+                return ResourceManager.GetString("NI1017_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not use LINQ query syntax; use method syntax instead..
         /// </summary>
         internal static string NI1018_Message {

@@ -204,7 +204,7 @@
     <Rule Id="NI1005" Action="Warning" />
     <Rule Id="NI1006" Action="Warning" />
     <Rule Id="NI1007" Action="Warning" />
-    <Rule Id="NI1009" Action="Warning" /> <!-- Reference internals must have InternalsVisibleTo attribute. This is off by default in the analyzer, so None reflects this -->
+    <Rule Id="NI1009" Action="None" /> <!-- Reference internals must have InternalsVisibleTo attribute. This is off by default in the analyzer, so None reflects this -->
     <Rule Id="NI1015" Action="Warning" />
     <Rule Id="NI1016" Action="Warning" />
     <Rule Id="NI1017" Action="Warning" />

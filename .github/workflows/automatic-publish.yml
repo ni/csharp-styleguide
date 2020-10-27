@@ -39,8 +39,7 @@ jobs:
       
       - name: Output version
         run: |
-          echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
-          echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
+          echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"          
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
@@ -60,7 +59,7 @@ jobs:
         run: dotnet test NationalInstruments.Analyzers.sln
                 
       - name: Pack Nuget Package
-        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build -p:NuspecProperties="Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
+        run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build -p:NuspecProperties="Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}"
             
       - name: Publish Nuget Package        
         # run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true

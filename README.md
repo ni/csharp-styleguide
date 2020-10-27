@@ -1,6 +1,6 @@
 # NI C# Style Guide
 
-<!-- @TODO: Add the image once we get one -->
+![logo](docs/logo.svg)
 
 ---
 
@@ -33,6 +33,11 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
 
 ## Coding Conventions
 
+- [NI C# Style Guide](#ni-c-style-guide)
+  - [Quickstart](#quickstart)
+    - [Package Reference](#package-reference)
+    - [Rulesets](#rulesets)
+  - [Coding Conventions](#coding-conventions)
 - [Purpose of coding conventions](#purpose-of-coding-conventions)
 - [How to Read This Document](#how-to-read-this-document)
 - [Formatting](#formatting)

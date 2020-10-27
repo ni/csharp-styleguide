@@ -1,6 +1,6 @@
 # NI C# Style Guide
 
-![logo](/docs/logo.svg)
+![logo](docs/logo.svg)
 
 ---
 

@@ -1,5 +1,3 @@
-# This is a basic workflow that is manually triggered
-
 name: Automatic Publish Nuget
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
@@ -61,8 +59,7 @@ jobs:
       - name: Pack Nuget Package
         run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build -p:NuspecProperties="Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}"
             
-      - name: Publish Nuget Package        
-        # run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true
+      - name: Publish Nuget Package
         run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols true --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
 
        

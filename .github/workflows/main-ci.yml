@@ -32,7 +32,7 @@ jobs:
         run: dotnet restore NationalInstruments.Analyzers.sln
      
       - name: Build App
-        run: dotnet build NationalInstruments.Analyzers.sln --configuration release
+        run: dotnet build NationalInstruments.Analyzers.sln --configuration release --no-restore
         
       - name: Run Tests
         run: dotnet test NationalInstruments.Analyzers.sln

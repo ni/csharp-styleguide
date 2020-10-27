@@ -11,7 +11,7 @@ branches:
     regex: (^master$|^origin\/master$|^main$|^origin\/main$)
     increment: Patch
     prevent-increment-of-merged-branch-version: true
-    tag: 'beta'
+    tag: ''
     track-merge-target: false
     tracks-release-branches: false
     is-release-branch: false

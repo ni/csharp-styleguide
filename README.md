@@ -740,7 +740,7 @@ Example: Using the name LabVIEW in code in the `NationalInstruments.VI` namespac
 
 Interfaces **must** begin with `I` but that is the only exception to this rule.
 
-### [N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_`
+### [N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_` 💻
 
 > NOTE: There is an IDE rule, IDE1006 that flags this but it's only in the editor. IDE rules cannot be enforced at build time.
 
@@ -844,7 +844,7 @@ Examples include:
 
 ## [C.4] Usings
 
-### [C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`
+### [C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace` 💻
 
 ### [C.4.2] ✔️ **DO** Sort `using` directives 💻
 

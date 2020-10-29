@@ -58,7 +58,7 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
     - [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#f31--avoid-adding-excessive-complexity-in-compound-statements)
     - [[F.3.2] ✔️ **CONSIDER** Extracting methods from complex nested expressions](#f32-️-consider-extracting-methods-from-complex-nested-expressions)
     - [[F.3.3] ✔️ **CONSIDER** Splitting long parameter lists](#f33-️-consider-splitting-long-parameter-lists)
-    - [[F.3.4] ✔️ **DO** Split chains of method invocations with lambda expressions 💻](#f34-️-do-split-chains-of-method-invocations-with-lambda-expressions)
+    - [[F.3.4] ✔️ **DO** Split chains of method invocations with lambda expressions 💻](#f34-️-do-split-chains-of-method-invocations-with-lambda-expressions-)
     - [[F.3.5] ✔️ **DO** Apply consistent formatting on split statements](#f35-️-do-apply-consistent-formatting-on-split-statements)
   - [[F.4] Indents and Braces](#f4-indents-and-braces)
     - [[F.4.1] ✔️ **DO** Use 4 space characters for indentation, never tab characters](#f41-️-do-use-4-space-characters-for-indentation-never-tab-characters)

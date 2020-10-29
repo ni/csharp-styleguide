@@ -466,12 +466,12 @@ Indent dotted invocations one level deeper than the root object. Place the dot f
 
 ```csharp
 // Bad
-var distinctSoftware = softwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).First(x => x == "Distinct");
+var availableTables = enabledMeasurements.SelectMany(measurement => measurement.Results).Select(result => result.Tables).Where(table => table.Available);
 
 // Good
-var distinctSoftware = softwareContents.GroupBy(software => software.AliasName)
-    .Select(g => g.First())
-    .First(x => x == "Distinct");
+var availableTables = enabledMeasurements.SelectMany(measurement => measurement.Results)
+    .Select(result => result.Tables)
+    .Where(table => table.Available);
 ```
 
 If you end up indenting deeper than 2 more levels, **CONSIDER** extracting local variables.

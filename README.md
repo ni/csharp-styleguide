@@ -85,7 +85,7 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
   - [[N.5] Identifier Prefixing](#n5-identifier-prefixing)
     - [[N.5.1] ✔️ **DO** Prefix interfaces with `I` 💻](#n51-️-do-prefix-interfaces-with-i-)
     - [[N.5.2] ❌ **DO NOT** Prefix enums, classes or delegates with any letter](#n52--do-not-prefix-enums-classes-or-delegates-with-any-letter)
-    - [[N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_`](#n53-️-do-prefix-private-fields-and-member-variables-with-an-underscore-_)
+    - [[N.5.3] ✔️ **DO** Prefix private fields and member variables with an underscore `_` 💻](#n53-️-do-prefix-private-fields-and-member-variables-with-an-underscore-_)
   - [[N.6] Properties and Methods](#n6-properties-and-methods)
     - [[N.6.1] ✔️ **DO** Name properties with nouns instead of verbs](#n61-️-do-name-properties-with-nouns-instead-of-verbs)
     - [[N.6.2] ✔️ **DO** Name methods with verbs instead of nouns](#n62-️-do-name-methods-with-verbs-instead-of-nouns)
@@ -107,7 +107,7 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
   - [[C.2] ✔️ **DO** Place public types not intended for use outside the defining assembly's component in a `Restricted` namespace](#c2-️-do-place-public-types-not-intended-for-use-outside-the-defining-assemblys-component-in-a-restricted-namespace)
   - [[C.3] ✔️ **CONSIDER** Having one public or internal type per file and its name should match the file's name](#c3-️-consider-having-one-public-or-internal-type-per-file-and-its-name-should-match-the-files-name)
   - [[C.4] Usings](#c4-usings)
-    - [[C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace`](#c41-️-do-place-using-directives-at-top-of-file-outside-namespace)
+    - [[C.4.1] ✔️ **DO** Place `using` directives at top of file, outside `namespace` 💻](#c41-️-do-place-using-directives-at-top-of-file-outside-namespace)
     - [[C.4.2] ✔️ **DO** Sort `using` directives 💻](#c42-️-do-sort-using-directives-)
   - [[C.5] ❌ **DO NOT** Expose nested types as `public` or `internal`](#c5--do-not-expose-nested-types-as-public-or-internal)
   - [[C.6] ✔️ **CONSIDER** Arranging types and members in logical layers](#c6-️-consider-arranging-types-and-members-in-logical-layers)
@@ -155,12 +155,6 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
     - [[M.1.1] ❌ **AVOID** Rewriting Framework Class Library (FCL) API implementations](#m11--avoid-rewriting-framework-class-library-fcl-api-implementations)
   - [[M.2] ✔️ **DO** Place English localizable strings into a resource file](#m2-️-do-place-english-localizable-strings-into-a-resource-file)
   - [[M.3] ✔️ **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#m3-️-do-ensure-projects-have-check-for-arithmetic-overflowunderflow-enabled-for-debugrelease-builds-and-disabled-for-distribution-builds)
-
-- [Maintainability](#maintainability)
-  - [[M.1] External dependencies](#%5Bm.1%5D-external-dependencies)
-    - [[M.1.1] ❌ **AVOID** Rewriting Framework Class Library (FCL) API implementations](#%5Bm.1.1%5D-%3Ax%3A-**avoid**-rewriting-framework-class-library-(fcl)-api-implementations)
-  - [[M.2] ✔️ **DO** Place English localizable strings into a resource file](#%5Bm.2%5D-%3A&#x2714;%3A-**do**-place-english-localizable-strings-into-a-resource-file)
-  - [[M.3] ✔️ **DO** Ensure projects have "Check for arithmetic overflow/underflow" enabled for Debug/Release Builds and disabled for Distribution builds](#%5Bm.3%5D-%3A&#x2714;%3A-**do**-ensure-projects-have-"check-for-arithmetic-overflow%2Funderflow"-enabled-for-debug%2Frelease-builds-and-disabled-for-distribution-builds)
 
 ----
 

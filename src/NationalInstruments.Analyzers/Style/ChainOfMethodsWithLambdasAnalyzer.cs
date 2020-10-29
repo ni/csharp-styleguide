@@ -12,7 +12,8 @@ using NationalInstruments.Analyzers.Utilities.Extensions;
 namespace NationalInstruments.Analyzers.Style
 {
     /// <summary>
-    /// Enforces the convention: [F.3.4] - DO Split chains of method invocations with lambda expressions
+    /// Enforces the convention: <see href="https://github.com/ni/csharp-styleguide#f34-%EF%B8%8F-do-split-chains-of-method-invocations-with-lambda-expressions-">
+    /// [F.3.4] - DO Split chains of method invocations with lambda expressions</see>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ChainOfMethodsWithLambdasAnalyzer : NIDiagnosticAnalyzer

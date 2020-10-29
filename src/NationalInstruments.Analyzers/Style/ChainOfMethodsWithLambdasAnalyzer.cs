@@ -12,8 +12,7 @@ using NationalInstruments.Analyzers.Utilities.Extensions;
 namespace NationalInstruments.Analyzers.Style
 {
     /// <summary>
-    /// Enforces the convention -
-    /// https://github.com/ni/csharp/blob/main/docs/Coding-Conventions.md#f34-%EF%B8%8F-consider-splitting-long-chains-of-dotted-methodproperty-invocations
+    /// Enforces the convention: [F.3.4] - DO Split chains of method invocations with lambda expressions
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ChainOfMethodsWithLambdasAnalyzer : NIDiagnosticAnalyzer

@@ -58,7 +58,7 @@ If your project starts with `TestUtilities.` or `!TestUtilities.`, the `NI.TestU
     - [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#f31--avoid-adding-excessive-complexity-in-compound-statements)
     - [[F.3.2] ✔️ **CONSIDER** Extracting methods from complex nested expressions](#f32-️-consider-extracting-methods-from-complex-nested-expressions)
     - [[F.3.3] ✔️ **CONSIDER** Splitting long parameter lists](#f33-️-consider-splitting-long-parameter-lists)
-    - [[F.3.4] ✔️ **CONSIDER** Splitting long chains of dotted method/property invocations](#f34-️-consider-splitting-long-chains-of-dotted-methodproperty-invocations)
+    - [[F.3.4] ✔️ **DO** Split chains of method invocations with lambda expressions 💻](#f34-️-do-split-chains-of-method-invocations-with-lambda-expressions-)
     - [[F.3.5] ✔️ **DO** Apply consistent formatting on split statements](#f35-️-do-apply-consistent-formatting-on-split-statements)
   - [[F.4] Indents and Braces](#f4-indents-and-braces)
     - [[F.4.1] ✔️ **DO** Use 4 space characters for indentation, never tab characters](#f41-️-do-use-4-space-characters-for-indentation-never-tab-characters)
@@ -450,9 +450,9 @@ ConfigureMyObject(
     downstreamDependencies: originalObjectDependencies.Where(x => x.Direction == Direction.Downstream));
 ```
 
-### [F.3.4] ✔️ **CONSIDER** Splitting long chains of dotted method/property invocations
+### [F.3.4] ✔️ **DO** Split chains of method invocations with lambda expressions 💻
 
-If you invoke a chain of methods and/or properties and that single line becomes very long, split each invocation onto its own line. Use well-named local variables if needed.
+If you invoke a chain of methods with lambda expressions, split each invocation (except the first one) onto its own line. Use well-named local variables if needed.
 
 There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
 
@@ -460,13 +460,12 @@ Indent dotted invocations one level deeper than the root object. Place the dot f
 
 ```csharp
 // Bad
-var distinctSelectedSoftware = selectedSoftwareContents.GroupBy(software => software.AliasName).Select(g => g.First()).Distinct();
+var availableTables = enabledMeasurements.SelectMany(measurement => measurement.Results).Select(result => result.Tables).Where(table => table.Available);
 
 // Good
-var distinctSelectedSoftware = selectedSoftwareContents
-    .GroupBy(software => software.AliasName)
-    .Select(g => g.First())
-    .Distinct();
+var availableTables = enabledMeasurements.SelectMany(measurement => measurement.Results)
+    .Select(result => result.Tables)
+    .Where(table => table.Available);
 ```
 
 If you end up indenting deeper than 2 more levels, **CONSIDER** extracting local variables.

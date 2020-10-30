@@ -3,9 +3,10 @@
   <IncludeAll Action="Warning" />
   <Include Path=".\NI.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1040" Action="None" /> <!-- Avoid empty interfaces. Applying the mix-in pattern is an exception to this rule/ -->
     <Rule Id="CA1304" Action="None" /> <!-- Specify CultureInfo. Tests shouldn't have to worry about localizable strings. -->
-    <Rule Id="CA1305" Action="None" /> <!-- Specify IFormatProvider. Tests shouldn't have to worry about localizable strings. -->
-    <Rule Id="CA1040" Action="None" /> <!-- Avoid empty interfaces. Applying the mix-in pattern is an exception to this rule/ -->    
+    <Rule Id="CA1305" Action="None" /> <!-- Specify IFormatProvider. Tests shouldn't have to worry about localizable strings. -->    
+    <Rule Id="CA1707" Action="None" /> <!-- Identifiers should not contain underscores. Given_When_Then test naming requires the usage of underscores. -->    
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA1604" Action="None" /> <!-- Element documentation must have summary. Tests shouldn't require every public element to be documented. -->

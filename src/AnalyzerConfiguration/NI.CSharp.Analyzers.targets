@@ -19,9 +19,9 @@
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
+    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>  
 
   <PropertyGroup>

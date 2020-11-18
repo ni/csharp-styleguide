@@ -16,7 +16,7 @@
     <license type="file">LICENSE.txt</license>
     <dependencies>
       <group targetFramework="netstandard1.3">
-        <dependency id="Microsoft.CodeAnalysis.FxCopAnalyzers" version="2.6.3" />
+        <dependency id="Microsoft.CodeAnalysis.FxCopAnalyzers" version="2.9.10" />
         <dependency id="Microsoft.CodeQuality.Analyzers" version="2.6.3" />
         <dependency id="Microsoft.NetCore.Analyzers" version="2.6.3" />
         <dependency id="Microsoft.NetFramework.Analyzers" version="2.6.3" />

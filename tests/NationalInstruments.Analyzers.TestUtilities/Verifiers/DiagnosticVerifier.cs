@@ -274,7 +274,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <returns>The actual diagnostics.</returns>
         private IEnumerable<Diagnostic> VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, DiagnosticResult[] expectedResults)
         {
-            var expectedCount = expectedResults.Count();
+            var expectedCount = expectedResults.Length;
             var actualCount = actualResults.Count();
 
             if (expectedCount != actualCount)

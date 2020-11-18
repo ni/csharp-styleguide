@@ -120,8 +120,8 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
             void InitializeApprovedNamespaces()
             {
                 var fileProvider = AdditionalFileProvider.FromOptions(compilationStartContext.Options);
-                var approvedNamespacesFile = fileProvider.GetMatchingFiles("^.*ApprovedNamespaces.txt").FirstOrDefault();
-                var approvedTestNamespacesFile = fileProvider.GetMatchingFiles("^.*ApprovedTestNamespaces.txt").FirstOrDefault();
+                var approvedNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.txt").FirstOrDefault();
+                var approvedTestNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.Tests.txt").FirstOrDefault();
 
                 if (approvedNamespacesFile != null)
                 {

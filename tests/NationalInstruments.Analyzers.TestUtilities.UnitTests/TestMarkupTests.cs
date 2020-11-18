@@ -219,7 +219,7 @@ namespace My.Namespace
 
             var markers = new TestMarkup().Parse(Test, out var source);
 
-            Assert.Equal(ExpectedMarkerCount, markers.Count());
+            Assert.Equal(ExpectedMarkerCount, markers.Count);
 
             foreach (var marker in markers)
             {

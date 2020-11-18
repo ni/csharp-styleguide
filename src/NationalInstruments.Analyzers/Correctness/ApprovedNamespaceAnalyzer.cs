@@ -102,7 +102,11 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
         private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
         {
             InitializeApprovedNamespaces();
-            compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
+            if (!string.IsNullOrEmpty(_approvedNamespacesFilePath)
+                || !string.IsNullOrEmpty(_approvedTestNamespacesFilePath))
+            {
+                compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
+            }
 
             void AnalyzeNamespace(SymbolAnalysisContext context)
             {

@@ -28,7 +28,7 @@ jobs:
         with:
           dotnet-version: '3.1.x'
           
-      - name: Resotre Nuget Packages
+      - name: Restore Nuget Packages
         run: dotnet restore NationalInstruments.Analyzers.sln
      
       - name: Build App

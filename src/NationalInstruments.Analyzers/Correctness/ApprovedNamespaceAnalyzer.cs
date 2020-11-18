@@ -102,8 +102,7 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
         private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
         {
             InitializeApprovedNamespaces();
-            if (!string.IsNullOrEmpty(_approvedNamespacesFilePath)
-                || !string.IsNullOrEmpty(_approvedTestNamespacesFilePath))
+            if (ApprovalFilesExist())
             {
                 compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
             }
@@ -187,6 +186,12 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
                     var diagnostic = Diagnostic.Create(rule, nameSyntax.GetLocation(), namespaceName);
                     context.ReportDiagnostic(diagnostic);
                 }
+            }
+            
+            bool ApprovalFilesExist()
+            {
+                return !string.IsNullOrEmpty(_approvedNamespacesFilePath)
+                    || !string.IsNullOrEmpty(_approvedTestNamespacesFilePath);
             }
         }
 

@@ -11,7 +11,7 @@ using NationalInstruments.Analyzers.Properties;
 using NationalInstruments.Analyzers.Utilities;
 using NationalInstruments.Analyzers.Utilities.Extensions;
 
-namespace NationalInstruments.Tools.Analyzers.Namespaces
+namespace NationalInstruments.Analyzers.Correctness
 {
     /// <summary>
     /// Analyzer that reports a diagnostic if a type's namespace is not from an approved list

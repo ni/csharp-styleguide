@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using NationalInstruments.Analyzers.Properties;
 
-namespace NationalInstruments.Tools.Analyzers.Namespaces
+namespace NationalInstruments.Analyzers.Correctness
 {
     /// <summary>
     /// Fix for NI1017 - Unapproved namespace violation.

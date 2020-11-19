@@ -1,14 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
+using NationalInstruments.Analyzers.Correctness;
 using NationalInstruments.Analyzers.TestUtilities;
 using NationalInstruments.Analyzers.TestUtilities.TestFiles;
 using NationalInstruments.Analyzers.TestUtilities.Verifiers;
-using NationalInstruments.Tools.Analyzers.Namespaces;
 using Xunit;
 
 namespace NationalInstruments.Analyzers.UnitTests

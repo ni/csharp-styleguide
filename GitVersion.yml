@@ -9,7 +9,7 @@ assembly-informational-format: '{LegacySemVer}'
 branches:
   master:
     regex: (^master$|^origin\/master$|^main$|^origin\/main$)
-    increment: Minor
+    increment: Patch
     prevent-increment-of-merged-branch-version: true
     tag: ''
     track-merge-target: false

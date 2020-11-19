@@ -1,4 +1,4 @@
-<!-- This is the props file -->
+<!-- This is a props file -->
 <Project>
   <PropertyGroup>
     <!-- Indicates that a rebuild is required if this file changes. -->

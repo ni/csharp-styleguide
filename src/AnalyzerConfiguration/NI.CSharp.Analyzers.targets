@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <PropertyGroup>    
+  <PropertyGroup>
     <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_CSharp_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
   </PropertyGroup>
 
@@ -17,12 +17,12 @@
     <CodeAnalysisRuleSetDefined>False</CodeAnalysisRuleSetDefined>
     <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != '' and '$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
     <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>  
+  </PropertyGroup>
 
   <PropertyGroup>
     <!-- Enable analyzers if they haven't been explicitly disabled, we're using Roslyn for CA/SA, the code needs to be validated -->
@@ -39,16 +39,15 @@
     <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>
     <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
 
-    <RoslynAnalyzer Include="Microsoft.CodeQuality" />
-    <RoslynAnalyzer Include="Microsoft.NetCore" />
-    <RoslynAnalyzer Include="Microsoft.NetFramework" />
-    <RoslynAnalyzer Include="Text" />
-
     <!-- Microsoft's CA analyzers -->
-    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackageRoot)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).Analyzers.dll')"/>
-    <Analyzer Include="@(RoslynAnalyzer->'$(NuGetPackageRoot)\%(Identity).analyzers\2.6.3\analyzers\dotnet\cs\%(Identity).CSharp.Analyzers.dll')"/>
-    <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_NetCore_Analyzers)\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_NetCore_Analyzers)\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_NetFramework_Analyzers)\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_NetFramework_Analyzers)\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
 
     <!-- NI's CA analyzers -->
     <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.Utilities.dll"/>
@@ -60,7 +59,7 @@
       <Link>$(NI1704_AdditionalSpellingDictionary)</Link>
     </AdditionalFiles>
     <AdditionalFiles Include="$(CodeAnalysisRuleSet)" Condition="Exists('$(CodeAnalysisRuleSet)')">
-     <Link>$(CodeAnalysisRuleSet)</Link>
+      <Link>$(CodeAnalysisRuleSet)</Link>
     </AdditionalFiles>
   </ItemGroup>
 

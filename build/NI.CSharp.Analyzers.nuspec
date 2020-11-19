@@ -17,13 +17,12 @@
     <dependencies>
       <group targetFramework="netstandard1.3">
         <dependency id="Microsoft.CodeAnalysis.FxCopAnalyzers" version="2.9.10" />
-        <dependency id="Microsoft.CodeQuality.Analyzers" version="2.6.3" />
-        <dependency id="Microsoft.NetCore.Analyzers" version="2.6.3" />
-        <dependency id="Microsoft.NetFramework.Analyzers" version="2.6.3" />
+        <dependency id="Microsoft.CodeQuality.Analyzers" version="2.9.10" />
+        <dependency id="Microsoft.NetCore.Analyzers" version="2.9.10" />
+        <dependency id="Microsoft.NetFramework.Analyzers" version="2.9.10" />
         <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="16.3.52" />
         <dependency id="Roslynator.Analyzers" version="2.1.0" />
         <dependency id="StyleCop.Analyzers" version="1.1.118" />
-        <dependency id="Text.Analyzers" version="2.6.3" />
       </group>
     </dependencies>
   </metadata>

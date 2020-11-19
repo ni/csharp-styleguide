@@ -40,6 +40,7 @@
     <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
 
     <!-- Microsoft's CA analyzers -->
+    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_NetCore_Analyzers)\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll"/>
@@ -49,7 +50,6 @@
     <Analyzer Include="$(PkgText_Analyzers)\analyzers\dotnet\cs\Text.Analyzers.dll"/>
     <Analyzer Include="$(PkgText_Analyzers)\analyzers\dotnet\cs\Text.CSharp.Analyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
 
     <!-- NI's CA analyzers -->
     <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.Utilities.dll"/>

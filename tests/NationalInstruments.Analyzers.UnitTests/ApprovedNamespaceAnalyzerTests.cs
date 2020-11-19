@@ -17,6 +17,13 @@ namespace NationalInstruments.Analyzers.UnitTests
     /// </summary>
     public sealed class ApprovedNamespaceAnalyzerTests : NIDiagnosticAnalyzerWithCodeFixTests<ApprovedNamespaceAnalyzer, ApprovedNamespaceCodeFixProvider>
     {
+        [Fact]
+        public void MissingApprovalFiles_Verify_EmitsDiagnostic()
+        {
+            VerifyDiagnostics(
+                new TestFile("class Program { }"), GetResult(ApprovedNamespaceAnalyzer.MissingApprovalFilesRule));
+        }
+
         [Theory]
         [InlineData(
                 @"

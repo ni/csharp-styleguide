@@ -70,12 +70,12 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ProductionRule, TestRule, FileReadRule);
 
         /// <inheritdoc/>
-        public override void Initialize(AnalysisContext analysisContext)
+        public override void Initialize(AnalysisContext context)
         {
-            analysisContext.EnableConcurrentExecutionIf(IsRunningInProduction && !InDebugMode);
-            analysisContext.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            context.EnableConcurrentExecutionIf(IsRunningInProduction && !InDebugMode);
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-            analysisContext.RegisterCompilationStartAction(OnCompilationStart);
+            context.RegisterCompilationStartAction(OnCompilationStart);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace NationalInstruments.Tools.Analyzers.Namespaces
                     context.ReportDiagnostic(diagnostic);
                 }
             }
-            
+
             bool ApprovalFilesExist()
             {
                 return !string.IsNullOrEmpty(_approvedNamespacesFilePath)

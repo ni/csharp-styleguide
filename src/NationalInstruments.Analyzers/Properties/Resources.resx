@@ -406,4 +406,12 @@
     <value>Not an approved namespace.</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="NI1800_MissingApprovalFilesErrorMessage" xml:space="preserve">
+    <value>No namespace approval files were found.</value>
+    <comment>The message the diagnostic displays.</comment>
+  </data>
+  <data name="NI1800_MissingApprovalFilesErrorTitle" xml:space="preserve">
+    <value>Missing namespace approval files</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
 </root>

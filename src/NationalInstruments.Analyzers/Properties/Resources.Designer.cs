@@ -719,6 +719,24 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No namespace approval files were found..
+        /// </summary>
+        internal static string NI1800_MissingApprovalFilesErrorMessage {
+            get {
+                return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing namespace approval files.
+        /// </summary>
+        internal static string NI1800_MissingApprovalFilesErrorTitle {
+            get {
+                return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string NI1800_ParseError_Message {

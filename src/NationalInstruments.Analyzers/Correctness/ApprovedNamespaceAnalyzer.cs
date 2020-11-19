@@ -66,8 +66,19 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 
+        /// <summary>
+        /// Rule for missing approved namespaces files.
+        /// </summary>
+        public static DiagnosticDescriptor MissingApprovalFilesRule { get; } = new DiagnosticDescriptor(
+            $"{DiagnosticId}_ReadError",
+            new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorTitle), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorMessage), Resources.ResourceManager, typeof(Resources)),
+            Resources.CategoryNamespaces,
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true);
+
         /// <inheritdoc/>
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ProductionRule, TestRule, FileReadRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ProductionRule, TestRule, FileReadRule, MissingApprovalFilesRule);
 
         /// <inheritdoc/>
         public override void Initialize(AnalysisContext context)
@@ -102,9 +113,12 @@ namespace NationalInstruments.Analyzers.Correctness
         private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
         {
             InitializeApprovedNamespaces();
-            if (ApprovalFilesExist())
+            compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
+
+            if (!ApprovalFilesExist())
             {
-                compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
+                var diagnostic = Diagnostic.Create(MissingApprovalFilesRule, Location.None);
+                compilationStartContext.RegisterCompilationEndAction(x => x.ReportDiagnostic(diagnostic));
             }
 
             void AnalyzeNamespace(SymbolAnalysisContext context)

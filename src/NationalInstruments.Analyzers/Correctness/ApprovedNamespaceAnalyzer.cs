@@ -140,6 +140,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 var approvedNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.txt").FirstOrDefault();
                 var approvedTestNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.Tests.txt").FirstOrDefault();
 
+                _approvedNamespacesFilePath = null;
                 if (approvedNamespacesFile != null)
                 {
                     var sourceText = approvedNamespacesFile.GetText(compilationStartContext.CancellationToken);
@@ -151,6 +152,7 @@ namespace NationalInstruments.Analyzers.Correctness
                     _approvedNamespacesFilePath = approvedNamespacesFile.Path;
                 }
 
+                _approvedTestNamespacesFilePath = null;
                 if (approvedTestNamespacesFile != null)
                 {
                     var sourceText = approvedTestNamespacesFile.GetText(compilationStartContext.CancellationToken);

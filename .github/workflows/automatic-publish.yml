@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetach-depeth: 0
+          fetch-depth: 0
         
 #       - name: Correct for GitVersion
 #         run: |

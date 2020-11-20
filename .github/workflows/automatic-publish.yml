@@ -24,9 +24,9 @@ jobs:
         with:
           fetach-depeth: 0
         
-      - name: Correct for GitVersion
-        run: |
-          git fetch --prune --unshallow
+#       - name: Correct for GitVersion
+#         run: |
+#           git fetch --prune --unshallow
         
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.6   

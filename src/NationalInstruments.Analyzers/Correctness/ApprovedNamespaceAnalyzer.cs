@@ -33,7 +33,7 @@ namespace NationalInstruments.Analyzers.Correctness
         public static DiagnosticDescriptor ProductionRule { get; } = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_Title), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.NI1800_Message), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.NI1800_MessageFormat), Resources.ResourceManager, typeof(Resources)),
             Resources.CategoryNamespaces,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
@@ -46,7 +46,7 @@ namespace NationalInstruments.Analyzers.Correctness
         public static DiagnosticDescriptor TestRule { get; } = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_TestTitle), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.NI1800_TestMessage), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.NI1800_TestMessageFormat), Resources.ResourceManager, typeof(Resources)),
             Resources.CategoryNamespaces,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
@@ -107,7 +107,7 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 var symbol = context.Symbol;
                 var namespaceName = symbol.ToDisplayString();
-                if (TryGetNamespaceViolatingRule(namespaceName, out DiagnosticDescriptor rule, out string approvedNamespacesFilePath))
+                if (TryGetNamespaceViolatingRule(namespaceName, out DiagnosticDescriptor rule, out var approvedNamespacesFilePath))
                 {
                     foreach (var location in symbol.Locations)
                     {
@@ -130,7 +130,7 @@ namespace NationalInstruments.Analyzers.Correctness
                         ReportFileReadDiagnostic(approvedNamespacesFile.Path);
                     }
 
-                    _approvedNamespaces.Path = approvedNamespacesFile.Path;                   
+                    _approvedNamespaces.Path = approvedNamespacesFile.Path;
                 }
 
                 if (approvedTestNamespacesFile != null)

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -37,7 +38,10 @@ namespace NationalInstruments.Analyzers.Correctness
                     .FindNode(location.SourceSpan)
                     .ToString();
                 var approvedNamespacesFilePaths = diagnostic.Properties.Values;
-                context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, approvedNamespacesFilePaths), context.Diagnostics);
+                foreach (var path in approvedNamespacesFilePaths)
+                {
+                    context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, path), context.Diagnostics);
+                }
             }
         }
 
@@ -45,16 +49,18 @@ namespace NationalInstruments.Analyzers.Correctness
         {
             private readonly string _namespaceName;
             private readonly CodeFixContext _context;
-            private IEnumerable<string> _approvedNamespacesFilePaths;
+            private readonly string _approvedNamespacesFilePath;
+            private readonly string _title;
 
-            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName, IEnumerable<string> approvedNamespacesFilePaths)
+            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName, string approvedNamespacesFilePath)
             {
                 _context = context;
                 _namespaceName = namespaceName;
-                _approvedNamespacesFilePaths = approvedNamespacesFilePaths;
+                _approvedNamespacesFilePath = approvedNamespacesFilePath;
+                _title = string.Format(CultureInfo.InvariantCulture, Resources.NI1800_CodeFixTitleFormat, approvedNamespacesFilePath);
             }
 
-            public override string Title => Resources.NI1800_CodeFixTitle;
+            public override string Title => _title;
 
             public override string EquivalenceKey => _namespaceName;
 
@@ -66,7 +72,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
             protected override Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
             {
-                ApproveNamespace(_namespaceName, _approvedNamespacesFilePaths.First());
+                ApproveNamespace(_namespaceName, _approvedNamespacesFilePath);
                 return Task.FromResult(_context.Document);
             }
 

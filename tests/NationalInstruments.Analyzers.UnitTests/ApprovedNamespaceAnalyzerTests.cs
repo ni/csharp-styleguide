@@ -518,7 +518,7 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
         private class TestState : IDisposable
         {
             private const string ApprovedNamespacesFileName = "ApprovedNamespaces.txt";
-            private  const string ApprovedTestNamespacesFileName = "ApprovedNamespaces.Tests.txt";
+            private const string ApprovedTestNamespacesFileName = "ApprovedNamespaces.Tests.txt";
             private const string ApprovedNamespaces = @"
                 NationalInstruments.Design
                 NationalInstruments.SourceModel

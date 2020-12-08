@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,29 +36,22 @@ namespace NationalInstruments.Analyzers.Correctness
                 var namespaceName = (await location.SourceTree.GetRootAsync(context.CancellationToken).ConfigureAwait(false))
                     .FindNode(location.SourceSpan)
                     .ToString();
-                var codeAction = CodeAction.Create(
-                    Resources.NI1800_CodeFixTitle,
-                    cancellationToken => AddNamespaceAsync(context, namespaceName),
-                    nameof(ApprovedNamespaceCodeFixProvider));
-                context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName), context.Diagnostics);
+                var approvedNamespacesFilePaths = diagnostic.Properties.Values;
+                context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, approvedNamespacesFilePaths), context.Diagnostics);
             }
-        }
-
-        private Task<Document> AddNamespaceAsync(CodeFixContext context, string namespaceName)
-        {
-            ApprovedNamespaceAnalyzer.ApproveNamespace(namespaceName);
-            return Task.FromResult(context.Document);
         }
 
         private class ApprovedNamespaceCodeAction : CodeAction
         {
             private readonly string _namespaceName;
             private readonly CodeFixContext _context;
+            private IEnumerable<string> _approvedNamespacesFilePaths;
 
-            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName)
+            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName, IEnumerable<string> approvedNamespacesFilePaths)
             {
                 _context = context;
                 _namespaceName = namespaceName;
+                _approvedNamespacesFilePaths = approvedNamespacesFilePaths;
             }
 
             public override string Title => Resources.NI1800_CodeFixTitle;
@@ -72,8 +66,19 @@ namespace NationalInstruments.Analyzers.Correctness
 
             protected override Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
             {
-                ApprovedNamespaceAnalyzer.ApproveNamespace(_namespaceName);
+                ApproveNamespace(_namespaceName, _approvedNamespacesFilePaths.First());
                 return Task.FromResult(_context.Document);
+            }
+
+            private void ApproveNamespace(string namespaceName, string namespacesFilePath)
+            {
+                var lines = File.ReadAllLines(namespacesFilePath);
+                var namespaces = lines
+                        .Concat(new[] { namespaceName })
+                        .Select(x => x.Trim())
+                        .OrderBy(x => x)
+                        .Distinct();
+                File.WriteAllLines(namespacesFilePath, namespaces);
             }
         }
     }

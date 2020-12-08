@@ -383,7 +383,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1800_Message" xml:space="preserve">
-    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list.</value>
+    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_ParseError_Message" xml:space="preserve">
@@ -395,7 +395,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1800_TestMessage" xml:space="preserve">
-    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list</value>
+    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_TestTitle" xml:space="preserve">

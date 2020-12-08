@@ -213,7 +213,7 @@ namespace SomeNamespace
         {
             using (var testState = new TestState())
             {
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.ProductionRule, violatingNamespace));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.ProductionRule, violatingNamespace, testState.ApprovedNamespacesFilePath));
                 VerifyDiagnostics(test, testState.GetApprovedNamespaces());
             }
         }
@@ -261,7 +261,7 @@ namespace <?>NationalInstruments.Design.Toolbar
             using (var testState = new TestState())
             {
                 var approvedNamespaceFiles = testState.GetApprovedNamespaces();
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.ProductionRule, "NationalInstruments.Design.Toolbar"));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.ProductionRule, "NationalInstruments.Design.Toolbar", testState.ApprovedNamespacesFilePath));
                 var testAfterFix = new AutoTestFile(sampleCode.Replace("<?>", string.Empty));
 
                 VerifyDiagnostics(test, approvedNamespaceFiles);
@@ -329,7 +329,7 @@ namespace <?>XUnity.Tests
         {
             using (var testState = new TestState())
             {
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, violatingNamespace));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, violatingNamespace, testState.ApprovedTestNamespacesFilePath));
                 VerifyDiagnostics(test, testState.GetApprovedNamespaces());
             }
         }
@@ -377,7 +377,7 @@ namespace <?>NationalInstruments.Tests.Integration.SourceModel
             using (var testState = new TestState())
             {
                 var approvedNamespaceFiles = testState.GetApprovedNamespaces();
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, "NationalInstruments.Tests.Integration.SourceModel"));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, "NationalInstruments.Tests.Integration.SourceModel", testState.ApprovedTestNamespacesFilePath));
                 var testAfterFix = new AutoTestFile(sampleCode.Replace("<?>", string.Empty));
 
                 VerifyDiagnostics(test, approvedNamespaceFiles);
@@ -445,7 +445,7 @@ namespace <?>XUnity.TestUtilities.Core
         {
             using (var testState = new TestState())
             {
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, violatingNamespace));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, violatingNamespace, testState.ApprovedTestNamespacesFilePath));
                 VerifyDiagnostics(test, testState.GetApprovedNamespaces());
             }
         }
@@ -493,7 +493,7 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
             using (var testState = new TestState())
             {
                 var approvedNamespaceFiles = testState.GetApprovedNamespaces();
-                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, "NationalInstruments.TestUtilities.SourceModel"));
+                var test = new AutoTestFile(sampleCode, new Rule(ApprovedNamespaceAnalyzer.TestRule, "NationalInstruments.TestUtilities.SourceModel", testState.ApprovedTestNamespacesFilePath));
                 var testAfterFix = new AutoTestFile(sampleCode.Replace("<?>", string.Empty));
 
                 VerifyDiagnostics(test, approvedNamespaceFiles);
@@ -518,7 +518,7 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
         private class TestState : IDisposable
         {
             private const string ApprovedNamespacesFileName = "ApprovedNamespaces.txt";
-            private const string ApprovedTestNamespacesFileName = "ApprovedNamespaces.Tests.txt";
+            private  const string ApprovedTestNamespacesFileName = "ApprovedNamespaces.Tests.txt";
             private const string ApprovedNamespaces = @"
                 NationalInstruments.Design
                 NationalInstruments.SourceModel
@@ -542,9 +542,9 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
                 Directory.CreateDirectory(_testFilesFolder);
             }
 
-            private string ApprovedNamespacesFilePath => Path.Combine(_testFilesFolder, ApprovedNamespacesFileName);
+            public string ApprovedNamespacesFilePath => Path.Combine(_testFilesFolder, ApprovedNamespacesFileName);
 
-            private string ApprovedTestNamespacesFilePath => Path.Combine(_testFilesFolder, ApprovedTestNamespacesFileName);
+            public string ApprovedTestNamespacesFilePath => Path.Combine(_testFilesFolder, ApprovedTestNamespacesFileName);
 
             public void Dispose()
             {

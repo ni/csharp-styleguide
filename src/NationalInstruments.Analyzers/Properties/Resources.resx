@@ -371,7 +371,7 @@
     <comment>The title of code fix</comment>
   </data>
   <data name="NI1800_Description" xml:space="preserve">
-    <value>This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedNamespaces.txt.</value>
+    <value>This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1800_FileReadErrorMessage" xml:space="preserve">
@@ -383,7 +383,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1800_Message" xml:space="preserve">
-    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedNamespaces.txt.</value>
+    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list.</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_ParseError_Message" xml:space="preserve">
@@ -391,11 +391,11 @@
     <comment>The exception text caught from parsing an "additional file".</comment>
   </data>
   <data name="NI1800_TestDescription" xml:space="preserve">
-    <value>This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedTestNamespaces.txt.</value>
+    <value>This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1800_TestMessage" xml:space="preserve">
-    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedTestNamespaces.txt.</value>
+    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_TestTitle" xml:space="preserve">

@@ -683,7 +683,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedNamespaces.txt..
+        ///   Looks up a localized string similar to This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list..
         /// </summary>
         internal static string NI1800_Description {
             get {
@@ -710,7 +710,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedNamespaces.txt..
+        ///   Looks up a localized string similar to {0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list..
         /// </summary>
         internal static string NI1800_Message {
             get {
@@ -746,7 +746,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedTestNamespaces.txt..
+        ///   Looks up a localized string similar to This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list..
         /// </summary>
         internal static string NI1800_TestDescription {
             get {
@@ -755,7 +755,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - BuildTools\CodeAnalysisRuleSet\NI1800_ApprovedTestNamespaces.txt..
+        ///   Looks up a localized string similar to {0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list.
         /// </summary>
         internal static string NI1800_TestMessage {
             get {

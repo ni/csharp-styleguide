@@ -23,8 +23,6 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly Regex _testNamespacePattern = new Regex(@".+(\.Tests|\.TestUtilities)");
         private static readonly SourceTextValueProvider<ApprovedNamespaces> _approvedNamespacesProvider = new SourceTextValueProvider<ApprovedNamespaces>(s => new ApprovedNamespaces(s));
-        private static string _approvedNamespacesFilePath;
-        private static string _approvedTestNamespacesFilePath;
 
         private ApprovedNamespaces _approvedNamespaces;
         private ApprovedNamespaces _approvedTestNamespaces;
@@ -89,22 +87,6 @@ namespace NationalInstruments.Analyzers.Correctness
             context.RegisterCompilationStartAction(OnCompilationStart);
         }
 
-        /// <summary>
-        /// Adds a namespace to the approved namespaces list
-        /// </summary>
-        /// <param name="namespaceName">Namespace to be approved</param>
-        internal static void ApproveNamespace(string namespaceName)
-        {
-            var namespacesFilePath = IsTestNamespace(namespaceName) ? _approvedTestNamespacesFilePath : _approvedNamespacesFilePath;
-            var lines = File.ReadAllLines(namespacesFilePath);
-            var namespaces = lines
-                    .Concat(new[] { namespaceName })
-                    .Select(x => x.Trim())
-                    .OrderBy(x => x)
-                    .Distinct();
-            File.WriteAllLines(namespacesFilePath, namespaces);
-        }
-
         private static bool IsTestNamespace(string namespaceName)
         {
             return _testNamespacePattern.IsMatch(namespaceName);
@@ -125,11 +107,11 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 var symbol = context.Symbol;
                 var namespaceName = symbol.ToDisplayString();
-                if (TryGetNamespaceViolatingRule(namespaceName, out DiagnosticDescriptor rule))
+                if (TryGetNamespaceViolatingRule(namespaceName, out DiagnosticDescriptor rule, out var approvedNamespacesFilePath))
                 {
                     foreach (var location in symbol.Locations)
                     {
-                        ReportDiagnostic(context, namespaceName, location, rule);
+                        ReportDiagnostic(context, namespaceName, location, rule, approvedNamespacesFilePath);
                     }
                 }
             }
@@ -140,7 +122,6 @@ namespace NationalInstruments.Analyzers.Correctness
                 var approvedNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.txt").FirstOrDefault();
                 var approvedTestNamespacesFile = fileProvider.GetMatchingFiles("ApprovedNamespaces.Tests.txt").FirstOrDefault();
 
-                _approvedNamespacesFilePath = null;
                 if (approvedNamespacesFile != null)
                 {
                     var sourceText = approvedNamespacesFile.GetText(compilationStartContext.CancellationToken);
@@ -149,10 +130,9 @@ namespace NationalInstruments.Analyzers.Correctness
                         ReportFileReadDiagnostic(approvedNamespacesFile.Path);
                     }
 
-                    _approvedNamespacesFilePath = approvedNamespacesFile.Path;
+                    _approvedNamespaces.Path = approvedNamespacesFile.Path;
                 }
 
-                _approvedTestNamespacesFilePath = null;
                 if (approvedTestNamespacesFile != null)
                 {
                     var sourceText = approvedTestNamespacesFile.GetText(compilationStartContext.CancellationToken);
@@ -160,8 +140,7 @@ namespace NationalInstruments.Analyzers.Correctness
                     {
                         ReportFileReadDiagnostic(approvedTestNamespacesFile.Path);
                     }
-
-                    _approvedTestNamespacesFilePath = approvedTestNamespacesFile.Path;
+                    _approvedTestNamespaces.Path = approvedTestNamespacesFile.Path;
                 }
 
                 void ReportFileReadDiagnostic(string filePath)
@@ -181,14 +160,15 @@ namespace NationalInstruments.Analyzers.Correctness
                         && !_approvedNamespaces.IsNamespaceApproved(namespaceName));
             }
 
-            bool TryGetNamespaceViolatingRule(string namespaceName, out DiagnosticDescriptor rule)
+            bool TryGetNamespaceViolatingRule(string namespaceName, out DiagnosticDescriptor rule, out string approvedNamespacesFilePath)
             {
                 var isTestNamespace = IsTestNamespace(namespaceName);
                 rule = isTestNamespace ? TestRule : ProductionRule;
+                approvedNamespacesFilePath = isTestNamespace ? _approvedTestNamespaces.Path : _approvedNamespaces.Path;
                 return IsNamespaceNameViolatingRule(namespaceName, isTestNamespace);
             }
 
-            void ReportDiagnostic(SymbolAnalysisContext context, string namespaceName, Location location, DiagnosticDescriptor rule)
+            void ReportDiagnostic(SymbolAnalysisContext context, string namespaceName, Location location, DiagnosticDescriptor rule, string approvedNamespacesFilePath)
             {
                 var syntaxNode = location.SourceTree.GetRoot().FindNode(location.SourceSpan);
                 var isLeafNamespace = !(syntaxNode.Parent is QualifiedNameSyntax parent)
@@ -199,15 +179,17 @@ namespace NationalInstruments.Analyzers.Correctness
                 {
                     var nameSyntax = namespaceDeclaration.Name;
 
-                    var diagnostic = Diagnostic.Create(rule, nameSyntax.GetLocation(), namespaceName);
+                    var builder = ImmutableDictionary.CreateBuilder<string, string>();
+                    builder.Add("Path", approvedNamespacesFilePath);
+                    var properties = builder.ToImmutable();
+                    var diagnostic = Diagnostic.Create(rule, nameSyntax.GetLocation(), properties, namespaceName, approvedNamespacesFilePath);
                     context.ReportDiagnostic(diagnostic);
                 }
             }
 
             bool ApprovalFilesExist()
             {
-                return !string.IsNullOrEmpty(_approvedNamespacesFilePath)
-                    || !string.IsNullOrEmpty(_approvedTestNamespacesFilePath);
+                return _approvedNamespaces is object || _approvedTestNamespaces is object;
             }
         }
 
@@ -243,6 +225,8 @@ namespace NationalInstruments.Analyzers.Correctness
                     }
                 }
             }
+
+            public string Path { get; set; }
 
             public bool IsNamespaceApproved(string namespaceName)
             {

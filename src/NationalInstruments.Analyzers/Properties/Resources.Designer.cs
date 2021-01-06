@@ -712,9 +712,9 @@ namespace NationalInstruments.Analyzers.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.
         /// </summary>
-        internal static string NI1800_MessageFormat {
+        internal static string NI1800_Message {
             get {
-                return ResourceManager.GetString("NI1800_MessageFormat", resourceCulture);
+                return ResourceManager.GetString("NI1800_Message", resourceCulture);
             }
         }
         
@@ -757,9 +757,9 @@ namespace NationalInstruments.Analyzers.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.
         /// </summary>
-        internal static string NI1800_TestMessageFormat {
+        internal static string NI1800_TestMessage {
             get {
-                return ResourceManager.GetString("NI1800_TestMessageFormat", resourceCulture);
+                return ResourceManager.GetString("NI1800_TestMessage", resourceCulture);
             }
         }
         

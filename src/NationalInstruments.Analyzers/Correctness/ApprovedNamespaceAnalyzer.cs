@@ -33,7 +33,7 @@ namespace NationalInstruments.Analyzers.Correctness
         public static DiagnosticDescriptor ProductionRule { get; } = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_Title), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.NI1800_MessageFormat), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.NI1800_Message), Resources.ResourceManager, typeof(Resources)),
             Resources.CategoryNamespaces,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
@@ -46,7 +46,7 @@ namespace NationalInstruments.Analyzers.Correctness
         public static DiagnosticDescriptor TestRule { get; } = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_TestTitle), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.NI1800_TestMessageFormat), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.NI1800_TestMessage), Resources.ResourceManager, typeof(Resources)),
             Resources.CategoryNamespaces,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
@@ -168,7 +168,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 return IsNamespaceNameViolatingRule(namespaceName, isTestNamespace);
             }
 
-            void ReportDiagnostic(SymbolAnalysisContext context, string namespaceName, Location location, DiagnosticDescriptor rule, string approvedNamespacesfilePath)
+            void ReportDiagnostic(SymbolAnalysisContext context, string namespaceName, Location location, DiagnosticDescriptor rule, string approvedNamespacesFilePath)
             {
                 var syntaxNode = location.SourceTree.GetRoot().FindNode(location.SourceSpan);
                 var isLeafNamespace = !(syntaxNode.Parent is QualifiedNameSyntax parent)
@@ -180,9 +180,9 @@ namespace NationalInstruments.Analyzers.Correctness
                     var nameSyntax = namespaceDeclaration.Name;
 
                     var builder = ImmutableDictionary.CreateBuilder<string, string>();
-                    builder.Add("Path", approvedNamespacesfilePath);
+                    builder.Add("Path", approvedNamespacesFilePath);
                     var properties = builder.ToImmutable();
-                    var diagnostic = Diagnostic.Create(rule, nameSyntax.GetLocation(), properties, namespaceName, approvedNamespacesfilePath);
+                    var diagnostic = Diagnostic.Create(rule, nameSyntax.GetLocation(), properties, namespaceName, approvedNamespacesFilePath);
                     context.ReportDiagnostic(diagnostic);
                 }
             }

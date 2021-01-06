@@ -382,7 +382,7 @@
     <value>Error reading file</value>
     <comment>The title of the diagnostic.</comment>
   </data>
-  <data name="NI1800_MessageFormat" xml:space="preserve">
+  <data name="NI1800_Message" xml:space="preserve">
     <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
@@ -394,7 +394,7 @@
     <value>This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
-  <data name="NI1800_TestMessageFormat" xml:space="preserve">
+  <data name="NI1800_TestMessage" xml:space="preserve">
     <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>

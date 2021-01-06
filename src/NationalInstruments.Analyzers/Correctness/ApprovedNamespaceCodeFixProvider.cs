@@ -37,7 +37,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 var namespaceName = (await location.SourceTree.GetRootAsync(context.CancellationToken).ConfigureAwait(false))
                     .FindNode(location.SourceSpan)
                     .ToString();
-                var approvedNamespacesFilePaths = diagnostic.Properties.Values;
+                var approvedNamespacesFilePaths = diagnostic.Properties.Where(kv => kv.Key.StartsWith("Path")).Select(kv => kv.Value);
                 foreach (var path in approvedNamespacesFilePaths)
                 {
                     context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, path), context.Diagnostics);
@@ -47,8 +47,8 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private class ApprovedNamespaceCodeAction : CodeAction
         {
-            private readonly string _namespaceName;
             private readonly CodeFixContext _context;
+            private readonly string _namespaceName;
             private readonly string _approvedNamespacesFilePath;
             private readonly string _title;
 

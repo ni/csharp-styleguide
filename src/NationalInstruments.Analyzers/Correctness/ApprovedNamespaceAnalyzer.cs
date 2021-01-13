@@ -95,12 +95,15 @@ namespace NationalInstruments.Analyzers.Correctness
         private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
         {
             InitializeApprovedNamespaces();
-            compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
 
             if (!ApprovalFilesExist())
             {
                 var diagnostic = Diagnostic.Create(MissingApprovalFilesRule, Location.None);
                 compilationStartContext.RegisterCompilationEndAction(x => x.ReportDiagnostic(diagnostic));
+            }
+            else
+            {
+                compilationStartContext.RegisterSymbolAction(AnalyzeNamespace, SymbolKind.Namespace);
             }
 
             void AnalyzeNamespace(SymbolAnalysisContext context)

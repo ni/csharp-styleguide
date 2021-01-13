@@ -20,7 +20,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         [Fact]
         public void MissingApprovalFiles_Verify_EmitsDiagnostic()
         {
-            VerifyDiagnostics(new TestFile("class Program { }"), GetResult(ApprovedNamespaceAnalyzer.MissingApprovalFilesRule));
+            VerifyDiagnostics(new TestFile("namespace Foo { class Program { } }"), GetResult(ApprovedNamespaceAnalyzer.MissingApprovalFilesRule));
         }
 
         [Theory]

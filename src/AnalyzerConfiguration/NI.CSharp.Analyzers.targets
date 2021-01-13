@@ -50,8 +50,8 @@
     <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
 
     <!-- NI's CA analyzers -->
-    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.Utilities.dll"/>
-    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\lib\netstandard1.3\NationalInstruments.Analyzers.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\analyzers\dotnet\cs\NationalInstruments.Analyzers.Utilities.dll"/>
+    <Analyzer Include="$(PkgNI_CSharp_Analyzers)\analyzers\dotnet\cs\NationalInstruments.Analyzers.dll"/>
 
     <!-- Configuration files for our analyzers -->
     <!-- By adding the Link attribute, these files will not be shown in the Solution Explorer for .NET Core projects. -->

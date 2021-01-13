@@ -27,7 +27,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\.binaries\Release\NationalInstruments.Analyzers\**\*.dll" target="analyzers\dotnet\cs" />
+    <file src="..\.binaries\Release\NationalInstruments.Analyzers\netstandard1.3\*.dll" target="analyzers\dotnet\cs" />
     <file src="..\src\AnalyzerConfiguration\NI.CSharp.Analyzers.targets" target="build" />
     <file src="..\src\AnalyzerConfiguration\*.ruleset" target="content" />
     <file src="..\src\AnalyzerConfiguration\NI1704_AdditionalSpellingDictionary.dic" target="content" />

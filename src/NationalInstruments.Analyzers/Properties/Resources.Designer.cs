@@ -62,6 +62,15 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Namespaces.
+        /// </summary>
+        internal static string CategoryNamespaces {
+            get {
+                return ResourceManager.GetString("CategoryNamespaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Naming.
         /// </summary>
         internal static string CategoryNaming {
@@ -661,6 +670,114 @@ namespace NationalInstruments.Analyzers.Properties {
         internal static string NI1018_Title {
             get {
                 return ResourceManager.GetString("NI1018_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add this namespace to {0}.
+        /// </summary>
+        internal static string NI1800_CodeFixTitleFormat {
+            get {
+                return ResourceManager.GetString("NI1800_CodeFixTitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list..
+        /// </summary>
+        internal static string NI1800_Description {
+            get {
+                return ResourceManager.GetString("NI1800_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error reading approved namespaces file.
+        /// </summary>
+        internal static string NI1800_FileReadErrorMessage {
+            get {
+                return ResourceManager.GetString("NI1800_FileReadErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error reading file.
+        /// </summary>
+        internal static string NI1800_FileReadErrorTitle {
+            get {
+                return ResourceManager.GetString("NI1800_FileReadErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.
+        /// </summary>
+        internal static string NI1800_Message {
+            get {
+                return ResourceManager.GetString("NI1800_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No namespace approval files were found..
+        /// </summary>
+        internal static string NI1800_MissingApprovalFilesErrorMessage {
+            get {
+                return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing namespace approval files.
+        /// </summary>
+        internal static string NI1800_MissingApprovalFilesErrorTitle {
+            get {
+                return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}.
+        /// </summary>
+        internal static string NI1800_ParseError_Message {
+            get {
+                return ResourceManager.GetString("NI1800_ParseError_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list..
+        /// </summary>
+        internal static string NI1800_TestDescription {
+            get {
+                return ResourceManager.GetString("NI1800_TestDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.
+        /// </summary>
+        internal static string NI1800_TestMessage {
+            get {
+                return ResourceManager.GetString("NI1800_TestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not an approved test namespace..
+        /// </summary>
+        internal static string NI1800_TestTitle {
+            get {
+                return ResourceManager.GetString("NI1800_TestTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not an approved namespace..
+        /// </summary>
+        internal static string NI1800_Title {
+            get {
+                return ResourceManager.GetString("NI1800_Title", resourceCulture);
             }
         }
         

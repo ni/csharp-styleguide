@@ -94,6 +94,12 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
         {
+            var effectiveSeverity = ProductionRule.GetEffectiveSeverity(compilationStartContext.Compilation.Options);
+            if (effectiveSeverity == Microsoft.CodeAnalysis.ReportDiagnostic.Suppress)
+            {
+                return;
+            }
+
             InitializeApprovedNamespaces();
 
             if (!ApprovalFilesExist())

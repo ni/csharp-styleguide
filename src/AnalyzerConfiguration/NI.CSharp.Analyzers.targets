@@ -1,24 +1,18 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <PropertyGroup>
+  <!-- Set NI_CodeAnalysisRuleSetDirectory before including this file to override the standard rulesets -->
+  <PropertyGroup Condition="'$(NI_CodeAnalysisRuleSetDirectory)' == ''">
     <NI_CodeAnalysisRuleSetDirectory>$(PkgNI_CSharp_Analyzers)\content</NI_CodeAnalysisRuleSetDirectory>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <!-- this would more correctly be: assemblyname contains .Test. We have an issue with test utilities projects, and test.testutilities projects. -->
-    <NI_IsTestProject Condition="'$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.StartsWith("Tests."))</NI_IsTestProject>
-    <NI_IsTestProject Condition="'$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.EndsWith(".Tests"))</NI_IsTestProject>
-    <NI_IsTestProject Condition="'$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.StartsWith("!Tests."))</NI_IsTestProject>
-    <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("TestUtilities."))</NI_IsTestUtilitiesProject>
-    <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True'">$(MSBuildProjectName.StartsWith("!TestUtilities."))</NI_IsTestUtilitiesProject>
-    <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
-    <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
-
-    <CodeAnalysisRuleSetDefined>False</CodeAnalysisRuleSetDefined>
-    <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != '' and '$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
+  <!-- Set NI_IsTestProject or NI_IsTestUtilitiesProject before including this file to override the standard categorization logic -->
+  <PropertyGroup Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">
+    <NI_IsTestProject>$(MSBuildProjectName.StartsWith("Tests."))</NI_IsTestProject>
+    <NI_IsTestUtilitiesProject>$(MSBuildProjectName.StartsWith("TestUtilities."))</NI_IsTestUtilitiesProject>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
+  <!-- Set CodeAnalysisRuleSet before including this file to override the standard ruleset mapping -->
+  <PropertyGroup Condition="'$(CodeAnalysisRuleSet)' == ''">
     <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.Tests.ruleset</CodeAnalysisRuleSet>

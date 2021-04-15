@@ -222,7 +222,7 @@
     <Rule Id="RCS1020" Action="None" />
     <Rule Id="RCS1021" Action="None" />
     <Rule Id="RCS1023" Action="None" />
-    <Rule Id="RCS1029" Action="Warning" />
+    <Rule Id="RCS1029" Action="None" />
     <Rule Id="RCS1032" Action="None" />
     <Rule Id="RCS1033" Action="None" />
     <Rule Id="RCS1034" Action="None" />

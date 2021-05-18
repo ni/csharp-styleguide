@@ -433,7 +433,7 @@ private bool IsFooFullyEnabled(Mode modeFlags)
 
 If a given method takes so many parameters that the line becomes very long, split the parameter list so that all parameters are on their own line.
 
-There is no hard limit on line length. Use judgement to keep code easy to read and diff. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
+Favor readability over a specific line length, but aim to keep lines under 150 characters. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
 
 Indent the parameter list one level deeper than the invocation that takes the parameters.
 

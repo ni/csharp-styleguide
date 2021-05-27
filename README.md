@@ -431,7 +431,7 @@ private bool IsFooFullyEnabled(Mode modeFlags)
 
 ### [F.3.3] ✔️ **CONSIDER** Splitting long parameter lists
 
-If a given method takes so many parameters that the line becomes very long, split the parameter list so that all parameters are on their own line.
+If a given method takes so many parameters that the line becomes very long, split the parameter list so that each parameter is on its own line.
 
 Favor readability over a specific line length, but aim to keep lines under 150 characters. See [[F.3.1] ❌ **AVOID** Adding excessive complexity in compound statements](#%5Bf.3.1%5D-%3Ax%3A-**avoid**-adding-excessive-complexity-in-compound-statements).
 

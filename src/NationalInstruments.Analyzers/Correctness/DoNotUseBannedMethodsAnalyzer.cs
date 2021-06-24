@@ -58,7 +58,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1006_Description), Resources.ResourceManager, typeof(Resources)),
-            helpLinkUri: "https://nitalk.jiveon.com/docs/DOC-455694");
+            helpLinkUri: "https://github.com/ni/csharp-styleguide/blob/main/docs/Banned%20Methods.md");
 
         public static DiagnosticDescriptor FileParseRule { get; } = new DiagnosticDescriptor(
             DiagnosticId,

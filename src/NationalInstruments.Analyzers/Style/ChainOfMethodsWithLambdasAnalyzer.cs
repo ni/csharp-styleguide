@@ -36,14 +36,18 @@ namespace NationalInstruments.Analyzers.Style
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
             context.RegisterSyntaxNodeAction(
-                AnalyzeSyntaxNode,
+                AnalyzeSyntaxContext,
                 SyntaxKind.ExpressionStatement,
                 SyntaxKind.EqualsValueClause,
                 SyntaxKind.Argument,
                 SyntaxKind.ArrowExpressionClause);
+
+            context.RegisterSyntaxNodeAction(
+                ArrayInitializerExpressionContext,
+                SyntaxKind.ArrayInitializerExpression);
         }
 
-        private static void AnalyzeSyntaxNode(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeSyntaxContext(SyntaxNodeAnalysisContext context)
         {
             var parentSyntaxNode = context.Node;
 
@@ -55,6 +59,27 @@ namespace NationalInstruments.Analyzers.Style
                 .OfType<InvocationExpressionSyntax>()
                 .FirstOrDefault();
 
+            AnalyzeSyntaxNode(invocationExpressionSyntax, context.ReportDiagnostic);
+        }
+
+        private static void ArrayInitializerExpressionContext(SyntaxNodeAnalysisContext context)
+        {
+            var arrayInitializerSyntaxNode = context.Node;
+
+            // Find all direct child invocation expressions
+            var invocationExpressions = arrayInitializerSyntaxNode
+                .ChildNodes()
+                .OfType<InvocationExpressionSyntax>();
+
+            // Analyze individual invocation expressions
+            foreach (var invocationExpression in invocationExpressions)
+            {
+                AnalyzeSyntaxNode(invocationExpression, context.ReportDiagnostic);
+            }
+        }
+
+        private static void AnalyzeSyntaxNode(InvocationExpressionSyntax invocationExpressionSyntax, Action<Diagnostic> reportDiagnostic)
+        {
             if (invocationExpressionSyntax is null)
             {
                 // This does not contain any invocations, bail out
@@ -98,7 +123,7 @@ namespace NationalInstruments.Analyzers.Style
                 if (!dotToken.LeadingTrivia.Any(trivia => trivia.IsKind(SyntaxKind.WhitespaceTrivia)))
                 {
                     var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
-                    context.ReportDiagnostic(diagnostic);
+                    reportDiagnostic(diagnostic);
                     break;
                 }
             }

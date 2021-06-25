@@ -43,7 +43,7 @@ namespace NationalInstruments.Analyzers.Style
                 SyntaxKind.ArrowExpressionClause);
 
             context.RegisterSyntaxNodeAction(
-                ArrayInitializerExpressionContext,
+                AnalyzeArrayInitializerContext,
                 SyntaxKind.ArrayInitializerExpression);
         }
 
@@ -62,11 +62,11 @@ namespace NationalInstruments.Analyzers.Style
             AnalyzeSyntaxNode(invocationExpressionSyntax, context.ReportDiagnostic);
         }
 
-        private static void ArrayInitializerExpressionContext(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeArrayInitializerContext(SyntaxNodeAnalysisContext context)
         {
             var arrayInitializerSyntaxNode = context.Node;
 
-            // Find all direct child invocation expressions
+            // Find only direct child invocation expressions
             var invocationExpressions = arrayInitializerSyntaxNode
                 .ChildNodes()
                 .OfType<InvocationExpressionSyntax>();

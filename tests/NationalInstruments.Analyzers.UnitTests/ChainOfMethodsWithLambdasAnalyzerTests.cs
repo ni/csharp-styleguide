@@ -642,6 +642,117 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_NoLambdasArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers)
+        {
+            var max = new[]
+            {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+            }
+            .Max();
+            return max;
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasArrayInitializers_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers, ISoftwareContent softwareContent)
+        {
+            var max = new[]
+            {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3),
+                <|>softwareContent.Children(x => true).Count(s => s.AliasName == ""T"")
+            }
+            .Max();
+            return max;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+", GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasArrayInitializers_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers, ISoftwareContent softwareContent)
+        {
+            var max = new[]
+            {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3),
+                softwareContent.Children(x => true)
+                    .Count(s => s.AliasName == ""T"")
+            }
+            .Max();
+            return max;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1017Rule()
         {
             return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);

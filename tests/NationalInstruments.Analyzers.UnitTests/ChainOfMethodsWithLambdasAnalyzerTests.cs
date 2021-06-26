@@ -677,7 +677,6 @@ namespace NationalInstruments.Analyzers.UnitTests
         {
             var test = new AutoTestFile(
 @"
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -717,7 +716,6 @@ namespace NationalInstruments.Analyzers.UnitTests
         {
             var test = new AutoTestFile(
 @"
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

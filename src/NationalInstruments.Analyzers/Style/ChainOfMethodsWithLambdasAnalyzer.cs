@@ -136,6 +136,5 @@ namespace NationalInstruments.Analyzers.Style
 
             bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
         }
-
     }
 }

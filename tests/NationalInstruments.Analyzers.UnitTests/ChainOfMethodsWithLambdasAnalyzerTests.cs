@@ -707,7 +707,9 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", GetNI1017Rule(), GetNI1017Rule());
+",
+GetNI1017Rule(),
+GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -786,7 +788,9 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", GetNI1017Rule(), GetNI1017Rule());
+",
+GetNI1017Rule(),
+GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }

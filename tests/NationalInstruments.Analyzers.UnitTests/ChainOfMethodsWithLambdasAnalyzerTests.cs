@@ -835,6 +835,51 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_WellSplitLambdasJaggedArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int Foo(IEnumerable<int> numbers)
+        {
+            var temp = new int[][]
+            {
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+            };
+            return 42;
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
         private Rule GetNI1017Rule()
         {
             return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);

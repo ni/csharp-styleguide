@@ -715,7 +715,7 @@ GetNI1017Rule());
         }
 
         [Fact]
-        public void NI1017_WellSplitLambdasArrayInitializers_EmitsDiagnostic()
+        public void NI1017_WellSplitLambdasArrayInitializers_NoDiagnostic()
         {
             var test = new AutoTestFile(
 @"
@@ -796,7 +796,7 @@ GetNI1017Rule());
         }
 
         [Fact]
-        public void NI1017_WellSplitLambdasAlongWithArrayInitializers_EmitsDiagnostic()
+        public void NI1017_WellSplitLambdasAlongWithArrayInitializers_NoDiagnostic()
         {
             var test = new AutoTestFile(
 @"
@@ -882,7 +882,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
 
         [Fact]
-        public void NI1017_PoorlyLambdasJaggedArrayInitializers_EmitsDiagnostic()
+        public void NI1017_PoorlySplitLambdasJaggedArrayInitializers_EmitsDiagnostic()
         {
             var test = new AutoTestFile(
 @"

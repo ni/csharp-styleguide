@@ -70,12 +70,12 @@ namespace NationalInstruments.Analyzers.Style
             var arrayInitializerSyntax = context.Node;
 
             // Find only direct child invocation expressions
-            var invocationExpressions = arrayInitializerSyntax
+            var invocationExpressionSyntaxes = arrayInitializerSyntax
                 .ChildNodes()
                 .OfType<InvocationExpressionSyntax>();
 
             // Analyze individual invocation expressions
-            foreach (var invocationExpression in invocationExpressions)
+            foreach (var invocationExpression in invocationExpressionSyntaxes)
             {
                 AnalyzeInvocationExpression(invocationExpression, context.ReportDiagnostic);
             }

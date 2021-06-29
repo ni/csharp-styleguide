@@ -67,10 +67,10 @@ namespace NationalInstruments.Analyzers.Style
 
         private static void AnalyzeArrayInitializer(SyntaxNodeAnalysisContext context)
         {
-            var arrayInitializerSyntaxNode = context.Node;
+            var arrayInitializerSyntax = context.Node;
 
             // Find only direct child invocation expressions
-            var invocationExpressions = arrayInitializerSyntaxNode
+            var invocationExpressions = arrayInitializerSyntax
                 .ChildNodes()
                 .OfType<InvocationExpressionSyntax>();
 

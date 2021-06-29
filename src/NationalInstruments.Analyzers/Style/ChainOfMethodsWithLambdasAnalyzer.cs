@@ -55,13 +55,14 @@ namespace NationalInstruments.Analyzers.Style
             // a method/delegate call or a property access
             // or a chain of them
             var invocationExpressionSyntax = parentSyntaxNode
-                .DescendantNodes(IsNotArrayCreationSyntax)
+                .DescendantNodes(IsNotArrayInitializerSyntax)
                 .OfType<InvocationExpressionSyntax>()
                 .FirstOrDefault();
 
             AnalyzeSyntaxNode(invocationExpressionSyntax, context.ReportDiagnostic);
 
-            bool IsNotArrayCreationSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.ArrayCreationExpression);
+            bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) =>
+                !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
         }
 
         private static void AnalyzeArrayInitializerContext(SyntaxNodeAnalysisContext context)

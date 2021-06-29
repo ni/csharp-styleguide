@@ -91,7 +91,7 @@ namespace NationalInstruments.Analyzers.Style
 
             // Find all non-nested arguments which contain a lambda expression
             var nonNestedArgumentsWithLambdas = invocationExpressionSyntax
-                .DescendantNodes(IsNonNested)
+                .DescendantNodes(IsOutOfScopeSyntax)
                 .OfType<ArgumentListSyntax>()
                 .Where(argument => argument.DescendantNodes().Any(IsLambdaExpression));
 
@@ -133,7 +133,7 @@ namespace NationalInstruments.Analyzers.Style
 
             bool IsLambdaExpression(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.SimpleLambdaExpression);
 
-            bool IsNonNested(SyntaxNode syntaxNode) => IsNotArgumentSyntax(syntaxNode) && IsNotArrayInitializerSyntax(syntaxNode);
+            bool IsOutOfScopeSyntax(SyntaxNode syntaxNode) => IsNotArgumentSyntax(syntaxNode) && IsNotArrayInitializerSyntax(syntaxNode);
 
             bool IsNotArgumentSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.Argument);
 

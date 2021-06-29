@@ -59,7 +59,7 @@ namespace NationalInstruments.Analyzers.Style
                 .OfType<InvocationExpressionSyntax>()
                 .FirstOrDefault();
 
-            AnalyzeSyntaxNode(invocationExpressionSyntax, context.ReportDiagnostic);
+            AnalyzeInvocationExpression(invocationExpressionSyntax, context.ReportDiagnostic);
 
             bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) =>
                 !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
@@ -77,11 +77,11 @@ namespace NationalInstruments.Analyzers.Style
             // Analyze individual invocation expressions
             foreach (var invocationExpression in invocationExpressions)
             {
-                AnalyzeSyntaxNode(invocationExpression, context.ReportDiagnostic);
+                AnalyzeInvocationExpression(invocationExpression, context.ReportDiagnostic);
             }
         }
 
-        private static void AnalyzeSyntaxNode(InvocationExpressionSyntax invocationExpressionSyntax, Action<Diagnostic> reportDiagnostic)
+        private static void AnalyzeInvocationExpression(InvocationExpressionSyntax invocationExpressionSyntax, Action<Diagnostic> reportDiagnostic)
         {
             if (invocationExpressionSyntax is null)
             {

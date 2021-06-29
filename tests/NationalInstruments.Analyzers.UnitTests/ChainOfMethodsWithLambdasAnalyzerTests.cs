@@ -925,6 +925,74 @@ GetNI1017Rule());
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_PoorlySplitLambdasInsideArrayInsideLambda_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private static void Foo(IEnumerable<ISoftwareContent> softwareContents)
+        {
+            softwareContents.Select(s => new[] { <|>s.Children(x => false).Select(x => x).First(u => u.AliasName == ""T"") }).First();
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+",
+GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasInsideArrayInsideLambda_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private static void Foo(IEnumerable<ISoftwareContent> softwareContents)
+        {
+            softwareContents.Select(s => new[]
+            { 
+                s.Children(x => false)
+                    .Select(x => x)
+                    .First(u => u.AliasName == ""T"") 
+            }).First();
+    }
+
+    private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1017Rule()
         {
             return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);

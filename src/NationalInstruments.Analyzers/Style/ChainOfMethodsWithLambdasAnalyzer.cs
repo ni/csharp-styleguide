@@ -36,18 +36,18 @@ namespace NationalInstruments.Analyzers.Style
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
             context.RegisterSyntaxNodeAction(
-                AnalyzeSyntaxContext,
+                AnalyzeExpression,
                 SyntaxKind.ExpressionStatement,
                 SyntaxKind.EqualsValueClause,
                 SyntaxKind.Argument,
                 SyntaxKind.ArrowExpressionClause);
 
             context.RegisterSyntaxNodeAction(
-                AnalyzeArrayInitializerContext,
+                AnalyzeArrayInitializer,
                 SyntaxKind.ArrayInitializerExpression);
         }
 
-        private static void AnalyzeSyntaxContext(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeExpression(SyntaxNodeAnalysisContext context)
         {
             var parentSyntaxNode = context.Node;
 
@@ -65,7 +65,7 @@ namespace NationalInstruments.Analyzers.Style
                 !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
         }
 
-        private static void AnalyzeArrayInitializerContext(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeArrayInitializer(SyntaxNodeAnalysisContext context)
         {
             var arrayInitializerSyntaxNode = context.Node;
 

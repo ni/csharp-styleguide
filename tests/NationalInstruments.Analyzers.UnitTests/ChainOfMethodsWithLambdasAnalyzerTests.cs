@@ -642,6 +642,357 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void NI1017_NoLambdasArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers)
+        {
+            var max = new[]
+            {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+            }
+            .Max();
+            return max;
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasArrayInitializers_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers, ISoftwareContent softwareContent)
+        {
+            var max = new[]
+            {
+                <|>softwareContent.Children(x => false).Count(s => s.AliasName == ""U""),
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3),
+                <|>softwareContent.Children(x => true).Count(s => s.AliasName == ""T"")
+            }
+            .Max();
+            return max;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+",
+GetNI1017Rule(),
+GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int MaxCounts(IEnumerable<int> numbers, ISoftwareContent softwareContent)
+        {
+            var max = new[]
+            {
+                softwareContent.Children(x => false)
+                    .Count(s => s.AliasName == ""U""),
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3),
+                softwareContent.Children(x => true)
+                    .Count(s => s.AliasName == ""T"")
+            }
+            .Max();
+            return max;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasAlongWithArrayInitializers_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static IEnumerable<string> Foo(ISoftwareContent softwareContent)
+        {
+            var newSoftware = <|>new ISoftwareContent[]
+            { 
+                <|>softwareContent.Children(x => false).Select(s => s).First(s => s.AliasName == ""T"")
+            }
+            .Select(s => s.AliasName).Where(n => n == ""A"");
+            
+            return newSoftware;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+",
+GetNI1017Rule(),
+GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasAlongWithArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static IEnumerable<string> Foo(ISoftwareContent softwareContent)
+        {
+            var newSoftware = new ISoftwareContent[]
+            { 
+                softwareContent.Children(x => false)
+                    .Select(s => s)
+                    .First(s => s.AliasName == ""T"")
+            }
+            .Select(s => s.AliasName)
+            .Where(n => n == ""A"");
+            
+            return newSoftware;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasJaggedArrayInitializers_NoDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static int Foo(IEnumerable<int> numbers)
+        {
+            var temp = new int[][]
+            {
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+
+                new[]
+                {
+                numbers.Count(number => number == 1),
+                numbers.Count(number => number == 2),
+                numbers.Count(number => number == 3)
+                },
+            };
+            return 42;
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasJaggedArrayInitializers_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    class Test
+    {
+        private static ISoftwareContent[][] Foo(ISoftwareContent softwareContent)
+        {
+            var temp = new ISoftwareContent[][]
+            {
+                new[]
+                {
+                    <|>softwareContent.Children(x => false).Select(s => s).First(s => s.AliasName == ""T"")
+                },
+                new[]
+                {
+                    <|>softwareContent.Children(x => false).Select(s => s).First(s => s.AliasName == ""U"")
+                }
+            };
+            return temp;
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+        
+            string AliasName { get; }
+        }
+    }
+}
+",
+GetNI1017Rule(),
+GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_PoorlySplitLambdasInsideArrayInsideLambda_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private static void Foo(IEnumerable<ISoftwareContent> softwareContents)
+        {
+            softwareContents.Select(s => new[] { <|>s.Children(x => false).Select(x => x).First(u => u.AliasName == ""T"") }).First();
+        }
+
+        private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+",
+GetNI1017Rule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1017_WellSplitLambdasInsideArrayInsideLambda_EmitsDiagnostic()
+        {
+            var test = new AutoTestFile(
+@"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NationalInstruments.Analyzers.UnitTests
+{
+    internal class Test
+    {
+        private static void Foo(IEnumerable<ISoftwareContent> softwareContents)
+        {
+            softwareContents.Select(s => new[]
+            { 
+                s.Children(x => false)
+                    .Select(x => x)
+                    .First(u => u.AliasName == ""T"") 
+            }).First();
+    }
+
+    private interface ISoftwareContent
+        {
+            IEnumerable<ISoftwareContent> Children(Predicate<int> predicate = null);
+
+            string AliasName { get; }
+        }
+    }
+}
+");
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1017Rule()
         {
             return new Rule(ChainOfMethodsWithLambdasAnalyzer.Rule);

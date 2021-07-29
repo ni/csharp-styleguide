@@ -36,14 +36,18 @@ namespace NationalInstruments.Analyzers.Style
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
             context.RegisterSyntaxNodeAction(
-                AnalyzeSyntaxNode,
+                AnalyzeExpression,
                 SyntaxKind.ExpressionStatement,
                 SyntaxKind.EqualsValueClause,
                 SyntaxKind.Argument,
                 SyntaxKind.ArrowExpressionClause);
+
+            context.RegisterSyntaxNodeAction(
+                AnalyzeArrayInitializer,
+                SyntaxKind.ArrayInitializerExpression);
         }
 
-        private static void AnalyzeSyntaxNode(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeExpression(SyntaxNodeAnalysisContext context)
         {
             var parentSyntaxNode = context.Node;
 
@@ -51,10 +55,31 @@ namespace NationalInstruments.Analyzers.Style
             // a method/delegate call or a property access
             // or a chain of them
             var invocationExpressionSyntax = parentSyntaxNode
-                .DescendantNodes()
+                .DescendantNodes(IsNotArrayInitializerSyntax)
                 .OfType<InvocationExpressionSyntax>()
                 .FirstOrDefault();
 
+            AnalyzeInvocationExpression(invocationExpressionSyntax, context.ReportDiagnostic);
+        }
+
+        private static void AnalyzeArrayInitializer(SyntaxNodeAnalysisContext context)
+        {
+            var arrayInitializerSyntax = context.Node;
+
+            // Find only direct child invocation expressions
+            var invocationExpressionSyntaxes = arrayInitializerSyntax
+                .ChildNodes()
+                .OfType<InvocationExpressionSyntax>();
+
+            // Analyze individual invocation expressions
+            foreach (var invocationExpressionSyntax in invocationExpressionSyntaxes)
+            {
+                AnalyzeInvocationExpression(invocationExpressionSyntax, context.ReportDiagnostic);
+            }
+        }
+
+        private static void AnalyzeInvocationExpression(InvocationExpressionSyntax invocationExpressionSyntax, Action<Diagnostic> reportDiagnostic)
+        {
             if (invocationExpressionSyntax is null)
             {
                 // This does not contain any invocations, bail out
@@ -63,7 +88,7 @@ namespace NationalInstruments.Analyzers.Style
 
             // Find all non-nested arguments which contain a lambda expression
             var nonNestedArgumentsWithLambdas = invocationExpressionSyntax
-                .DescendantNodes(IsNotArgumentSyntax)
+                .DescendantNodes(IsOutOfScopeSyntax)
                 .OfType<ArgumentListSyntax>()
                 .Where(argument => argument.DescendantNodes().Any(IsLambdaExpression));
 
@@ -98,14 +123,18 @@ namespace NationalInstruments.Analyzers.Style
                 if (!dotToken.LeadingTrivia.Any(trivia => trivia.IsKind(SyntaxKind.WhitespaceTrivia)))
                 {
                     var diagnostic = Diagnostic.Create(Rule, invocationExpressionSyntax.GetLocation());
-                    context.ReportDiagnostic(diagnostic);
+                    reportDiagnostic(diagnostic);
                     break;
                 }
             }
 
             bool IsLambdaExpression(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.SimpleLambdaExpression);
 
+            bool IsOutOfScopeSyntax(SyntaxNode syntaxNode) => IsNotArgumentSyntax(syntaxNode) && IsNotArrayInitializerSyntax(syntaxNode);
+
             bool IsNotArgumentSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.Argument);
         }
+
+        private static bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
     }
 }

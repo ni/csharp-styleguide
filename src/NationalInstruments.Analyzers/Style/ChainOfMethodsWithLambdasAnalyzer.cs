@@ -60,9 +60,6 @@ namespace NationalInstruments.Analyzers.Style
                 .FirstOrDefault();
 
             AnalyzeInvocationExpression(invocationExpressionSyntax, context.ReportDiagnostic);
-
-            bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) =>
-                !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
         }
 
         private static void AnalyzeArrayInitializer(SyntaxNodeAnalysisContext context)
@@ -136,8 +133,8 @@ namespace NationalInstruments.Analyzers.Style
             bool IsOutOfScopeSyntax(SyntaxNode syntaxNode) => IsNotArgumentSyntax(syntaxNode) && IsNotArrayInitializerSyntax(syntaxNode);
 
             bool IsNotArgumentSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.Argument);
-
-            bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
         }
+
+        private static bool IsNotArrayInitializerSyntax(SyntaxNode syntaxNode) => !syntaxNode.IsKind(SyntaxKind.ArrayInitializerExpression);
     }
 }

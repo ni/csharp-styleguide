@@ -75,9 +75,9 @@ namespace NationalInstruments.Analyzers.Style
                 .OfType<InvocationExpressionSyntax>();
 
             // Analyze individual invocation expressions
-            foreach (var invocationExpression in invocationExpressionSyntaxes)
+            foreach (var invocationExpressionSyntax in invocationExpressionSyntaxes)
             {
-                AnalyzeInvocationExpression(invocationExpression, context.ReportDiagnostic);
+                AnalyzeInvocationExpression(invocationExpressionSyntax, context.ReportDiagnostic);
             }
         }
 

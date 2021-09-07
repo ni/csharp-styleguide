@@ -6,4 +6,8 @@
     <RootNamespace>NationalInstruments.Analyzers.Utilities</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.11.0" />
+  </ItemGroup>
+
 </Project>

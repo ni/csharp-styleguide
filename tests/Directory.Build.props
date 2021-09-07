@@ -10,8 +10,8 @@
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
-    <NILibraryTargetFramework>netcoreapp3.1</NILibraryTargetFramework>
-    <NIAnalyzersTargetFramework>net46</NIAnalyzersTargetFramework>
+    <NILibraryTargetFramework>net5.0</NILibraryTargetFramework>
+    <NIAnalyzersTargetFramework>net461</NIAnalyzersTargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,6 +21,10 @@
 
   <ItemGroup>
     <TestFiles Include="$(MSBuildProjectDirectory)\TestFiles\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" />
   </ItemGroup>
 
   <Target Name="CopyTestFiles" AfterTargets="Build">

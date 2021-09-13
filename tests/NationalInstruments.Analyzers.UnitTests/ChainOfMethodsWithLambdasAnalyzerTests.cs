@@ -310,7 +310,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-",  GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -343,7 +344,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -429,7 +431,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -502,7 +505,8 @@ namespace NationalInstruments.Analyzers.UnitTests
             Predicate<string> predicate) => softwareContent;
     }
 }
-", GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -574,7 +578,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         Creator Foo { get; }
     }
 }
-", GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }
@@ -637,7 +642,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }
 }
-", GetNI1017Rule());
+",
+            GetNI1017Rule());
 
             VerifyDiagnostics(test);
         }

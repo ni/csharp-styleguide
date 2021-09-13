@@ -137,7 +137,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
                 foreach (XElement element in rootElement.Elements())
                 {
-                    ParseBannedMethodElement(element, default(AnalyzerEntryOptionsForParsing));
+                    ParseBannedMethodElement(element, default);
                 }
             }
 

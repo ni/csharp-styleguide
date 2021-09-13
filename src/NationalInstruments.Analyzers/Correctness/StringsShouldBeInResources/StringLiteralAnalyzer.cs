@@ -152,6 +152,9 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
         /// <param name="rootElement">
         /// Root node of an XML document containing exemptions for fields, string, files, assemblies, types, members, and namespaces.
         /// </param>
+        /// <param name="filePath">
+        /// Path to an XML file containing exemptions.
+        /// </param>
         protected override void LoadConfigurations(XElement rootElement, string filePath)
         {
             if (TryGetRootElementDiagnostic(rootElement, "Exemptions", filePath, StringsShouldBeInResourcesAnalyzer.FileParseRule, out var diagnostic))

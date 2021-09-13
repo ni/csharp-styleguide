@@ -126,7 +126,8 @@ namespace <?>NationalInstruments.Designer
         {
         }
     }
-}", "NationalInstruments.Designer")]
+}",
+            "NationalInstruments.Designer")]
         [InlineData(
             @"
 namespace <?>Systematic.Windows
@@ -137,7 +138,8 @@ namespace <?>Systematic.Windows
         {
         }
     }
-}", "Systematic.Windows")]
+}",
+            "Systematic.Windows")]
         [InlineData(
             @"
 namespace <?>NotAQualifiedNamespace
@@ -148,7 +150,8 @@ namespace <?>NotAQualifiedNamespace
         {
         }
     }
-}", "NotAQualifiedNamespace")]
+}",
+            "NotAQualifiedNamespace")]
         [InlineData(
             @"
 namespace Systematic
@@ -162,7 +165,8 @@ namespace Systematic
             }
         }
     }
-}", "Systematic.Windows")]
+}",
+            "Systematic.Windows")]
         [InlineData(
             @"
 namespace NationalInstruments
@@ -185,7 +189,8 @@ namespace NationalInstruments
             }
         }
     }
-}", "NationalInstruments.Bogus")]
+}",
+            "NationalInstruments.Bogus")]
         [InlineData(
             @"
 namespace SomeNamespace
@@ -208,7 +213,8 @@ namespace SomeNamespace
             }
         }
     }
-}", "SomeNamespace.Tong")]
+}",
+            "SomeNamespace.Tong")]
         public void UnapprovedNamespace_Verify_EmitsDiagnostic(string sampleCode, string violatingNamespace)
         {
             using (var testState = new TestState())
@@ -313,7 +319,8 @@ namespace <?>NationalInstruments.Tests.Designer
         {
         }
     }
-}", "NationalInstruments.Tests.Designer")]
+}",
+            "NationalInstruments.Tests.Designer")]
         [InlineData(
             @"
 namespace <?>XUnity.Tests
@@ -324,7 +331,8 @@ namespace <?>XUnity.Tests
         {
         }
     }
-}", "XUnity.Tests")]
+}",
+            "XUnity.Tests")]
         public void UnapprovedTestNamespace_Verify_EmitsDiagnostic(string sampleCode, string violatingNamespace)
         {
             using (var testState = new TestState())
@@ -429,7 +437,8 @@ namespace <?>NationalInstruments.TestUtilities.Designer
         {
         }
     }
-}", "NationalInstruments.TestUtilities.Designer")]
+}",
+            "NationalInstruments.TestUtilities.Designer")]
         [InlineData(
             @"
 namespace <?>XUnity.TestUtilities.Core
@@ -440,7 +449,8 @@ namespace <?>XUnity.TestUtilities.Core
         {
         }
     }
-}", "XUnity.TestUtilities.Core")]
+}",
+            "XUnity.TestUtilities.Core")]
         public void UnapprovedTestUtilitiesNamespace_Verify_EmitsDiagnostic(string sampleCode, string violatingNamespace)
         {
             using (var testState = new TestState())

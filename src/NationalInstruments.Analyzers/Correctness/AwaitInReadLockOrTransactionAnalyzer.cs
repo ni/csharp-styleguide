@@ -20,7 +20,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1015_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1015_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Resources.ResourceManager.GetString(nameof(Resources.NI1015_Description), CultureInfo.CurrentCulture));

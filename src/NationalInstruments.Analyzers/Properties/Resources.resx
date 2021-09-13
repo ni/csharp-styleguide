@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoryNI" xml:space="preserve">
-    <value>NationalInstruments</value>
-  </data>
   <data name="LRN001_Description" xml:space="preserve">
     <value>All restricted types should be defined under 'NationalInstruments.Restricted'.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
@@ -193,7 +190,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1001_Message" xml:space="preserve">
-    <value>Private field '{0}' must begin with an underscore and be camel-cased.</value>
+    <value>Private field '{0}' must begin with an underscore and be camel-cased</value>
   </data>
   <data name="NI1001_Title" xml:space="preserve">
     <value>Private, mutable fields must begin with underscore and be camel-cased</value>
@@ -282,9 +279,6 @@
     <value>Inaccessible internal member/type</value>
     <comment>The title of the diagnostic.</comment>
   </data>
-  <data name="CategoryNaming" xml:space="preserve">
-    <value>Naming</value>
-  </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyDescription" xml:space="preserve">
     <value>The name of an externally visible identifier contains one or more words that are not recognized by the Microsoft spelling checker library.</value>
   </data>
@@ -354,7 +348,7 @@
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1017_Title" xml:space="preserve">
-    <value>Split chains of dotted method invocations with lambdas.</value>
+    <value>Split chains of dotted method invocations with lambdas</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1018_Message" xml:space="preserve">
@@ -362,9 +356,6 @@
   </data>
   <data name="NI1018_Title" xml:space="preserve">
     <value>Do not use LINQ query syntax.</value>
-  </data>
-  <data name="CategoryNamespaces" xml:space="preserve">
-    <value>Namespaces</value>
   </data>
   <data name="NI1800_CodeFixTitleFormat" xml:space="preserve">
     <value>Add this namespace to {0}</value>

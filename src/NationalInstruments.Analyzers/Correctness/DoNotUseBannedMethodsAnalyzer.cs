@@ -54,7 +54,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI1006_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1006_Description), Resources.ResourceManager, typeof(Resources)),
@@ -64,7 +64,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.ParseError_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.IO,
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
 

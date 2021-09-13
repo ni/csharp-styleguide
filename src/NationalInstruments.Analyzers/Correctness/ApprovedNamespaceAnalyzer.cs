@@ -34,7 +34,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNamespaces,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1800_Description), Resources.ResourceManager, typeof(Resources)),
@@ -47,7 +47,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_TestTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_TestMessage), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNamespaces,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1800_TestDescription), Resources.ResourceManager, typeof(Resources)),
@@ -57,22 +57,22 @@ namespace NationalInstruments.Analyzers.Correctness
         /// Rule for failure to read approved namespaces files.
         /// </summary>
         public static DiagnosticDescriptor FileReadRule { get; } = new DiagnosticDescriptor(
-            $"{DiagnosticId}_ReadError",
+            DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_FileReadErrorTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_FileReadErrorMessage), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNamespaces,
-            DiagnosticSeverity.Warning,
+            Category.IO,
+            DiagnosticSeverity.Error,
             isEnabledByDefault: true);
 
         /// <summary>
         /// Rule for missing approved namespaces files.
         /// </summary>
         public static DiagnosticDescriptor MissingApprovalFilesRule { get; } = new DiagnosticDescriptor(
-            $"{DiagnosticId}_ReadError",
+            DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorMessage), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNamespaces,
-            DiagnosticSeverity.Warning,
+            Category.IO,
+            DiagnosticSeverity.Error,
             isEnabledByDefault: true);
 
         /// <inheritdoc/>

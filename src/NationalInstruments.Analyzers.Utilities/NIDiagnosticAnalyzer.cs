@@ -7,15 +7,22 @@ namespace NationalInstruments.Analyzers.Utilities
     /// </summary>
     public abstract class NIDiagnosticAnalyzer : DiagnosticAnalyzer
     {
+        /// <summary>
+        /// Boolean that indicates if this analyzer is running against real vs test code.
+        /// </summary>
+        public bool IsRunningInProduction { get; set; } = true;
+
 #if DEBUG
         protected const bool InDebugMode = true;
 #else
         protected const bool InDebugMode = false;
 #endif
 
-        /// <summary>
-        /// Boolean that indicates if this analyzer is running against real vs test code.
-        /// </summary>
-        public bool IsRunningInProduction { get; set; } = true;
+        protected static class Category
+        {
+            public const string Correctness = nameof(Correctness);
+            public const string Style = nameof(Style);
+            public const string IO = nameof(IO);
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1007_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1007_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Resources.ResourceManager.GetString(nameof(Resources.NI1007_Description), CultureInfo.CurrentCulture));

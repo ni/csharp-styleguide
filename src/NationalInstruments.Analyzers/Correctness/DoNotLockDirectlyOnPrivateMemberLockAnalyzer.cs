@@ -18,7 +18,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1016_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1016_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Correctness,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1016_Description), Resources.ResourceManager, typeof(Resources)));

@@ -70,8 +70,8 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1009_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1009_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
-            DiagnosticSeverity.Error,
+            Category.Correctness,
+            DiagnosticSeverity.Warning,
             isEnabledByDefault: false,
             description: new LocalizableResourceString(nameof(Resources.NI1009_Description), Resources.ResourceManager, typeof(Resources)),
             helpLinkUri: "https://dev.azure.com/ni/LabVIEW.Tools/_workitems/edit/148942/");

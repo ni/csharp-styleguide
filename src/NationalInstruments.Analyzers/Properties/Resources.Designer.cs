@@ -10,7 +10,6 @@
 
 namespace NationalInstruments.Analyzers.Properties {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
@@ -40,7 +39,7 @@ namespace NationalInstruments.Analyzers.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NationalInstruments.Analyzers.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NationalInstruments.Analyzers.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,33 +57,6 @@ namespace NationalInstruments.Analyzers.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Namespaces.
-        /// </summary>
-        internal static string CategoryNamespaces {
-            get {
-                return ResourceManager.GetString("CategoryNamespaces", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Naming.
-        /// </summary>
-        internal static string CategoryNaming {
-            get {
-                return ResourceManager.GetString("CategoryNaming", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NationalInstruments.
-        /// </summary>
-        internal static string CategoryNI {
-            get {
-                return ResourceManager.GetString("CategoryNI", resourceCulture);
             }
         }
         
@@ -359,7 +331,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private field &apos;{0}&apos; must begin with an underscore and be camel-cased..
+        ///   Looks up a localized string similar to Private field &apos;{0}&apos; must begin with an underscore and be camel-cased.
         /// </summary>
         internal static string NI1001_Message {
             get {
@@ -647,7 +619,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas..
+        ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas.
         /// </summary>
         internal static string NI1017_Title {
             get {

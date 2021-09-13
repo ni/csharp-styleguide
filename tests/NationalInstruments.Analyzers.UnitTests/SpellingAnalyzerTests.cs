@@ -418,9 +418,9 @@ class Program
         private static string CreateTypeWithConstructor(string typeName, bool isStatic, string parameter = "")
         {
             return $@"
-#pragma warning disable {SpellingAnalyzer.RuleId}
+#pragma warning disable {SpellingAnalyzer.DiagnosticId}
 class {typeName.TrimStart(new[] { '<', '?', '>' })}
-#pragma warning restore {SpellingAnalyzer.RuleId}
+#pragma warning restore {SpellingAnalyzer.DiagnosticId}
 {{
     {(isStatic ? "static " : string.Empty)}{typeName}({parameter}) {{ }}
 }}";

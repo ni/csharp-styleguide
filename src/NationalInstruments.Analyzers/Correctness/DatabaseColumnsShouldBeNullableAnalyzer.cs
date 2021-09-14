@@ -22,8 +22,8 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI0017_Diagnostic_ValueType), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
-            DiagnosticSeverity.Error,
+            Category.Correctness,
+            DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI0017_Description), Resources.ResourceManager, typeof(Resources)));
 
@@ -31,8 +31,8 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI0017_Diagnostic_IEnumerable), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
-            DiagnosticSeverity.Error,
+            Category.Correctness,
+            DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI0017_Description), Resources.ResourceManager, typeof(Resources)));
 

@@ -17,7 +17,7 @@ namespace NationalInstruments.Analyzers.Style.DoNotUseLinqQuerySyntax
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1018_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1018_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Style,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 

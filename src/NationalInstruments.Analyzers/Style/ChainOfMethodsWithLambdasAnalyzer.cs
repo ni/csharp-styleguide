@@ -24,7 +24,7 @@ namespace NationalInstruments.Analyzers.Style
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1017_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1017_Message), Resources.ResourceManager, typeof(Resources)),
-            Resources.CategoryNI,
+            Category.Style,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 

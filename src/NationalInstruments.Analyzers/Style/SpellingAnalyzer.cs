@@ -20,9 +20,8 @@ namespace NationalInstruments.Analyzers.Style
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SpellingAnalyzer : NIDiagnosticAnalyzer
     {
-        public const string RuleId = "NI1704";
+        public const string DiagnosticId = "NI1704";
 
-        private const string Category = "Naming";
         private const DiagnosticSeverity DefaultDiagnosticSeverity = DiagnosticSeverity.Warning;
 
         private static readonly LocalizableString LocalizableTitle = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyTitle), Resources.ResourceManager, typeof(Resources));
@@ -51,177 +50,177 @@ namespace NationalInstruments.Analyzers.Style
         private static readonly CodeAnalysisDictionary _mainDictionary = GetMainDictionary();
 
         public static DiagnosticDescriptor FileParseRule { get; } = new DiagnosticDescriptor(
-            $"{RuleId}_ParseError",
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageFileParse,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true);
 
         public static DiagnosticDescriptor AssemblyRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageAssembly,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor NamespaceRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageNamespace,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor TypeRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageType,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor MemberRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMember,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor VariableRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageVariable,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription);
 
         public static DiagnosticDescriptor MemberParameterRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMemberParameter,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor DelegateParameterRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageDelegateParameter,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor TypeTypeParameterRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageTypeTypeParameter,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor MethodTypeParameterRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMethodTypeParameter,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor AssemblyMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageAssemblyMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor NamespaceMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageNamespaceMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor TypeMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageTypeMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor MemberMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMemberMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor MemberParameterMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMemberParameterMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor DelegateParameterMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageDelegateParameterMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor TypeTypeParameterMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageTypeTypeParameterMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,
             helpLinkUri: "https://docs.microsoft.com/visualstudio/code-quality/ca1704-identifiers-should-be-spelled-correctly");
 
         public static DiagnosticDescriptor MethodTypeParameterMoreMeaningfulNameRule { get; } = new DiagnosticDescriptor(
-            RuleId,
+            DiagnosticId,
             LocalizableTitle,
             LocalizableMessageMethodTypeParameterMoreMeaningfulName,
-            Category,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
             description: LocalizableDescription,

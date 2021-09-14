@@ -53,7 +53,7 @@ namespace NationalInstruments.Analyzers.Style
             DiagnosticId,
             LocalizableTitle,
             LocalizableMessageFileParse,
-            Category.IO,
+            Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true);
 

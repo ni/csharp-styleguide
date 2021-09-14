@@ -22,7 +22,6 @@ namespace NationalInstruments.Analyzers.Utilities
         {
             public const string Correctness = nameof(Correctness);
             public const string Style = nameof(Style);
-            public const string IO = nameof(IO);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace NationalInstruments.Analyzers.Correctness
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.ParseError_Message), Resources.ResourceManager, typeof(Resources)),
-            Category.IO,
+            Category.Correctness,
             DiagnosticSeverity.Error,
             isEnabledByDefault: true);
 

@@ -44,9 +44,6 @@
 
     <PropertyGroup>
         <IncludeCompatabilityAnalyzer Condition=" '$(IncludeCompatabilityAnalyzer)' == '' ">True</IncludeCompatabilityAnalyzer>
-        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
-        <RunAnalyzers>true</RunAnalyzers>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

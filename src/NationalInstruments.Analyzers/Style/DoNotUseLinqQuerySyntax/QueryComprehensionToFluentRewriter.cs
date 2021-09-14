@@ -609,7 +609,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             var orderExpression = (ExpressionSyntax)SetFlagAndVisit(orderingSyntax.Expression);
 
             var orderByThenBy = firstOrderExpression ? "OrderBy" : "ThenBy";
-            orderByThenBy += orderingSyntax.AscendingOrDescendingKeyword.ValueText?.ToLower() == "descending"
+            orderByThenBy += orderingSyntax.AscendingOrDescendingKeyword.ValueText?.ToUpperInvariant() == "DESCENDING"
                                  ? "Descending"
                                  : string.Empty;
 

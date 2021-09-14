@@ -14,6 +14,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.UnitTests.Assets
     /// multiple arguments.
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisReleaseTracking", "RS2008:Enable analyzer release tracking", Justification = "Used for testing")]
     public sealed class ExampleDiagnosticAnalyzer : NIDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "TEST1234";
@@ -46,6 +47,9 @@ namespace NationalInstruments.Analyzers.TestUtilities.UnitTests.Assets
 
         public override void Initialize(AnalysisContext context)
         {
+            context.EnableConcurrentExecution();
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+
             // NoArgumentRule
             context.RegisterSyntaxNodeAction(AnalyzeConstructor, SyntaxKind.ConstructorDeclaration);
 

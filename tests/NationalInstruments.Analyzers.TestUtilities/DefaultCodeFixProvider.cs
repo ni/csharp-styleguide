@@ -11,6 +11,11 @@ namespace NationalInstruments.Analyzers.TestUtilities
     {
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray<string>.Empty;
 
+        public override FixAllProvider GetFixAllProvider()
+        {
+            return WellKnownFixAllProviders.BatchFixer;
+        }
+
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             return Task.CompletedTask;

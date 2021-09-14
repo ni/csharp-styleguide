@@ -49,16 +49,12 @@
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
         <DebugType>full</DebugType>
-        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-        <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
-        <RunAnalyzers>false</RunAnalyzers>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DefineConstants>$(DefineConstants)</DefineConstants>
         <DebugType>pdbonly</DebugType>
         <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">True</TreatWarningsAsErrors>
-        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\tools\Labview.Tools.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>

@@ -102,7 +102,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
             IAssemblySymbol referencedAssembly = symbol.ContainingAssembly;
             IAssemblySymbol callingAssembly = context.ContainingSymbol.ContainingAssembly;
-            if (referencedAssembly.Equals(callingAssembly))
+            if (referencedAssembly.Equals(callingAssembly, SymbolEqualityComparer.Default))
             {
                 return;
             }

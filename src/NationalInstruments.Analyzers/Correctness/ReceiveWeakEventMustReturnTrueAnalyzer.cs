@@ -70,7 +70,7 @@ namespace NationalInstruments.Analyzers.Correctness
             // Is this method implementing IWeakEventListener's ReceiveWeakEvent?
             ISymbol method = context.SemanticModel.GetDeclaredSymbol(methodSyntax);
             ISymbol implementation = method.ContainingType.FindImplementationForInterfaceMember(receiveWeakEventMethod);
-            if (implementation == null || !implementation.Equals(method))
+            if (implementation == null || !implementation.Equals(method, SymbolEqualityComparer.Default))
             {
                 return;
             }

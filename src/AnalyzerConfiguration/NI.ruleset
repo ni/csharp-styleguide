@@ -158,8 +158,9 @@
   </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.Analyzers" RuleNamespace="Microsoft.CodeAnalysis.Analyzers">
     <Rule Id="RS0015" Action="None" />
+    <Rule Id="RS0016" Action="None" />
     <Rule Id="RS0018" Action="None" />
-    <Rule Id="RS1001" Action="None" />        
+    <Rule Id="RS1001" Action="None" />
     <Rule Id="RS1002" Action="None" />
     <Rule Id="RS1003" Action="None" />
     <Rule Id="RS1004" Action="None" />
@@ -172,7 +173,9 @@
     <Rule Id="RS1011" Action="None" />
     <Rule Id="RS1012" Action="None" />
     <Rule Id="RS1013" Action="None" />
-    <Rule Id="RS1014" Action="None" />    
+    <Rule Id="RS1014" Action="None" />
+    <Rule Id="RS2002" Action="Warning" />
+    <Rule Id="RS2003" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="Microsoft.VisualStudio.Threading.Analyzers" RuleNamespace="Microsoft.VisualStudio.Threading.Analyzers">
     <Rule Id="VSTHRD001" Action="None" />
@@ -196,7 +199,7 @@
     <Rule Id="VSTHRD111" Action="None" />
     <Rule Id="VSTHRD200" Action="Warning" />
   </Rules>
-  <Rules AnalyzerId="NI.CSharp.Analyzers" RuleNamespace="NationalInstruments.Analyzers">        
+  <Rules AnalyzerId="NI.CSharp.Analyzers" RuleNamespace="NationalInstruments.Analyzers">
     <Rule Id="LRN001" Action="Warning" />
     <Rule Id="LRT001" Action="Warning" />
     <Rule Id="NI1001" Action="Warning" />
@@ -546,5 +549,5 @@
     <Rule Id="SA1651" Action="None" />
     <Rule Id="SA1652" Action="None" />
     <Rule Id="SX1309" Action="None" />
-  </Rules>  
+  </Rules>
 </RuleSet>

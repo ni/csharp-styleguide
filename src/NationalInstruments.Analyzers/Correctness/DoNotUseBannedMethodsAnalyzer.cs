@@ -50,7 +50,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly LocalizableString LocalizedTitle = new LocalizableResourceString(nameof(Resources.NI1006_Title), Resources.ResourceManager, typeof(Resources));
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI1006_Message), Resources.ResourceManager, typeof(Resources)),
@@ -60,12 +60,12 @@ namespace NationalInstruments.Analyzers.Correctness
             description: new LocalizableResourceString(nameof(Resources.NI1006_Description), Resources.ResourceManager, typeof(Resources)),
             helpLinkUri: "https://github.com/ni/csharp-styleguide/blob/main/docs/Banned%20Methods.md");
 
-        public static DiagnosticDescriptor FileParseRule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor FileParseRule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.ParseError_Message), Resources.ResourceManager, typeof(Resources)),
             Category.Correctness,
-            DiagnosticSeverity.Error,
+            DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule, FileParseRule);

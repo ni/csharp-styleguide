@@ -35,7 +35,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private const string ReceiveWeakEventMethodName = "ReceiveWeakEvent";
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1005_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1005_Message), Resources.ResourceManager, typeof(Resources)),

@@ -36,8 +36,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         public static IEnumerable<object[]> UnmeaningfulMembers
             => new[]
             {
-                new object[] { CreateTypeWithConstructor("<?>A", isStatic: false), "A" },
-                new object[] { CreateTypeWithConstructor("<?>B", isStatic: false), "B" },
+                new object[] { CreateTypeWithConstructor("<?>A", isStatic: false), "A", "A.A()" },
+                new object[] { CreateTypeWithConstructor("<?>B", isStatic: true), "B", "B.B()" },
                 new object[] { CreateTypeWithField("Program", "<?>_c"), "c" },
                 new object[] { CreateTypeWithEvent("Program", "<?>D"), "D" },
                 new object[] { CreateTypeWithProperty("Program", "<?>E"), "E" },
@@ -418,9 +418,11 @@ class Program
         private static string CreateTypeWithConstructor(string typeName, bool isStatic, string parameter = "")
         {
             return $@"
-#pragma warning disable {SpellingAnalyzer.DiagnosticId}
+#pragma warning disable {SpellingAnalyzer.MisspelledDiagnosticId}
+#pragma warning disable {SpellingAnalyzer.UnmeaningfulDiagnosticId}
 class {typeName.TrimStart(new[] { '<', '?', '>' })}
-#pragma warning restore {SpellingAnalyzer.DiagnosticId}
+#pragma warning restore {SpellingAnalyzer.UnmeaningfulDiagnosticId}
+#pragma warning restore {SpellingAnalyzer.MisspelledDiagnosticId}
 {{
     {(isStatic ? "static " : string.Empty)}{typeName}({parameter}) {{ }}
 }}";

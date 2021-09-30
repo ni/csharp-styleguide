@@ -18,7 +18,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly LocalizableString LocalizedTitle = new LocalizableResourceString(nameof(Resources.NI0017_Title), Resources.ResourceManager, typeof(Resources));
 
-        public static DiagnosticDescriptor ValueTypeRule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor ValueTypeRule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI0017_Diagnostic_ValueType), Resources.ResourceManager, typeof(Resources)),
@@ -27,7 +27,7 @@ namespace NationalInstruments.Analyzers.Correctness
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI0017_Description), Resources.ResourceManager, typeof(Resources)));
 
-        public static DiagnosticDescriptor IEnumerableColumnRule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor IEnumerableColumnRule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI0017_Diagnostic_IEnumerable), Resources.ResourceManager, typeof(Resources)),

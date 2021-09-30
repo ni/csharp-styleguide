@@ -47,7 +47,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly LocalizableString LocalizedTitle = new LocalizableResourceString(nameof(Resources.LRN001_Title), Resources.ResourceManager, typeof(Resources));
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.LRT001_Message), Resources.ResourceManager, typeof(Resources)),
@@ -57,12 +57,12 @@ namespace NationalInstruments.Analyzers.Correctness
             description: new LocalizableResourceString(nameof(Resources.LRT001_Description), Resources.ResourceManager, typeof(Resources)),
             helpLinkUri: "https://nitalk.jiveon.com/docs/DOC-234077");
 
-        public static DiagnosticDescriptor FileParseRule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor FileParseRule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.ParseError_Message), Resources.ResourceManager, typeof(Resources)),
             Category.Correctness,
-            DiagnosticSeverity.Error,
+            DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule, FileParseRule);

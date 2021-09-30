@@ -66,7 +66,7 @@ namespace NationalInstruments.Analyzers.Correctness
     {
         internal const string DiagnosticId = "NI1009";
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1009_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1009_Message), Resources.ResourceManager, typeof(Resources)),

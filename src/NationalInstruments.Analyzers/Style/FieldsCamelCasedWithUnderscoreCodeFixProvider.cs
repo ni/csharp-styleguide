@@ -77,7 +77,7 @@ namespace NationalInstruments.Analyzers.Style
             {
             }
 
-            var firstNonUnderscore = char.IsUpper(value[i]) ? char.ToLower(value[i]) : value[i];
+            var firstNonUnderscore = char.IsUpper(value[i]) ? char.ToLower(value[i], CultureInfo.CurrentCulture) : value[i];
             sb.Append(firstNonUnderscore);
 
             i++;

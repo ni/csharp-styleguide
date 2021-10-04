@@ -34,7 +34,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private const string RestrictedNamespacePrefix = "NationalInstruments.Restricted";
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.LRN001_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.LRN001_Message), Resources.ResourceManager, typeof(Resources)),

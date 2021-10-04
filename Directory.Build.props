@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <NILibraryTargetFramework>netstandard2.0</NILibraryTargetFramework>
-        <NIExecutableTargetFramework>netcoreapp3.1</NIExecutableTargetFramework>
-        <NIAnalyzersTargetFramework>netstandard1.3</NIAnalyzersTargetFramework>
+        <NILibraryTargetFramework>net5.0</NILibraryTargetFramework>
+        <NIExecutableTargetFramework>net5.0</NIExecutableTargetFramework>
+        <NIAnalyzersTargetFramework>netstandard2.0</NIAnalyzersTargetFramework>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -58,12 +58,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis" Version="2.10.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.10.0" />
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.10" />
-        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.0.102" />
-        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" />
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.10.56" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" />
         <PackageReference Condition=" '$(IncludeCompatabilityAnalyzer)' == 'True' " Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

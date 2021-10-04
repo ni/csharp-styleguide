@@ -735,7 +735,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
                     foreach (var interfaceMember in @interface.GetMembers())
                     {
-                        if (type.FindImplementationForInterfaceMember(interfaceMember)?.Equals(member) ?? false)
+                        if (type.FindImplementationForInterfaceMember(interfaceMember)?.Equals(member, SymbolEqualityComparer.Default) ?? false)
                         {
                             if (IsMembersStringLiteralAccepted(member, interfaceMember, parameterName))
                             {

@@ -46,7 +46,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly LocalizableString LocalizedTitle = new LocalizableResourceString(nameof(Resources.NI1004_Title), Resources.ResourceManager, typeof(Resources));
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI1004_Message), Resources.ResourceManager, typeof(Resources)),

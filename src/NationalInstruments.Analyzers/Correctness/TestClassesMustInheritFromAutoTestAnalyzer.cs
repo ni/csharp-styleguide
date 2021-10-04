@@ -39,7 +39,7 @@ namespace NationalInstruments.Analyzers.Correctness
         private const string TestClassAttributeTypeName = "Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute";
         private const string NIAutoTestAttributeTypeName = "NationalInstruments.Core.TestUtilities.AutoTest";
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1007_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1007_Message), Resources.ResourceManager, typeof(Resources)),

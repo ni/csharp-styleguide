@@ -35,7 +35,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private const string ReceiveWeakEventMethodName = "ReceiveWeakEvent";
 
-        public static DiagnosticDescriptor Rule { get; } = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1005_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1005_Message), Resources.ResourceManager, typeof(Resources)),
@@ -70,7 +70,7 @@ namespace NationalInstruments.Analyzers.Correctness
             // Is this method implementing IWeakEventListener's ReceiveWeakEvent?
             ISymbol method = context.SemanticModel.GetDeclaredSymbol(methodSyntax);
             ISymbol implementation = method.ContainingType.FindImplementationForInterfaceMember(receiveWeakEventMethod);
-            if (implementation == null || !implementation.Equals(method))
+            if (implementation == null || !implementation.Equals(method, SymbolEqualityComparer.Default))
             {
                 return;
             }

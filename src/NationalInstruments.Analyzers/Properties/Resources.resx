@@ -122,7 +122,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="LRN001_Message" xml:space="preserve">
-    <value>The namespace '{0}' should be renamed to 'NationalInstruments.Restricted'.</value>
+    <value>The namespace '{0}' should be renamed to 'NationalInstruments.Restricted'</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="LRN001_Title" xml:space="preserve">
@@ -134,7 +134,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="LRT001_Message" xml:space="preserve">
-    <value>Type '{0}' is not in the 'NationalInstruments' namespace.</value>
+    <value>Type '{0}' is not in the 'NationalInstruments' namespace</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="LRT001_Title" xml:space="preserve">
@@ -146,7 +146,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1004_Message" xml:space="preserve">
-    <value>Use a string resource in a .resx file instead of string literal '{0}'.</value>
+    <value>Use a string resource in a .resx file instead of string literal '{0}'</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1004_Title" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1005_Message" xml:space="preserve">
-    <value>IWeakEventListener.ReceiveWeakEvents() must return true.</value>
+    <value>IWeakEventListener.ReceiveWeakEvents() must return true</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1005_Title" xml:space="preserve">
@@ -182,7 +182,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1007_Message" xml:space="preserve">
-    <value>Test class '{0}' must ultimately derive from 'NationalInstruments.Core.TestUtilities.AutoTest'.</value>
+    <value>Test class '{0}' must ultimately derive from 'NationalInstruments.Core.TestUtilities.AutoTest'</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1007_Title" xml:space="preserve">
@@ -208,7 +208,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1015_Message" xml:space="preserve">
-    <value>Await call while holding a model lock or inside a transaction.</value>
+    <value>Await call while holding a model lock or inside a transaction</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1015_Title" xml:space="preserve">
@@ -232,11 +232,11 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1016_Message" xml:space="preserve">
-    <value>Do not lock directly on PrivateMemberLock - instead, call Acquire().</value>
+    <value>Do not lock directly on PrivateMemberLock - instead, call Acquire()</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1016_Title" xml:space="preserve">
-    <value>Do not lock directly on PrivateMemberLock.</value>
+    <value>Do not lock directly on PrivateMemberLock</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI0017_Description" xml:space="preserve">
@@ -286,52 +286,52 @@
     <value>Error parsing dictionary '{0}': {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageAssembly" xml:space="preserve">
-    <value>Correct the spelling of '{0}' in assembly name {1}.</value>
+    <value>Correct the spelling of '{0}' in assembly name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageAssemblyMoreMeaningfulName" xml:space="preserve">
-    <value>Consider providing a more meaningful name than assembly name {0}.</value>
+    <value>Consider providing a more meaningful name than assembly name {0}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameter" xml:space="preserve">
     <value>In delegate {0}, correct the spelling of '{1}' in parameter name {2}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameterMoreMeaningfulName" xml:space="preserve">
-    <value>In delegate {0}, consider providing a more meaningful name than parameter name {1}.</value>
+    <value>In delegate {0}, consider providing a more meaningful name than parameter name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMember" xml:space="preserve">
     <value>Correct the spelling of '{0}' in member name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberMoreMeaningfulName" xml:space="preserve">
-    <value>Consider providing a more meaningful name than member name {0}.</value>
+    <value>Consider providing a more meaningful name than member name {0}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberParameter" xml:space="preserve">
     <value>In method {0}, correct the spelling of '{1}' in parameter name {2}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberParameterMoreMeaningfulName" xml:space="preserve">
-    <value>In method {0}, consider providing a more meaningful name than parameter name {1}.</value>
+    <value>In method {0}, consider providing a more meaningful name than parameter name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameter" xml:space="preserve">
-    <value>On method {0}, correct the spelling of '{1}' in generic type parameter name {2}.</value>
+    <value>On method {0}, correct the spelling of '{1}' in generic type parameter name {2}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameterMoreMeaningfulName" xml:space="preserve">
-    <value>On method {0}, consider providing a more meaningful name than generic type parameter name {1}.</value>
+    <value>On method {0}, consider providing a more meaningful name than generic type parameter name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageNamespace" xml:space="preserve">
-    <value>Correct the spelling of '{0}' in namespace name '{1}'.</value>
+    <value>Correct the spelling of '{0}' in namespace name '{1}'</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageNamespaceMoreMeaningfulName" xml:space="preserve">
-    <value>Consider providing a more meaningful name than namespace name '{0}'.</value>
+    <value>Consider providing a more meaningful name than namespace name '{0}'</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageType" xml:space="preserve">
-    <value>Correct the spelling of '{0}' in type name {1}.</value>
+    <value>Correct the spelling of '{0}' in type name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeMoreMeaningfulName" xml:space="preserve">
-    <value>Consider providing a more meaningful name than type name {0}.</value>
+    <value>Consider providing a more meaningful name than type name {0}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameter" xml:space="preserve">
-    <value>On type {0}, correct the spelling of '{1}' in generic type parameter name {2}.</value>
+    <value>On type {0}, correct the spelling of '{1}' in generic type parameter name {2}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameterMoreMeaningfulName" xml:space="preserve">
-    <value>On type {0}, consider providing a more meaningful name than generic type parameter name {1}.</value>
+    <value>On type {0}, consider providing a more meaningful name than generic type parameter name {1}</value>
   </data>
   <data name="IdentifiersShouldBeSpelledCorrectlyMessageVariable" xml:space="preserve">
     <value>Correct the spelling of '{0}' in variable name {1}</value>
@@ -374,7 +374,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1800_Message" xml:space="preserve">
-    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
+    <value>{0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_ParseError_Message" xml:space="preserve">
@@ -386,19 +386,19 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NI1800_TestMessage" xml:space="preserve">
-    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}</value>
+    <value>{0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}.</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_TestTitle" xml:space="preserve">
-    <value>Not an approved test namespace.</value>
+    <value>Not an approved test namespace</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1800_Title" xml:space="preserve">
-    <value>Not an approved namespace.</value>
+    <value>Not an approved namespace</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NI1800_MissingApprovalFilesErrorMessage" xml:space="preserve">
-    <value>No namespace approval files were found.</value>
+    <value>No namespace approval files were found</value>
     <comment>The message the diagnostic displays.</comment>
   </data>
   <data name="NI1800_MissingApprovalFilesErrorTitle" xml:space="preserve">

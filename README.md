@@ -769,6 +769,8 @@ For information on when to create or not create a namespace, read [CSharp Coding
 
 ### [C.1.1] ✔️ **DO** Prefix namespace names with a company name to prevent namespaces from different companies from having the same name
 
+> :information_source: Note: For NI software, use "NationalInstruments" as the company name. Not "NI".
+
 ### [C.1.2] ✔️ **DO** Organize the hierarchy of namespaces around groups of related technologies
 
 ### [C.1.3] ✔️ **DO** Use PascalCasing and separate namespace components with periods

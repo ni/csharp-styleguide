@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NationalInstruments.Analyzers.Utilities;
+using Microsoft.CodeAnalysis.Rename;
 
 namespace NationalInstruments.Analyzers.Style
 {
@@ -25,14 +25,14 @@ namespace NationalInstruments.Analyzers.Style
     [Shared]
     public sealed class FieldsCamelCasedWithUnderscoreCodeFixProvider : CodeFixProvider
     {
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldsCamelCasedWithUnderscoreAnalyzer.DiagnosticId);
+        public override sealed ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldsCamelCasedWithUnderscoreAnalyzer.DiagnosticId);
 
         public override FixAllProvider GetFixAllProvider()
         {
             return null;
         }
 
-        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public override sealed async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             SyntaxNode root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
@@ -54,7 +54,7 @@ namespace NationalInstruments.Analyzers.Style
 
             var codeAction = CodeAction.Create(
                 $"Rename '{oldName}' to '{newName}'",
-                cancellationToken => Renamer.RenameSymbolAsync(context.Document, symbol, newName, cancellationToken),
+                cancellationToken => Renamer.RenameSymbolAsync(context.Document.Project.Solution, symbol, new SymbolRenameOptions(), newName, cancellationToken),
                 equivalenceKey: oldName + newName);
 
             context.RegisterCodeFix(codeAction, context.Diagnostics);

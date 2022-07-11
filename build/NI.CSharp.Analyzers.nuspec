@@ -16,10 +16,10 @@
     <license type="file">LICENSE.txt</license>
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="Microsoft.CodeAnalysis.NetAnalyzers" version="5.0.3" />
-        <dependency id="Microsoft.CodeAnalysis.CSharp" version="3.11.0" />
-        <dependency id="Microsoft.CodeAnalysis.Analyzers" version="3.3.2" />
-        <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="16.10.56" />
+        <dependency id="Microsoft.CodeAnalysis.NetAnalyzers" version="6.0.0" />
+        <dependency id="Microsoft.CodeAnalysis.CSharp" version="4.2.0" />
+        <dependency id="Microsoft.CodeAnalysis.Analyzers" version="3.3.3" />
+        <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="17.2.32" />
         <dependency id="StyleCop.Analyzers" version="1.2.0-beta.435" />
         <dependency id="Roslynator.Analyzers" version="4.1.1" />
       </group>

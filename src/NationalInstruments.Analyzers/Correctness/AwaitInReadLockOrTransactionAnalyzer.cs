@@ -67,7 +67,7 @@ namespace NationalInstruments.Analyzers.Correctness
             var usingStatementSyntax = (UsingStatementSyntax)context.Node;
             var containingMethodSyntax = usingStatementSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().FirstOrDefault();
             if (containingMethodSyntax != null &&
-                !containingMethodSyntax.Modifiers.Any(syntaxToken => syntaxToken.Kind() == SyntaxKind.AsyncKeyword))
+                !containingMethodSyntax.Modifiers.Any(syntaxToken => syntaxToken.IsKind(SyntaxKind.AsyncKeyword)))
             {
                 return;
             }

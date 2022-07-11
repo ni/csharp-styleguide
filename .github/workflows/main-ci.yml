@@ -22,18 +22,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         name: Checkout code
-      
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '3.1.x'
-          
+
       - name: Restore Nuget Packages
         run: dotnet restore NationalInstruments.Analyzers.sln
-     
+
       - name: Build App
         run: dotnet build NationalInstruments.Analyzers.sln --configuration release --no-restore
-        
+
       - name: Run Tests
         run: dotnet test NationalInstruments.Analyzers.sln
-        
+

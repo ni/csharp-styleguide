@@ -25,14 +25,14 @@ namespace NationalInstruments.Analyzers.Style
     [Shared]
     public sealed class FieldsCamelCasedWithUnderscoreCodeFixProvider : CodeFixProvider
     {
-        public override sealed ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldsCamelCasedWithUnderscoreAnalyzer.DiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldsCamelCasedWithUnderscoreAnalyzer.DiagnosticId);
 
         public override FixAllProvider GetFixAllProvider()
         {
             return null;
         }
 
-        public override sealed async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             SyntaxNode root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 

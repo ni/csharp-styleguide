@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NationalInstruments.Analyzers.Utilities;
+using Microsoft.CodeAnalysis.Rename;
 
 namespace NationalInstruments.Analyzers.Style
 {
@@ -54,7 +54,7 @@ namespace NationalInstruments.Analyzers.Style
 
             var codeAction = CodeAction.Create(
                 $"Rename '{oldName}' to '{newName}'",
-                cancellationToken => Renamer.RenameSymbolAsync(context.Document, symbol, newName, cancellationToken),
+                cancellationToken => Renamer.RenameSymbolAsync(context.Document.Project.Solution, symbol, new SymbolRenameOptions(), newName, cancellationToken),
                 equivalenceKey: oldName + newName);
 
             context.RegisterCodeFix(codeAction, context.Diagnostics);

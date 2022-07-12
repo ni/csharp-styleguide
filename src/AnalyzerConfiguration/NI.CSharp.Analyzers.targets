@@ -36,17 +36,12 @@
 
   <ItemGroup Condition="'$(NI_EnableAnalyzers)' == 'True'">
     <!-- Microsoft's SA analyzers -->
-    <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>
-    <Analyzer Include="$(PkgStyleCop_Analyzers)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
+    <Analyzer Include="$(PkgStyleCop_Analyzers_Unstable)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>
+    <Analyzer Include="$(PkgStyleCop_Analyzers_Unstable)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
 
     <!-- Microsoft's CA analyzers -->
-    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Humanizer.dll" />
-    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_CodeQuality_Analyzers)\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_NetCore_Analyzers)\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_NetCore_Analyzers)\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_NetFramework_Analyzers)\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll"/>
-    <Analyzer Include="$(PkgMicrosoft_NetFramework_Analyzers)\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
 
     <!-- NI's CA analyzers -->

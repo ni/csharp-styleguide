@@ -19,7 +19,7 @@ namespace NationalInstruments.Analyzers.Correctness
             new LocalizableResourceString(nameof(Resources.NI1816X_MessageFormat), Resources.ResourceManager, typeof(Resources)),
             category: "NationalInstruments",
             DiagnosticSeverity.Warning,
-            isEnabledByDefault: true,
+            isEnabledByDefault: false,
             description: new LocalizableResourceString(nameof(Resources.NI1816X_Description), Resources.ResourceManager, typeof(Resources)));
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);

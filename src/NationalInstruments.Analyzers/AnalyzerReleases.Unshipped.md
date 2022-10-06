@@ -4,4 +4,4 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-NI1816X | NationalInstruments | Warning | DisposableOmitsFinalizerAnalyzer
+NI1816X | NationalInstruments | Disabled | DisposableOmitsFinalizerAnalyzer

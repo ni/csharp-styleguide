@@ -754,6 +754,33 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type derived from Disposable must not contain a finalizer..
+        /// </summary>
+        internal static string NI1816X_Description {
+            get {
+                return ResourceManager.GetString("NI1816X_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type name {0} must remove its finalizer.
+        /// </summary>
+        internal static string NI1816X_MessageFormat {
+            get {
+                return ResourceManager.GetString("NI1816X_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disposable should not have finalizer.
+        /// </summary>
+        internal static string NI1816X_Title {
+            get {
+                return ResourceManager.GetString("NI1816X_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
         internal static string ParseError_Message {

@@ -27,7 +27,7 @@ namespace NationalInstruments.Analyzers.Correctness
         public override void Initialize(AnalysisContext context)
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-            context.EnableConcurrentExecution();
+            context.EnableConcurrentExecutionIf(IsRunningInProduction);
             context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.NamedType);
         }
 

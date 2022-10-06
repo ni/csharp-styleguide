@@ -1,4 +1,3 @@
-using System.Data.Common;
 using NationalInstruments.Analyzers.Correctness;
 using NationalInstruments.Analyzers.TestUtilities;
 using NationalInstruments.Analyzers.TestUtilities.TestFiles;
@@ -13,7 +12,7 @@ namespace NationalInstruments.Analyzers.UnitTests
     public sealed class DisposableOmitsFinalizerAnalyzerTests : NIDiagnosticAnalyzerTests<DisposableOmitsFinalizerAnalyzer>
     {
         [Fact]
-        public void NI1816X_ClassNotDerivedHasFinalizer_NoDiagnostic()
+        public void NI1816X_ClassNotDerivedHasFinalizerBody_NoDiagnostic()
         {
             var goodCode = @"
     using System;
@@ -66,7 +65,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
 
         [Fact]
-        public void NI1816X_ClassDerivedHasFinalizer_HasDiagnostic()
+        public void NI1816X_ClassDerivedHasFinalizerBody_HasDiagnostic()
         {
             var badCode = @"
     using System;
@@ -81,7 +80,7 @@ namespace NationalInstruments.Analyzers.UnitTests
             {
             }
         }
-        internal class DerivedDisposable : Disposable
+        internal class <|DerivedDisposable|> : Disposable
         {   
             public DerivedDisposable()
             {
@@ -92,9 +91,37 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
     }";
 
-            var test = new TestFile(badCode);
-            var expectedFailure = GetResultAt(14, 24, DisposableOmitsFinalizerAnalyzer.Rule, "DerivedDisposable");
-            VerifyDiagnostics(test, expectedFailure);
+            var test = new AutoTestFile(badCode, new Rule(DisposableOmitsFinalizerAnalyzer.Rule));
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void NI1816X_ClassDerivedHasFinalizerExpression_HasDiagnostic()
+        {
+            var badCode = @"
+    using System;
+    namespace NationalInstruments.Core
+    {
+        internal class Disposable : IDisposable
+        {
+            public Disposable()
+            {
+            }
+            public void Dispose()
+            {
+            }
+        }
+        internal class <|DerivedDisposable|> : Disposable
+        {   
+            public DerivedDisposable()
+            {
+            }
+            ~DerivedDisposable() => Dispose();
+        }
+    }";
+
+            var test = new AutoTestFile(badCode, new Rule(DisposableOmitsFinalizerAnalyzer.Rule));
+            VerifyDiagnostics(test);
         }
     }
 }

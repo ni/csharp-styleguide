@@ -12,6 +12,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
     {
         /// <summary>
         /// Checks if the given method is a Finalizer implementation.
+        /// https://github.com/dotnet/roslyn-analyzers/blob/846a766f73caa82608db6fee9f2860004298449f/src/Utilities/Compiler/Extensions/IMethodSymbolExtensions.cs#L114
         /// </summary>
         /// <param name="method">The method to check</param>
         public static bool IsFinalizer(this IMethodSymbol method)

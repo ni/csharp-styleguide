@@ -106,7 +106,7 @@ namespace NationalInstruments.Analyzers.Style
             var suffix = 2;
             var name = baseName;
 
-            while (!symbols.Any(x => string.Equals(x.Name, name, StringComparison.Ordinal)))
+            while (symbols.Any(x => string.Equals(x.Name, name, StringComparison.Ordinal)))
             {
                 name = baseName + suffix.ToString(CultureInfo.InvariantCulture);
                 suffix++;

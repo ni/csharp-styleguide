@@ -6,10 +6,34 @@ using Xunit;
 
 namespace NationalInstruments.Analyzers.UnitTests
 {
-    public sealed class FieldsCamelCasedWithUnderscoreAnalyzerTests : NIDiagnosticAnalyzerTests<FieldsCamelCasedWithUnderscoreAnalyzer>
+    public sealed class FieldsCamelCasedWithUnderscoreAnalyzerTests : NIDiagnosticAnalyzerWithCodeFixTests<FieldsCamelCasedWithUnderscoreAnalyzer, FieldsCamelCasedWithUnderscoreCodeFixProvider>
     {
+        private const string NoLeadingUnderscoreCodeMarkup = @"
+class Foo
+{
+    private int <|name|>;
+}";
+
+        private const string ExtraLeadingUnderscoreCodeMarkup = @"
+class Foo
+{
+    private int <|__name|>;
+}";
+
+        private const string UnderscoreUppercaseLetterCodeMarkup = @"
+class Foo
+{
+    private int <|_Name|>;
+}";
+
+        private const string FixedCode = @"
+class Foo
+{
+    private int _name;
+}";
+
         [Fact]
-        public void NI1001_PublicField_NoDiagnostic()
+        public void PublicField_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -21,7 +45,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_InternalField_NoDiagnostic()
+        public void InternalField_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -33,7 +57,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_ProtectedField_NoDiagnostic()
+        public void ProtectedField_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -45,7 +69,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_PropertyImplicitBackingField_NoDiagnostic()
+        public void PropertyImplicitBackingField_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -57,7 +81,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_PrivateConst_NoDiagnostic()
+        public void PrivateConst_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -69,7 +93,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_PrivateReadonlyField_NoDiagnostic()
+        public void PrivateReadonlyField_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -81,7 +105,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_UnderscoreAndBeginsLowercase_NoDiagnostic()
+        public void UnderscoreAndBeginsLowercase_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -93,7 +117,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_UnderscoreOnly_NoDiagnostic()
+        public void UnderscoreOnly_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -105,7 +129,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_InternalUnderscore_NoDiagnostic()
+        public void InternalUnderscore_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -117,7 +141,7 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_TrailingUnderscore_NoDiagnostic()
+        public void TrailingUnderscore_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -129,43 +153,67 @@ class Foo
         }
 
         [Fact]
-        public void NI1001_NoLeadingUnderscore_Diagnostic()
+        public void NoLeadingUnderscore_Verify_Diagnostic()
         {
-            var test = new TestFile(@"
-class Foo
-{
-    private int name;
-}");
+            var test = new AutoTestFile(
+                NoLeadingUnderscoreCodeMarkup,
+                GetNI1001FieldsCamelCasedWithUnderscoreRule());
 
-            VerifyDiagnostics(test, GetNI1001ResultAt(4, 17, "name"));
+            VerifyDiagnostics(test);
         }
 
         [Fact]
-        public void NI1001_ExtraLeadingUnderscore_Diagnostic()
+        public void NoLeadingUnderscore_ApplyFix_FixedWithNoDiagnostic()
         {
-            var test = new TestFile(@"
-class Foo
-{
-    private int __name;
-}");
+            var testBeforeFix = new AutoTestFile(NoLeadingUnderscoreCodeMarkup);
+            var testAfterFix = new TestFile(FixedCode);
 
-            VerifyDiagnostics(test, GetNI1001ResultAt(4, 17, "__name"));
+            VerifyFix(testBeforeFix, testAfterFix);
+            VerifyDiagnostics(testAfterFix);
         }
 
         [Fact]
-        public void NI1001_UnderscoreUppercaseLetter_Diagnostic()
+        public void ExtraLeadingUnderscore_Verify_Diagnostic()
         {
-            var test = new TestFile(@"
-class Foo
-{
-    private int _Name;
-}");
+            var test = new AutoTestFile(
+                ExtraLeadingUnderscoreCodeMarkup,
+                GetNI1001FieldsCamelCasedWithUnderscoreRule());
 
-            VerifyDiagnostics(test, GetNI1001ResultAt(4, 17, "_Name"));
+            VerifyDiagnostics(test);
         }
 
         [Fact]
-        public void NI1001_UnderscoreNumeral_NoDiagnostic()
+        public void ExtraLeadingUnderscore_ApplyFix_FixedWithNoDiagnostic()
+        {
+            var testBeforeFix = new AutoTestFile(ExtraLeadingUnderscoreCodeMarkup);
+            var testAfterFix = new TestFile(FixedCode);
+
+            VerifyFix(testBeforeFix, testAfterFix);
+            VerifyDiagnostics(testAfterFix);
+        }
+
+        [Fact]
+        public void UnderscoreUppercaseLetter_Verify_Diagnostic()
+        {
+            var test = new AutoTestFile(
+                UnderscoreUppercaseLetterCodeMarkup,
+                GetNI1001FieldsCamelCasedWithUnderscoreRule());
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void UnderscoreUppercaseLetter_ApplyFix_FixedWithNoDiagnostic()
+        {
+            var testBeforeFix = new AutoTestFile(UnderscoreUppercaseLetterCodeMarkup);
+            var testAfterFix = new TestFile(FixedCode);
+
+            VerifyFix(testBeforeFix, testAfterFix);
+            VerifyDiagnostics(testAfterFix);
+        }
+
+        [Fact]
+        public void UnderscoreNumeral_Verify_NoDiagnostic()
         {
             var test = new TestFile(@"
 class Foo
@@ -176,9 +224,7 @@ class Foo
             VerifyDiagnostics(test);
         }
 
-        private DiagnosticResult GetNI1001ResultAt(int line, int column, string fieldName)
-        {
-            return GetResultAt(line, column, FieldsCamelCasedWithUnderscoreAnalyzer.Rule, fieldName);
-        }
+        private Rule GetNI1001FieldsCamelCasedWithUnderscoreRule() 
+            => new Rule(FieldsCamelCasedWithUnderscoreAnalyzer.Rule);
     }
 }

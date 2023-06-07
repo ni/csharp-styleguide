@@ -224,7 +224,7 @@ class Foo
             VerifyDiagnostics(test);
         }
 
-        private Rule GetNI1001FieldsCamelCasedWithUnderscoreRule() 
+        private Rule GetNI1001FieldsCamelCasedWithUnderscoreRule()
             => new Rule(FieldsCamelCasedWithUnderscoreAnalyzer.Rule);
     }
 }

@@ -25,26 +25,9 @@ namespace NationalInstruments.Analyzers.Style
 
         private const DiagnosticSeverity DefaultDiagnosticSeverity = DiagnosticSeverity.Warning;
 
-        private static readonly LocalizableString LocalizableTitle = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyTitle), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageFileParse = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyFileParse), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageAssembly = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageAssembly), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageNamespace = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageNamespace), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageType = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageType), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMember = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMember), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageVariable = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageVariable), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMemberParameter = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMemberParameter), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageDelegateParameter = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameter), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageTypeTypeParameter = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameter), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMethodTypeParameter = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameter), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageAssemblyMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageAssemblyMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageNamespaceMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageNamespaceMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageTypeMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageTypeMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMemberMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMemberMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMemberParameterMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMemberParameterMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageDelegateParameterMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameterMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageTypeTypeParameterMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameterMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableMessageMethodTypeParameterMoreMeaningfulName = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameterMoreMeaningfulName), Resources.ResourceManager, typeof(Resources));
-        private static readonly LocalizableString LocalizableDescription = new LocalizableResourceString(nameof(Resources.IdentifiersShouldBeSpelledCorrectlyDescription), Resources.ResourceManager, typeof(Resources));
+        private static readonly Func<string, LocalizableString> CreateLocalizableResourceString = (string nameOfLocalizableResource) => new LocalizableResourceString(nameOfLocalizableResource, Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString LocalizableTitle = CreateLocalizableResourceString(nameof(Resources.NI1704_Title));
+        private static readonly LocalizableString LocalizableDescription = CreateLocalizableResourceString(nameof(Resources.NI1704_Description));
 
         private static readonly SourceTextValueProvider<CodeAnalysisDictionary> _xmlDictionaryProvider = new SourceTextValueProvider<CodeAnalysisDictionary>(ParseXmlDictionary);
         private static readonly SourceTextValueProvider<CodeAnalysisDictionary> _dicDictionaryProvider = new SourceTextValueProvider<CodeAnalysisDictionary>(ParseDicDictionary);
@@ -53,7 +36,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor FileParseRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageFileParse,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_DictionaryParseError_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true);
@@ -61,7 +44,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor AssemblyRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageAssembly,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_Assembly_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -71,7 +54,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor NamespaceRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageNamespace,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_Namespace_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -81,7 +64,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor TypeRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageType,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_Type_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -91,7 +74,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MemberRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMember,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_Member_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -101,7 +84,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor VariableRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageVariable,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_Variable_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -110,7 +93,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MemberParameterRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMemberParameter,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_MemberParameter_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -120,7 +103,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor DelegateParameterRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageDelegateParameter,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_DelegateParameter_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -130,7 +113,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor TypeTypeParameterRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageTypeTypeParameter,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_TypeTypeParameter_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -140,7 +123,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MethodTypeParameterRule = new DiagnosticDescriptor(
             MisspelledDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMethodTypeParameter,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_MethodTypeParameter_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: true,
@@ -150,7 +133,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor AssemblyMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageAssemblyMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_AssemblyMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -160,7 +143,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor NamespaceMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageNamespaceMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_NamespaceMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -170,7 +153,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor TypeMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageTypeMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_TypeMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -180,7 +163,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MemberMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMemberMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_MemberMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -190,7 +173,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MemberParameterMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMemberParameterMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_MemberParameterMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -200,7 +183,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor DelegateParameterMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageDelegateParameterMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_DelegateParameterMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -210,7 +193,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor TypeTypeParameterMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageTypeTypeParameterMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_TypeTypeParameterMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,
@@ -220,7 +203,7 @@ namespace NationalInstruments.Analyzers.Style
         public static readonly DiagnosticDescriptor MethodTypeParameterMoreMeaningfulNameRule = new DiagnosticDescriptor(
             UnmeaningfulDiagnosticId,
             LocalizableTitle,
-            LocalizableMessageMethodTypeParameterMoreMeaningfulName,
+            CreateLocalizableResourceString(nameof(Resources.NI1704_MethodTypeParameterMoreMeaningful_Message)),
             Category.Style,
             DefaultDiagnosticSeverity,
             isEnabledByDefault: false,

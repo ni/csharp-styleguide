@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -279,64 +279,64 @@
     <value>Inaccessible internal member/type</value>
     <comment>The title of the diagnostic.</comment>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyDescription" xml:space="preserve">
+  <data name="NI1704_Description" xml:space="preserve">
     <value>The name of an externally visible identifier contains one or more words that are not recognized by the Microsoft spelling checker library.</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyFileParse" xml:space="preserve">
+  <data name="NI1704_DictionaryParseError_Message" xml:space="preserve">
     <value>Error parsing dictionary '{0}': {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageAssembly" xml:space="preserve">
+  <data name="NI1704_Assembly_Message" xml:space="preserve">
     <value>Correct the spelling of '{0}' in assembly name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageAssemblyMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_AssemblyMoreMeaningful_Message" xml:space="preserve">
     <value>Consider providing a more meaningful name than assembly name {0}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameter" xml:space="preserve">
+  <data name="NI1704_DelegateParameter_Message" xml:space="preserve">
     <value>In delegate {0}, correct the spelling of '{1}' in parameter name {2}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageDelegateParameterMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_DelegateParameterMoreMeaningful_Message" xml:space="preserve">
     <value>In delegate {0}, consider providing a more meaningful name than parameter name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMember" xml:space="preserve">
+  <data name="NI1704_Member_Message" xml:space="preserve">
     <value>Correct the spelling of '{0}' in member name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_MemberMoreMeaningful_Message" xml:space="preserve">
     <value>Consider providing a more meaningful name than member name {0}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberParameter" xml:space="preserve">
+  <data name="NI1704_MemberParameter_Message" xml:space="preserve">
     <value>In method {0}, correct the spelling of '{1}' in parameter name {2}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMemberParameterMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_MemberParameterMoreMeaningful_Message" xml:space="preserve">
     <value>In method {0}, consider providing a more meaningful name than parameter name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameter" xml:space="preserve">
+  <data name="NI1704_MethodTypeParameter_Message" xml:space="preserve">
     <value>On method {0}, correct the spelling of '{1}' in generic type parameter name {2}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageMethodTypeParameterMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_MethodTypeParameterMoreMeaningful_Message" xml:space="preserve">
     <value>On method {0}, consider providing a more meaningful name than generic type parameter name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageNamespace" xml:space="preserve">
+  <data name="NI1704_Namespace_Message" xml:space="preserve">
     <value>Correct the spelling of '{0}' in namespace name '{1}'</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageNamespaceMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_NamespaceMoreMeaningful_Message" xml:space="preserve">
     <value>Consider providing a more meaningful name than namespace name '{0}'</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageType" xml:space="preserve">
+  <data name="NI1704_Type_Message" xml:space="preserve">
     <value>Correct the spelling of '{0}' in type name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_TypeMoreMeaningful_Message" xml:space="preserve">
     <value>Consider providing a more meaningful name than type name {0}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameter" xml:space="preserve">
+  <data name="NI1704_TypeTypeParameter_Message" xml:space="preserve">
     <value>On type {0}, correct the spelling of '{1}' in generic type parameter name {2}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageTypeTypeParameterMoreMeaningfulName" xml:space="preserve">
+  <data name="NI1704_TypeTypeParameterMoreMeaningful_Message" xml:space="preserve">
     <value>On type {0}, consider providing a more meaningful name than generic type parameter name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyMessageVariable" xml:space="preserve">
+  <data name="NI1704_Variable_Message" xml:space="preserve">
     <value>Correct the spelling of '{0}' in variable name {1}</value>
   </data>
-  <data name="IdentifiersShouldBeSpelledCorrectlyTitle" xml:space="preserve">
+  <data name="NI1704_Title" xml:space="preserve">
     <value>Identifiers should be spelled correctly</value>
   </data>
   <data name="NI1017_Description" xml:space="preserve">

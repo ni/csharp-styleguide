@@ -27,9 +27,9 @@
   </metadata>
   <files>
     <file src="..\.binaries\Release\NationalInstruments.Analyzers\netstandard2.0\*.dll" target="analyzers\dotnet\cs" />
-    <file src="..\src\AnalyzerConfiguration\*.globalconfig" target="build" />
     <file src="..\src\AnalyzerConfiguration\NI.CSharp.Analyzers.props" target="build" />
     <file src="..\src\AnalyzerConfiguration\NI.CSharp.Analyzers.targets" target="build" />
+    <file src="..\src\AnalyzerConfiguration\*.globalconfig" target="content" />
     <file src="..\src\AnalyzerConfiguration\*.ruleset" target="content" />
     <file src="..\src\AnalyzerConfiguration\NI1704_AdditionalSpellingDictionary.dic" target="content" />
     <file src="..\src\AnalyzerConfiguration\stylecop.json" target="content" />

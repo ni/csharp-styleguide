@@ -24,9 +24,9 @@
     the Microsoft code analyzer targets file, by the time we update GlobalAnalyzerConfigFiles it will be too late.
   -->
   <ItemGroup Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(NETCoreSdkVersion)', '6.0'))">
-    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)NI.CSharp.Analyzers.globalconfig" />
-    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)NI.CSharp.Analyzers.Tests.globalconfig" Condition="'$(NI_IsTestProject)' == 'True'" />
-    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)NI.CSharp.Analyzers.TestUtilities.globalconfig" Condition="'$(NI_IsTestUtilitiesProject)' == 'True'" />
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.globalconfig" />
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.Tests.globalconfig" Condition="'$(NI_IsTestProject)' == 'True'" />
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.TestUtilities.globalconfig" Condition="'$(NI_IsTestUtilitiesProject)' == 'True'" />
   </ItemGroup>
 
 </Project>

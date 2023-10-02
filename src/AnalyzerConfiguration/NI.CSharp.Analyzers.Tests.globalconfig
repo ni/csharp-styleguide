@@ -1,4 +1,4 @@
-# NOTE: Requires **VS2019 16.3** or later
+# NOTE: Requires **VS2019 16.7** or later
 is_global = true
 
 # set global level higher than NI.CSharp.Analyzers.globalconfig to override rules specified below

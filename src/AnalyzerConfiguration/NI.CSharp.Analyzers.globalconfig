@@ -1,11 +1,11 @@
-# NOTE: Requires **VS2019 16.3** or later
+# NOTE: Requires **VS2019 16.7** or later
 is_global = true
 global_level = 0
 
 # NI.ruleset
 # Description: Code analysis rules for NI projects.
 
-# Default severity for analyzer diagnostics - Requires **VS2019 16.5** or later
+# Default severity for analyzer diagnostics
 dotnet_analyzer_diagnostic.severity = warning
 
 dotnet_diagnostic.Async001.severity = none

@@ -1,0 +1,17 @@
+# NOTE: Requires **VS2019 16.7** or later
+is_global = true
+
+# set global level higher than NI.CSharp.Analyzers.globalconfig to override rules specified below
+global_level = 1
+
+# NI.TestUtilities.ruleset
+# Description: Code analysis rule overrides for NI Test Utility projects.
+
+# Avoid empty interfaces. Applying the mix-in pattern is an exception to this rule/
+dotnet_diagnostic.CA1040.severity = none
+
+# Specify CultureInfo. Tests shouldn't have to worry about localizable strings.
+dotnet_diagnostic.CA1304.severity = none
+
+# Specify IFormatProvider. Tests shouldn't have to worry about localizable strings.
+dotnet_diagnostic.CA1305.severity = none

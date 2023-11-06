@@ -1,6 +1,10 @@
 # NOTE: Requires **VS2019 16.7** or later
 is_global = true
-global_level = 0
+
+# The .NET global config for different AnalysisMode categories (e.g. Usage, Performance, Design, etc)
+# have global level set at -99, and we want to be a higher level so that we can override the configured
+# warnings.
+global_level = -98
 
 # NI.ruleset
 # Description: Code analysis rules for NI projects.
@@ -147,6 +151,12 @@ dotnet_diagnostic.CA1505.severity = none
 dotnet_diagnostic.CA1506.severity = none
 
 dotnet_diagnostic.CA1507.severity = none
+
+# CA1508: Avoid dead conditional code
+#   While useful, this rule has a buggy implementation and has too many
+#   false positives, particularly when analyzing code inside loops and
+#   try-finally code.
+dotnet_diagnostic.CA1508.severity = none
 
 dotnet_diagnostic.CA1601.severity = warning
 

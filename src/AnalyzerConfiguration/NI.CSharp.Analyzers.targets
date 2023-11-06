@@ -10,22 +10,6 @@
     <CodeAnalysisRuleSetDefined Condition="'$(CodeAnalysisRuleSet)' != '' and '$(CodeAnalysisRuleSet)' != 'MinimumRecommendedRules.ruleset'">True</CodeAnalysisRuleSetDefined>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(AnalysisMode)' == 'NI'">
-    <AnalysisModeStyle Condition="'$(AnalysisModeStyle)' == ''">Default</AnalysisModeStyle>
-    <AnalysisModeSecurity Condition="'$(AnalysisModeSecurity)' == ''">Default</AnalysisModeSecurity>
-    <AnalysisModeDesign Condition="'$(AnalysisModeDesign)' == ''">All</AnalysisModeDesign>
-    <AnalysisModeDocumentation Condition="'$(AnalysisModeDocumentation)' == ''">All</AnalysisModeDocumentation>
-    <AnalysisModeGlobalization Condition="'$(AnalysisModeGlobalization)' == ''">All</AnalysisModeGlobalization>
-    <AnalysisModeInteroperability Condition="'$(AnalysisModeInteroperability)' == ''">All</AnalysisModeInteroperability>
-    <AnalysisModeMaintainability Condition="'$(AnalysisModeMaintainability)' == ''">All</AnalysisModeMaintainability>
-    <AnalysisModeNaming Condition="'$(AnalysisModeNaming)' == ''">All</AnalysisModeNaming>
-    <AnalysisModePerformance Condition="'$(AnalysisModePerformance)' == ''">All</AnalysisModePerformance>
-    <AnalysisModeReliability Condition="'$(AnalysisModeReliability)' == ''">All</AnalysisModeReliability>
-    <AnalysisModeUsage Condition="'$(AnalysisModeUsage)' == ''">All</AnalysisModeUsage>
-
-    <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''">true</EnforceCodeStyleInBuild>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(CodeAnalysisRuleSetDefined)' == 'False'">
     <CodeAnalysisRuleSet>$(NI_CodeAnalysisRuleSetDirectory)\NI.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(NI_IsTestUtilitiesProject)' == 'True'">$(NI_CodeAnalysisRuleSetDirectory)\NI.TestUtilities.ruleset</CodeAnalysisRuleSet>
@@ -40,6 +24,22 @@
   <PropertyGroup>
     <!--AdditionalSpellingDictionary.dic contains the differences in words between the hunspell and Microsoft dictionaries-->
     <NI1704_AdditionalSpellingDictionary>$(NI_CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(NI_EnableAnalyzers)' == 'True' and '$(AnalysisMode)' == 'NI'">
+    <AnalysisModeStyle Condition="'$(AnalysisModeStyle)' == ''">Default</AnalysisModeStyle>
+    <AnalysisModeSecurity Condition="'$(AnalysisModeSecurity)' == ''">Default</AnalysisModeSecurity>
+    <AnalysisModeDesign Condition="'$(AnalysisModeDesign)' == ''">All</AnalysisModeDesign>
+    <AnalysisModeDocumentation Condition="'$(AnalysisModeDocumentation)' == ''">All</AnalysisModeDocumentation>
+    <AnalysisModeGlobalization Condition="'$(AnalysisModeGlobalization)' == ''">All</AnalysisModeGlobalization>
+    <AnalysisModeInteroperability Condition="'$(AnalysisModeInteroperability)' == ''">All</AnalysisModeInteroperability>
+    <AnalysisModeMaintainability Condition="'$(AnalysisModeMaintainability)' == ''">All</AnalysisModeMaintainability>
+    <AnalysisModeNaming Condition="'$(AnalysisModeNaming)' == ''">All</AnalysisModeNaming>
+    <AnalysisModePerformance Condition="'$(AnalysisModePerformance)' == ''">All</AnalysisModePerformance>
+    <AnalysisModeReliability Condition="'$(AnalysisModeReliability)' == ''">All</AnalysisModeReliability>
+    <AnalysisModeUsage Condition="'$(AnalysisModeUsage)' == ''">All</AnalysisModeUsage>
+
+    <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''">true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(NI_EnableAnalyzers)' == 'True'">

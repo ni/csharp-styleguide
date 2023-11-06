@@ -10,7 +10,26 @@
     <!-- The following is needed for misnamed TestUtilities that contain xaml because the generated project for the second compile appends random characters to the end of the project name -->
     <NI_IsTestUtilitiesProject Condition="'$(NI_IsTestUtilitiesProject)' != 'True' and '$(NI_IsTestProject)' != 'True'">$(MSBuildProjectName.Contains(".TestUtilities"))</NI_IsTestUtilitiesProject>
 
+    <!--
+      Microsoft supports analysis modes that preconfigure code analysis rules (e.g. All, Recommended, Minimum, etc).
+      We will introduce a new analysis mode "NI" that represents the set of rules that we enable/disable.
+
+      While Microsoft's analysis modes come with a dedicated global config that lists all CA rule specifications, 
+      we currently construct the rules by setting per category warnings to all and then adding NI.CSharp.Analyzers.globalconfig
+      that selectively overrides the warnings we want to disable.  This is done for maintenance reasons: we do not need to update
+      the complete list of CA rules every year, we just need to maintain the rules we want to disable.
+
+      The drawback to the approach is if individual projects want to configure a different per-category setting (i.e. 
+      use NI mode but set Performance category to "Minimum"), it may not work if NI.CSharp.Analyzers.globalconfig has a
+      conflicting rule.
+      
+      NI.CSharp.Analyzers.globalconfig has a higher global level than the per-category global config precisely
+      to allow overriding of rules.  But if the per-category rules is preferred by the project, it may end up getting
+      overriden by NI.CSharp.Analyzers.globalconfig.  The workaround is to copy the per-category global config to a
+      new file that is included by the project and set the global level to higher than NI.CSharp.Analyzers.globalconfig.
+    -->
     <AnalysisMode Condition="'$(AnalysisMode)' == ''">NI</AnalysisMode>
+
     <AnalysisLevel>7.0</AnalysisLevel>
   </PropertyGroup>
 

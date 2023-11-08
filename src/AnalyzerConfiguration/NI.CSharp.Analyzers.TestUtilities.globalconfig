@@ -2,7 +2,7 @@
 is_global = true
 
 # set global level higher than NI.CSharp.Analyzers.globalconfig to override rules specified below
-global_level = 1
+global_level = -97
 
 # NI.TestUtilities.ruleset
 # Description: Code analysis rule overrides for NI Test Utility projects.

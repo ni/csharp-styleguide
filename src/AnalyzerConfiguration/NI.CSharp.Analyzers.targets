@@ -26,6 +26,22 @@
     <NI1704_AdditionalSpellingDictionary>$(NI_CodeAnalysisRuleSetDirectory)\NI1704_AdditionalSpellingDictionary.dic</NI1704_AdditionalSpellingDictionary>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(NI_EnableAnalyzers)' == 'True' and '$(AnalysisMode)' == 'NI'">
+    <AnalysisModeStyle Condition="'$(AnalysisModeStyle)' == ''">Default</AnalysisModeStyle>
+    <AnalysisModeSecurity Condition="'$(AnalysisModeSecurity)' == ''">Default</AnalysisModeSecurity>
+    <AnalysisModeDesign Condition="'$(AnalysisModeDesign)' == ''">All</AnalysisModeDesign>
+    <AnalysisModeDocumentation Condition="'$(AnalysisModeDocumentation)' == ''">All</AnalysisModeDocumentation>
+    <AnalysisModeGlobalization Condition="'$(AnalysisModeGlobalization)' == ''">All</AnalysisModeGlobalization>
+    <AnalysisModeInteroperability Condition="'$(AnalysisModeInteroperability)' == ''">All</AnalysisModeInteroperability>
+    <AnalysisModeMaintainability Condition="'$(AnalysisModeMaintainability)' == ''">All</AnalysisModeMaintainability>
+    <AnalysisModeNaming Condition="'$(AnalysisModeNaming)' == ''">All</AnalysisModeNaming>
+    <AnalysisModePerformance Condition="'$(AnalysisModePerformance)' == ''">All</AnalysisModePerformance>
+    <AnalysisModeReliability Condition="'$(AnalysisModeReliability)' == ''">All</AnalysisModeReliability>
+    <AnalysisModeUsage Condition="'$(AnalysisModeUsage)' == ''">All</AnalysisModeUsage>
+
+    <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''">true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(NI_EnableAnalyzers)' == 'True'">
     <!-- Microsoft's SA analyzers -->
     <Analyzer Include="$(PkgStyleCop_Analyzers_Unstable)\analyzers\dotnet\cs\StyleCop.Analyzers.dll"/>

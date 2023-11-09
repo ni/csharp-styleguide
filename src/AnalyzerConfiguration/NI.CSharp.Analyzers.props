@@ -30,7 +30,7 @@
     -->
     <AnalysisMode Condition="'$(AnalysisMode)' == ''">NI</AnalysisMode>
 
-    <AnalysisLevel>7.0</AnalysisLevel>
+    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">7.0</AnalysisLevel>
   </PropertyGroup>
 
   <!-- 

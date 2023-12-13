@@ -30,7 +30,13 @@
     -->
     <AnalysisMode Condition="'$(AnalysisMode)' == ''">NI</AnalysisMode>
 
-    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">7.0</AnalysisLevel>
+    <!--
+      If AnalysisLevel is not set, the .NET SDK will default to the version of the SDK.  If the SDK is less than .NET 8,
+      then despite having a .NET 8 analyzer nuget referenced, we will use the lower SDK version as the analysis level.
+
+      Thus we manually set the default analysis level to 8.0 to make sure .NET 8 warnings are still checked.
+    -->
+    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">8.0</AnalysisLevel>
   </PropertyGroup>
 
   <!-- 

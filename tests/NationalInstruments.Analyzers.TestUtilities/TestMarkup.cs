@@ -66,7 +66,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
 
             var markupBySpan = new Dictionary<TextSpan, Markup?>();
 
-            for (var i = 0; i < markup.Length - 1; ++i)
+            for (var i = 0; i < markup.Length; ++i)
             {
                 // Look for markup that captures a position
                 foreach (var markupDefinition in PositionMarkupDefinitions)
@@ -95,7 +95,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
                         markupBySpan.Add(endSpan, captureMarkup);
                     }
 
-                    if (i == markup.Length - 2)
+                    if (i == markup.Length - 1)
                     {
                         // We're at the very last character of the markup; do we have any unclosed instances of capture markup?
                         if (markupDefinition.StartSpans.Count > 0)

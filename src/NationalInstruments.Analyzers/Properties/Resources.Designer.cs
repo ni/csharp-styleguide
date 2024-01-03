@@ -10,8 +10,8 @@
 
 namespace NationalInstruments.Analyzers.Properties {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace NationalInstruments.Analyzers.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,113 @@ namespace NationalInstruments.Analyzers.Properties {
                 resourceCulture = value;
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0
+        ///0th
+        ///1
+        ///1st
+        ///1th
+        ///2
+        ///2nd
+        ///2th
+        ///3
+        ///3rd
+        ///3th
+        ///4
+        ///4th
+        ///5
+        ///5th
+        ///6
+        ///6th
+        ///7
+        ///7th
+        ///8
+        ///8th
+        ///9
+        ///9th
+        ///A
+        ///As
+        ///A&apos;s
+        ///AA
+        ///AA&apos;s
+        ///AAA
+        ///AB
+        ///AB&apos;s
+        ///ABA
+        ///ABC
+        ///ABCs
+        ///ABC&apos;s
+        ///ABM
+        ///ABMs
+        ///ABM&apos;s
+        ///ABS
+        ///AC
+        ///AC&apos;s
+        ///ACLU
+        ///ACLU&apos;s
+        ///ACT
+        ///ACTH
+        ///ACTH&apos;s
+        ///AD
+        ///AD&apos;s
+        ///ADC
+        ///ADD
+        ///ADM
+        ///ADP
+        ///ADP&apos;s
+        ///AF
+        ///AFAIK
+        ///AFB
+        ///AFC
+        ///AFC&apos;s
+        ///AFDC
+        ///AFN
+        ///AFT
+        ///AI
+        ///AIs
+        ///AI&apos;s
+        ///AIDS
+        ///AIDS&apos;s
+        ///AK
+        ///AL
+        ///AM
+        ///AM&apos;s
+        ///AMA
+        ///AMD
+        ///AMD&apos;s
+        ///ANSI
+        ///ANSIs
+        ///ANZUS
+        ///ANZUS&apos;s
+        ///AOL
+        ///AOL&apos;s
+        ///AP
+        ///AP&apos;s
+        ///APB
+        ///APC
+        ///API
+        ///APO
+        ///APR
+        ///AR
+        ///ARC
+        ///ASAP
+        ///ASCII
+        ///ASCIIs
+        ///ASCII&apos;s
+        ///ASL
+        ///ASL&apos;s
+        ///ASPCA
+        ///ATM
+        ///ATM&apos;s
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Dictionary {
+            get {
+                return ResourceManager.GetString("Dictionary", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to All restricted types should be defined under &apos;NationalInstruments.Restricted&apos;..
         /// </summary>
@@ -68,7 +174,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRN001_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The namespace &apos;{0}&apos; should be renamed to &apos;NationalInstruments.Restricted&apos;.
         /// </summary>
@@ -77,7 +183,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRN001_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to There is only one restricted namespace.
         /// </summary>
@@ -86,7 +192,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRN001_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All types should be in the &apos;NationalInstruments&apos; namespace..
         /// </summary>
@@ -95,7 +201,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRT001_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type &apos;{0}&apos; is not in the &apos;NationalInstruments&apos; namespace.
         /// </summary>
@@ -104,7 +210,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRT001_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All types are in &apos;NationalInstruments&apos; namespace.
         /// </summary>
@@ -113,7 +219,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("LRT001_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to To enable fully backwards-compatible database migrations in EntityFramework, all columns in the DB should be nullable. This means DbSet cannot use value types (unless they are marked as [NotMapped]) or types that implement IEnumerable&lt;T&gt; (we don&apos;t know how they&apos;ll be handled)..
         /// </summary>
@@ -122,7 +228,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI0017_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to DbSet uses an IEnumerable that we don&apos;t know how EntityFramework will handle: {0} for {1} in {2}.
         /// </summary>
@@ -131,7 +237,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI0017_Diagnostic_IEnumerable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to DbSet creates non-nullable columns: {0} for {1} in {2} is a value type.
         /// </summary>
@@ -140,7 +246,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI0017_Diagnostic_ValueType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Database columns should be nullable.
         /// </summary>
@@ -149,7 +255,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI0017_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Private field &apos;{0}&apos; must begin with an underscore and be camel-cased.
         /// </summary>
@@ -158,7 +264,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1001_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Private, mutable fields must begin with underscore and be camel-cased.
         /// </summary>
@@ -167,7 +273,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1001_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Attribute &apos;{0}&apos; with Scope &apos;{1}&apos; in file &apos;{2}&apos; is missing a Target value..
         /// </summary>
@@ -176,7 +282,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1004_AttributeMissingTarget_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rather than using string literals, use a string resource (.resx), unless this string will never be displayed to users..
         /// </summary>
@@ -185,7 +291,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1004_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a string resource in a .resx file instead of string literal &apos;{0}&apos;.
         /// </summary>
@@ -194,7 +300,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1004_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not use string literals in code.
         /// </summary>
@@ -203,7 +309,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1004_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to IWeakEventListener.ReceiveWeakEvents() must return true..
         /// </summary>
@@ -212,7 +318,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1005_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to IWeakEventListener.ReceiveWeakEvents() must return true.
         /// </summary>
@@ -221,7 +327,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1005_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not return false from IWeakEventListener.ReceiveWeakEvents().
         /// </summary>
@@ -230,7 +336,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1005_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Alternative: {0}.
         /// </summary>
@@ -239,7 +345,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_AdditionalInfo_Alternative", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Banned in this assembly..
         /// </summary>
@@ -248,7 +354,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_AdditionalInfo_BannedInThisAssembly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Justification: {0}.
         /// </summary>
@@ -257,7 +363,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_AdditionalInfo_Justification", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to These methods have been banned from NG code. Contact an architect for explanation..
         /// </summary>
@@ -266,7 +372,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Replace &apos;{0}&apos; with a non-banned method or get permission to suppress this rule.{1}  See http://nitalk.natinst.com/docs/DOC-153475 for more information.
         /// </summary>
@@ -275,7 +381,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not use banned methods.
         /// </summary>
@@ -284,7 +390,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1006_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test classes must ultimately inherit from &apos;AutoTest&apos;..
         /// </summary>
@@ -293,7 +399,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1007_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test class &apos;{0}&apos; must ultimately derive from &apos;NationalInstruments.Core.TestUtilities.AutoTest&apos;.
         /// </summary>
@@ -302,7 +408,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1007_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test classes must ultimately inherit from &apos;AutoTest&apos;.
         /// </summary>
@@ -311,7 +417,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1007_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Released APIs are monitored for backwards compatibility..
         /// </summary>
@@ -320,7 +426,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1008_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
@@ -329,7 +435,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1008_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not break backwards compatibility of released APIs.
         /// </summary>
@@ -338,7 +444,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1008_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internal members/types need to be have the VisibleInternalAttribute to be accessible..
         /// </summary>
@@ -347,7 +453,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1009_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot access internal member/type &apos;{0}&apos; without VisibleInternalAttribute.
         /// </summary>
@@ -356,7 +462,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1009_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Inaccessible internal member/type.
         /// </summary>
@@ -365,7 +471,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1009_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Await call while holding a model lock or inside a transaction.  This can lead to hard-to-diagnose hangs and intermittent test failures.  If you have questions, contact the Platform Framework team..
         /// </summary>
@@ -374,7 +480,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1015_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Await call while holding a model lock or inside a transaction.
         /// </summary>
@@ -383,7 +489,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1015_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Await while holding a model lock or inside a transaction.
         /// </summary>
@@ -392,7 +498,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1015_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not lock directly on PrivateMemberLock.  This will not get the desired behavior of asserting if other locks are token. Instead, call Acquire()..
         /// </summary>
@@ -401,7 +507,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1016_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not lock directly on PrivateMemberLock - instead, call Acquire().
         /// </summary>
@@ -410,7 +516,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1016_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not lock directly on PrivateMemberLock.
         /// </summary>
@@ -419,7 +525,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1016_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to If you invoke a chain of methods with lambda expressions in a single line, split each invocation (except the first one) onto its own line..
         /// </summary>
@@ -428,7 +534,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1017_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas. Use well-named local variables if needed..
         /// </summary>
@@ -437,7 +543,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1017_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Split chains of dotted method invocations with lambdas.
         /// </summary>
@@ -446,7 +552,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1017_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not use LINQ query syntax; use method syntax instead..
         /// </summary>
@@ -455,7 +561,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1018_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not use LINQ query syntax..
         /// </summary>
@@ -464,7 +570,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1018_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in assembly name {1}.
         /// </summary>
@@ -473,7 +579,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Assembly_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Consider providing a more meaningful name than assembly name {0}.
         /// </summary>
@@ -482,7 +588,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_AssemblyMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In delegate {0}, correct the spelling of &apos;{1}&apos; in parameter name {2}.
         /// </summary>
@@ -491,7 +597,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_DelegateParameter_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In delegate {0}, consider providing a more meaningful name than parameter name {1}.
         /// </summary>
@@ -500,7 +606,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_DelegateParameterMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The name of an externally visible identifier contains one or more words that are not recognized by the Microsoft spelling checker library..
         /// </summary>
@@ -509,7 +615,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Error parsing dictionary &apos;{0}&apos;: {1}.
         /// </summary>
@@ -518,7 +624,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_DictionaryParseError_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in member name {1}.
         /// </summary>
@@ -527,7 +633,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Member_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Consider providing a more meaningful name than member name {0}.
         /// </summary>
@@ -536,7 +642,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_MemberMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In method {0}, correct the spelling of &apos;{1}&apos; in parameter name {2}.
         /// </summary>
@@ -545,7 +651,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_MemberParameter_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In method {0}, consider providing a more meaningful name than parameter name {1}.
         /// </summary>
@@ -554,7 +660,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_MemberParameterMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to On method {0}, correct the spelling of &apos;{1}&apos; in generic type parameter name {2}.
         /// </summary>
@@ -563,7 +669,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_MethodTypeParameter_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to On method {0}, consider providing a more meaningful name than generic type parameter name {1}.
         /// </summary>
@@ -572,7 +678,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_MethodTypeParameterMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in namespace name &apos;{1}&apos;.
         /// </summary>
@@ -581,7 +687,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Namespace_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Consider providing a more meaningful name than namespace name &apos;{0}&apos;.
         /// </summary>
@@ -590,7 +696,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_NamespaceMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Identifiers should be spelled correctly.
         /// </summary>
@@ -599,7 +705,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in type name {1}.
         /// </summary>
@@ -608,7 +714,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Type_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Consider providing a more meaningful name than type name {0}.
         /// </summary>
@@ -617,7 +723,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_TypeMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to On type {0}, correct the spelling of &apos;{1}&apos; in generic type parameter name {2}.
         /// </summary>
@@ -626,7 +732,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_TypeTypeParameter_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to On type {0}, consider providing a more meaningful name than generic type parameter name {1}.
         /// </summary>
@@ -635,7 +741,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_TypeTypeParameterMoreMeaningful_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Correct the spelling of &apos;{0}&apos; in variable name {1}.
         /// </summary>
@@ -644,7 +750,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1704_Variable_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Add this namespace to {0}.
         /// </summary>
@@ -653,7 +759,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_CodeFixTitleFormat", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list..
         /// </summary>
@@ -662,7 +768,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Error reading approved namespaces file.
         /// </summary>
@@ -671,7 +777,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_FileReadErrorMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Error reading file.
         /// </summary>
@@ -680,7 +786,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_FileReadErrorTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} is not an approved namespace. If this namespace is valid, please add it to the approved namespaces list - {1}..
         /// </summary>
@@ -689,7 +795,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No namespace approval files were found.
         /// </summary>
@@ -698,7 +804,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Missing namespace approval files.
         /// </summary>
@@ -707,7 +813,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_MissingApprovalFilesErrorTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>
@@ -716,7 +822,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_ParseError_Message", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list..
         /// </summary>
@@ -725,7 +831,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_TestDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} is not an approved test namespace. If this namespace is valid, please add it to the approved namespaces list - {1}..
         /// </summary>
@@ -734,7 +840,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_TestMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Not an approved test namespace.
         /// </summary>
@@ -743,7 +849,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_TestTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Not an approved namespace.
         /// </summary>
@@ -752,7 +858,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1800_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type derived from Disposable must not contain a finalizer..
         /// </summary>
@@ -761,7 +867,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1816X_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type name {0} must remove its finalizer.
         /// </summary>
@@ -770,7 +876,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1816X_MessageFormat", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disposable should not have finalizer.
         /// </summary>
@@ -779,7 +885,7 @@ namespace NationalInstruments.Analyzers.Properties {
                 return ResourceManager.GetString("NI1816X_Title", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0}.
         /// </summary>

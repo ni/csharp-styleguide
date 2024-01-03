@@ -99,11 +99,12 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 var namespaceSyntax = (NamespaceDeclarationSyntax)context.Node;
                 var @namespace = namespaceSyntax.GetDeclaredOrReferencedSymbol(context.SemanticModel);
-                var namespaceName = @namespace.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).TrimStart("global:".ToCharArray());
+                var namespaceName = @namespace?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).TrimStart("global:".ToCharArray());
 
                 // Bail out if this namespace already is/starts with 'NationalInstruments[.]' or is exempt
-                if (Regex.IsMatch(namespaceName, string.Format(CultureInfo.InvariantCulture, @"^{0}(\s|\b)", CorrectNamespace), RegexOptions.IgnoreCase)
-                    || _exemptNamespaces.Contains(namespaceName))
+                if (namespaceName is not null
+                    && (Regex.IsMatch(namespaceName, string.Format(CultureInfo.InvariantCulture, @"^{0}(\s|\b)", CorrectNamespace), RegexOptions.IgnoreCase)
+                    || _exemptNamespaces.Contains(namespaceName)))
                 {
                     return;
                 }
@@ -120,7 +121,7 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 if (TryGetRootElementDiagnostic(rootElement, "ExemptNamespaces", filePath, FileParseRule, out var diagnostic))
                 {
-                    _additionalFileService.ParsingDiagnostics.Add(diagnostic);
+                    _additionalFileService.ParsingDiagnostics.Add(diagnostic!);
                 }
 
                 _exemptNamespaces.UnionWith(rootElement.Elements("Entry").Select(x => x.Value.Trim()));

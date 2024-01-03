@@ -35,7 +35,7 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             var file = fileProvider.GetFile("a.txt");
 
             Assert.NotNull(file);
-            Assert.Equal("a.txt", file.Path);
+            Assert.Equal("a.txt", file?.Path);
         }
 
         [Theory]
@@ -59,8 +59,8 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             var file = fileProvider.GetFile("a.txt");
 
             Assert.NotNull(file);
-            Assert.Equal("a.txt", file.Path);
-            Assert.Equal("1", file.GetText().ToString());
+            Assert.Equal("a.txt", file?.Path);
+            Assert.Equal("1", file?.GetText()?.ToString());
         }
 
         [Theory]

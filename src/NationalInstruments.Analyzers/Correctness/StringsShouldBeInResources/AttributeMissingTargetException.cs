@@ -49,11 +49,11 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
         /// <summary>
         /// Name of the attribute missing a target value.
         /// </summary>
-        public string AttributeName { get; private set; }
+        public string? AttributeName { get; private set; }
 
         /// <summary>
         /// Name of the attribute's scope.
         /// </summary>
-        public string ScopeName { get; private set; }
+        public string? ScopeName { get; private set; }
     }
 }

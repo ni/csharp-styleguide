@@ -22,7 +22,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="document">The Document to apply the fix on</param>
         /// <param name="codeAction">A CodeAction that will be applied to the Document.</param>
         /// <returns>A Document with the changes from the CodeAction</returns>
-        private static async Task<Document> ApplyFixAsync(Document document, CodeAction codeAction)
+        private static async Task<Document?> ApplyFixAsync(Document document, CodeAction codeAction)
         {
             var operations = await codeAction.GetOperationsAsync(CancellationToken.None).ConfigureAwait(false);
             var solution = operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
@@ -67,7 +67,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         private static async Task<IEnumerable<Diagnostic>> GetCompilerDiagnosticsAsync(Document document)
         {
             var semanticModel = await document.GetSemanticModelAsync().ConfigureAwait(false);
-            return semanticModel.GetDiagnostics();
+            return semanticModel?.GetDiagnostics() ?? Enumerable.Empty<Diagnostic>();
         }
 
         /// <summary>
@@ -75,12 +75,21 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// </summary>
         /// <param name="document">The Document to be converted to a string</param>
         /// <returns>A string containing the syntax of the Document after formatting</returns>
-        private static async Task<string> GetStringFromDocumentAsync(Document document)
+        private static async Task<string?> GetStringFromDocumentAsync(Document? document)
         {
+            if (document is null)
+            {
+                return string.Empty;
+            }
+
             var simplifiedDoc = await Simplifier.ReduceAsync(document, Simplifier.Annotation).ConfigureAwait(false);
             var root = await simplifiedDoc.GetSyntaxRootAsync().ConfigureAwait(false);
-            root = Formatter.Format(root, Formatter.Annotation, simplifiedDoc.Project.Solution.Workspace);
-            return root.GetText().ToString();
+            if (root is not null)
+            {
+                root = Formatter.Format(root, Formatter.Annotation, simplifiedDoc.Project.Solution.Workspace);
+            }
+
+            return root?.GetText()?.ToString();
         }
     }
 }

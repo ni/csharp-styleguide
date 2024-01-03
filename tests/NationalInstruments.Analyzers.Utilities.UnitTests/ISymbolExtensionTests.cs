@@ -223,13 +223,13 @@ namespace My.Namespace
                 (tree, compilation) =>
                 {
                     var symbol = GetSymbol<PropertyDeclarationSyntax>(tree, compilation);
-                    Assert.Equal(ExpectedPropertyName, symbol.GetFullName());
+                    Assert.Equal(ExpectedPropertyName, symbol?.GetFullName());
 
                     var property = symbol as IPropertySymbol;
 
                     Assert.NotNull(property);
-                    Assert.Equal(ExpectedPropertyGetName, property.GetMethod.GetFullName());
-                    Assert.Equal(ExpectedPropertySetName, property.SetMethod.GetFullName());
+                    Assert.Equal(ExpectedPropertyGetName, property?.GetMethod?.GetFullName());
+                    Assert.Equal(ExpectedPropertySetName, property?.SetMethod?.GetFullName());
                 });
         }
 
@@ -258,13 +258,13 @@ namespace My.Namespace
                 (tree, compilation) =>
                 {
                     var symbol = GetSymbol<IndexerDeclarationSyntax>(tree, compilation);
-                    Assert.Equal(ExpectedIndexerName, symbol.GetFullName());
+                    Assert.Equal(ExpectedIndexerName, symbol?.GetFullName());
 
                     var property = symbol as IPropertySymbol;
 
                     Assert.NotNull(property);
-                    Assert.Equal(ExpectedIndexerGetName, property.GetMethod.GetFullName());
-                    Assert.Equal(ExpectedIndexerSetName, property.SetMethod.GetFullName());
+                    Assert.Equal(ExpectedIndexerGetName, property?.GetMethod?.GetFullName());
+                    Assert.Equal(ExpectedIndexerSetName, property?.SetMethod?.GetFullName());
                 });
         }
 
@@ -354,10 +354,10 @@ namespace My.Namespace
         {
             var symbol = GetSymbol<TSyntax>(tree, compilation);
 
-            Assert.Equal(expectedName, symbol.GetFullName());
+            Assert.Equal(expectedName, symbol?.GetFullName());
         }
 
-        private ISymbol GetSymbol<TSyntax>(SyntaxTree tree, Compilation compilation)
+        private ISymbol? GetSymbol<TSyntax>(SyntaxTree tree, Compilation compilation)
             where TSyntax : SyntaxNode
         {
             var semanticModel = compilation.GetSemanticModel(tree);

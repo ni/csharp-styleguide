@@ -54,7 +54,7 @@ namespace NationalInstruments.Analyzers.Correctness
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
             var classSymbol = classDeclaration.GetDeclaredOrReferencedSymbol(context.SemanticModel) as INamedTypeSymbol;
 
-            if (!classSymbol.IsOrInheritsFromClass("Microsoft.EntityFrameworkCore.DbContext"))
+            if (!classSymbol?.IsOrInheritsFromClass("Microsoft.EntityFrameworkCore.DbContext") ?? false)
             {
                 return;
             }
@@ -65,7 +65,7 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 var propertyType = property.Type.GetDeclaredOrReferencedSymbol(context.SemanticModel) as INamedTypeSymbol;
 
-                if (propertyType.ConstructedFrom.GetFullName() != "Microsoft.EntityFrameworkCore.DbSet<T>")
+                if (propertyType?.ConstructedFrom.GetFullName() != "Microsoft.EntityFrameworkCore.DbSet<T>")
                 {
                     continue;
                 }
@@ -79,9 +79,9 @@ namespace NationalInstruments.Analyzers.Correctness
             }
         }
 
-        private void CheckType(INamedTypeSymbol type, IPropertySymbol declaringProperty, SyntaxNodeAnalysisContext context, bool allowValueType = false)
+        private void CheckType(INamedTypeSymbol? type, IPropertySymbol? declaringProperty, SyntaxNodeAnalysisContext context, bool allowValueType = false)
         {
-            if (type.SpecialType == SpecialType.System_String)
+            if (type is null || type.SpecialType == SpecialType.System_String)
             {
                 // String is special because it's a fundamental DB type
                 return;
@@ -131,8 +131,8 @@ namespace NationalInstruments.Analyzers.Correctness
         private void CheckProperty(IPropertySymbol property, SyntaxNodeAnalysisContext context)
         {
             bool AllowsValueType(AttributeData x) =>
-                x.AttributeClass.ToString() == "System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute"
-                || x.AttributeClass.ToString() == "System.ComponentModel.DataAnnotations.KeyAttribute";
+                x.AttributeClass?.ToString() == "System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute"
+                || x.AttributeClass?.ToString() == "System.ComponentModel.DataAnnotations.KeyAttribute";
 
             if (property.GetAttributes().Any(AllowsValueType))
             {
@@ -150,9 +150,9 @@ namespace NationalInstruments.Analyzers.Correctness
             CheckType(property.Type as INamedTypeSymbol, property, context);
         }
 
-        private void ReportDiagnostic(SyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor, INamedTypeSymbol type, IPropertySymbol property)
+        private void ReportDiagnostic(SyntaxNodeAnalysisContext context, DiagnosticDescriptor descriptor, INamedTypeSymbol type, IPropertySymbol? property)
         {
-            var diagnostic = Diagnostic.Create(descriptor, property.Locations.First(), type.Name, property.Name, property.ContainingType.Name);
+            var diagnostic = Diagnostic.Create(descriptor, property?.Locations.First(), type.Name, property?.Name, property?.ContainingType.Name);
             context.ReportDiagnostic(diagnostic);
         }
     }

@@ -310,7 +310,7 @@ class Program
             return new Rule(ExampleDiagnosticAnalyzer.NoArgumentRule);
         }
 
-        private Rule GetExampleDiagnosticFieldRule(string fieldName = null)
+        private Rule GetExampleDiagnosticFieldRule(string? fieldName = null)
         {
             return new Rule(ExampleDiagnosticAnalyzer.OneArgumentRule, fieldName);
         }

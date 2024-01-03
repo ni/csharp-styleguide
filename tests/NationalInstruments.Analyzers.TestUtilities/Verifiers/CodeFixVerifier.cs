@@ -24,22 +24,22 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// Returns the codefix being tested (C#) - to be implemented in non-abstract class
         /// </summary>
         /// <returns>The CodeFixProvider to be used for CSharp code</returns>
-        protected virtual CodeFixProvider CodeFixProvider => null;
+        protected virtual CodeFixProvider? CodeFixProvider => null;
 
         /// <summary>
         /// Called to test a C# codefix when applied on the inputted string as a source
         /// </summary>
         /// <param name="testBeforeFix">A test file belonging to a project that may contain markup and should contain diagnostics.</param>
         /// <param name="testAfterFix">A test file belonging to a project whose source should be "fixed".</param>
-        /// <param name="additionalTestFiles"></param>
+        /// <param name="additionalTestFiles">Other C# source files used for a test.</param>
         /// <param name="additionalFiles">Supporting test files that will appear to the analyzer as "additional files".</param>
         /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
         /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
         protected void VerifyFix(
             ITestFile testBeforeFix,
             TestFile testAfterFix,
-            IEnumerable<ITestFile> additionalTestFiles = null,
-            IEnumerable<AdditionalText> additionalFiles = null,
+            IEnumerable<ITestFile>? additionalTestFiles = null,
+            IEnumerable<AdditionalText>? additionalFiles = null,
             int? codeFixIndex = null,
             bool allowNewCompilerDiagnostics = false)
         {
@@ -66,17 +66,17 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="codeFixProvider">The codefix to be applied to the code wherever the relevant Diagnostic is found</param>
         /// <param name="testBeforeFix">A test file belonging to a project that may contain markup and should contain diagnostics.</param>
         /// <param name="testAfterFix">A test file belonging to a project whose source should be "fixed".</param>
-        /// <param name="additionalTestFiles"></param>
+        /// <param name="additionalTestFiles">Other C# source files used for a test.</param>
         /// <param name="additionalFiles">Supporting test files that will appear to the analyzer as "additional files".</param>
         /// <param name="codeFixIndex">Index determining which codefix to apply if there are multiple</param>
         /// <param name="allowNewCompilerDiagnostics">A bool controlling whether or not the test will fail if the CodeFix introduces other warnings after being applied</param>
         private static async Task VerifyFixAsync(
-            DiagnosticAnalyzer analyzer,
-            CodeFixProvider codeFixProvider,
+            DiagnosticAnalyzer? analyzer,
+            CodeFixProvider? codeFixProvider,
             ITestFile testBeforeFix,
             TestFile testAfterFix,
-            IEnumerable<ITestFile> additionalTestFiles,
-            IEnumerable<AdditionalText> additionalFiles,
+            IEnumerable<ITestFile>? additionalTestFiles,
+            IEnumerable<AdditionalText>? additionalFiles,
             int? codeFixIndex,
             bool allowNewCompilerDiagnostics)
         {
@@ -93,8 +93,8 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             for (var i = 0; i < attempts; ++i)
             {
                 var actions = new List<CodeAction>();
-                var context = new CodeFixContext(document, analyzerDiagnostics[0], (a, d) => actions.Add(a), CancellationToken.None);
-                await codeFixProvider.RegisterCodeFixesAsync(context).ConfigureAwait(false);
+                var context = new CodeFixContext(document, analyzerDiagnostics.FirstOrDefault(), (a, d) => actions.Add(a), CancellationToken.None);
+                await (codeFixProvider?.RegisterCodeFixesAsync(context) ?? Task.CompletedTask).ConfigureAwait(false);
 
                 if (!actions.Any())
                 {
@@ -108,6 +108,11 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                 }
 
                 document = await ApplyFixAsync(document, actions.ElementAt(0)).ConfigureAwait(false);
+                if (document is null)
+                {
+                    break;
+                }
+
                 analyzerDiagnostics = (await GetSortedDiagnosticsAsync(
                     analyzer,
                     new[] { document },
@@ -122,14 +127,17 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                     // Format and get the compiler diagnostics again so that the locations make sense in the output
                     var syntaxRoot = await document.GetSyntaxRootAsync().ConfigureAwait(false);
                     var updatedCompilerDiagnostics = await GetCompilerDiagnosticsAsync(document).ConfigureAwait(false);
-                    document = document.WithSyntaxRoot(Formatter.Format(syntaxRoot, Formatter.Annotation, document.Project.Solution.Workspace));
+                    if (syntaxRoot is not null)
+                    {
+                        document = document.WithSyntaxRoot(Formatter.Format(syntaxRoot, Formatter.Annotation, document.Project.Solution.Workspace));
+                    }
                     newCompilerDiagnostics = GetNewDiagnostics(compilerDiagnostics, updatedCompilerDiagnostics);
 
                     Assert.True(false, string.Format(
                         CultureInfo.InvariantCulture,
                         "Fix introduced new compiler diagnostics:\r\n{0}\r\n\r\nNew document:\r\n{1}\r\n",
                         string.Join("\r\n", newCompilerDiagnostics.Select(d => d.ToString())),
-                        syntaxRoot.ToFullString()));
+                        syntaxRoot?.ToFullString()));
                 }
 
                 // check if there are analyzer diagnostics left after the code fix

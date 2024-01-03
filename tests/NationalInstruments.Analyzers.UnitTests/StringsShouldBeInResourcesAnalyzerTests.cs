@@ -2392,7 +2392,7 @@ class Foo
             return GetExemptionsFile(null, exemptions);
         }
 
-        private TestAdditionalDocument GetExemptionsFile(FileInfo fileInfo, params string[] exemptions)
+        private TestAdditionalDocument GetExemptionsFile(FileInfo? fileInfo, params string[] exemptions)
         {
             var defaultFileInfo = new FileInfo(ExampleLiteralExemptionsFileName);
             var documentContents = $@"

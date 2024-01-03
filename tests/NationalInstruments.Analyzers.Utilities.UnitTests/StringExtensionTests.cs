@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Interop;
 using NationalInstruments.Analyzers.Utilities.Extensions;
 using Xunit;
 
@@ -45,10 +46,12 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             Assert.Throws<ArgumentNullException>(() => ExampleText.MatchesWildcardPattern(null));
         }
 
-        [Fact]
-        public void MatchesWildcardPattern_InputNull_ThrowsArgumentNullException()
+        [Theory]
+        [InlineData(false)]
+        public void MatchesWildcardPattern_InputNull_ThrowsArgumentNullException(bool argument)
         {
-            Assert.Throws<ArgumentNullException>(() => ((string)null).MatchesWildcardPattern("Anything"));
+            var input = argument ? string.Empty : null;
+            Assert.Throws<ArgumentNullException>(() => input.MatchesWildcardPattern("Anything"));
         }
     }
 }

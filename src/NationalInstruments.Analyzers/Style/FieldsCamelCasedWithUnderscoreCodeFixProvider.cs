@@ -27,17 +27,17 @@ namespace NationalInstruments.Analyzers.Style
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(FieldsCamelCasedWithUnderscoreAnalyzer.DiagnosticId);
 
-        public override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider? GetFixAllProvider()
         {
             return null;
         }
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            SyntaxNode root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            SyntaxNode? root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
-            VariableDeclaratorSyntax declarator = root
-                .FindNode(context.Span, getInnermostNodeForTie: true)
+            VariableDeclaratorSyntax? declarator = root
+                ?.FindNode(context.Span, getInnermostNodeForTie: true)
                 ?.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
 
             if (declarator == null)
@@ -45,19 +45,21 @@ namespace NationalInstruments.Analyzers.Style
                 return;
             }
 
-            SemanticModel semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            SemanticModel? semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
 
-            ISymbol symbol = semanticModel.GetDeclaredSymbol(declarator, context.CancellationToken);
+            ISymbol? symbol = semanticModel?.GetDeclaredSymbol(declarator, context.CancellationToken);
+            if (symbol is not null)
+            {
+                var oldName = declarator.Identifier.ValueText;
+                var newName = EnsureUniqueMemberName(FixName(oldName), declarator.Identifier.SpanStart, semanticModel, context.CancellationToken);
 
-            var oldName = declarator.Identifier.ValueText;
-            var newName = EnsureUniqueMemberName(FixName(oldName), declarator.Identifier.SpanStart, semanticModel, context.CancellationToken);
+                var codeAction = CodeAction.Create(
+                    $"Rename '{oldName}' to '{newName}'",
+                    cancellationToken => Renamer.RenameSymbolAsync(context.Document.Project.Solution, symbol, new SymbolRenameOptions(), newName, cancellationToken),
+                    equivalenceKey: oldName + newName);
 
-            var codeAction = CodeAction.Create(
-                $"Rename '{oldName}' to '{newName}'",
-                cancellationToken => Renamer.RenameSymbolAsync(context.Document.Project.Solution, symbol, new SymbolRenameOptions(), newName, cancellationToken),
-                equivalenceKey: oldName + newName);
-
-            context.RegisterCodeFix(codeAction, context.Diagnostics);
+                context.RegisterCodeFix(codeAction, context.Diagnostics);
+            }
         }
 
         private static string FixName(string value)
@@ -90,18 +92,18 @@ namespace NationalInstruments.Analyzers.Style
         private static string EnsureUniqueMemberName(
             string baseName,
             int position,
-            SemanticModel semanticModel,
+            SemanticModel? semanticModel,
             CancellationToken cancellationToken)
         {
-            ISymbol symbol = semanticModel.GetEnclosingSymbol(position, cancellationToken);
-            INamedTypeSymbol asNamedTypeSymbol = null;
+            ISymbol? symbol = semanticModel?.GetEnclosingSymbol(position, cancellationToken);
+            INamedTypeSymbol? asNamedTypeSymbol = null;
 
-            while (symbol != null && (asNamedTypeSymbol = symbol as INamedTypeSymbol) == null)
+            while (symbol is not null && (asNamedTypeSymbol = symbol as INamedTypeSymbol) is null)
             {
                 symbol = symbol.ContainingSymbol;
             }
 
-            IList<ISymbol> symbols = asNamedTypeSymbol?.GetMembers() ?? semanticModel.LookupSymbols(position);
+            IList<ISymbol>? symbols = asNamedTypeSymbol?.GetMembers() ?? semanticModel?.LookupSymbols(position);
 
             var suffix = 2;
             var name = baseName;

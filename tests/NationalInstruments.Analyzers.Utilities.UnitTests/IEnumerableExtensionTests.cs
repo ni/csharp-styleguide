@@ -28,7 +28,7 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
         [Fact]
         public void ToSafeEnumerable_NullEnumerable_IsNonNullAndEmpty()
         {
-            IEnumerable<int> nullEnumerable = null;
+            IEnumerable<int>? nullEnumerable = null;
             Assert.NotNull(nullEnumerable.ToSafeEnumerable());
             Assert.Empty(nullEnumerable.ToSafeEnumerable());
         }

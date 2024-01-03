@@ -521,7 +521,7 @@ class Program
             return GetBannedMethodsFile(null, bannedMethods);
         }
 
-        private TestAdditionalDocument GetBannedMethodsFile(FileInfo fileInfo, params string[] bannedMethods)
+        private TestAdditionalDocument GetBannedMethodsFile(FileInfo? fileInfo, params string[] bannedMethods)
         {
             var xml = $@"
 <BannedMethods>
@@ -535,7 +535,7 @@ class Program
             return GetBannedMethodsFromXml(null, xml);
         }
 
-        private TestAdditionalDocument GetBannedMethodsFromXml(FileInfo fileInfo, string xml)
+        private TestAdditionalDocument GetBannedMethodsFromXml(FileInfo? fileInfo, string xml)
         {
             var defaultFileInfo = new FileInfo(ExampleBannedMethodsFileName);
 

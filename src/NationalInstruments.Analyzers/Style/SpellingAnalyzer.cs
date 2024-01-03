@@ -341,17 +341,18 @@ namespace NationalInstruments.Analyzers.Style
             IEnumerable<CodeAnalysisDictionary> ReadDictionaries()
             {
                 var fileProvider = AdditionalFileProvider.FromOptions(compilationStartContext.Options);
-                return fileProvider.GetMatchingFiles(@"(?:dictionary|custom).*?\.(?:xml|dic)$")
+                return fileProvider?.GetMatchingFiles(@"(?:dictionary|custom).*?\.(?:xml|dic)$")
                     .Select(CreateDictionaryFromAdditionalText)
-                    .Where(x => x != null);
+                    .OfType<CodeAnalysisDictionary>() ?? Enumerable.Empty<CodeAnalysisDictionary>();
 
-                CodeAnalysisDictionary CreateDictionaryFromAdditionalText(AdditionalText additionalFile)
+                CodeAnalysisDictionary? CreateDictionaryFromAdditionalText(AdditionalText additionalFile)
                 {
+                    CodeAnalysisDictionary? dictionary = null;
                     var text = additionalFile.GetText(compilationStartContext.CancellationToken);
                     var isXml = additionalFile.Path.EndsWith("xml", StringComparison.OrdinalIgnoreCase);
                     var provider = isXml ? _xmlDictionaryProvider : _dicDictionaryProvider;
 
-                    if (!compilationStartContext.TryGetValue(text, provider, out var dictionary))
+                    if (text is not null && !compilationStartContext.TryGetValue(text, provider, out dictionary))
                     {
                         try
                         {
@@ -479,9 +480,9 @@ namespace NationalInstruments.Analyzers.Style
             IEnumerable<string> GetMisspelledWords(string symbolName)
             {
                 var parser = new WordParser(symbolName, WordParserOptions.SplitCompoundWords);
-                if (parser.PeekWord() != null)
+                if (parser.PeekWord() is not null)
                 {
-                    var word = parser.NextWord();
+                    var word = parser.NextWord()!;
 
                     do
                     {
@@ -492,7 +493,7 @@ namespace NationalInstruments.Analyzers.Style
 
                         yield return word;
                     }
-                    while ((word = parser.NextWord()) != null);
+                    while ((word = parser.NextWord()) is not null);
                 }
             }
 

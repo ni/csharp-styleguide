@@ -68,11 +68,11 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="projectAdditionalFiles">Mapping of project names to the <see cref="AdditionalText"/> files they include.</param>
         /// <returns>An <see cref="IEnumerable{Diagnostic}" /> that surfaced in the source code, sorted by Location.</returns>
         protected static async Task<IEnumerable<Diagnostic>> GetSortedDiagnosticsAsync(
-            DiagnosticAnalyzer analyzer,
+            DiagnosticAnalyzer? analyzer,
             IEnumerable<ITestFile> testFiles,
             TestValidationModes validationModes = DefaultTestValidationMode,
-            IEnumerable<AdditionalText> additionalFiles = null,
-            Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles = null)
+            IEnumerable<AdditionalText>? additionalFiles = null,
+            Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles = null)
         {
             return await GetSortedDiagnosticsAsync(
                 analyzer,
@@ -92,11 +92,11 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="projectAdditionalFiles">Mapping of project name to the array of <see cref="AdditionalText"/> it includes.</param>
         /// <returns>An <see cref="IEnumerable{Diagnostic}" /> that surfaced in the source code, sorted by Location.</returns>
         protected static async Task<IEnumerable<Diagnostic>> GetSortedDiagnosticsAsync(
-            DiagnosticAnalyzer analyzer,
+            DiagnosticAnalyzer? analyzer,
             IEnumerable<Document> documents,
             TestValidationModes validationModes = DefaultTestValidationMode,
-            IEnumerable<AdditionalText> additionalFiles = null,
-            Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles = null)
+            IEnumerable<AdditionalText>? additionalFiles = null,
+            Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles = null)
         {
             return await GetSortedDiagnosticsFromDocumentsAsync(
                 analyzer,
@@ -128,6 +128,11 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                 foreach (var projectName in projectsInOrder)
                 {
                     var project = CreateProject(ref solution, projectName, projectsAndTestFiles[projectName], projects);
+                    if (project is null)
+                    {
+                        continue;
+                    }
+
                     projects.Add(project);
 
                     var documents = project.Documents.ToArray();
@@ -154,12 +159,17 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="additionalFiles">Enumerable of <see cref="AdditionalText" /> that will appear to the analyzer as additional files.</param>
         /// <returns>An <see cref="IEnumerable{Diagnostic}" /> that surfaced in the source code, sorted by Location.</returns>
         private static async Task<IEnumerable<Diagnostic>> GetSortedDiagnosticsFromDocumentsAsync(
-            DiagnosticAnalyzer analyzer,
+            DiagnosticAnalyzer? analyzer,
             IEnumerable<Document> documents,
             TestValidationModes validationModes,
-            IEnumerable<AdditionalText> additionalFiles,
-            Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles)
+            IEnumerable<AdditionalText>? additionalFiles,
+            Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles)
         {
+            if (analyzer is null)
+            {
+                throw new ArgumentNullException(nameof(analyzer));
+            }
+
             var projects = new HashSet<Project>();
             foreach (var document in documents)
             {
@@ -170,6 +180,10 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             foreach (var project in projects)
             {
                 var compilation = await project.GetCompilationAsync().ConfigureAwait(false);
+                if (compilation is null)
+                {
+                    continue;
+                }
 
                 compilation = EnableDiagnostics(analyzer, compilation);
 
@@ -282,13 +296,18 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             {
                 // Helper function that returns two different strings. The first looks like "1 error(s)" and the
                 // second like "TestValidationModes.ValidateErrors". Both will be used to construct a helpful message
-                var getMessageParts = new Func<TestValidationModes, string, Tuple<string, string>>((mode, whats) =>
+                var getMessageParts = new Func<TestValidationModes, string, Tuple<string, string>?>((mode, whats) =>
                 {
-                    return validationModes.HasFlag(mode) && compileDiagnostics.ContainsKey(mode)
-                        ? new Tuple<string, string>(
-                            string.Format(CultureInfo.CurrentCulture, "{0} {1}", compileDiagnostics[mode].Count, whats),
-                            string.Format(CultureInfo.CurrentCulture, "{0}.{1}", nameof(TestValidationModes), Enum.GetName(typeof(TestValidationModes), mode)))
-                        : null;
+                    if ((compileDiagnostics?.TryGetValue(mode, out var diagnostics) ?? false) && diagnostics is not null)
+                    {
+                        return validationModes.HasFlag(mode)
+                            ? new Tuple<string, string>(
+                                string.Format(CultureInfo.CurrentCulture, "{0} {1}", diagnostics.Count, whats),
+                                string.Format(CultureInfo.CurrentCulture, "{0}.{1}", nameof(TestValidationModes), Enum.GetName(typeof(TestValidationModes), mode)))
+                            : null;
+                    }
+
+                    return null;
                 });
 
                 var messages = new[]
@@ -301,8 +320,8 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                 var message = string.Format(
                     CultureInfo.CurrentCulture,
                     "\nTest compilation contains {0}. Disable {1} if these are expected:\n",
-                    string.Join(", ", messages.Select(x => x.Item1)),
-                    string.Join(" and/or ", messages.Select(x => x.Item2)));
+                    string.Join(", ", messages.Where(x => x is not null).Select(x => x!.Item1)),
+                    string.Join(" and/or ", messages.Where(x => x is not null).Select(x => x!.Item2)));
 
                 var builder = new StringBuilder(message);
 
@@ -425,7 +444,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="testFiles">A collection of <see cref="TestFile"/> that contain source and project information.</param>
         /// <param name="projectsToReference">An array of <see cref="Project"/>s that this project should reference.</param>
         /// <returns>A Project created out of the Documents created from the test files.</returns>
-        private static Project CreateProject(ref Solution solution, string projectName, IEnumerable<ITestFile> testFiles, IEnumerable<Project> projectsToReference)
+        private static Project? CreateProject(ref Solution solution, string projectName, IEnumerable<ITestFile> testFiles, IEnumerable<Project> projectsToReference)
         {
             var projectId = ProjectId.CreateNewId(debugName: projectName);
 

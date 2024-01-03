@@ -10,10 +10,10 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
     /// </summary>
     public struct Rule : IEquatable<Rule>
     {
-        public Rule(DiagnosticDescriptor diagnosticDescriptor, params string[] arguments)
+        public Rule(DiagnosticDescriptor diagnosticDescriptor, params string?[] arguments)
         {
             DiagnosticDescriptor = diagnosticDescriptor;
-            Arguments = arguments.ToList();
+            Arguments = arguments.Where(x => x is not null).Select(x => x!).ToList();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
         public static bool operator !=(Rule left, Rule right) => !(left == right);
 
-        public override bool Equals(object obj) => !(obj is Rule) ? false : Equals((Rule)obj);
+        public override bool Equals(object obj) => obj is not Rule ? false : Equals((Rule)obj);
 
         public override int GetHashCode()
         {

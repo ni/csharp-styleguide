@@ -67,7 +67,7 @@ namespace NationalInstruments.Analyzers.Correctness
             var hasTestAttribute = classSyntax
                 .DescendantNodes()
                 .OfType<AttributeSyntax>()
-                .Any(syntax => context.SemanticModel.GetTypeInfo(syntax).Type.ToString().Equals(TestClassAttributeTypeName, StringComparison.OrdinalIgnoreCase));
+                .Any(syntax => context.SemanticModel?.GetTypeInfo(syntax).Type?.ToString().Equals(TestClassAttributeTypeName, StringComparison.OrdinalIgnoreCase) ?? false);
 
             if (!hasTestAttribute)
             {
@@ -76,7 +76,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
             // Yes, this is a [TestClass]. Does it inherit from NI's AutoTest?
             var testClass = classSyntax.GetDeclaredOrReferencedSymbol(context.SemanticModel) as INamedTypeSymbol;
-            if (!testClass.GetBaseTypesAndThis().Any(x => x.ToString().Equals(NIAutoTestAttributeTypeName, StringComparison.OrdinalIgnoreCase)))
+            if (!testClass?.GetBaseTypesAndThis().Any(x => x.ToString().Equals(NIAutoTestAttributeTypeName, StringComparison.OrdinalIgnoreCase)) ?? false)
             {
                 var diagnostic = Diagnostic.Create(Rule, classSyntax.GetLocation(), classSyntax.Identifier.ToString());
                 context.ReportDiagnostic(diagnostic);

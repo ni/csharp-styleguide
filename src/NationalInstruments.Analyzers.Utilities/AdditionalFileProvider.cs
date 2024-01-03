@@ -39,7 +39,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// </summary>
         /// <param name="fileName">Name of the file, including extension, to return.</param>
         /// <returns>An additional file or <c>null</c> if no file can be found.</returns>
-        public AdditionalText GetFile(string fileName)
+        public AdditionalText? GetFile(string fileName)
             => _additionalFiles.FirstOrDefault(x => Path.GetFileName(x.Path).Equals(fileName, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>

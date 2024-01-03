@@ -64,13 +64,14 @@ namespace NationalInstruments.Analyzers.Correctness
                 return;
             }
 
-            ISymbol receiveWeakEventMethod = WellKnownTypes.IWeakEventListener(context.Compilation)
-                .GetMembers(ReceiveWeakEventMethodName).Single();
+            ISymbol? receiveWeakEventMethod = WellKnownTypes.IWeakEventListener(context.Compilation)
+                ?.GetMembers(ReceiveWeakEventMethodName)
+                .Single();
 
             // Is this method implementing IWeakEventListener's ReceiveWeakEvent?
-            ISymbol method = context.SemanticModel.GetDeclaredSymbol(methodSyntax);
-            ISymbol implementation = method.ContainingType.FindImplementationForInterfaceMember(receiveWeakEventMethod);
-            if (implementation == null || !implementation.Equals(method, SymbolEqualityComparer.Default))
+            ISymbol? method = context.SemanticModel.GetDeclaredSymbol(methodSyntax);
+            ISymbol? implementation = receiveWeakEventMethod is null ? null : method?.ContainingType.FindImplementationForInterfaceMember(receiveWeakEventMethod);
+            if (implementation is null || !implementation.Equals(method, SymbolEqualityComparer.Default))
             {
                 return;
             }

@@ -73,8 +73,8 @@ namespace NationalInstruments.Analyzers.Correctness
             }
 
             var usingAcquiresLock = false;
-            var memberAccessSyntaxes = (usingStatementSyntax.Declaration?.DescendantNodes().OfType<MemberAccessExpressionSyntax>()).ToSafeEnumerable()
-                .Concat((usingStatementSyntax.Expression?.DescendantNodesAndSelf().OfType<MemberAccessExpressionSyntax>()).ToSafeEnumerable());
+            var memberAccessSyntaxes = (usingStatementSyntax?.Declaration?.DescendantNodes().OfType<MemberAccessExpressionSyntax>()).ToSafeEnumerable()
+                .Concat((usingStatementSyntax?.Expression?.DescendantNodesAndSelf().OfType<MemberAccessExpressionSyntax>()).ToSafeEnumerable());
             foreach (var memberAccessSyntax in memberAccessSyntaxes)
             {
                 // If it's an array, pointer, or type parameter we can ignore it anyway, so cast to INamedTypeSymbol.
@@ -109,8 +109,9 @@ namespace NationalInstruments.Analyzers.Correctness
 
             if (usingAcquiresLock)
             {
-                var bodySyntax = usingStatementSyntax.Statement;
-                foreach (var awaitExpressionSyntax in bodySyntax.DescendantNodesAndSelf().OfType<AwaitExpressionSyntax>())
+                var bodySyntax = usingStatementSyntax?.Statement;
+                foreach (var awaitExpressionSyntax in
+                    (bodySyntax?.DescendantNodesAndSelf().OfType<AwaitExpressionSyntax>()).ToSafeEnumerable())
                 {
                     var diagnostic = Diagnostic.Create(Rule, awaitExpressionSyntax.GetLocation());
                     context.ReportDiagnostic(diagnostic);

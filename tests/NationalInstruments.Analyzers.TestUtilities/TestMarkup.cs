@@ -61,10 +61,10 @@ namespace NationalInstruments.Analyzers.TestUtilities
             if (!ContainsMarkers(markup))
             {
                 source = markup;
-                return null;
+                return new SourceMarker[] { };
             }
 
-            var markupBySpan = new Dictionary<TextSpan, Markup>();
+            var markupBySpan = new Dictionary<TextSpan, Markup?>();
 
             for (var i = 0; i < markup.Length - 1; ++i)
             {
@@ -131,7 +131,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
             string markup,
             int index,
             PositionMarkupDefinition markupDefinition,
-            out PositionMarkup positionMarkup,
+            out PositionMarkup? positionMarkup,
             out TextSpan span)
         {
             var currentMarkup = markup.Substring(0, index + 1);
@@ -146,7 +146,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
             }
 
             // Use defaults (values shouldn't be used)
-            span = default(TextSpan);
+            span = default;
             positionMarkup = null;
 
             return false;
@@ -156,7 +156,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
             string markup,
             int index,
             CaptureMarkupDefinition markupDefinition,
-            out CaptureMarkup captureMarkup,
+            out CaptureMarkup? captureMarkup,
             out TextSpan startSpan,
             out TextSpan endSpan)
         {
@@ -191,8 +191,8 @@ namespace NationalInstruments.Analyzers.TestUtilities
             }
 
             // Use defaults (values shouldn't be used)
-            startSpan = default(TextSpan);
-            endSpan = default(TextSpan);
+            startSpan = default;
+            endSpan = default;
             captureMarkup = null;
 
             return false;
@@ -203,7 +203,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
             return new TextSpan(i - (syntax.Length - 1), syntax.Length);
         }
 
-        private string GetSourceFromMarkup(string markup, Dictionary<TextSpan, Markup> markupBySpan)
+        private string GetSourceFromMarkup(string markup, Dictionary<TextSpan, Markup?> markupBySpan)
         {
             var removed = 0;
             var output = new StringBuilder(markup);
@@ -221,9 +221,8 @@ namespace NationalInstruments.Analyzers.TestUtilities
                 {
                     positionMarkup.Index -= removed;
                 }
-                else
+                else if (markupInstance is CaptureMarkup captureMarkup)
                 {
-                    var captureMarkup = (CaptureMarkup)markupInstance;
                     if (span.Start == captureMarkup.StartIndex)
                     {
                         captureMarkup.StartIndex -= removed;
@@ -240,11 +239,11 @@ namespace NationalInstruments.Analyzers.TestUtilities
             return output.ToString();
         }
 
-        private IEnumerable<SourceMarker> CreateSourceMarkers(IEnumerable<Markup> markups, string source)
+        private IEnumerable<SourceMarker> CreateSourceMarkers(IEnumerable<Markup?> markups, string source)
         {
             foreach (var markup in markups)
             {
-                switch (markup.Type)
+                switch (markup?.Type)
                 {
                     case MarkupType.Diagnostic:
                         if (markup is PositionMarkup positionMarkup)
@@ -279,7 +278,7 @@ namespace NationalInstruments.Analyzers.TestUtilities
                         break;
 
                     default:
-                        throw new InvalidOperationException($"Unknown markup type: {markup.Type}");
+                        throw new InvalidOperationException($"Unknown markup type: {markup?.Type}");
                 }
             }
         }

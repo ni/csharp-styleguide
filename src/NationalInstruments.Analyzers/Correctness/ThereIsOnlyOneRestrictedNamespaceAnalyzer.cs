@@ -54,9 +54,9 @@ namespace NationalInstruments.Analyzers.Correctness
             context.RegisterSyntaxNodeAction(AnalyzeNamespaceSyntax, SyntaxKind.NamespaceDeclaration);
         }
 
-        private static bool IsNamespaceNameViolatingRule(string namespaceName)
+        private static bool IsNamespaceNameViolatingRule(string? namespaceName)
         {
-            return namespaceName != null
+            return namespaceName is not null
                 && namespaceName.IndexOf("Restricted", StringComparison.OrdinalIgnoreCase) >= 0
                 && !namespaceName.StartsWith(RestrictedNamespacePrefix, StringComparison.OrdinalIgnoreCase);
         }
@@ -73,7 +73,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 // the case and there shouldn't be a violation, apply the same test against the fully-qualified
                 // namespace name.
                 var @namespace = namespaceSyntax.GetDeclaredOrReferencedSymbol(context.SemanticModel);
-                var namespaceName = @namespace.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).TrimStart("global:".ToCharArray());
+                var namespaceName = @namespace?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).TrimStart("global:".ToCharArray());
 
                 if (IsNamespaceNameViolatingRule(namespaceName))
                 {

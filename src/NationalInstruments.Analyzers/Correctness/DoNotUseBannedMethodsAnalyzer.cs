@@ -110,7 +110,7 @@ namespace NationalInstruments.Analyzers.Correctness
                     return;
                 }
 
-                ISymbol invocation = invocationSyntax.GetDeclaredOrReferencedSymbol(context.SemanticModel);
+                ISymbol? invocation = invocationSyntax.GetDeclaredOrReferencedSymbol(context.SemanticModel);
                 var fullName = invocation?.GetFullName();
                 if (string.IsNullOrEmpty(fullName))
                 {
@@ -119,7 +119,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
                 foreach (var bannedMatch in _bannedMethods.Where(analyzerEntry => analyzerEntry.EntryRegex.IsMatch(fullName)))
                 {
-                    if (bannedMatch.IsBannedInThisAssembly(context.ContainingSymbol.ContainingAssembly))
+                    if (bannedMatch.IsBannedInThisAssembly(context.ContainingSymbol?.ContainingAssembly))
                     {
                         var diagnostic = Diagnostic.Create(Rule, invocationSyntax.GetLocation(), fullName, bannedMatch.AdditionalErrorMessage);
                         context.ReportDiagnostic(diagnostic);
@@ -132,7 +132,7 @@ namespace NationalInstruments.Analyzers.Correctness
             {
                 if (TryGetRootElementDiagnostic(rootElement, "BannedMethods", filePath, FileParseRule, out var diagnostic))
                 {
-                    _additionalFileService.ParsingDiagnostics.Add(diagnostic);
+                    _additionalFileService.ParsingDiagnostics.Add(diagnostic!);
                 }
 
                 foreach (XElement element in rootElement.Elements())
@@ -181,17 +181,17 @@ namespace NationalInstruments.Analyzers.Correctness
 
                 public AnalyzerEntryOptionsForParsing WithJustification(string justification)
                 {
-                    return new AnalyzerEntryOptionsForParsing(justification?.Trim(), Alternative, Assemblies);
+                    return new AnalyzerEntryOptionsForParsing(justification.Trim(), Alternative, Assemblies);
                 }
 
                 public AnalyzerEntryOptionsForParsing WithAlternative(string alternative)
                 {
-                    return new AnalyzerEntryOptionsForParsing(Justification, alternative?.Trim(), Assemblies);
+                    return new AnalyzerEntryOptionsForParsing(Justification, alternative.Trim(), Assemblies);
                 }
 
                 public AnalyzerEntryOptionsForParsing WithAssemblies(string assemblies)
                 {
-                    return new AnalyzerEntryOptionsForParsing(Justification, Alternative, assemblies?.Trim());
+                    return new AnalyzerEntryOptionsForParsing(Justification, Alternative, assemblies.Trim());
                 }
 
                 public AnalyzerEntryOptionsForParsing UpdateFromElement(XElement element)
@@ -225,6 +225,7 @@ namespace NationalInstruments.Analyzers.Correctness
                     EntryRegex = GetEscapedRegex(EntryName);
                     Justification = options.Justification;
                     Alternative = options.Alternative;
+                    Assemblies = options.Assemblies;
                     AssemblyRegexes = !string.IsNullOrWhiteSpace(options.Assemblies)
                         ? options.Assemblies.Trim().Split(',').Select(x => GetEscapedRegex(x))
                         : new List<Regex>();
@@ -270,9 +271,9 @@ namespace NationalInstruments.Analyzers.Correctness
 
                 public static bool operator !=(AnalyzerEntry entry1, AnalyzerEntry entry2) => !(entry1 == entry2);
 
-                public bool IsBannedInThisAssembly(IAssemblySymbol assemblySymbol)
+                public bool IsBannedInThisAssembly(IAssemblySymbol? assemblySymbol)
                 {
-                    return !AssemblyRegexes.Any() || AssemblyRegexes.Any(regex => regex.IsMatch(assemblySymbol.Name));
+                    return !AssemblyRegexes.Any() || AssemblyRegexes.Any(regex => regex.IsMatch(assemblySymbol?.Name));
                 }
 
                 public override bool Equals(object obj)
@@ -293,9 +294,9 @@ namespace NationalInstruments.Analyzers.Correctness
                     return hashCode;
                 }
 
-                public bool Equals(AnalyzerEntry other)
+                public bool Equals(AnalyzerEntry? other)
                 {
-                    return other != null
+                    return other is not null
                         && EntryName == other.EntryName
                         && Justification == other.Justification
                         && Alternative == other.Alternative

@@ -14,7 +14,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <typeparam name="T">Any type</typeparam>
         /// <param name="enumerable">The enumerable to return, or empty if null.</param>
         /// <returns><paramref name="enumerable"/>, or <see cref="Enumerable.Empty{T}"/> if null</returns>
-        public static IEnumerable<T> ToSafeEnumerable<T>(this IEnumerable<T> enumerable)
+        public static IEnumerable<T> ToSafeEnumerable<T>(this IEnumerable<T>? enumerable)
         {
             return enumerable ?? Enumerable.Empty<T>();
         }

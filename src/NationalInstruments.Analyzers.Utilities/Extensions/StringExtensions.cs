@@ -18,7 +18,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <param name="input">Any text.</param>
         /// <param name="wildcardPattern">Any text that optionally includes "wildcards", or asterisks.</param>
         /// <returns>True or false depending on whether the given input matches the given wildcard pattern or not.</returns>
-        public static bool MatchesWildcardPattern(this string input, string wildcardPattern)
+        public static bool MatchesWildcardPattern(this string? input, string? wildcardPattern)
         {
             var pattern = string.Concat("^", Regex.Escape(wildcardPattern).Replace(@"\*", ".*"), "$");
             return Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);

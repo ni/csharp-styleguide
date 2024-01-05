@@ -27,7 +27,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
                 return false;
             }
 
-            IMethodSymbol overridden = method.OverriddenMethod;
+            IMethodSymbol? overridden = method.OverriddenMethod;
 
             if (method.ContainingType.SpecialType == SpecialType.System_Object)
             {
@@ -40,12 +40,12 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
                 return false;
             }
 
-            for (IMethodSymbol o = overridden.OverriddenMethod; o != null; o = o.OverriddenMethod)
+            for (IMethodSymbol? o = overridden?.OverriddenMethod; o != null; o = o.OverriddenMethod)
             {
                 overridden = o;
             }
 
-            return overridden.ContainingType.SpecialType == SpecialType.System_Object; // it is object.Finalize
+            return overridden?.ContainingType.SpecialType == SpecialType.System_Object; // it is object.Finalize
         }
     }
 }

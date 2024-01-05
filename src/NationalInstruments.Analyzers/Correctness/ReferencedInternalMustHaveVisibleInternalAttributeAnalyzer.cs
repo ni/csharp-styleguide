@@ -89,8 +89,8 @@ namespace NationalInstruments.Analyzers.Correctness
         public void AnalyzeExpression(SyntaxNodeAnalysisContext context)
         {
             SyntaxNode node = context.Node;
-            ISymbol symbol = node.GetDeclaredOrReferencedSymbol(context.SemanticModel);
-            if (symbol == null)
+            ISymbol? symbol = node.GetDeclaredOrReferencedSymbol(context.SemanticModel);
+            if (symbol is null)
             {
                 return;
             }
@@ -101,13 +101,13 @@ namespace NationalInstruments.Analyzers.Correctness
             }
 
             IAssemblySymbol referencedAssembly = symbol.ContainingAssembly;
-            IAssemblySymbol callingAssembly = context.ContainingSymbol.ContainingAssembly;
+            IAssemblySymbol? callingAssembly = context.ContainingSymbol?.ContainingAssembly;
             if (referencedAssembly.Equals(callingAssembly, SymbolEqualityComparer.Default))
             {
                 return;
             }
 
-            IEnumerable<string> attributeNames = symbol.GetAttributes().Select(attribute => attribute.AttributeClass.Name);
+            IEnumerable<string?> attributeNames = symbol.GetAttributes().Select(attribute => attribute.AttributeClass?.Name);
             if (attributeNames.Contains("VisibleInternalAttribute", StringComparer.Ordinal))
             {
                 return;

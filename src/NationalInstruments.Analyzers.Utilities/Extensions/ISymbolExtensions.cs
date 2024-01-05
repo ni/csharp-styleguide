@@ -15,7 +15,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <returns>
         /// A string representing all the aspects of a symbol that make it uniquely identifiable, such as its fully-qualified parameters.
         /// </returns>
-        public static string GetFullName(this ISymbol symbol)
+        public static string? GetFullName(this ISymbol symbol)
         {
             if (symbol == null)
             {
@@ -52,18 +52,18 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
                 }
             }
 
-            IFieldSymbol field = null;
-            IPropertySymbol property = null;
-            if ((field = symbol as IFieldSymbol) != null || (property = symbol as IPropertySymbol) != null)
+            var fieldSymbol = symbol as IFieldSymbol;
+            var propertySymbol = symbol as IPropertySymbol;
+            if (fieldSymbol is not null || propertySymbol is not null)
             {
-                ITypeSymbol type = field?.Type ?? property?.Type;
-                prefix = type.ToDisplayString(SymbolDisplayFormats.FullyQualifiedParameters);
+                ITypeSymbol? type = fieldSymbol?.Type ?? propertySymbol?.Type;
+                prefix = type?.ToDisplayString(SymbolDisplayFormats.FullyQualifiedParameters);
             }
 
             // Always keep the removal of whitespace separate from the removal of the prefix. This will prevent
             // characters beyond the prefix from being removed.
             var symbolName = symbol.ToDisplayString(SymbolDisplayFormats.FullyQualifiedParameters)
-                .TrimStart(prefix.ToCharArray())
+                .TrimStart(prefix?.ToCharArray())
                 .TrimStart();
 
             symbolNameBuilder.Append(symbolName);

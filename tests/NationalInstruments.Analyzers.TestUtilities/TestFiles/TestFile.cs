@@ -20,14 +20,14 @@ namespace NationalInstruments.Analyzers.TestUtilities.TestFiles
         {
         }
 
-        public TestFile(string name, string projectName, string source)
+        public TestFile(string? name, string projectName, string source)
             : this(name, projectName, source, Enumerable.Empty<string>())
         {
         }
 
-        public TestFile(string name, string projectName, string source, IEnumerable<string> referencedProjectNames)
+        public TestFile(string? name, string projectName, string source, IEnumerable<string> referencedProjectNames)
         {
-            Name = name;
+            Name = name ?? "Test0.cs";
             ProjectName = projectName;
             Source = source;
             ReferencedProjectNames = referencedProjectNames;
@@ -49,7 +49,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.TestFiles
 
         public static bool operator !=(TestFile left, TestFile right) => !(left == right);
 
-        public override bool Equals(object obj) => !(obj is TestFile) ? false : Equals((TestFile)obj);
+        public override bool Equals(object obj) => obj is TestFile file && Equals(file);
 
         public override int GetHashCode()
         {

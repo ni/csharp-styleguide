@@ -60,7 +60,7 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             var parsedFile = additionalFileService.ParseXmlFile(additionalFile);
 
             Assert.Empty(additionalFileService.ParsingDiagnostics);
-            Assert.Equal(3, parsedFile.Elements("Entry").Count());
+            Assert.Equal(3, parsedFile?.Elements("Entry").Count());
         }
 
         [Fact]

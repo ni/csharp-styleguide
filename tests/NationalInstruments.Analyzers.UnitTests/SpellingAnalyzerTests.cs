@@ -390,10 +390,10 @@ class Program
                     "The 'word' start tag on line 6 position 14 does not match the end tag of 'Word'. Line 6, position 24."));
         }
 
-        private static AdditionalText CreateXmlDictionary(IEnumerable<string> recognizedWords, IEnumerable<string> unrecognizedWords = null) =>
+        private static AdditionalText CreateXmlDictionary(IEnumerable<string>? recognizedWords, IEnumerable<string>? unrecognizedWords = null) =>
             CreateXmlDictionary("CodeAnalysisDictionary.xml", recognizedWords, unrecognizedWords);
 
-        private static AdditionalText CreateXmlDictionary(string filename, IEnumerable<string> recognizedWords, IEnumerable<string> unrecognizedWords = null)
+        private static AdditionalText CreateXmlDictionary(string filename, IEnumerable<string>? recognizedWords, IEnumerable<string>? unrecognizedWords = null)
         {
             var contents = $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Dictionary>
@@ -405,7 +405,7 @@ class Program
 
             return new TestAdditionalDocument(filename, contents);
 
-            string CreateXml(IEnumerable<string> words) =>
+            string CreateXml(IEnumerable<string>? words) =>
                 string.Join(Environment.NewLine, words?.Select(x => $"<Word>{x}</Word>") ?? Enumerable.Empty<string>());
         }
 

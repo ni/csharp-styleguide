@@ -543,8 +543,8 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
                 XUnit.*";
 
             private readonly string _testFilesFolder;
-            private TestAdditionalDocument _approvedNamespacesDocument;
-            private TestAdditionalDocument _approvedTestNamespacesDocument;
+            private TestAdditionalDocument? _approvedNamespacesDocument;
+            private TestAdditionalDocument? _approvedTestNamespacesDocument;
 
             public TestState()
             {
@@ -584,25 +584,25 @@ namespace <?>NationalInstruments.TestUtilities.SourceModel
 
             public void AppendToApprovedNamespacesFile(string namespaceName)
             {
-                File.AppendAllLines(_approvedNamespacesDocument.Path, new[] { namespaceName });
+                File.AppendAllLines(_approvedNamespacesDocument?.Path, new[] { namespaceName });
             }
 
             public void AppendToApprovedTestNamespacesFile(string namespaceName)
             {
-                File.AppendAllLines(_approvedTestNamespacesDocument.Path, new[] { namespaceName });
+                File.AppendAllLines(_approvedTestNamespacesDocument?.Path, new[] { namespaceName });
             }
 
             public void AssertNamespaceExistsInApprovedNamespacesFile(string namespaceName)
             {
-                AssertNamespaceExistsInFile(_approvedNamespacesDocument.Path, namespaceName);
+                AssertNamespaceExistsInFile(_approvedNamespacesDocument?.Path, namespaceName);
             }
 
             public void AssertNamespaceExistsInApprovedTestNamespacesFile(string namespaceName)
             {
-                AssertNamespaceExistsInFile(_approvedTestNamespacesDocument.Path, namespaceName);
+                AssertNamespaceExistsInFile(_approvedTestNamespacesDocument?.Path, namespaceName);
             }
 
-            private void AssertNamespaceExistsInFile(string filePath, string namespaceName)
+            private void AssertNamespaceExistsInFile(string? filePath, string namespaceName)
             {
                 Assert.NotNull(File
                     .ReadAllLines(filePath)

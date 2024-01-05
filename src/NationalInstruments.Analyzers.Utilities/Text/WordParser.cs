@@ -52,7 +52,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         private readonly WordParserOptions _options;
         private readonly StringBuilder _buffer;
         private readonly string _text;
-        private string _peekedWord;
+        private string? _peekedWord;
         private int _index;
         private char _prefix;
 
@@ -71,7 +71,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public WordParser(string text, WordParserOptions options)
+        public WordParser(string? text, WordParserOptions options)
             : this(text, options, NullChar)
         {
         }
@@ -95,7 +95,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public WordParser(string text, WordParserOptions options, char prefix)
+        public WordParser(string? text, WordParserOptions options, char prefix)
         {
             if (options < WordParserOptions.None || options > (WordParserOptions.IgnoreMnemonicsIndicators | WordParserOptions.SplitCompoundWords))
             {
@@ -139,7 +139,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public static bool ContainsWord(string text, WordParserOptions options, ImmutableArray<string> words)
+        public static bool ContainsWord(string? text, WordParserOptions options, ImmutableArray<string> words)
         {
             return ContainsWord(text, options, NullChar, words);
         }
@@ -150,7 +150,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <returns>
         ///     A <see cref="string"/> containing the next word or <see langword="null"/> if there are no more words.
         /// </returns>
-        public string NextWord()
+        public string? NextWord()
         {
             if (_peekedWord == null)
             {
@@ -168,7 +168,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <returns>
         ///     A <see cref="string"/> containing the next word or <see langword="null"/> if there are no more words.
         /// </returns>
-        public string PeekWord()
+        public string? PeekWord()
         {
             if (_peekedWord == null)
             {
@@ -196,7 +196,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public static Collection<string> Parse(string text, WordParserOptions options)
+        public static Collection<string> Parse(string? text, WordParserOptions options)
         {
             return Parse(text, options, NullChar);
         }
@@ -223,13 +223,13 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public static Collection<string> Parse(string text, WordParserOptions options, char prefix)
+        public static Collection<string> Parse(string? text, WordParserOptions options, char prefix)
         {
             var parser = new WordParser(text, options, prefix);
             var words = new Collection<string>();
 
-            string word;
-            while ((word = parser.NextWord()) != null)
+            string? word;
+            while ((word = parser.NextWord()) is not null)
             {
                 words.Add(word);
             }
@@ -266,7 +266,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
         /// <exception cref="ArgumentException">
         ///     <paramref name="options"/> is not one or more of the <see cref="WordParserOptions"/> values.
         /// </exception>
-        public static bool ContainsWord(string text, WordParserOptions options, char prefix, ImmutableArray<string> words)
+        public static bool ContainsWord(string? text, WordParserOptions options, char prefix, ImmutableArray<string> words)
         {
             if (words.IsDefault)
             {
@@ -275,7 +275,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
 
             var parser = new WordParser(text, options, prefix);
 
-            string parsedWord;
+            string? parsedWord;
             while ((parsedWord = parser.NextWord()) != null)
             {
                 foreach (var word in words)
@@ -354,7 +354,7 @@ namespace NationalInstruments.Analyzers.Utilities.Text
             return false;
         }
 
-        private string NextWordCore()
+        private string? NextWordCore()
         {
             // Reset buffer
             _buffer.Length = 0;

@@ -44,9 +44,9 @@ namespace NationalInstruments.Analyzers.Correctness
             }
         }
 
-        private bool TypeIsPrivateMemberLock(INamedTypeSymbol type)
+        private bool TypeIsPrivateMemberLock(INamedTypeSymbol? type)
         {
-            return type.IsOrInheritsFromClass("NationalInstruments.Core.PrivateMemberLock");
+            return type?.IsOrInheritsFromClass("NationalInstruments.Core.PrivateMemberLock") ?? false;
         }
     }
 }

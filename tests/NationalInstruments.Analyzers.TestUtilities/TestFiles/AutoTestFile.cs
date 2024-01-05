@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using NationalInstruments.Analyzers.TestUtilities.Markers;
 using NationalInstruments.Analyzers.TestUtilities.Verifiers;
 using Xunit;
@@ -25,14 +26,14 @@ namespace NationalInstruments.Analyzers.TestUtilities.TestFiles
         {
         }
 
-        public AutoTestFile(string name, string projectName, string source, params Rule[] violatedRules)
+        public AutoTestFile(string? name, string projectName, string source, params Rule[] violatedRules)
             : this(name, projectName, source, Enumerable.Empty<string>(), violatedRules)
         {
         }
 
-        public AutoTestFile(string name, string projectName, string source, IEnumerable<string> referencedProjectNames, params Rule[] violatedRules)
+        public AutoTestFile(string? name, string projectName, string source, IEnumerable<string> referencedProjectNames, params Rule[] violatedRules)
         {
-            Name = name;
+            Name = name ?? "Test0.cs";
             ProjectName = projectName;
             ReferencedProjectNames = referencedProjectNames;
 
@@ -63,7 +64,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.TestFiles
 
         public static bool operator !=(AutoTestFile left, AutoTestFile right) => !(left == right);
 
-        public override bool Equals(object obj) => !(obj is AutoTestFile) ? false : Equals((AutoTestFile)obj);
+        public override bool Equals(object obj) => obj is AutoTestFile file && Equals(file);
 
         public override int GetHashCode()
         {
@@ -93,11 +94,16 @@ namespace NationalInstruments.Analyzers.TestUtilities.TestFiles
                 yield break;
             }
 
-            Assert.True(markers.Count == violatedRules.Length, "Number of markers should always equal the number of violated rules");
+            Assert.True(markers?.Count == violatedRules?.Length, "Number of markers should always equal the number of violated rules");
 
-            for (var i = 0; i < markers.Count; ++i)
+            for (var i = 0; i < markers?.Count; ++i)
             {
-                var rule = violatedRules[i];
+                if (violatedRules is null)
+                {
+                    continue;
+                }
+
+                Rule rule = violatedRules[i];
                 var marker = markers[i];
                 var arguments = Enumerable.Empty<object>();
 

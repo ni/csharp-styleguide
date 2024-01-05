@@ -11,6 +11,9 @@
         <NILibraryTargetFramework>net6.0</NILibraryTargetFramework>
         <NIExecutableTargetFramework>net6.0</NIExecutableTargetFramework>
         <NIAnalyzersTargetFramework>netstandard2.0</NIAnalyzersTargetFramework>
+
+        <Nullable>enable</Nullable>
+        <LangVersion>9.0</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup>

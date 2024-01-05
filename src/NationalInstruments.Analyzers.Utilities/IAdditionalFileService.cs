@@ -34,6 +34,6 @@ namespace NationalInstruments.Analyzers.Utilities
         /// <param name="xmlFile">An <see cref="AdditionalText" /> file that should have XML contents.</param>
         /// <param name="cancellationToken">A token that allows text retrieval/parsing to be canceled prior to completion.</param>
         /// <returns>The <see cref="XElement" /> root node.</returns>
-        XElement ParseXmlFile(AdditionalText xmlFile, CancellationToken cancellationToken);
+        XElement? ParseXmlFile(AdditionalText xmlFile, CancellationToken cancellationToken);
     }
 }

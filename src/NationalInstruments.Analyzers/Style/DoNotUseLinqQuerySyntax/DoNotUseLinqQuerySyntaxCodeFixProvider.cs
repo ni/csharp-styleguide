@@ -40,10 +40,13 @@ namespace NationalInstruments.Analyzers.Style.DoNotUseLinqQuerySyntax
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken).ConfigureAwait(false);
 
-            var rewriter = new QueryComprehensionToFluentRewriter(semanticModel);
-            var oldExpression = root.FindNode(sourceSpan, getInnermostNodeForTie: true);
-            var newExpression = rewriter.Visit(oldExpression);
-            editor.ReplaceNode(oldExpression, newExpression);
+            if (root is not null && semanticModel is not null)
+            {
+                var rewriter = new QueryComprehensionToFluentRewriter(semanticModel);
+                var oldExpression = root.FindNode(sourceSpan, getInnermostNodeForTie: true);
+                var newExpression = rewriter.Visit(oldExpression);
+                editor.ReplaceNode(oldExpression, newExpression);
+            }
 
             return editor.GetChangedDocument();
         }

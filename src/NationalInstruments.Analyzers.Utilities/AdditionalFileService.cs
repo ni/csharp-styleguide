@@ -45,7 +45,7 @@ namespace NationalInstruments.Analyzers.Utilities
         }
 
         /// <inheritdoc />
-        public XElement ParseXmlFile(AdditionalText xmlFile, CancellationToken cancellationToken = default(CancellationToken))
+        public XElement? ParseXmlFile(AdditionalText xmlFile, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace NationalInstruments.Analyzers.Utilities
 
                 if (!cancellationToken.IsCancellationRequested)
                 {
-                    xml = xmlFile.GetText(cancellationToken).ToString();
+                    xml = xmlFile.GetText(cancellationToken)?.ToString();
                 }
 
                 if (!cancellationToken.IsCancellationRequested)

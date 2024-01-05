@@ -38,21 +38,21 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             Scope = exemptionScope;
         }
 
-        public string Name => _attributeData.AttributeClass.Name;
+        public string? Name => _attributeData.AttributeClass?.Name;
 
         public ExemptionScope Scope { get; }
 
-        public string Target => GetNamedArgumentValueOrDefault("Target");
+        public string? Target => GetNamedArgumentValueOrDefault("Target");
 
-        public string Literal => _attributeData.ConstructorArguments.FirstOrDefault().Value?.ToString()
+        public string? Literal => _attributeData.ConstructorArguments.FirstOrDefault().Value?.ToString()
                                  ?? GetNamedArgumentValueOrDefault("Literal");
 
-        public static string GetTargetFromAttribute(ExemptionAttribute exemptionAttribute)
+        public static string? GetTargetFromAttribute(ExemptionAttribute exemptionAttribute)
         {
             return GetTargetFromAttributeOrSymbol<ISymbol>(exemptionAttribute, null);
         }
 
-        internal static string GetTargetFromAttributeOrSymbol<TExpected>(ExemptionAttribute exemptionAttribute, ISymbol decoratedSymbol)
+        internal static string? GetTargetFromAttributeOrSymbol<TExpected>(ExemptionAttribute exemptionAttribute, ISymbol? decoratedSymbol)
         {
             if (!string.IsNullOrWhiteSpace(exemptionAttribute.Target))
             {
@@ -69,11 +69,11 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
             throw new AttributeMissingTargetException(
                 string.Format(CultureInfo.CurrentCulture, "Attribute {0} is missing a Target value.", attributeName),
-                attributeName,
+                attributeName ?? "Unknown attribute",
                 scopeName);
         }
 
-        private string GetNamedArgumentValueOrDefault(string argumentName)
+        private string? GetNamedArgumentValueOrDefault(string argumentName)
         {
             return _attributeData.NamedArguments.FirstOrDefault(x => x.Key == argumentName).Value.Value?.ToString();
         }

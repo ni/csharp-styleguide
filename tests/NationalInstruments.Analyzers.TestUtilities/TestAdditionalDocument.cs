@@ -26,9 +26,9 @@ namespace NationalInstruments.Analyzers.TestUtilities
         {
         }
 
-        public TestAdditionalDocument(string filePath, string fileName, string text)
+        public TestAdditionalDocument(string? filePath, string fileName, string text)
         {
-            Path = filePath;
+            Path = filePath ?? string.Empty;
             Name = fileName;
             _sourceText = SourceText.From(text);
         }
@@ -37,6 +37,6 @@ namespace NationalInstruments.Analyzers.TestUtilities
 
         public string Name { get; }
 
-        public override SourceText GetText(CancellationToken cancellationToken = default(CancellationToken)) => _sourceText;
+        public override SourceText GetText(CancellationToken cancellationToken = default) => _sourceText;
     }
 }

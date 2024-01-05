@@ -21,7 +21,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <summary>
         /// Get the CSharp analyzer being tested - to be implemented in non-abstract class
         /// </summary>
-        protected virtual DiagnosticAnalyzer DiagnosticAnalyzer => null;
+        protected virtual DiagnosticAnalyzer? DiagnosticAnalyzer => null;
 
         /// <summary>
         /// The test will verify that the diagnostic messages exactly match the expected messages if <c>true</c>.
@@ -44,21 +44,21 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, DiagnosticResult[])"/>
         /// <param name="additionalFile">A supporting test file that will appear to the analyzer as an "additional file".</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, AdditionalText additionalFile, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, AdditionalText? additionalFile, params DiagnosticResult[] expectedDiagnostics)
         {
-            return VerifyDiagnostics(testFile, new[] { additionalFile }.Where(x => x != null), expectedDiagnostics);
+            return VerifyDiagnostics(testFile, additionalFile is null ? null : new[] { additionalFile }, expectedDiagnostics);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, DiagnosticResult[])"/>
         /// <param name="additionalFiles">Supporting test files that will appear to the analyzer as "additional files".</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, IEnumerable<AdditionalText> additionalFiles, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, IEnumerable<AdditionalText>? additionalFiles, params DiagnosticResult[] expectedDiagnostics)
         {
             return VerifyDiagnostics(testFile, additionalFiles, null, expectedDiagnostics);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, IEnumerable{AdditionalText}, DiagnosticResult[])"/>
         /// <param name="projectAdditionalFiles">Mapping of project names to the <see cref="AdditionalText"/> files they include.</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, IEnumerable<AdditionalText> additionalFiles, Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile testFile, IEnumerable<AdditionalText>? additionalFiles, Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles, params DiagnosticResult[] expectedDiagnostics)
         {
             return VerifyDiagnostics(new[] { testFile }, additionalFiles, projectAdditionalFiles, expectedDiagnostics);
         }
@@ -72,21 +72,21 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, AdditionalText, DiagnosticResult[])"/>
         /// <inheritdoc cref="VerifyDiagnostics(TestFile[], DiagnosticResult[])" path="param"/>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, AdditionalText additionalFile, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, AdditionalText? additionalFile, params DiagnosticResult[] expectedDiagnostics)
         {
-            return VerifyDiagnostics(testFiles, new[] { additionalFile }.Where(x => x != null), expectedDiagnostics);
+            return VerifyDiagnostics(testFiles, additionalFile is null ? null : new[] { additionalFile }, expectedDiagnostics);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, IEnumerable{AdditionalText}, DiagnosticResult[])"/>
         /// <inheritdoc cref="VerifyDiagnostics(TestFile[], DiagnosticResult[])" path="param"/>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, IEnumerable<AdditionalText> additionalFiles, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, IEnumerable<AdditionalText>? additionalFiles, params DiagnosticResult[] expectedDiagnostics)
         {
             return VerifyDiagnostics(testFiles, additionalFiles, null, expectedDiagnostics);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(TestFile, IEnumerable{AdditionalText}, Dictionary{string, IEnumerable{AdditionalText}}, DiagnosticResult[])"/>
         /// <inheritdoc cref="VerifyDiagnostics(TestFile[], DiagnosticResult[])" path="param"/>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, IEnumerable<AdditionalText> additionalFiles, Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles, params DiagnosticResult[] expectedDiagnostics)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(TestFile[] testFiles, IEnumerable<AdditionalText>? additionalFiles, Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles, params DiagnosticResult[] expectedDiagnostics)
         {
             var context = new JoinableTaskContext();
             var diagnostics = new JoinableTaskFactory(context).Run(
@@ -101,42 +101,42 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="testFile">A test file belonging to a project that may contain diagnostic markup.</param>
         /// <param name="additionalFile">A supporting test file that will appear to the analyzer as an "additional file".</param>
         /// <returns>The actual diagnostics.</returns>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, AdditionalText additionalFile = null)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, AdditionalText? additionalFile = null)
         {
-            return VerifyDiagnostics(testFile, new[] { additionalFile }.Where(x => x != null));
+            return VerifyDiagnostics(testFile, additionalFile is null ? null : new[] { additionalFile });
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile, AdditionalText)"/>
         /// <param name="additionalFiles">Supporting test files that will appear to the analyzer as "additional files".</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, IEnumerable<AdditionalText> additionalFiles)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, IEnumerable<AdditionalText>? additionalFiles)
         {
             return VerifyDiagnostics(testFile, additionalFiles, null);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile, IEnumerable{AdditionalText})"/>
         /// <param name="projectAdditionalFiles">Mapping of project names to the <see cref="AdditionalText"/> files they include.</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, IEnumerable<AdditionalText> additionalFiles, Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile testFile, IEnumerable<AdditionalText>? additionalFiles, Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles)
         {
             return VerifyDiagnostics(new[] { testFile }, additionalFiles, projectAdditionalFiles);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile, AdditionalText)"/>
         /// <param name="testFiles">Test files belonging to a project that may contain diagnostic markup.</param>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, AdditionalText additionalFile = null)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, AdditionalText? additionalFile = null)
         {
-            return VerifyDiagnostics(testFiles, new[] { additionalFile }.Where(x => x != null));
+            return VerifyDiagnostics(testFiles, additionalFile is null ? null : new[] { additionalFile });
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile, IEnumerable{AdditionalText})"/>
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile[], AdditionalText)" path="param"/>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, IEnumerable<AdditionalText> additionalFiles)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, IEnumerable<AdditionalText>? additionalFiles)
         {
             return VerifyDiagnostics(testFiles, additionalFiles, null);
         }
 
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile, IEnumerable{AdditionalText}, Dictionary{string, IEnumerable{AdditionalText}})"/>
         /// <inheritdoc cref="VerifyDiagnostics(AutoTestFile[], AdditionalText)" path="param"/>
-        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, IEnumerable<AdditionalText> additionalFiles, Dictionary<string, IEnumerable<AdditionalText>> projectAdditionalFiles)
+        protected IEnumerable<Diagnostic> VerifyDiagnostics(AutoTestFile[] testFiles, IEnumerable<AdditionalText>? additionalFiles, Dictionary<string, IEnumerable<AdditionalText>>? projectAdditionalFiles)
         {
             var context = new JoinableTaskContext();
             var diagnostics = new JoinableTaskFactory(context).Run(
@@ -235,7 +235,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                                     "Test base does not currently handle diagnostics in metadata locations. Diagnostic in metadata: {0}\r\n",
                                     diagnostics[i]));
 
-                            var resultMethodName = diagnostics[i].Location.SourceTree.FilePath.EndsWith(".cs", StringComparison.OrdinalIgnoreCase) ?
+                            var resultMethodName = (diagnostics[i].Location.SourceTree?.FilePath.EndsWith(".cs", StringComparison.OrdinalIgnoreCase) ?? true) ?
                                 "GetCSharpResultAt" :
                                 "GetBasicResultAt";
                             var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;
@@ -272,8 +272,13 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
         /// <param name="analyzer">The analyzer that was being run on the sources</param>
         /// <param name="expectedResults">Diagnostic Results that should have appeared in the code</param>
         /// <returns>The actual diagnostics.</returns>
-        private IEnumerable<Diagnostic> VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, DiagnosticResult[] expectedResults)
+        private IEnumerable<Diagnostic> VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer? analyzer, DiagnosticResult[] expectedResults)
         {
+            if (analyzer is null)
+            {
+                throw new ArgumentNullException(nameof(analyzer));
+            }
+
             var expectedCount = expectedResults.Length;
             var actualCount = actualResults.Count();
 

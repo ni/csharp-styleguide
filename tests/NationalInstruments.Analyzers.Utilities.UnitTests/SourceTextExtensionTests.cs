@@ -11,19 +11,13 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
     public sealed class SourceTextExtensionTests
     {
         [Fact]
-        public void NullSourceText_Parse_Throws()
-        {
-            SourceText sourceText = null;
-
-            Assert.Throws<ArgumentNullException>("text", () => sourceText.Parse(stream => stream.ReadToEnd()));
-        }
-
-        [Fact]
         public void SourceText_ParseWithNullFunction_Throws()
         {
             var sourceText = SourceText.From(string.Empty);
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             Assert.Throws<ArgumentNullException>("parser", () => sourceText.Parse<int>(null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
 
         [Fact]

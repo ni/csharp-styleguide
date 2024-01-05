@@ -341,5 +341,17 @@ namespace My.Namespace
 
             Assert.Throws<InvalidOperationException>(() => new TestMarkup().Parse(test, out var source));
         }
+
+        [Fact]
+        public void ExtremesDiagnosticTextSyntax_TextCaptured()
+        {
+            const int ExpectedMarkerCount = 1;
+            const string Test = @"<|class Program { }|>";
+
+            var markers = new TestMarkup().Parse(Test, out var source);
+
+            Assert.NotNull(markers);
+            Assert.Equal(ExpectedMarkerCount, markers.Count);
+        }
     }
 }

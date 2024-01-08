@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
@@ -29,8 +28,8 @@ namespace NationalInstruments.Analyzers.Style
         private static readonly LocalizableString LocalizableTitle = CreateLocalizableResourceString(nameof(Resources.NI1704_Title));
         private static readonly LocalizableString LocalizableDescription = CreateLocalizableResourceString(nameof(Resources.NI1704_Description));
 
-        private static readonly SourceTextValueProvider<CodeAnalysisDictionary> _xmlDictionaryProvider = new SourceTextValueProvider<CodeAnalysisDictionary>(ParseXmlDictionary);
-        private static readonly SourceTextValueProvider<CodeAnalysisDictionary> _dicDictionaryProvider = new SourceTextValueProvider<CodeAnalysisDictionary>(ParseDicDictionary);
+        private static readonly SourceTextValueProvider<(CodeAnalysisDictionary? Dictionary, Exception? Exception)> _xmlDictionaryProvider = new(text => ParseDictionary(text, isXml: true));
+        private static readonly SourceTextValueProvider<(CodeAnalysisDictionary? Dictionary, Exception? Exception)> _dicDictionaryProvider = new(text => ParseDictionary(text, isXml: false));
         private static readonly CodeAnalysisDictionary _mainDictionary = GetMainDictionary();
 
         public static readonly DiagnosticDescriptor FileParseRule = new DiagnosticDescriptor(
@@ -237,98 +236,15 @@ namespace NationalInstruments.Analyzers.Style
             context.RegisterCompilationStartAction(OnCompilationStart);
         }
 
-        private static CodeAnalysisDictionary GetMainDictionary()
+        private void OnCompilationStart(CompilationStartAnalysisContext context)
         {
-            var assemblyType = typeof(SpellingAnalyzer);
-            var assembly = assemblyType.GetTypeInfo().Assembly;
-            var dictionary = $"{assemblyType.Namespace}.Dictionary.dic";
+            var cancellationToken = context.CancellationToken;
 
-            using (var stream = assembly.GetManifestResourceStream(dictionary))
-            {
-                var text = SourceText.From(stream);
-                return ParseDicDictionary(text);
-            }
-        }
+            var dictionaries = ReadDictionaries().Add(_mainDictionary);
 
-        private static CodeAnalysisDictionary ParseXmlDictionary(SourceText text)
-            => text.Parse(CodeAnalysisDictionary.CreateFromXml);
-
-        private static CodeAnalysisDictionary ParseDicDictionary(SourceText text)
-            => text.Parse(CodeAnalysisDictionary.CreateFromDic);
-
-        private static string RemovePrefixIfPresent(string prefix, string name)
-            => name.StartsWith(prefix, StringComparison.Ordinal) ? name.Substring(1) : name;
-
-        private static IEnumerable<Diagnostic> GetMisspelledWordDiagnostics(ISymbol symbol, string misspelledWord)
-        {
-            switch (symbol.Kind)
-            {
-                case SymbolKind.Assembly:
-                    // Do not report spelling rules in assembly names for now. The spelling should be enforced
-                    // at the API level and the name of the assembly on disk isn't relevant
-                    // yield return Diagnostic.Create(AssemblyRule, Location.None, misspelledWord, symbol.Name);
-                    break;
-
-                case SymbolKind.Namespace:
-                    yield return Diagnostic.Create(NamespaceRule, symbol.Locations.First(), misspelledWord, symbol.ToDisplayString());
-                    break;
-
-                case SymbolKind.NamedType:
-                    foreach (var location in symbol.Locations)
-                    {
-                        yield return Diagnostic.Create(TypeRule, location, misspelledWord, symbol.ToDisplayString());
-                    }
-
-                    break;
-
-                case SymbolKind.Method:
-                case SymbolKind.Property:
-                case SymbolKind.Event:
-                case SymbolKind.Field:
-                    yield return Diagnostic.Create(MemberRule, symbol.Locations.First(), misspelledWord, symbol.ToDisplayString());
-                    break;
-
-                case SymbolKind.Parameter:
-                    yield return symbol.ContainingType.TypeKind == TypeKind.Delegate
-                        ? Diagnostic.Create(DelegateParameterRule, symbol.Locations.First(), symbol.ContainingType.ToDisplayString(), misspelledWord, symbol.Name)
-                        : Diagnostic.Create(MemberParameterRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name);
-
-                    break;
-
-                case SymbolKind.TypeParameter:
-                    yield return symbol.ContainingSymbol.Kind == SymbolKind.Method
-                        ? Diagnostic.Create(MethodTypeParameterRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name)
-                        : Diagnostic.Create(TypeTypeParameterRule, symbol.Locations.First(), symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name);
-
-                    break;
-
-                case SymbolKind.Local:
-                    yield return Diagnostic.Create(VariableRule, symbol.Locations.First(), misspelledWord, symbol.ToDisplayString());
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Unknown SymbolKind: {symbol.Kind}");
-            }
-        }
-
-        private void OnCompilationStart(CompilationStartAnalysisContext compilationStartContext)
-        {
-            if (IsRunningInProduction && InDebugMode)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }
-
-            var projectDictionary = _mainDictionary.Clone();
-            var dictionaries = ReadDictionaries();
-            if (dictionaries.Any())
-            {
-                var aggregatedDictionary = dictionaries.Aggregate((x, y) => x.CombineWith(y));
-                projectDictionary = projectDictionary.CombineWith(aggregatedDictionary);
-            }
-
-            compilationStartContext.RegisterOperationAction(AnalyzeVariable, OperationKind.VariableDeclarator);
-            compilationStartContext.RegisterCompilationEndAction(AnalyzeAssembly);
-            compilationStartContext.RegisterSymbolAction(
+            context.RegisterOperationAction(AnalyzeVariable, OperationKind.VariableDeclarator);
+            context.RegisterCompilationEndAction(AnalyzeAssembly);
+            context.RegisterSymbolAction(
                 AnalyzeSymbol,
                 SymbolKind.Namespace,
                 SymbolKind.NamedType,
@@ -338,43 +254,31 @@ namespace NationalInstruments.Analyzers.Style
                 SymbolKind.Field,
                 SymbolKind.Parameter);
 
-            IEnumerable<CodeAnalysisDictionary> ReadDictionaries()
+            ImmutableArray<CodeAnalysisDictionary> ReadDictionaries()
             {
-                var fileProvider = AdditionalFileProvider.FromOptions(compilationStartContext.Options);
-                return fileProvider?.GetMatchingFiles(@"(?:dictionary|custom).*?\.(?:xml|dic)$")
-                    .Select(CreateDictionaryFromAdditionalText)
-                    .OfType<CodeAnalysisDictionary>() ?? Enumerable.Empty<CodeAnalysisDictionary>();
+                var fileProvider = AdditionalFileProvider.FromOptions(context.Options);
+                return fileProvider.GetMatchingFiles(@"(?:dictionary|custom).*?\.(?:xml|dic)$")
+                    .Select(GetOrCreateDictionaryFromAdditionalText)
+                    .Where(x => x != null)
+                    .ToImmutableArray();
+            }
 
-                CodeAnalysisDictionary? CreateDictionaryFromAdditionalText(AdditionalText additionalFile)
+            CodeAnalysisDictionary GetOrCreateDictionaryFromAdditionalText(AdditionalText additionalText)
+            {
+                var isXml = additionalText.Path.EndsWith(".xml", StringComparison.OrdinalIgnoreCase);
+                var provider = isXml ? _xmlDictionaryProvider : _dicDictionaryProvider;
+
+                var (dictionary, exception) = context.TryGetValue(additionalText.GetTextOrEmpty(cancellationToken), provider, out var result)
+                    ? result
+                    : default;
+
+                if (exception is not null)
                 {
-                    CodeAnalysisDictionary? dictionary = null;
-                    var text = additionalFile.GetText(compilationStartContext.CancellationToken);
-                    var isXml = additionalFile.Path.EndsWith("xml", StringComparison.OrdinalIgnoreCase);
-                    var provider = isXml ? _xmlDictionaryProvider : _dicDictionaryProvider;
-
-                    if (text is not null && !compilationStartContext.TryGetValue(text, provider, out dictionary))
-                    {
-                        try
-                        {
-                            // Annoyingly (and expectedly), TryGetValue swallows the parsing exception,
-                            // so we have to parse again to get it.
-                            var unused = isXml ? ParseXmlDictionary(text) : ParseDicDictionary(text);
-                            ReportFileParseDiagnostic(additionalFile.Path, "Unknown error");
-                        }
-                        catch (Exception ex)
-                        {
-                            ReportFileParseDiagnostic(additionalFile.Path, ex.Message);
-                        }
-                    }
-
-                    return dictionary;
+                    var diagnostic = Diagnostic.Create(FileParseRule, Location.None, additionalText.Path, exception.Message);
+                    context.RegisterCompilationEndAction(x => x.ReportDiagnostic(diagnostic));
                 }
 
-                void ReportFileParseDiagnostic(string filePath, string message)
-                {
-                    var diagnostic = Diagnostic.Create(FileParseRule, Location.None, filePath, message);
-                    compilationStartContext.RegisterCompilationEndAction(x => x.ReportDiagnostic(diagnostic));
-                }
+                return dictionary!;
             }
 
             void AnalyzeVariable(OperationAnalysisContext operationContext)
@@ -382,22 +286,14 @@ namespace NationalInstruments.Analyzers.Style
                 var variableOperation = (IVariableDeclaratorOperation)operationContext.Operation;
                 var variable = variableOperation.Symbol;
 
-                var diagnostics = GetDiagnosticsForSymbol(variable, variable.Name, checkForUnmeaningful: false);
-                foreach (var diagnostic in diagnostics)
-                {
-                    operationContext.ReportDiagnostic(diagnostic);
-                }
+                ReportDiagnosticsForSymbol(variable, variable.Name, operationContext.ReportDiagnostic, checkForUnmeaningful: false);
             }
 
-            void AnalyzeAssembly(CompilationAnalysisContext context)
+            void AnalyzeAssembly(CompilationAnalysisContext analysisContext)
             {
-                var assembly = context.Compilation.Assembly;
-                var diagnostics = GetDiagnosticsForSymbol(assembly, assembly.Name);
+                var assembly = analysisContext.Compilation.Assembly;
 
-                foreach (var diagnostic in diagnostics)
-                {
-                    context.ReportDiagnostic(diagnostic);
-                }
+                ReportDiagnosticsForSymbol(assembly, assembly.Name, analysisContext.ReportDiagnostic);
             }
 
             void AnalyzeSymbol(SymbolAnalysisContext symbolContext)
@@ -413,8 +309,8 @@ namespace NationalInstruments.Analyzers.Style
                 var symbolName = symbol.Name;
                 switch (symbol)
                 {
-                    case IFieldSymbol field:
-                        symbolName = RemovePrefixIfPresent("_", symbolName);
+                    case IFieldSymbol:
+                        symbolName = RemovePrefixIfPresent('_', symbolName);
                         break;
 
                     case IMethodSymbol method:
@@ -432,7 +328,7 @@ namespace NationalInstruments.Analyzers.Style
 
                         foreach (var typeParameter in method.TypeParameters)
                         {
-                            typeParameterDiagnostics = GetDiagnosticsForSymbol(typeParameter, RemovePrefixIfPresent("T", typeParameter.Name));
+                            ReportDiagnosticsForSymbol(typeParameter, RemovePrefixIfPresent('T', typeParameter.Name), symbolContext.ReportDiagnostic);
                         }
 
                         break;
@@ -440,69 +336,185 @@ namespace NationalInstruments.Analyzers.Style
                     case INamedTypeSymbol type:
                         if (type.TypeKind == TypeKind.Interface)
                         {
-                            symbolName = RemovePrefixIfPresent("I", symbolName);
+                            symbolName = RemovePrefixIfPresent('I', symbolName);
                         }
 
                         foreach (var typeParameter in type.TypeParameters)
                         {
-                            typeParameterDiagnostics = GetDiagnosticsForSymbol(typeParameter, RemovePrefixIfPresent("T", typeParameter.Name));
+                            ReportDiagnosticsForSymbol(typeParameter, RemovePrefixIfPresent('T', typeParameter.Name), symbolContext.ReportDiagnostic);
+                        }
+
+                        break;
+
+                    case IParameterSymbol parameter:
+                        // Check if the member this parameter is part of is an override/interface implementation
+                        if (parameter.ContainingSymbol.IsImplementationOfAnyImplicitInterfaceMember()
+                            || parameter.ContainingSymbol.IsImplementationOfAnyExplicitInterfaceMember()
+                            || parameter.ContainingSymbol.IsOverride)
+                        {
+                            if (NameMatchesBase(parameter))
+                            {
+                                return;
+                            }
                         }
 
                         break;
                 }
 
-                var diagnostics = GetDiagnosticsForSymbol(symbol, symbolName);
-                var allDiagnostics = typeParameterDiagnostics.Concat(diagnostics);
-                foreach (var diagnostic in allDiagnostics)
-                {
-                    symbolContext.ReportDiagnostic(diagnostic);
-                }
+                ReportDiagnosticsForSymbol(symbol, symbolName, symbolContext.ReportDiagnostic);
             }
 
-            IEnumerable<Diagnostic> GetDiagnosticsForSymbol(ISymbol symbol, string symbolName, bool checkForUnmeaningful = true)
+            void ReportDiagnosticsForSymbol(ISymbol symbol, string symbolName, Action<Diagnostic> reportDiagnostic, bool checkForUnmeaningful = true)
             {
-                var diagnostics = new List<Diagnostic>();
-                if (checkForUnmeaningful && symbolName.Length == 1)
+                foreach (var misspelledWord in GetMisspelledWords(symbolName))
                 {
-                    // diagnostics.AddRange(GetUnmeaningfulIdentifierDiagnostics(symbol, symbolName));
-                }
-                else
-                {
-                    foreach (var misspelledWord in GetMisspelledWords(symbolName))
-                    {
-                        diagnostics.AddRange(GetMisspelledWordDiagnostics(symbol, misspelledWord));
-                    }
+                    reportDiagnostic(GetMisspelledWordDiagnostic(symbol, misspelledWord));
                 }
 
-                return diagnostics;
+                if (checkForUnmeaningful && symbolName.Length == 1)
+                {
+                    reportDiagnostic(GetUnmeaningfulIdentifierDiagnostic(symbol, symbolName));
+                }
             }
 
             IEnumerable<string> GetMisspelledWords(string symbolName)
             {
                 var parser = new WordParser(symbolName, WordParserOptions.SplitCompoundWords);
-                if (parser.PeekWord() is not null)
+
+                string? word;
+                while ((word = parser.NextWord()) is not null)
                 {
-                    var word = parser.NextWord()!;
-
-                    do
+                    if (!IsWordAcronym(word) && !IsWordNumeric(word) && !IsWordSpelledCorrectly(word))
                     {
-                        if (IsWordAcronym(word) || IsWordNumeric(word) || IsWordSpelledCorrectly(word))
-                        {
-                            continue;
-                        }
-
                         yield return word;
                     }
-                    while ((word = parser.NextWord()) is not null);
                 }
             }
 
-            bool IsWordAcronym(string word) => word.All(char.IsUpper);
+            static bool IsWordAcronym(string word) => word.All(char.IsUpper);
 
-            bool IsWordNumeric(string word) => char.IsDigit(word[0]);
+            static bool IsWordNumeric(string word) => char.IsDigit(word[0]);
 
             bool IsWordSpelledCorrectly(string word)
-                => !projectDictionary.UnrecognizedWords.Contains(word) && projectDictionary.RecognizedWords.Contains(word);
+            {
+                return !dictionaries.Any((d) => d.ContainsUnrecognizedWord(word)) && dictionaries.Any((d) => d.ContainsRecognizedWord(word));
+            }
+        }
+
+        /// <summary>
+        /// Check if the parameter matches the name of the parameter in any base implementation
+        /// </summary>
+        private static bool NameMatchesBase(IParameterSymbol parameter)
+        {
+            if (parameter.ContainingSymbol is IMethodSymbol methodSymbol)
+            {
+                ImmutableArray<IMethodSymbol> originalDefinitions = methodSymbol.GetOriginalDefinitions();
+
+                foreach (var methodDefinition in originalDefinitions)
+                {
+                    if (methodDefinition.Parameters.Length > parameter.Ordinal)
+                    {
+                        if (methodDefinition.Parameters[parameter.Ordinal].Name == parameter.Name)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (parameter.ContainingSymbol is IPropertySymbol propertySymbol)
+            {
+                ImmutableArray<IPropertySymbol> originalDefinitions = propertySymbol.GetOriginalDefinitions();
+
+                foreach (var propertyDefinition in originalDefinitions)
+                {
+                    if (propertyDefinition.Parameters.Length > parameter.Ordinal)
+                    {
+                        if (propertyDefinition.Parameters[parameter.Ordinal].Name == parameter.Name)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            // Name either does not match or there was an issue getting the base implementation
+            return false;
+        }
+
+        private static CodeAnalysisDictionary GetMainDictionary()
+        {
+            // The "main" dictionary, Dictionary.dic, was created in WSL Ubuntu with the following commands:
+            //
+            // Install dependencies:
+            // > sudo apt install hunspell-tools hunspell-en-us
+            //
+            // Create dictionary:
+            // > unmunch /usr/share/hunspell/en_US.dic /usr/share/hunspell/en_US.aff > Dictionary.dic
+            //
+            // Tweak:
+            // Added the words: 'namespace'
+            var text = SourceText.From(Resources.Dictionary);
+            return ParseDicDictionary(text);
+        }
+
+        private static (CodeAnalysisDictionary? Dictionary, Exception? Exception) ParseDictionary(SourceText text, bool isXml)
+        {
+            try
+            {
+                return (isXml ? ParseXmlDictionary(text) : ParseDicDictionary(text), Exception: null);
+            }
+            catch (Exception ex)
+            {
+                return (null, ex);
+            }
+        }
+
+        private static CodeAnalysisDictionary ParseXmlDictionary(SourceText text)
+            => text.Parse(CodeAnalysisDictionary.CreateFromXml);
+
+        private static CodeAnalysisDictionary ParseDicDictionary(SourceText text)
+            => text.Parse(CodeAnalysisDictionary.CreateFromDic);
+
+        private static string RemovePrefixIfPresent(char prefix, string name)
+            => name.Length > 0 && name[0] == prefix ? name.Substring(1) : name;
+
+        private static Diagnostic GetMisspelledWordDiagnostic(ISymbol symbol, string misspelledWord)
+        {
+            return symbol.Kind switch
+            {
+                SymbolKind.Assembly => symbol.CreateDiagnostic(AssemblyRule, misspelledWord, symbol.Name),
+                SymbolKind.Namespace => symbol.CreateDiagnostic(NamespaceRule, misspelledWord, symbol.ToDisplayString()),
+                SymbolKind.NamedType => symbol.CreateDiagnostic(TypeRule, misspelledWord, symbol.ToDisplayString()),
+                SymbolKind.Method or SymbolKind.Property or SymbolKind.Event or SymbolKind.Field
+                    => symbol.CreateDiagnostic(MemberRule, misspelledWord, symbol.ToDisplayString()),
+                SymbolKind.Parameter => symbol.ContainingType.TypeKind == TypeKind.Delegate
+                    ? symbol.CreateDiagnostic(DelegateParameterRule, symbol.ContainingType.ToDisplayString(), misspelledWord, symbol.Name)
+                    : symbol.CreateDiagnostic(MemberParameterRule, symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name),
+                SymbolKind.TypeParameter => symbol.ContainingSymbol.Kind == SymbolKind.Method
+                    ? symbol.CreateDiagnostic(MethodTypeParameterRule, symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name)
+                    : symbol.CreateDiagnostic(TypeTypeParameterRule, symbol.ContainingSymbol.ToDisplayString(), misspelledWord, symbol.Name),
+                SymbolKind.Local => symbol.CreateDiagnostic(VariableRule, misspelledWord, symbol.ToDisplayString()),
+                _ => throw new NotImplementedException($"Unknown SymbolKind: {symbol.Kind}"),
+            };
+        }
+
+        private static Diagnostic GetUnmeaningfulIdentifierDiagnostic(ISymbol symbol, string symbolName)
+        {
+            return symbol.Kind switch
+            {
+                SymbolKind.Assembly => symbol.CreateDiagnostic(AssemblyMoreMeaningfulNameRule, symbolName),
+                SymbolKind.Namespace => symbol.CreateDiagnostic(NamespaceMoreMeaningfulNameRule, symbolName),
+                SymbolKind.NamedType => symbol.CreateDiagnostic(TypeMoreMeaningfulNameRule, symbolName),
+                SymbolKind.Method or SymbolKind.Property or SymbolKind.Event or SymbolKind.Field
+                    => symbol.CreateDiagnostic(MemberMoreMeaningfulNameRule, symbolName),
+                SymbolKind.Parameter => symbol.ContainingType.TypeKind == TypeKind.Delegate
+                    ? symbol.CreateDiagnostic(DelegateParameterMoreMeaningfulNameRule, symbol.ContainingType.ToDisplayString(), symbolName)
+                    : symbol.CreateDiagnostic(MemberParameterMoreMeaningfulNameRule, symbol.ContainingSymbol.ToDisplayString(), symbolName),
+                SymbolKind.TypeParameter => symbol.ContainingSymbol.Kind == SymbolKind.Method
+                    ? symbol.CreateDiagnostic(MethodTypeParameterMoreMeaningfulNameRule, symbol.ContainingSymbol.ToDisplayString(), symbol.Name)
+                    : symbol.CreateDiagnostic(TypeTypeParameterMoreMeaningfulNameRule, symbol.ContainingSymbol.ToDisplayString(), symbol.Name),
+                _ => throw new NotImplementedException($"Unknown SymbolKind: {symbol.Kind}"),
+            };
         }
     }
 }

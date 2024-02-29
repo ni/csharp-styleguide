@@ -929,7 +929,7 @@ Constructors should only contain parameters that are required and use initialize
 
 Treat every line of code as having the potential to throw an exception. Code should be written such that exceptions cleanly abort the current operation, leaving all data structures in a consistent state that is balanced with respect to paired operations (e.g. init/cleanup).
 
-For more information about writing exception-safe code, please refer to [CSharp Coding Conventions Appendix: Writing exception-safe code](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#writing-exception-safe-code)
+For more information about writing exception-safe code, please refer to [CSharp Coding Conventions Appendix: Writing exception-safe code](CSharp-Coding-Conventions-Appendix.md#writing-exception-safe-code)
 
 ### [L.5.2] ✔️ **DO** Throw exceptions instead of returning error codes or null
 
@@ -959,11 +959,11 @@ public bool TryDoSomeStuff(out MyStuff stuff)
 
 ### [L.6.1] ✔️ **CONSIDER** Following standard conventions for event handlers (naming, inheritance and implementation)
 
-When defining an event that a C# class can raise, follow the steps outlined in [CSharp Coding Conventions Appendix: Events](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#events) regarding naming and implementation.
+When defining an event that a C# class can raise, follow the steps outlined in [CSharp Coding Conventions Appendix: Events](CSharp-Coding-Conventions-Appendix.md#events) regarding naming and implementation.
 
 ### [L.6.2] ❌ **AVOID** Using multi-threaded events
 
-Multi-threaded events are difficult to write properly to handle all situations. If it is necessary, please read and follow the guidelines outlined in [CSharp Coding Conventions Appendix: Multi-threaded events](/Organizations/ASW/Developer-Handbook/Coding-Conventions/CSharp-Coding-Conventions/CSharp-Coding-Conventions-Appendix#multi-threaded-events)
+Multi-threaded events are difficult to write properly to handle all situations. If it is necessary, please read and follow the guidelines outlined in [CSharp Coding Conventions Appendix: Multi-threaded events](CSharp-Coding-Conventions-Appendix.md#multi-threaded-events)
 
 ## [L.7] ✔️ **CONSIDER** Handling out of range values for enumerations
 

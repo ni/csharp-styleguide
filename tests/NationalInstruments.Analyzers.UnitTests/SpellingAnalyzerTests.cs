@@ -36,8 +36,8 @@ namespace NationalInstruments.Analyzers.UnitTests
         public static IEnumerable<object[]> UnmeaningfulMembers
             => new[]
             {
-                new object[] { CreateTypeWithConstructor("<?>A", isStatic: false), "A", "A.A()" },
-                new object[] { CreateTypeWithConstructor("<?>B", isStatic: true), "B", "B.B()" },
+                new object[] { CreateTypeWithConstructor("<?>A", isStatic: false), "A" },
+                new object[] { CreateTypeWithConstructor("<?>B", isStatic: true), "B" },
                 new object[] { CreateTypeWithField("Program", "<?>_c"), "c" },
                 new object[] { CreateTypeWithEvent("Program", "<?>D"), "D" },
                 new object[] { CreateTypeWithProperty("Program", "<?>E"), "E" },
@@ -122,20 +122,20 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(testFile, null, GetProjectAdditionalFiles("AssemblyB", dictionary));
         }
 
-        [Fact(Skip = "Assembly names are disabled for now")]
+        [Fact]
         public void AssemblyMisspelled_Verify_EmitsDiagnostic()
         {
-            var testFile = new TestFile("MyAssambly", "class Program { }");
+            var testFile = new AutoTestFile("MyAssambly", "<?>class Program { }", GetAssemblyRule("Assambly", "MyAssambly"));
 
-            VerifyDiagnostics(testFile, GetResult(SpellingAnalyzer.AssemblyRule, "Assambly", "MyAssambly"));
+            VerifyDiagnostics(testFile);
         }
 
-        [Fact(Skip = "Unmeaningful rules disabled for now")]
+        [Fact]
         public void AssemblyUnmeaningful_Verify_EmitsDiagnostic()
         {
-            var testFile = new TestFile("A", "class Program { }");
+            var testFile = new AutoTestFile("A", "<?>class Program { }", new Rule(SpellingAnalyzer.AssemblyMoreMeaningfulNameRule, "A"));
 
-            VerifyDiagnostics(testFile, GetResult(SpellingAnalyzer.AssemblyMoreMeaningfulNameRule, "A"));
+            VerifyDiagnostics(testFile);
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(testFile);
         }
 
-        [Fact(Skip = "Unmeaningful rules disabled for now")]
+        [Fact]
         public void NamespaceUnmeaningful_Verify_EmitsDiagnostic()
         {
             var testFile = new AutoTestFile("namespace Tests.<|A|> { }", new Rule(SpellingAnalyzer.NamespaceMoreMeaningfulNameRule));
@@ -167,7 +167,7 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(testFile);
         }
 
-        [Theory(Skip = "Unmeaningful rules disabled for now")]
+        [Theory]
         [InlineData("class <?>A { }", "A")]
         [InlineData("struct <?>B { }", "B")]
         [InlineData("enum <?>C { }", "C")]
@@ -221,7 +221,7 @@ class Grandchild : Child
             VerifyDiagnostics(testFile);
         }
 
-        [Theory(Skip = "Unmeaningful rules disabled for now")]
+        [Theory]
         [MemberData(nameof(UnmeaningfulMembers))]
         public void MemberUnmeaningful_Verify_EmitsDiagnostic(string source, string memberName)
         {
@@ -255,7 +255,7 @@ class Program
             VerifyDiagnostics(testFile);
         }
 
-        [Fact(Skip = "Unmeaningful rules disabled for now")]
+        [Fact]
         public void MemberParameterUnmeaningful_Verify_EmitsDiagnostic()
         {
             var source = @"
@@ -285,7 +285,7 @@ class Program
             VerifyDiagnostics(testFile);
         }
 
-        [Fact(Skip = "Unmeaningful rules disabled for now")]
+        [Fact]
         public void DelegateParameterUnmeaningful_Verify_EmitsDiagnostic()
         {
             var testFile = new AutoTestFile(
@@ -308,7 +308,7 @@ class Program
             VerifyDiagnostics(testFile);
         }
 
-        [Theory(Skip = "Unmeaningful rules disabled for now")]
+        [Theory]
         [InlineData("class MyClass<<?>A> { }", "MyClass<A>", "A")]
         [InlineData("struct MyStructure<<?>B> { }", "MyStructure<B>", "B")]
         [InlineData("interface IInterface<<?>C> { }", "IInterface<C>", "C")]
@@ -335,7 +335,7 @@ class Program
             VerifyDiagnostics(testFile);
         }
 
-        [Fact(Skip = "Unmeaningful rules disabled for now")]
+        [Fact]
         public void MethodTypeParameterUnmeaningful_Verify_EmitsDiagnostic()
         {
             var source = @"
@@ -390,10 +390,10 @@ class Program
                     "The 'word' start tag on line 6 position 14 does not match the end tag of 'Word'. Line 6, position 24."));
         }
 
-        private static AdditionalText CreateXmlDictionary(IEnumerable<string> recognizedWords, IEnumerable<string> unrecognizedWords = null) =>
+        private static AdditionalText CreateXmlDictionary(IEnumerable<string>? recognizedWords, IEnumerable<string>? unrecognizedWords = null) =>
             CreateXmlDictionary("CodeAnalysisDictionary.xml", recognizedWords, unrecognizedWords);
 
-        private static AdditionalText CreateXmlDictionary(string filename, IEnumerable<string> recognizedWords, IEnumerable<string> unrecognizedWords = null)
+        private static AdditionalText CreateXmlDictionary(string filename, IEnumerable<string>? recognizedWords, IEnumerable<string>? unrecognizedWords = null)
         {
             var contents = $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Dictionary>
@@ -405,7 +405,7 @@ class Program
 
             return new TestAdditionalDocument(filename, contents);
 
-            string CreateXml(IEnumerable<string> words) =>
+            string CreateXml(IEnumerable<string>? words) =>
                 string.Join(Environment.NewLine, words?.Select(x => $"<Word>{x}</Word>") ?? Enumerable.Empty<string>());
         }
 
@@ -446,6 +446,9 @@ class {typeName.TrimStart(new[] { '<', '?', '>' })}
 
 class {typeName} {{ event EventHandler<string> {eventName}; }}";
         }
+
+        private static Rule GetAssemblyRule(string misspelling, string assemblyName)
+            => new Rule(SpellingAnalyzer.AssemblyRule, misspelling, assemblyName);
 
         private static Rule GetNamespaceRule(string misspelling, string namespaceName)
             => new Rule(SpellingAnalyzer.NamespaceRule, misspelling, namespaceName);

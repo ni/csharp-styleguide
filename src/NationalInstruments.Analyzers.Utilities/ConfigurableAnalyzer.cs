@@ -9,7 +9,7 @@ namespace NationalInstruments.Analyzers.Utilities
     /// </summary>
     public abstract class ConfigurableAnalyzer : StatefulAnalyzer
     {
-        private IAdditionalFileService _additionalFileService;
+        private readonly IAdditionalFileService _additionalFileService;
 
         /// <summary>
         /// Constructor that stores an implementation of <see cref="IAdditionalFileService"/>.
@@ -33,7 +33,7 @@ namespace NationalInstruments.Analyzers.Utilities
         {
             foreach (var file in _additionalFileService.GetFilesMatchingPattern(fileNamePattern))
             {
-                XElement configuration = _additionalFileService.ParseXmlFile(file, CancellationToken);
+                XElement? configuration = _additionalFileService.ParseXmlFile(file, CancellationToken);
                 if (configuration != null)
                 {
                     LoadConfigurations(configuration, file.Path);
@@ -56,8 +56,8 @@ namespace NationalInstruments.Analyzers.Utilities
         /// <param name="filePath">Full path to the XML file.</param>
         /// <param name="rule">Rule to use if the root element's name differs from the expected name.</param>
         /// <param name="diagnostic">Diagnostic to return as an out parameter if the root element's name differs from the expected name.</param>
-        /// <returns></returns>
-        protected bool TryGetRootElementDiagnostic(XElement rootElement, string expectedName, string filePath, DiagnosticDescriptor rule, out Diagnostic diagnostic)
+        /// <returns>True if a diagnostic was created, false otherwise.</returns>
+        protected bool TryGetRootElementDiagnostic(XElement rootElement, string expectedName, string filePath, DiagnosticDescriptor rule, out Diagnostic? diagnostic)
         {
             if (rootElement.Name != expectedName)
             {

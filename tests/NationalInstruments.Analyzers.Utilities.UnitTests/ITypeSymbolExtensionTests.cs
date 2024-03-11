@@ -74,7 +74,7 @@ class Foo
                     var method = methodSyntax.GetDeclaredOrReferencedSymbol(compilation.GetSemanticModel(tree));
 
                     var i = 0;
-                    foreach (ITypeSymbol type in method.ContainingType.GetBaseTypesAndThis())
+                    foreach (var type in (method?.ContainingType?.GetBaseTypesAndThis()).ToSafeEnumerable())
                     {
                         Assert.Equal(expectedTypes[i++], type.Name);
                     }

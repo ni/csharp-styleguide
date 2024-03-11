@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
@@ -34,13 +35,20 @@ namespace NationalInstruments.Analyzers.Correctness
             if (diagnostic != null)
             {
                 var location = diagnostic.Location;
-                var namespaceName = (await location.SourceTree.GetRootAsync(context.CancellationToken).ConfigureAwait(false))
-                    .FindNode(location.SourceSpan)
-                    .ToString();
+                var sourceTree = location.SourceTree;
+                var namespaceName = sourceTree is not null
+                    ? (await sourceTree.GetRootAsync(context.CancellationToken))
+                        .FindNode(location.SourceSpan)
+                        .ToString()
+                    : null;
                 var approvedNamespacesFilePaths = diagnostic.Properties.Where(kv => kv.Key.StartsWith("Path")).Select(kv => kv.Value);
+
                 foreach (var path in approvedNamespacesFilePaths)
                 {
-                    context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, path), context.Diagnostics);
+                    if (namespaceName is not null)
+                    {
+                        context.RegisterCodeFix(new ApprovedNamespaceCodeAction(context, namespaceName, path), context.Diagnostics);
+                    }
                 }
             }
         }
@@ -52,11 +60,11 @@ namespace NationalInstruments.Analyzers.Correctness
             private readonly string _approvedNamespacesFilePath;
             private readonly string _title;
 
-            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName, string approvedNamespacesFilePath)
+            public ApprovedNamespaceCodeAction(CodeFixContext context, string namespaceName, string? approvedNamespacesFilePath)
             {
                 _context = context;
                 _namespaceName = namespaceName;
-                _approvedNamespacesFilePath = approvedNamespacesFilePath;
+                _approvedNamespacesFilePath = approvedNamespacesFilePath ?? "Unknown";
                 _title = string.Format(CultureInfo.InvariantCulture, Resources.NI1800_CodeFixTitleFormat, approvedNamespacesFilePath);
             }
 

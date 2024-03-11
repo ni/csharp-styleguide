@@ -28,7 +28,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             _state = new QueryState();
         }
 
-        public override SyntaxNode VisitQueryExpression(QueryExpressionSyntax node)
+        public override SyntaxNode? VisitQueryExpression(QueryExpressionSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -41,27 +41,31 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
 
             VisitQueryBody(node.Body);
 
-            ExpressionSyntax currentExpression = ParenthesizedExpression((InvocationExpressionSyntax)_state.FluentExpression);
-
-            foreach (var invocation in _pendingInvocationExpressions.AsEnumerable().Reverse())
+            var fluentExpression = _state.FluentExpression;
+            if (fluentExpression is not null)
             {
-                var fluentNode = InvocationExpression(
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        currentExpression,
-                        ((MemberAccessExpressionSyntax)invocation.Expression).Name),
-                    invocation.ArgumentList);
+                ExpressionSyntax currentExpression = ParenthesizedExpression((InvocationExpressionSyntax)fluentExpression);
 
-                currentExpression = fluentNode;
+                foreach (var invocation in _pendingInvocationExpressions.AsEnumerable().Reverse())
+                {
+                    var fluentNode = InvocationExpression(
+                        MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            currentExpression,
+                            ((MemberAccessExpressionSyntax)invocation.Expression).Name),
+                        invocation.ArgumentList);
+
+                    currentExpression = fluentNode;
+                }
             }
 
             _pendingInvocationExpressions.Clear();
             _state.IsAnonymousType = false;
 
-            return _state.FluentExpression;
+            return fluentExpression;
         }
 
-        public override SyntaxNode VisitQueryBody(QueryBodySyntax node)
+        public override SyntaxNode? VisitQueryBody(QueryBodySyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -86,7 +90,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return node;
         }
 
-        public override SyntaxNode VisitQueryContinuation(QueryContinuationSyntax node)
+        public override SyntaxNode? VisitQueryContinuation(QueryContinuationSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -98,7 +102,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return node;
         }
 
-        public override SyntaxNode VisitFromClause(FromClauseSyntax node)
+        public override SyntaxNode? VisitFromClause(FromClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -107,8 +111,13 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
 
             var temp = _visitInvocation;
             _visitInvocation = false;
-            var newFrom = (FromClauseSyntax)base.VisitFromClause(node);
+            var newFrom = (FromClauseSyntax?)base.VisitFromClause(node);
             _visitInvocation = temp;
+
+            if (newFrom is null)
+            {
+                return null;
+            }
 
             _state.SourceIdentifier = newFrom.Identifier;
             _state.IdentifiersChain[_state.SourceIdentifier.ValueText] = 0;
@@ -164,7 +173,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return newFrom;
         }
 
-        public override SyntaxNode VisitWhereClause(WhereClauseSyntax node)
+        public override SyntaxNode? VisitWhereClause(WhereClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -175,7 +184,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return BuildFluentInvocation("Where", BuildSimpleLambdaExpression(condition));
         }
 
-        public override SyntaxNode VisitLetClause(LetClauseSyntax node)
+        public override SyntaxNode? VisitLetClause(LetClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -185,13 +194,13 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             var letExpression = (ExpressionSyntax)SetFlagAndVisit(node.Expression);
 
             var nameEqualsExpressions =
-                new List<Tuple<NameEqualsSyntax, ExpressionSyntax>>
+                new List<Tuple<NameEqualsSyntax?, ExpressionSyntax>>
                 {
-                    Tuple.Create<NameEqualsSyntax, ExpressionSyntax>(
+                    Tuple.Create<NameEqualsSyntax?, ExpressionSyntax>(
                         null,
                         IdentifierName(GetLambdaParameterToken(letExpression))),
                     Tuple.Create(
-                        NameEquals(node.Identifier.ValueText),
+                        (NameEqualsSyntax?)NameEquals(node.Identifier.ValueText),
                         letExpression),
                 };
 
@@ -205,7 +214,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return selectInvocation;
         }
 
-        public override SyntaxNode VisitOrderByClause(OrderByClauseSyntax node)
+        public override SyntaxNode? VisitOrderByClause(OrderByClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -236,7 +245,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return orderByInvocation;
         }
 
-        public override SyntaxNode VisitJoinClause(JoinClauseSyntax node)
+        public override SyntaxNode? VisitJoinClause(JoinClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -273,7 +282,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             }
         }
 
-        public override SyntaxNode VisitSelectClause(SelectClauseSyntax node)
+        public override SyntaxNode? VisitSelectClause(SelectClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -284,7 +293,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return BuildFluentInvocation("Select", BuildSimpleLambdaExpression(selectExpression));
         }
 
-        public override SyntaxNode VisitGroupClause(GroupClauseSyntax node)
+        public override SyntaxNode? VisitGroupClause(GroupClauseSyntax node)
         {
             if (!_visitQuerySyntax)
             {
@@ -298,11 +307,11 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
                 BuildSimpleLambdaExpression(newGroup.GroupExpression));
         }
 
-        public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
+        public override SyntaxNode? VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             if (_visitInvocation)
             {
-                if (node.Expression is MemberAccessExpressionSyntax memberAccess && _state.FluentExpression == null)
+                if (node.Expression is MemberAccessExpressionSyntax memberAccess && _state.FluentExpression is null)
                 {
                     _pendingInvocationExpressions.Add(node);
                 }
@@ -311,11 +320,11 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             return base.VisitInvocationExpression(node);
         }
 
-        public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+        public override SyntaxNode? VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
             return _state.IsAnonymousType
-                       ? (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node)
-                       : base.VisitMemberAccessExpression(node);
+                       ? (MemberAccessExpressionSyntax?)base.VisitMemberAccessExpression(node)
+                       : base.VisitMemberAccessExpression(node)!;
         }
 
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
@@ -382,9 +391,10 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             var node = fromClause.Expression;
             ExpressionSyntax source = RemoveParenthesized(node);
 
-            if (!(node.DescendantNodesAndSelf().
-                OfType<InvocationExpressionSyntax>().
-                FirstOrDefault()?.Expression is MemberAccessExpressionSyntax memberAccess))
+            if (node
+                .DescendantNodesAndSelf()
+                .OfType<InvocationExpressionSyntax>()
+                .FirstOrDefault()?.Expression is not MemberAccessExpressionSyntax memberAccess)
             {
                 return node;
             }
@@ -393,7 +403,11 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
             do
             {
                 invocations.Add(memberAccess.Expression);
-                memberAccess = (memberAccess.Expression as InvocationExpressionSyntax)?.Expression as MemberAccessExpressionSyntax;
+                var invocation = memberAccess.Expression as InvocationExpressionSyntax;
+                if (invocation?.Expression is MemberAccessExpressionSyntax intermediateMemberAccess)
+                {
+                    memberAccess = intermediateMemberAccess;
+                }
             }
             while (memberAccess != null);
 
@@ -502,7 +516,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
                     SeparatedList(arguments)));
         }
 
-        private SimpleLambdaExpressionSyntax BuildSimpleLambdaExpression(ExpressionSyntax expression, ParameterSyntax parameter = null)
+        private SimpleLambdaExpressionSyntax BuildSimpleLambdaExpression(ExpressionSyntax expression, ParameterSyntax? parameter = null)
         {
             return SimpleLambdaExpression(parameter ?? GetLambdaParameter(expression), expression);
         }
@@ -525,7 +539,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
         }
 
         private AnonymousObjectCreationExpressionSyntax BuildAnonymousObject(
-            List<Tuple<NameEqualsSyntax, ExpressionSyntax>> nameEqulasAndExpression)
+            List<Tuple<NameEqualsSyntax?, ExpressionSyntax>> nameEqulasAndExpression)
         {
             return AnonymousObjectCreationExpression(
                 SeparatedList(
@@ -556,15 +570,19 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
         {
             try
             {
-                return Identifier(
-                    node.DescendantNodesAndSelf().
-                    Select(n => _model.GetSymbolInfo(n).Symbol).
-                    SingleOrDefault(n => n is IRangeVariableSymbol)?.Name);
+                var symbolName = node.DescendantNodesAndSelf().
+                    Select(n => _model.GetSymbolInfo(n).Symbol)?.
+                    SingleOrDefault(n => n is IRangeVariableSymbol)?.Name;
+                if (symbolName is not null)
+                {
+                    return Identifier(symbolName);
+                }
             }
             catch (Exception)
             {
-                return Identifier(_state.SourceIdentifier.ValueText);
             }
+
+            return Identifier(_state.SourceIdentifier.ValueText);
         }
 
         private IEnumerable<SyntaxToken> GetRangeVariables(params SyntaxNode[] nodes)
@@ -593,13 +611,16 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
 
                 foreach (Tuple<SimpleNameSyntax, ArgumentListSyntax> tuple in simpleNameAndArgumentsTuple)
                 {
-                    _state.FluentExpression =
-                        InvocationExpression(
-                            MemberAccessExpression(
-                                SyntaxKind.SimpleMemberAccessExpression,
-                                _state.FluentExpression,
-                                tuple.Item1),
-                            tuple.Item2);
+                    if (_state.FluentExpression is not null)
+                    {
+                        _state.FluentExpression =
+                            InvocationExpression(
+                                MemberAccessExpression(
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    _state.FluentExpression,
+                                    tuple.Item1),
+                                tuple.Item2);
+                    }
                 }
             }
         }
@@ -626,7 +647,7 @@ namespace NationalInstruments.Tools.Analyzers.Style.DoNotUseLinqQuerySyntax
 
             public Dictionary<string, int> IdentifiersChain { get; } = new Dictionary<string, int>();
 
-            public ExpressionSyntax FluentExpression { get; set; }
+            public ExpressionSyntax? FluentExpression { get; set; }
 
             public SyntaxToken SourceIdentifier { get; set; }
 

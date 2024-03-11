@@ -31,7 +31,7 @@ namespace NationalInstruments.Analyzers.Utilities
     /// </example>
     public sealed class ExemptionCollection : IEnumerable<string>
     {
-        private readonly Dictionary<Exemption, AttributeCollection> _exemptions = new Dictionary<Exemption, AttributeCollection>();
+        private readonly Dictionary<Exemption, AttributeCollection?> _exemptions = new Dictionary<Exemption, AttributeCollection?>();
 
         /// <summary>
         /// Default parameterless constructor.
@@ -45,7 +45,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// </summary>
         /// <param name="values">An array of exemption values.</param>
         public ExemptionCollection(params string[] values)
-            : this(values.Select(x => Tuple.Create<string, AttributeCollection>(x, null)).ToArray())
+            : this(values.Select(x => Tuple.Create<string, AttributeCollection?>(x, null)).ToArray())
         {
         }
 
@@ -53,11 +53,11 @@ namespace NationalInstruments.Analyzers.Utilities
         /// Constructor that accepts any number of value-attribute exemptions.
         /// </summary>
         /// <param name="exemptions">An array of tuples containing exemption value and associated attributes.</param>
-        public ExemptionCollection(params Tuple<string, AttributeCollection>[] exemptions)
+        public ExemptionCollection(params Tuple<string, AttributeCollection?>[] exemptions)
         {
             foreach (var exemption in exemptions)
             {
-                Add(exemption.Item1, exemption.Item2);
+                Add(exemption.Item1, exemption?.Item2);
             }
         }
 
@@ -71,7 +71,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// </summary>
         /// <param name="value">A string pattern that should be exempt.</param>
         /// <returns>A set of attributes that applies to this exemption.</returns>
-        public AttributeCollection this[string value] => _exemptions[new Exemption(value)];
+        public AttributeCollection? this[string value] => _exemptions[new Exemption(value)];
 
         /// <inheritdoc />
         public IEnumerator<string> GetEnumerator()
@@ -90,15 +90,15 @@ namespace NationalInstruments.Analyzers.Utilities
         /// </summary>
         /// <param name="value">A string pattern that should be exempt.</param>
         /// <param name="attributes">A set of attributes that applies to this exemption.</param>
-        public void Add(string value, AttributeCollection attributes = null)
+        public void Add(string? value, AttributeCollection? attributes = null)
         {
             var exemption = new Exemption(value);
 
             if (_exemptions.TryGetValue(exemption, out var existingAttributes))
             {
-                if (existingAttributes != null)
+                if (existingAttributes is not null)
                 {
-                    if (attributes != null)
+                    if (attributes is not null)
                     {
                         existingAttributes.Merge(attributes);
                     }
@@ -140,7 +140,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// <param name="value">Any string value.</param>
         /// <param name="attributes">A set of attributes that applies to the current <paramref name="value"/>.</param>
         /// <returns>A Boolean that indicates if the value/attributes combo is contained in/satisfied by this collection.</returns>
-        public bool Contains(string value, AttributeCollection attributes = null)
+        public bool Contains(string value, AttributeCollection? attributes = null)
         {
             if (_exemptions.TryGetValue(new Exemption(value), out var existingAttributes))
             {
@@ -158,7 +158,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// <param name="value">Any string value.</param>
         /// <param name="attributes">A set of attributes that applies to the current <paramref name="value"/>.</param>
         /// <returns>A Boolean that indicates f the value/attributes combo matches an entry in this collection.</returns>
-        public bool Matches(string value, AttributeCollection attributes = null)
+        public bool Matches(string value, AttributeCollection? attributes = null)
         {
             return _exemptions.Any(x => x.Key.Pattern.IsMatch(value) && (!x.Value?.MoreSpecificThan(attributes) ?? true));
         }
@@ -167,9 +167,9 @@ namespace NationalInstruments.Analyzers.Utilities
         {
             private readonly string _comparisonValue;
 
-            public Exemption(string value)
+            public Exemption(string? value)
             {
-                if (value == null)
+                if (value is null)
                 {
                     throw new ArgumentNullException(nameof(value));
                 }

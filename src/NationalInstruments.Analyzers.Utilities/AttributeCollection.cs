@@ -81,8 +81,13 @@ namespace NationalInstruments.Analyzers.Utilities
         /// </summary>
         /// <param name="name">Name of the attribute.</param>
         /// <param name="value">Value of the attribute.</param>
-        public void Add(string name, string value)
+        public void Add(string name, string? value)
         {
+            if (value is null)
+            {
+                return;
+            }
+
             if (_attributes.TryGetValue(name, out var values))
             {
                 values.Add(value);
@@ -92,7 +97,7 @@ namespace NationalInstruments.Analyzers.Utilities
                 _attributes.Add(
                     name,
                     new HashSet<string>(
-                        value.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries),
+                        value?.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries),
                         StringComparer.OrdinalIgnoreCase));
             }
         }
@@ -138,9 +143,9 @@ namespace NationalInstruments.Analyzers.Utilities
         /// A Boolean that indicates that the <paramref name="attributes"/> either don't exist in this
         /// collection or their values match.
         /// </returns>
-        public bool MoreSpecificThan(AttributeCollection attributes)
+        public bool MoreSpecificThan(AttributeCollection? attributes)
         {
-            if (attributes == null)
+            if (attributes is null)
             {
                 return _attributes.Any();
             }
@@ -181,7 +186,7 @@ namespace NationalInstruments.Analyzers.Utilities
         /// <returns>A Boolean that indicates if this instance is equal to another.</returns>
         public override bool Equals(object obj)
         {
-            if (obj == null)
+            if (obj is null)
             {
                 return false; // 'this' cannot be null
             }
@@ -191,8 +196,7 @@ namespace NationalInstruments.Analyzers.Utilities
                 return true;
             }
 
-            var other = obj as AttributeCollection;
-            if (other == null)
+            if (obj is not AttributeCollection other)
             {
                 return false; // comparing against an object that isn't an 'AttributeSet'
             }

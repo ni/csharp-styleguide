@@ -67,7 +67,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             _compilation = compilation;
         }
 
-        private AttributeCollection DefaultAttributes => new AttributeCollection(Tuple.Create(Assembly, _compilation.AssemblyName));
+        private AttributeCollection DefaultAttributes => new AttributeCollection(Tuple.Create(Assembly, _compilation.AssemblyName ?? Assembly));
 
         /// <summary>
         /// Determines if a particular file should be analyzed for string literals and, if it should,
@@ -102,7 +102,8 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                 AddExemptionsFromAttributes(_compilation.Assembly.GetAttributes(), null, semanticModel);
 
                 // Bail out if the entire assembly is exempt e.g. [assembly: <ExemptAttribute>]
-                if (_exemptAssemblies.Contains(_compilation.AssemblyName) || _exemptAssemblies.Matches(_compilation.AssemblyName))
+                if (_compilation.AssemblyName is not null
+                    && (_exemptAssemblies.Contains(_compilation.AssemblyName) || _exemptAssemblies.Matches(_compilation.AssemblyName)))
                 {
                     return;
                 }
@@ -124,12 +125,12 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                         continue;
                     }
 
-                    if (IsLiteralExemptFromAncestor(literal.Syntax, semanticModel))
+                    if (IsLiteralExemptFromAncestor(literal.Syntax!, semanticModel))
                     {
                         continue;
                     }
 
-                    var diagnostic = Diagnostic.Create(StringsShouldBeInResourcesAnalyzer.Rule, literal.Syntax?.GetLocation(), literal.Value);
+                    var diagnostic = Diagnostic.Create(StringsShouldBeInResourcesAnalyzer.Rule, literal.Syntax!.GetLocation(), literal.Value);
                     context.ReportDiagnostic(diagnostic);
                 }
             }
@@ -159,7 +160,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
         {
             if (TryGetRootElementDiagnostic(rootElement, "Exemptions", filePath, StringsShouldBeInResourcesAnalyzer.FileParseRule, out var diagnostic))
             {
-                _additionalFileService.ParsingDiagnostics.Add(diagnostic);
+                _additionalFileService.ParsingDiagnostics.Add(diagnostic!);
             }
 
             _exemptStrings.UnionWith(rootElement.Elements("String"));
@@ -190,7 +191,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                         .Where(x => x != appliesAttribute)
                         .Select(x => Tuple.Create(x.Name.LocalName, x.Value)).ToArray();
 
-                    AttributeCollection attributes = null;
+                    AttributeCollection? attributes = null;
                     if (attributePairs.Length > 0)
                     {
                         attributes = new AttributeCollection(attributePairs);
@@ -215,7 +216,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             }
         }
 
-        private static string GetParameterNameForSyntax(ISymbol member, SyntaxNode memberSyntax, SyntaxNode literalSyntax)
+        private static string? GetParameterNameForSyntax(ISymbol member, SyntaxNode memberSyntax, SyntaxNode literalSyntax)
         {
             var parameterStartIndex = 0;
             var method = member as IMethodSymbol;
@@ -247,7 +248,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                     .Cast<SyntaxNode>().ToList();
             }
 
-            if (arguments == null || !arguments.Any())
+            if (arguments is null || !arguments.Any())
             {
                 return null;
             }
@@ -271,19 +272,19 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             return _exemptFilenames.Contains(filePath) || _exemptFilenames.Matches(filePath);
         }
 
-        private void AddExemptionsFromAttributes(IEnumerable<AttributeSyntax> attributeSyntaxes, SemanticModel semanticModel)
+        private void AddExemptionsFromAttributes(IEnumerable<AttributeSyntax?> attributeSyntaxes, SemanticModel semanticModel)
         {
             foreach (var attributeSyntax in attributeSyntaxes)
             {
                 // Append "Attribute" to whatever attribute name is found in the syntax. This may yield "somethingAttributeAttribute",
                 // but that's okay because we're testing if "somethingAttributeAttribute".Contains(exemptionAttributeName)
-                var attributeName = ExemptionAttributeNames.FirstOrDefault(string.Concat(attributeSyntax.Name, Attribute).Contains);
+                var attributeName = ExemptionAttributeNames.FirstOrDefault(string.Concat(attributeSyntax?.Name, Attribute).Contains);
                 if (string.IsNullOrEmpty(attributeName))
                 {
                     continue;
                 }
 
-                IEnumerable<SyntaxNode> syntaxes = new[] { attributeSyntax.Parent.Parent };
+                IEnumerable<SyntaxNode?> syntaxes = new[] { attributeSyntax?.Parent?.Parent };
 
                 // Fields can have multiple assignments, but the attribute can only appear on the top-level FieldDeclaration
                 if (syntaxes.First() is FieldDeclarationSyntax fieldSyntax)
@@ -293,8 +294,8 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
                 foreach (var syntax in syntaxes)
                 {
-                    var symbol = syntax.GetDeclaredOrReferencedSymbol(semanticModel);
-                    if (symbol == null)
+                    var symbol = syntax?.GetDeclaredOrReferencedSymbol(semanticModel);
+                    if (symbol is null)
                     {
                         continue;
                     }
@@ -304,13 +305,13 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             }
         }
 
-        private void AddExemptionsFromAttributes(IEnumerable<AttributeData> attributes, SyntaxNode decoratedSyntax, SemanticModel semanticModel)
+        private void AddExemptionsFromAttributes(IEnumerable<AttributeData> attributes, SyntaxNode? decoratedSyntax, SemanticModel semanticModel)
         {
             foreach (var attribute in attributes)
             {
-                var attributeName = attribute.AttributeClass.Name;
+                var attributeName = attribute.AttributeClass?.Name;
 
-                if (ExemptionAttributeNames.Contains(attributeName))
+                if (attributeName is not null && ExemptionAttributeNames.Contains(attributeName))
                 {
                     var exemptionAttribute = new ExemptionAttribute(attribute);
 
@@ -318,12 +319,12 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                     {
                         case ExemptFromStringLiteralsRuleAttributeName:
                         case ImplementationAllowedToUseStringLiteralsAttributeName:
-                            AddScopeExemption(exemptionAttribute, decoratedSyntax.GetDeclaredOrReferencedSymbol(semanticModel));
+                            AddScopeExemption(exemptionAttribute, decoratedSyntax?.GetDeclaredOrReferencedSymbol(semanticModel));
                             break;
 
                         case AcceptsStringLiteralArgumentsAttributeName:
                         case AllowExternalCodeToAcceptStringLiteralArgumentsAttributeName:
-                            AddInvocationExemption(exemptionAttribute, decoratedSyntax.GetDeclaredOrReferencedSymbol(semanticModel));
+                            AddInvocationExemption(exemptionAttribute, decoratedSyntax?.GetDeclaredOrReferencedSymbol(semanticModel));
                             break;
 
                         case AllowThisNonLocalizedLiteralAttributeName:
@@ -332,18 +333,25 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                     }
                 }
 
-                if (decoratedSyntax == null
-                    && attributeName.Contains("AssemblyMetadata")
-                    && attribute.ConstructorArguments[0].Value.ToString() == "Localize.Constant")
+                if (attribute is not null && attribute.ConstructorArguments.Length == 2)
                 {
-                    _exemptStrings.Add(attribute.ConstructorArguments[1].Value.ToString(), DefaultAttributes);
+                    if (decoratedSyntax is null
+                        && (attributeName?.Contains("AssemblyMetadata") ?? false)
+                        && attribute.ConstructorArguments[0].Value?.ToString() == "Localize.Constant")
+                    {
+                        var exemptValue = attribute.ConstructorArguments[1].Value?.ToString();
+                        if (exemptValue is not null)
+                        {
+                            _exemptStrings.Add(exemptValue, DefaultAttributes);
+                        }
+                    }
                 }
             }
         }
 
-        private void AddScopeExemption(ExemptionAttribute exemptionAttribute, ISymbol decoratedSymbol)
+        private void AddScopeExemption(ExemptionAttribute exemptionAttribute, ISymbol? decoratedSymbol)
         {
-            string target;
+            string? target;
 
             switch (exemptionAttribute.Scope)
             {
@@ -359,7 +367,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
                 case ExemptionScope.Namespace:
                     target = ExemptionAttribute.GetTargetFromAttributeOrSymbol<INamespaceSymbol>(exemptionAttribute, decoratedSymbol);
-                    if (!target.EndsWith("*", StringComparison.Ordinal))
+                    if (!target?.EndsWith("*", StringComparison.Ordinal) ?? false)
                     {
                         target = string.Concat(target, "*");
                     }
@@ -379,9 +387,12 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
                 case ExemptionScope.Disabled:
                 case ExemptionScope.Unknown:
-                    if (decoratedSymbol == null)
+                    if (decoratedSymbol is null)
                     {
-                        _exemptAssemblies.Add(_compilation.AssemblyName);
+                        if (_compilation.AssemblyName is not null)
+                        {
+                            _exemptAssemblies.Add(_compilation.AssemblyName);
+                        }
                     }
                     else
                     {
@@ -405,9 +416,9 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             }
         }
 
-        private void AddInvocationExemption(ExemptionAttribute exemptionAttribute, ISymbol decoratedSymbol)
+        private void AddInvocationExemption(ExemptionAttribute exemptionAttribute, ISymbol? decoratedSymbol)
         {
-            string target;
+            string? target;
             AttributeCollection attributes = DefaultAttributes;
 
             switch (exemptionAttribute.Scope)
@@ -434,10 +445,10 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                     // Exempts any literal being passed to the specified method and optionally, parameter(s)
                     // Note: this can only occur as an assembly attribute
                     var targetParts = ExemptionAttribute.GetTargetFromAttribute(exemptionAttribute)
-                        .Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        ?.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                    target = targetParts[0];
-                    if (targetParts.Length > 1)
+                    target = targetParts?[0];
+                    if (targetParts?.Length > 1)
                     {
                         attributes.Add(Parameter, string.Join("|", targetParts.Skip(1)));
                     }
@@ -549,7 +560,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
         private bool IsLiteralExemptFromAncestor(SyntaxNode literalSyntax, SemanticModel semanticModel)
         {
-            foreach (var ancestorSyntax in literalSyntax.Ancestors())
+            foreach (var ancestorSyntax in literalSyntax.Ancestors() ?? Enumerable.Empty<SyntaxNode>())
             {
                 if (AreLiteralsInAncestorScopeExempt(ancestorSyntax, semanticModel))
                 {
@@ -578,7 +589,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                 return true; // all attribute and parameter literals are exempt
             }
 
-            var getSymbol = new Func<ISymbol>(() => ancestorSyntax.GetDeclaredOrReferencedSymbol(semanticModel));
+            var getSymbol = new Func<ISymbol?>(() => ancestorSyntax.GetDeclaredOrReferencedSymbol(semanticModel));
 
             if (ancestorSyntax is VariableDeclaratorSyntax && IsSymbolExempt(getSymbol(), _exemptFieldScopes))
             {
@@ -595,7 +606,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
 
             if (ancestorSyntax is BaseTypeDeclarationSyntax)
             {
-                ISymbol type = getSymbol();
+                ISymbol? type = getSymbol();
                 if (IsSymbolExempt(type, _exemptTypeScopes) || IsSymbolExempt(type?.ContainingNamespace, _exemptNamespaces))
                 {
                     return true;
@@ -678,9 +689,9 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
                    || IsMemberInBaseTypeOrInterfaceExempt(member, parameterName);
         }
 
-        private bool IsSymbolExempt(ISymbol symbol, ExemptionCollection exemptions, params Tuple<string, string>[] additionalAttributes)
+        private bool IsSymbolExempt(ISymbol? symbol, ExemptionCollection exemptions, params Tuple<string, string?>[] additionalAttributes)
         {
-            if (symbol == null)
+            if (symbol is null)
             {
                 return false;
             }
@@ -692,7 +703,8 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             }
 
             var symbolName = symbol.GetFullName();
-            if (exemptions.Contains(symbolName, attributes) || exemptions.Matches(symbolName, attributes))
+            if (symbolName is not null
+                && (exemptions.Contains(symbolName, attributes) || exemptions.Matches(symbolName, attributes)))
             {
                 return true;
             }
@@ -700,9 +712,9 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             return false;
         }
 
-        private bool IsMemberInBaseTypeOrInterfaceExempt(ISymbol member, string parameterName)
+        private bool IsMemberInBaseTypeOrInterfaceExempt(ISymbol? member, string? parameterName)
         {
-            if (member == null)
+            if (member is null)
             {
                 return false;
             }
@@ -749,7 +761,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             return false;
         }
 
-        private bool IsMembersStringLiteralAccepted(ISymbol member, ISymbol baseSymbol, string parameterName = null)
+        private bool IsMembersStringLiteralAccepted(ISymbol member, ISymbol? baseSymbol, string? parameterName = null)
         {
             if (baseSymbol == null)
             {
@@ -757,7 +769,7 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             }
 
             var acceptsStringLiteralArgumentsAttributes = baseSymbol.GetAttributes()
-                .Where(x => AcceptsStringLiteralArgumentsAttributeName.Contains(x.AttributeClass.Name))
+                .Where(x => AcceptsStringLiteralArgumentsAttributeName.Contains(x.AttributeClass?.Name))
                 .Select(x => new ExemptionAttribute(x));
 
             foreach (var attribute in acceptsStringLiteralArgumentsAttributes)

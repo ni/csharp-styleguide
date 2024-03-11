@@ -61,6 +61,112 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 0
+        ///0th
+        ///1
+        ///1st
+        ///1th
+        ///2
+        ///2nd
+        ///2th
+        ///3
+        ///3rd
+        ///3th
+        ///4
+        ///4th
+        ///5
+        ///5th
+        ///6
+        ///6th
+        ///7
+        ///7th
+        ///8
+        ///8th
+        ///9
+        ///9th
+        ///A
+        ///As
+        ///A&apos;s
+        ///AA
+        ///AA&apos;s
+        ///AAA
+        ///AB
+        ///AB&apos;s
+        ///ABA
+        ///ABC
+        ///ABCs
+        ///ABC&apos;s
+        ///ABM
+        ///ABMs
+        ///ABM&apos;s
+        ///ABS
+        ///AC
+        ///AC&apos;s
+        ///ACLU
+        ///ACLU&apos;s
+        ///ACT
+        ///ACTH
+        ///ACTH&apos;s
+        ///AD
+        ///AD&apos;s
+        ///ADC
+        ///ADD
+        ///ADM
+        ///ADP
+        ///ADP&apos;s
+        ///AF
+        ///AFAIK
+        ///AFB
+        ///AFC
+        ///AFC&apos;s
+        ///AFDC
+        ///AFN
+        ///AFT
+        ///AI
+        ///AIs
+        ///AI&apos;s
+        ///AIDS
+        ///AIDS&apos;s
+        ///AK
+        ///AL
+        ///AM
+        ///AM&apos;s
+        ///AMA
+        ///AMD
+        ///AMD&apos;s
+        ///ANSI
+        ///ANSIs
+        ///ANZUS
+        ///ANZUS&apos;s
+        ///AOL
+        ///AOL&apos;s
+        ///AP
+        ///AP&apos;s
+        ///APB
+        ///APC
+        ///API
+        ///APO
+        ///APR
+        ///AR
+        ///ARC
+        ///ASAP
+        ///ASCII
+        ///ASCIIs
+        ///ASCII&apos;s
+        ///ASL
+        ///ASL&apos;s
+        ///ASPCA
+        ///ATM
+        ///ATM&apos;s
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Dictionary {
+            get {
+                return ResourceManager.GetString("Dictionary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All restricted types should be defined under &apos;NationalInstruments.Restricted&apos;..
         /// </summary>
         internal static string LRN001_Description {

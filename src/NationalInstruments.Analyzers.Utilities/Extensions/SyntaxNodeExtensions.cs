@@ -19,9 +19,9 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <param name="node">Syntax node in a syntax tree.</param>
         /// <param name="model">Semantic model for the syntax tree containing the <paramref name="node"/>.</param>
         /// <returns>Symbol represented by the provided syntax.</returns>
-        public static ISymbol GetDeclaredOrReferencedSymbol(this SyntaxNode node, SemanticModel model)
+        public static ISymbol? GetDeclaredOrReferencedSymbol(this SyntaxNode? node, SemanticModel model)
         {
-            return node != null ? model.GetDeclaredSymbol(node) ?? model.GetSymbolInfo(node).Symbol : null;
+            return node is not null ? model.GetDeclaredSymbol(node) ?? model.GetSymbolInfo(node).Symbol : null;
         }
 
         /// <summary>

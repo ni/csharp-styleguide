@@ -30,7 +30,13 @@
     -->
     <AnalysisMode Condition="'$(AnalysisMode)' == ''">NI</AnalysisMode>
 
-    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">7.0</AnalysisLevel>
+    <!--
+      If AnalysisLevel is not set, the .NET SDK will default to the version of the SDK.  If the SDK is less than .NET 8,
+      then despite having a .NET 8 analyzer nuget referenced, we will use the lower SDK version as the analysis level.
+
+      Thus we manually set the default analysis level to 8.0 to make sure .NET 8 warnings are still checked.
+    -->
+    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">8.0</AnalysisLevel>
   </PropertyGroup>
 
   <!-- 
@@ -45,7 +51,7 @@
     EditorConfigFiles is what is passed to the compile target, not GlobalAnalyzerConfigFiles.  Because our targets file may be imported *after*
     the Microsoft code analyzer targets file, by the time we update GlobalAnalyzerConfigFiles it will be too late.
   -->
-  <ItemGroup Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(NETCoreSdkVersion)', '6.0')) and '$(AnalysisMode)' == 'NI'">
+  <ItemGroup Condition="'$(NETCoreSdkVersion)' != '' and $([MSBuild]::VersionGreaterThanOrEquals('$(NETCoreSdkVersion)', '6.0')) and '$(AnalysisMode)' == 'NI'">
     <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.globalconfig" />
     <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.Tests.globalconfig" Condition="'$(NI_IsTestProject)' == 'True'" />
     <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)../content/NI.CSharp.Analyzers.TestUtilities.globalconfig" Condition="'$(NI_IsTestUtilitiesProject)' == 'True'" />

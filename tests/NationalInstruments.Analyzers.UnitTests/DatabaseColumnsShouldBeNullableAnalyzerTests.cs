@@ -55,7 +55,7 @@ class MyDbContext : DbContext
         [InlineData("Id")]
         [InlineData("MyDataModelId")]
         [InlineData("MyPk", "[Key]")]
-        public void NI0017_PrimaryKey_NoDiagnostic(string propertyName, string attribute = null)
+        public void NI0017_PrimaryKey_NoDiagnostic(string propertyName, string? attribute = null)
         {
             var test = new AutoTestFile(Setup + $@"
 class MyDataModel
@@ -73,7 +73,7 @@ class MyDataModel
         [InlineData("Nullable<DateTime>")]
         [InlineData("IEnumerable<DateTime>")]
         [InlineData("int", "[NotMapped]")]
-        public void NI0017_AcceptableTypes_NoDiagnostic(string type, string attribute = null)
+        public void NI0017_AcceptableTypes_NoDiagnostic(string type, string? attribute = null)
         {
             var test = new AutoTestFile(Setup + $@"
 class MyDataModel
@@ -89,7 +89,7 @@ class MyDataModel
         [Theory]
         [InlineData("int", "Int32")]
         [InlineData("DateTime")]
-        public void NI0017_ValueTypes_Diagnostic(string type, string typeDiagnostic = null)
+        public void NI0017_ValueTypes_Diagnostic(string type, string? typeDiagnostic = null)
         {
             var test = new AutoTestFile(
                 Setup + $@"

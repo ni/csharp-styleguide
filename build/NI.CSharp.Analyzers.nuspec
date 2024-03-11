@@ -16,7 +16,12 @@
     <license type="file">LICENSE.txt</license>
     <dependencies>
       <group targetFramework="netstandard2.0">
-        <dependency id="Microsoft.CodeAnalysis.NetAnalyzers" version="7.0.4" />
+        <!-- 
+          IMPORTANT: when updating Microsoft.CodeAnalysis.NetAnalayzers to a new
+          major version, make sure to update AnalysisLevel in NI.CSharp.Analysers.props
+          too, otherwise new rules will not be properly enabled.
+        -->
+        <dependency id="Microsoft.CodeAnalysis.NetAnalyzers" version="8.0.0" />
         <dependency id="Microsoft.CodeAnalysis.CSharp" version="4.2.0" />
         <dependency id="Microsoft.CodeAnalysis.Analyzers" version="3.3.3" />
         <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="17.2.32" />

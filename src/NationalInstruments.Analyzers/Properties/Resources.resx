@@ -414,4 +414,14 @@
   <data name="NI1816X_Title" xml:space="preserve">
     <value>Disposable should not have finalizer</value>
   </data>
+  <data name="NI1019_Description" xml:space="preserve">
+    <value>The default equality method implementation for records is to compare enumerable types by reference, not the element values;  thus it is important for records with enumerable properties to override the default implementation and compare the enumerables using SequenceEqual or UnorderedEquals (depending on whether ordering matters).</value>
+  </data>
+  <data name="NI1019_Message" xml:space="preserve">
+    <value>Record '{0}' has properties that are enumerable collections, but does not override the default Equals and GetHashCode methods</value>
+    <comment>{0} is the name of the record</comment>
+  </data>
+  <data name="NI1019_Title" xml:space="preserve">
+    <value>Records that have enumerable properties should override the default Equals and GetHashCode methods</value>
+  </data>
 </root>

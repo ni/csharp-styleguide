@@ -17,6 +17,7 @@ NI1007 | Correctness | Warning | TestClassesMustInheritFromAutoTestAnalyzer
 NI1009 | Correctness | Disabled | ReferencedInternalMustHaveVisibleInternalAttributeAnalyzer
 NI1015 | Correctness | Warning | AwaitInReadLockOrTransactionAnalyzer
 NI1016 | Correctness | Warning | DoNotLockDirectlyOnPrivateMemberLockAnalyzer
+NI1019 | Correctness | Warning | RecordWithEnumerablesShouldOverrideDefaultEqualityAnalyzer
 NI1800 | Correctness | Warning | ApprovedNamespaceAnalyzer
 NI1001 | Style | Warning | FieldsCamelCasedWithUnderscoreAnalyzer
 NI1017 | Style | Warning | ChainOfMethodsWithLambdasAnalyzer

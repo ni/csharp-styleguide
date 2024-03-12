@@ -231,6 +231,17 @@ dotnet_diagnostic.CA1825.severity = none
 
 dotnet_diagnostic.CA1826.severity = none
 
+# CA1852: Seal internal types
+#   CA 1852 is already enabled, but by default, the analyzer treats internal types as public
+#   if the assembly has InternalsVisibleTo attribute defined.  Most of our assemblies have
+#   InternalsVisibleTo defined for at least test projects, and thus checking internal classes
+#   will basically be disabled for our code base.
+#
+#   By setting ignore_internalsvisibleto to true, we ensure internal classes are checked.  For
+#   any unsealed internal class which the test class needs to derive from, we will require developers to
+#   manually suppress CA 1852 and explain why.
+dotnet_code_quality.CA1852.ignore_internalsvisibleto = true
+
 dotnet_diagnostic.CA2000.severity = none
 
 dotnet_diagnostic.CA2001.severity = warning

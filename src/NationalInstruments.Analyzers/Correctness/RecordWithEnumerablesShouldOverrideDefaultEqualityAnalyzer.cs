@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -24,8 +25,7 @@ namespace NationalInstruments.Analyzers.Correctness
             isEnabledByDefault: true,
             description: new LocalizableResourceString(nameof(Resources.NI1019_Description), Resources.ResourceManager, typeof(Resources)));
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-            = ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -54,7 +54,9 @@ namespace NationalInstruments.Analyzers.Correctness
             // check if the record type has implemented its own Equality methods
             foreach (var location in typeSymbol.Locations)
             {
-                var rootNode = (CompilationUnitSyntax)location.SourceTree.GetRoot();
+                var rootNode = (CompilationUnitSyntax?)location.SourceTree?.GetRoot()
+                    ?? throw new InvalidOperationException("The SourceTree of the record is null");
+
                 var recordDeclarationNode = rootNode.Members
                     .OfType<RecordDeclarationSyntax>()
                     .FirstOrDefault();

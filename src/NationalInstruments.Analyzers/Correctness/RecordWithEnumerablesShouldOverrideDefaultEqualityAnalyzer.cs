@@ -41,9 +41,13 @@ namespace NationalInstruments.Analyzers.Correctness
                 return;
             }
 
+            var baseTypeProperties = GetBaseTypeProperties(typeSymbol)
+                .Select(p => p.Name)
+                .ToImmutableHashSet();
+
             var enumerableProperties = typeSymbol
                 .GetPublicPropertySymbols()
-                .Where(p => p.Type.IsEnumerable())
+                .Where(p => p.Type.IsEnumerable() && !baseTypeProperties.Contains(p.Name))
                 .ToImmutableArray();
 
             if (enumerableProperties.Length == 0)
@@ -57,13 +61,10 @@ namespace NationalInstruments.Analyzers.Correctness
                 var rootNode = (CompilationUnitSyntax?)location.SourceTree?.GetRoot()
                     ?? throw new InvalidOperationException("The SourceTree of the record is null");
 
-                var recordDeclarationNode = rootNode.Members
+                var recordDeclarationNode = rootNode
+                    .DescendantNodes()
                     .OfType<RecordDeclarationSyntax>()
-                    .FirstOrDefault();
-                if (recordDeclarationNode is null)
-                {
-                    continue;
-                }
+                    .First(r => r.Identifier.ValueText == typeSymbol.Name);
 
                 if (recordDeclarationNode.Members
                     .OfType<MethodDeclarationSyntax>()
@@ -76,6 +77,19 @@ namespace NationalInstruments.Analyzers.Correctness
             }
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, typeSymbol.Locations[0], typeSymbol.Name));
+        }
+
+        private ImmutableArray<IPropertySymbol> GetBaseTypeProperties(ITypeSymbol typeSymbol)
+        {
+            var baseType = typeSymbol.BaseType;
+            if (baseType is null || baseType.Name == nameof(Object))
+            {
+                // For classes that don't have a base class declared,
+                // the base type is not null but System.Object.
+                return ImmutableArray<IPropertySymbol>.Empty;
+            }
+
+            return baseType.GetPublicPropertySymbols();
         }
     }
 }

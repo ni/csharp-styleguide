@@ -17,7 +17,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 {
                     public int MyInt {get;}
                     public string MyString {get;}
-                };");
+                }");
 
             VerifyDiagnostics(test);
         }
@@ -31,7 +31,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 public class TestClass
                 {
                     public IEnumerable<int> MyInts {get;}
-                };");
+                }");
 
             VerifyDiagnostics(test);
         }
@@ -45,7 +45,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 public record <?>TestRecord
                 {
                     public IEnumerable<int> MyInts {get;}
-                };",
+                }",
                 GetNI1019Rule("TestRecord"));
 
             VerifyDiagnostics(test);
@@ -60,7 +60,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 public record <?>TestRecord
                 {
                     public IDictionary<int, string> MyDictionary {get;}
-                };",
+                }",
                 GetNI1019Rule("TestRecord"));
 
             VerifyDiagnostics(test);
@@ -82,7 +82,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                         return other is not null
                             && MyInts.SequenceEqual(other.MyInts);
                     }
-                };");
+                }");
 
             VerifyDiagnostics(test);
         }
@@ -96,7 +96,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                 public partial record TestRecord
                 {
                     public IEnumerable<int> MyInts {get;}
-                };");
+                }");
             var recordEqualsSource = new AutoTestFile(
                 @"using System.Linq;
                 public partial record TestRecord
@@ -109,6 +109,85 @@ namespace NationalInstruments.Analyzers.UnitTests
                 }");
 
             VerifyDiagnostics(new[] { recordPropertySource, recordEqualsSource });
+        }
+
+        [Fact]
+        public void RecordHasEnumerableBaseTypePropertiesAndDoesNotImplementEquality_NoDiagnostics()
+        {
+            var baseRecord = new AutoTestFile(
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public record BaseRecord
+                {
+                    public IEnumerable<int> MyInts {get;}
+
+                    public virtual bool Equals(BaseRecord other)
+                    {
+                        return other is not null
+                            && MyInts.SequenceEqual(other.MyInts);
+                    }
+                }");
+            var derivedRecord = new AutoTestFile(
+                @"using Test;
+                public record DerivedRecord : BaseRecord
+                {
+                }");
+
+            VerifyDiagnostics(new[] { baseRecord, derivedRecord });
+        }
+
+        [Fact]
+        public void NestedRecordWithEnumerablePropertyInClass_Diagnostics()
+        {
+            var test = new AutoTestFile(
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public class Test
+                {
+                    private record <?>TestRecord
+                    {
+                        public IEnumerable<int> MyInts {get;}
+                    }
+                }",
+                GetNI1019Rule("TestRecord"));
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void MultipleRecordsWithEnumerablePropertyInSingleFile_Diagnostics()
+        {
+            var test = new AutoTestFile(
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public record <?>TestRecord
+                {
+                    public IEnumerable<int> MyInts {get;}
+                }
+
+                public record <?>TestRecord2
+                {
+                    public IEnumerable<int> MyInts {get;}
+                }
+
+                public record TestRecord3
+                {
+                    public int MyInt {get;}
+                }
+                ",
+                GetNI1019Rule("TestRecord"),
+                GetNI1019Rule("TestRecord2"));
+
+            VerifyDiagnostics(test);
         }
 
         private Rule GetNI1019Rule(string typeName)

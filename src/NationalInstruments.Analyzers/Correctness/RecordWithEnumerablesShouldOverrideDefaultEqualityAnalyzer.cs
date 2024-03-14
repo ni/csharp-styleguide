@@ -16,7 +16,7 @@ namespace NationalInstruments.Analyzers.Correctness
     {
         internal const string DiagnosticId = "NI1019";
 
-        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1019_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1019_Message), Resources.ResourceManager, typeof(Resources)),
@@ -29,6 +29,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         public override void Initialize(AnalysisContext context)
         {
+            context.EnableConcurrentExecutionIf(IsRunningInProduction);
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSymbolAction(AnalyzeRecord, SymbolKind.NamedType);
         }

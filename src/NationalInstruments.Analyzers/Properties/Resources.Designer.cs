@@ -572,7 +572,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default equality method implementation for records is to compare enumerable types by reference, not the element values;  thus it is important for records with enumerable properties to override the default implementation and compare the enumerables using SequenceEqual or UnorderedEquals (depending on whether ordering matters)..
+        ///   Looks up a localized string similar to The default implicit equality method implementation for records is to compare enumerable types by reference, not the element values;  thus it is important for records with enumerable properties to explicitly implement equality and compare the enumerables using SequenceEqual or UnorderedEquals (depending on whether ordering matters)..
         /// </summary>
         internal static string NI1019_Description {
             get {
@@ -581,7 +581,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record &apos;{0}&apos; has properties that are enumerable collections, but does not override the default Equals and GetHashCode methods.
+        ///   Looks up a localized string similar to Record &apos;{0}&apos; has properties that are enumerable collections, but does not explicitly implement the Equals and GetHashCode methods.
         /// </summary>
         internal static string NI1019_Message {
             get {
@@ -590,7 +590,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Records that have enumerable properties should override the default Equals and GetHashCode methods.
+        ///   Looks up a localized string similar to Records that have enumerable properties should explicitly implement both Equals and GetHashCode methods.
         /// </summary>
         internal static string NI1019_Title {
             get {

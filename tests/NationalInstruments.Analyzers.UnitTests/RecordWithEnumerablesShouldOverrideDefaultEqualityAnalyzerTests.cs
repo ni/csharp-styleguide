@@ -191,7 +191,7 @@ namespace NationalInstruments.Analyzers.UnitTests
         }
 
         [Fact]
-        public void DerivedRecordHidesPropertyWithEnumerableTypeAndDoesNotImplementEquality_Diagnostics()
+        public void DerivedRecordHidesBasePropertyWithEnumerableTypeAndDoesNotImplementEquality_Diagnostics()
         {
             var test = new AutoTestFile(
                 @"public record BaseRecord
@@ -203,6 +203,24 @@ namespace NationalInstruments.Analyzers.UnitTests
                 {
                     public IEnumerable<int> MyInts { get; }
                 }",
+                GetNI1019Rule("TestRecord"));
+
+            VerifyDiagnostics(test);
+        }
+
+        [Fact]
+        public void RecordImplementEqualsWithUnexpectedSignature_Diagnostics()
+        {
+            var test = new AutoTestFile(
+                @"public record <?>TestRecord
+                {
+                    public IEnumerable<int> MyInts { get; }
+
+                    public bool Equals(int otherInt)
+                    {
+                        return false;
+                    }
+                }s",
                 GetNI1019Rule("TestRecord"));
 
             VerifyDiagnostics(test);

@@ -126,7 +126,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <summary>
         /// Gets whether this type is an enumerable.
         /// </summary>
-        /// <param name="typeSymbol">the symbol to inspect.</param>
+        /// <param name="typeSymbol">The symbol to inspect.</param>
         /// <returns>True if the type implements IEnumerable, false otherwise.</returns>
         /// <remarks>
         /// String types will return false, despite implementing IEnumerable{char}, because

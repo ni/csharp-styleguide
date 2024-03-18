@@ -154,5 +154,13 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
 
             return typeSymbol.AllInterfaces.Any(i => i.Name == nameof(IEnumerable));
         }
+
+        public static bool HasExplicitEquals(
+            this ITypeSymbol typeSymbol)
+        {
+            return typeSymbol.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Any(m => m.IsExplicitEquals());
+        }
     }
 }

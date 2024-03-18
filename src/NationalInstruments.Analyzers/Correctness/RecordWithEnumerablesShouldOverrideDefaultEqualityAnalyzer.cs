@@ -2,7 +2,6 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NationalInstruments.Analyzers.Properties;
 using NationalInstruments.Analyzers.Utilities;
@@ -52,28 +51,16 @@ namespace NationalInstruments.Analyzers.Correctness
 
             if (enumerableProperties.Length == 0)
             {
+                // if the record does not have any enumerable properties,
+                // then the default record equality implementation will work as expected.
                 return;
             }
 
-            // check if the record type has implemented its own Equality methods
-            foreach (var location in typeSymbol.Locations)
+            if (typeSymbol.HasExplicitEquals())
             {
-                var rootNode = (CompilationUnitSyntax?)location.SourceTree?.GetRoot()
-                    ?? throw new InvalidOperationException("The SourceTree of the record is null");
-
-                var recordDeclarationNode = rootNode
-                    .DescendantNodes()
-                    .OfType<RecordDeclarationSyntax>()
-                    .First(r => r.Identifier.ValueText == typeSymbol.Name);
-
-                if (recordDeclarationNode.Members
-                    .OfType<MethodDeclarationSyntax>()
-                    .Any(m => m.Identifier.Text == "Equals"))
-                {
-                    // we don't need to check for GetHashCode because the built-in C# analyzer will
-                    // flag code that implements Equals but not GetHashCode.
-                    return;
-                }
+                // we don't need to check for GetHashCode because the built-in
+                // C# warning CS0659 will flag code that implements Equals but not GetHashCode.
+                return;
             }
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, typeSymbol.Locations[0], typeSymbol.Name));

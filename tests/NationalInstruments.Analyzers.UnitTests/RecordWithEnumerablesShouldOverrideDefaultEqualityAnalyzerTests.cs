@@ -194,7 +194,12 @@ namespace NationalInstruments.Analyzers.UnitTests
         public void DerivedRecordHidesBasePropertyWithEnumerableTypeAndDoesNotImplementEquality_Diagnostics()
         {
             var test = new AutoTestFile(
-                @"public record BaseRecord
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public record BaseRecord
                 {
                     public int MyInts { get; }
                 }
@@ -212,7 +217,12 @@ namespace NationalInstruments.Analyzers.UnitTests
         public void RecordImplementEqualsWithUnexpectedSignature_Diagnostics()
         {
             var test = new AutoTestFile(
-                @"public record <?>TestRecord
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public record <?>TestRecord
                 {
                     public IEnumerable<int> MyInts { get; }
 
@@ -220,7 +230,7 @@ namespace NationalInstruments.Analyzers.UnitTests
                     {
                         return false;
                     }
-                }s",
+                }",
                 GetNI1019Rule("TestRecord"));
 
             VerifyDiagnostics(test);

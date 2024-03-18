@@ -190,6 +190,24 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void DerivedRecordHidesPropertyWithEnumerableTypeAndDoesNotImplementEquality_Diagnostics()
+        {
+            var test = new AutoTestFile(
+                @"public record BaseRecord
+                {
+                    public int MyInts { get; }
+                }
+
+                public record <?>TestRecord : BaseRecord
+                {
+                    public IEnumerable<int> MyInts { get; }
+                }",
+                GetNI1019Rule("TestRecord"));
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1019Rule(string typeName)
         {
             return new Rule(

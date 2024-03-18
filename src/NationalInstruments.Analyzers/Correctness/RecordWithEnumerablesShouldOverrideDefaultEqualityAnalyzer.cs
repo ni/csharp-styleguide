@@ -16,7 +16,7 @@ namespace NationalInstruments.Analyzers.Correctness
     {
         internal const string DiagnosticId = "NI1019";
 
-        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1019_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1019_Message), Resources.ResourceManager, typeof(Resources)),
@@ -43,12 +43,11 @@ namespace NationalInstruments.Analyzers.Correctness
             }
 
             var baseTypeProperties = GetBaseTypeProperties(typeSymbol)
-                .Select(p => p.Name)
-                .ToImmutableHashSet();
+                .ToImmutableHashSet(SymbolEqualityComparer.Default);
 
             var enumerableProperties = typeSymbol
                 .GetPublicPropertySymbols()
-                .Where(p => p.Type.IsEnumerable() && !baseTypeProperties.Contains(p.Name))
+                .Where(p => p.Type.IsEnumerable() && !baseTypeProperties.Contains(p))
                 .ToImmutableArray();
 
             if (enumerableProperties.Length == 0)

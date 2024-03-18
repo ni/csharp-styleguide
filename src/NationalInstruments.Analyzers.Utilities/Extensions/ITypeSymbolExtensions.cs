@@ -111,7 +111,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <summary>
         /// Gets all of the public properties of the type.
         /// </summary>
-        /// <param name="typeSymbol">the symbol to inspect</param>
+        /// <param name="typeSymbol">The symbol to inspect</param>
         /// <returns>Array of <see cref="IPropertySymbol"/> of the public properties</returns>
         public static ImmutableArray<IPropertySymbol> GetPublicPropertySymbols(
             this ITypeSymbol typeSymbol)
@@ -129,7 +129,7 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         /// <param name="typeSymbol">the symbol to inspect.</param>
         /// <returns>True if the type implements IEnumerable, false otherwise.</returns>
         /// <remarks>
-        /// string types will return false, despite implementing IEnumerable{char}, because
+        /// String types will return false, despite implementing IEnumerable{char}, because
         /// we don't generally consider strings as enumerables.
         /// </remarks>
         public static bool IsEnumerable(
@@ -155,12 +155,17 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
             return typeSymbol.AllInterfaces.Any(i => i.Name == nameof(IEnumerable));
         }
 
-        public static bool HasExplicitEquals(
+        /// <summary>
+        /// Whether the type has an explicitly declared IEquatable{T}.Equals method.
+        /// </summary>
+        /// <param name="typeSymbol">The type symbol to check.</param>
+        /// <returns>True if the type has explicitly declared an IEquatable{T}.Equals method, false otherwise.</returns>
+        public static bool HasExplicitIEquatableEquals(
             this ITypeSymbol typeSymbol)
         {
             return typeSymbol.GetMembers()
                 .OfType<IMethodSymbol>()
-                .Any(m => m.IsExplicitEquals());
+                .Any(m => m.IsExplicitIEquatableEquals());
         }
     }
 }

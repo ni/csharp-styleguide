@@ -56,7 +56,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 return;
             }
 
-            if (typeSymbol.HasExplicitEquals())
+            if (typeSymbol.HasExplicitIEquatableEquals())
             {
                 // we don't need to check for GetHashCode because the built-in
                 // C# warning CS0659 will flag code that implements Equals but not GetHashCode.

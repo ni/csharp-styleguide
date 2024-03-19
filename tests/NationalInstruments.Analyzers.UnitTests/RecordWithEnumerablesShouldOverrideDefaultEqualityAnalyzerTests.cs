@@ -236,6 +236,45 @@ namespace NationalInstruments.Analyzers.UnitTests
             VerifyDiagnostics(test);
         }
 
+        [Fact]
+        public void DerivedRecordDeclaresDifferentlyNamedPropertyAndDoesNotImplementEquality_Diagnostics()
+        {
+            var test = new AutoTestFile(
+                @"using System.Linq;
+                using System.Collections.Generic;
+
+                namespace Test;
+
+                public record BaseRecord
+                {
+                    public IEnumerable<int> MyInts { get; }
+
+                    public BaseRecord(IEnumerable<int> myInts)
+                    {
+                        MyInts = myInts;
+                    }
+
+                    public virtual bool Equals(BaseRecord? other)
+                    {
+                        return other is not null
+                            && MyInts.SequenceEqual(other.MyInts);
+                    }
+                }
+
+                public record <?>DerivedRecord : BaseRecord
+                {
+                    public IEnumerable<int> OtherInts { get; }
+
+                    public DerivedRecord(IEnumerable<int> otherInts)
+                        : base(otherInts)
+                    {
+                    }
+                }",
+                GetNI1019Rule("DerivedRecord"));
+
+            VerifyDiagnostics(test);
+        }
+
         private Rule GetNI1019Rule(string typeName)
         {
             return new Rule(

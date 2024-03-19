@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally Condition="'$(ManagePackageVersionsCentrally)' == ''">true</ManagePackageVersionsCentrally>
+
+    <!-- Indicates that a rebuild is required if this file changes. -->
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <ItemGroup Label="Global package reference versions">
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32" />
+    <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.435" />
+  </ItemGroup>
+
+  <ItemGroup Label="Global test package reference versions">
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.2.0" />
+    <PackageVersion Include="xunit" Version="2.4.1" />
+    <PackageVersion Include="xunit.assert" Version="2.4.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Global NuGet Package Versions">
+    <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.TestPlatform" Version="14.0.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading" Version="16.0.102" />
+  </ItemGroup>
+</Project>

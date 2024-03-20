@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -16,7 +17,11 @@ namespace NationalInstruments.Analyzers.Correctness
     {
         internal const string DiagnosticId = "NI1015";
 
-        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        [SuppressMessage(
+            "MicrosoftCodeAnalysisCorrectness",
+            "RS1035:'CultureInfo.CurrentCulture' is banned for use by analyzers: Analyzers should use the locale given by the compiler command line arguments, not the CurrentCulture",
+            Justification = "No public API available to get the locale given to the compiler, see https://github.com/dotnet/roslyn/issues/66566")]
+        public static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1015_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1015_Message), Resources.ResourceManager, typeof(Resources)),

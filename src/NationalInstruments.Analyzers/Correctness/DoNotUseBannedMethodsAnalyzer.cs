@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,7 @@ namespace NationalInstruments.Analyzers.Correctness
 
         private static readonly LocalizableString LocalizedTitle = new LocalizableResourceString(nameof(Resources.NI1006_Title), Resources.ResourceManager, typeof(Resources));
 
-        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.NI1006_Message), Resources.ResourceManager, typeof(Resources)),
@@ -60,7 +61,7 @@ namespace NationalInstruments.Analyzers.Correctness
             description: new LocalizableResourceString(nameof(Resources.NI1006_Description), Resources.ResourceManager, typeof(Resources)),
             helpLinkUri: "https://github.com/ni/csharp-styleguide/blob/main/docs/Banned%20Methods.md");
 
-        public static readonly DiagnosticDescriptor FileParseRule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor FileParseRule = new(
             DiagnosticId,
             LocalizedTitle,
             new LocalizableResourceString(nameof(Resources.ParseError_Message), Resources.ResourceManager, typeof(Resources)),
@@ -93,7 +94,7 @@ namespace NationalInstruments.Analyzers.Correctness
         private class BannedMethodsAnalyzer : ConfigurableAnalyzer
         {
             private readonly IAdditionalFileService _additionalFileService;
-            private readonly HashSet<AnalyzerEntry> _bannedMethods = new HashSet<AnalyzerEntry>();
+            private readonly HashSet<AnalyzerEntry> _bannedMethods = new();
 
             public BannedMethodsAnalyzer(IAdditionalFileService additionalFileService, CancellationToken cancellationToken)
                 : base(additionalFileService, cancellationToken)
@@ -164,7 +165,7 @@ namespace NationalInstruments.Analyzers.Correctness
                 }
             }
 
-            private struct AnalyzerEntryOptionsForParsing
+            private readonly struct AnalyzerEntryOptionsForParsing
             {
                 private AnalyzerEntryOptionsForParsing(string justification, string alternative, string assemblies)
                 {
@@ -243,6 +244,10 @@ namespace NationalInstruments.Analyzers.Correctness
 
                 public IEnumerable<Regex> AssemblyRegexes { get; }
 
+                [SuppressMessage(
+                    "MicrosoftCodeAnalysisCorrectness",
+                    "RS1035:'CultureInfo.CurrentCulture' is banned for use by analyzers: Analyzers should use the locale given by the compiler command line arguments, not the CurrentCulture",
+                    Justification = "No public API available to get the locale given to the compiler, see https://github.com/dotnet/roslyn/issues/66566")]
                 public string AdditionalErrorMessage
                 {
                     get

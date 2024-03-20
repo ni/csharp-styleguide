@@ -50,7 +50,9 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             };
 
             Assert.Single(exemptions);
-            Assert.Single(exemptions["foo"]);
+            var foo = exemptions["foo"];
+            Assert.NotNull(foo);
+            Assert.Single(foo);
         }
 
         [Fact]
@@ -63,13 +65,14 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             };
 
             var attributes = exemptions["foo"];
+            Assert.NotNull(attributes);
 
             Assert.Single(exemptions);
             Assert.Single(attributes);
 
-            Assert.DoesNotContain("Assembly", attributes?.Names);
-            Assert.Contains("Parameter", attributes?.Names);
-            Assert.Single(attributes?["Parameter"]);
+            Assert.DoesNotContain("Assembly", attributes.Names);
+            Assert.Contains("Parameter", attributes.Names);
+            Assert.Single(attributes["Parameter"]);
         }
 
         [Fact]
@@ -82,13 +85,14 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
             };
 
             var attributes = exemptions["foo"];
+            Assert.NotNull(attributes);
 
             Assert.Single(exemptions);
             Assert.Single(attributes);
 
-            Assert.Contains("Assembly", attributes?.Names);
+            Assert.Contains("Assembly", attributes.Names);
 
-            var attributeValues = attributes?["Assembly"];
+            var attributeValues = attributes["Assembly"];
             Assert.Contains("A", attributeValues);
             Assert.Contains("B", attributeValues);
         }

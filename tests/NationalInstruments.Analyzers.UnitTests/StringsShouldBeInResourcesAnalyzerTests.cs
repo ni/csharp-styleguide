@@ -1136,12 +1136,12 @@ partial class Program
         [InlineData(null, "element")]
         [InlineData(TestAssemblyName, null)]
         [InlineData(TestAssemblyName, "element")]
-        public void NI1004_StringLiteralInMethodInvocation_ExemptFromFile_AttributesMatch_NoDiagnostic(string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_ExemptFromFile_AttributesMatch_NoDiagnostic(string? assemblyName, string? parameterName)
         {
             // Any method "type" could be used
             var test = new AutoTestFile(string.Format(CultureInfo.InvariantCulture, ExampleGenericMethodTestTemplate, ExampleLiteral, string.Empty));
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -1154,14 +1154,14 @@ partial class Program
         [InlineData(null, "wrong")]
         [InlineData("Different", null)]
         [InlineData("Different", "wrong")]
-        public void NI1004_StringLiteralInMethodInvocation_ExemptFromFile_AttributesMismatch_Diagnostic(string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_ExemptFromFile_AttributesMismatch_Diagnostic(string? assemblyName, string? parameterName)
         {
             // Any method "type" could be used
             var test = new AutoTestFile(
                 string.Format(CultureInfo.InvariantCulture, ExampleGenericMethodTestTemplate, ExampleLiteral, "<?>"),
                 GetNI1004LiteralRule(ExampleLiteral));
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -1261,11 +1261,11 @@ class Program
         [InlineData(ExampleClassTestTemplate, "My.Namespace.ExemptClass", null, "name")]
         [InlineData(ExampleStructTestTemplate, "My.Namespace.ExemptStruct", TestAssemblyName, null)]
         [InlineData(ExampleAbstractClassTestTemplate, "My.Namespace.ExemptClassBase", TestAssemblyName, "name")]
-        public void NI1004_StringLiteralInMethodInvocation_TypeExemptFromFile_AttributesMatch_NoDiagnostic(string testTemplate, string exemption, string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_TypeExemptFromFile_AttributesMatch_NoDiagnostic(string testTemplate, string exemption, string? assemblyName, string? parameterName)
         {
             var test = new AutoTestFile(string.Format(CultureInfo.InvariantCulture, testTemplate, ExampleLiteral, string.Empty));
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -1278,13 +1278,13 @@ class Program
         [InlineData(ExampleClassTestTemplate, "My.Namespace.ExemptClass", null, "wrong")]
         [InlineData(ExampleStructTestTemplate, "My.Namespace.ExemptStruct", "Different", null)]
         [InlineData(ExampleAbstractClassTestTemplate, "My.Namespace.ExemptClassBase", "Different", "wrong")]
-        public void NI1004_StringLiteralInMethodInvocation_TypeExemptFromFile_AttributesMismatch_Diagnostic(string testTemplate, string exemption, string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_TypeExemptFromFile_AttributesMismatch_Diagnostic(string testTemplate, string exemption, string? assemblyName, string? parameterName)
         {
             var test = new AutoTestFile(
                 string.Format(CultureInfo.InvariantCulture, testTemplate, ExampleLiteral, "<?>"),
                 GetNI1004LiteralRule(ExampleLiteral));
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -1314,7 +1314,7 @@ class Program
         [InlineData(null, "paramName")]
         [InlineData(TestAssemblyName, null)]
         [InlineData(TestAssemblyName, "paramName")]
-        public void NI1004_StringLiteralInMethodInvocation_BaseTypeExemptFromFile_AttributesMatch_NoDiagnostic(string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_BaseTypeExemptFromFile_AttributesMatch_NoDiagnostic(string? assemblyName, string? parameterName)
         {
             var test = new AutoTestFile($@"
 using System;
@@ -1327,7 +1327,7 @@ class Program
     }}
 }}");
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -1340,7 +1340,7 @@ class Program
         [InlineData(null, "wrong")]
         [InlineData("Different", null)]
         [InlineData("Different", "wrong")]
-        public void NI1004_StringLiteralInMethodInvocation_BaseTypeExemptFromFile_AttributesMismatch_Diagnostic(string assemblyName, string parameterName)
+        public void NI1004_StringLiteralInMethodInvocation_BaseTypeExemptFromFile_AttributesMismatch_Diagnostic(string? assemblyName, string? parameterName)
         {
             var test = new AutoTestFile(
                 $@"
@@ -1355,7 +1355,7 @@ class Program
 }}",
                 GetNI1004LiteralRule(ExampleLiteral));
 
-            var attributes = GetNonNullAttributesString(new Dictionary<string, string>
+            var attributes = GetNonNullAttributesString(new Dictionary<string, string?>
             {
                 ["Assembly"] = assemblyName,
                 ["Parameter"] = parameterName,
@@ -2403,7 +2403,7 @@ class Foo
             return new TestAdditionalDocument((fileInfo ?? defaultFileInfo).Name, documentContents);
         }
 
-        private string GetNonNullAttributesString(Dictionary<string, string> attributeNameToValue)
+        private string GetNonNullAttributesString(Dictionary<string, string?> attributeNameToValue)
         {
             return string.Join(" ", attributeNameToValue.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => $@"{x.Key}=""{x.Value}"""));
         }

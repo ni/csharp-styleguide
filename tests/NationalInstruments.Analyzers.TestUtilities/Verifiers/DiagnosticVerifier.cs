@@ -173,8 +173,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             {
                 if (actualLinePosition.Line + 1 != expected.Line)
                 {
-                    Assert.True(
-                        false,
+                    Assert.Fail(
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "Expected diagnostic to be on line \"{0}\" was actually on line \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
@@ -189,8 +188,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             {
                 if (actualLinePosition.Character + 1 != expected.Column)
                 {
-                    Assert.True(
-                        false,
+                    Assert.Fail(
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "Expected diagnostic to start at column \"{0}\" was actually at column \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
@@ -286,8 +284,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
             {
                 var diagnosticsOutput = actualResults.Any() ? FormatDiagnostics(analyzer, actualResults.ToArray()) : "    NONE.";
 
-                Assert.True(
-                    false,
+                Assert.Fail(
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "Mismatch between number of diagnostics returned, expected \"{0}\" actual \"{1}\"\r\n\r\nDiagnostics:\r\n{2}\r\n",
@@ -305,8 +302,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                 {
                     if (actual.Location != Location.None)
                     {
-                        Assert.True(
-                            false,
+                        Assert.Fail(
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 "Expected:\nA project diagnostic with No location\nActual:\n{0}",
@@ -320,8 +316,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
                     if (additionalLocations.Length != expected.Locations.Count - 1)
                     {
-                        Assert.True(
-                            false,
+                        Assert.Fail(
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 "Expected {0} additional locations but got {1} for Diagnostic:\r\n    {2}\r\n",
@@ -338,8 +333,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
                 if (actual.Id != expected.Id)
                 {
-                    Assert.True(
-                        false,
+                    Assert.Fail(
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "Expected diagnostic id to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
@@ -350,8 +344,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
 
                 if (actual.Severity != expected.Severity)
                 {
-                    Assert.True(
-                        false,
+                    Assert.Fail(
                         string.Format(
                             CultureInfo.InvariantCulture,
                             "Expected diagnostic severity to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
@@ -364,8 +357,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                 {
                     if (actual.GetMessage() != expected.Message)
                     {
-                        Assert.True(
-                            false,
+                        Assert.Fail(
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 "Expected diagnostic message to be \"{0}\" was \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",

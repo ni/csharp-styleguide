@@ -52,6 +52,10 @@ namespace NationalInstruments.Analyzers.Correctness.StringsShouldBeInResources
             return GetTargetFromAttributeOrSymbol<ISymbol>(exemptionAttribute, null);
         }
 
+        [SuppressMessage(
+            "MicrosoftCodeAnalysisCorrectness",
+            "RS1035:'CultureInfo.CurrentCulture' is banned for use by analyzers: Analyzers should use the locale given by the compiler command line arguments, not the CurrentCulture",
+            Justification = "No public API available to get the locale given to the compiler, see https://github.com/dotnet/roslyn/issues/66566")]
         internal static string? GetTargetFromAttributeOrSymbol<TExpected>(ExemptionAttribute exemptionAttribute, ISymbol? decoratedSymbol)
         {
             if (!string.IsNullOrWhiteSpace(exemptionAttribute.Target))

@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -84,6 +84,10 @@ namespace NationalInstruments.Analyzers.Correctness
                 return Task.FromResult(_context.Document);
             }
 
+            [SuppressMessage(
+                "MicrosoftCodeAnalysisCorrectness",
+                "RS1035:The symbol 'File' is banned for use by analyzers: Do not do file IO in analyzers",
+                Justification = "Existing working code.")]
             private void ApproveNamespace(string namespaceName, string namespacesFilePath)
             {
                 var lines = File.ReadAllLines(namespacesFilePath);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -32,6 +33,10 @@ namespace NationalInstruments.Analyzers.Correctness
     /// </code>
     /// </example>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [SuppressMessage(
+        "MicrosoftCodeAnalysisCorrectness",
+        "RS1035:'CultureInfo.CurrentCulture' is banned for use by analyzers: Analyzers should use the locale given by the compiler command line arguments, not the CurrentCulture",
+        Justification = "No public API available to get the locale given to the compiler, see https://github.com/dotnet/roslyn/issues/66566")]
     public class TestClassesMustInheritFromAutoTestAnalyzer : NIDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "NI1007";
@@ -39,7 +44,7 @@ namespace NationalInstruments.Analyzers.Correctness
         private const string TestClassAttributeTypeName = "Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute";
         private const string NIAutoTestAttributeTypeName = "NationalInstruments.Core.TestUtilities.AutoTest";
 
-        public static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor Rule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1007_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1007_Message), Resources.ResourceManager, typeof(Resources)),

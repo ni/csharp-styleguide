@@ -4,6 +4,7 @@
     <TargetFramework>$(NIAnalyzersTargetFramework)</TargetFramework>
     <AssemblyName>NationalInstruments.Analyzers.TestUtilities.UnitTests</AssemblyName>
     <RootNamespace>NationalInstruments.Analyzers.TestUtilities.UnitTests</RootNamespace>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -21,8 +20,8 @@ namespace NationalInstruments.Analyzers.Correctness
     {
         internal const string DiagnosticId = "NI1800";
 
-        private static readonly Regex _testNamespacePattern = new Regex(@".+(\.Tests|\.TestUtilities)");
-        private static readonly SourceTextValueProvider<ApprovedNamespaces> _approvedNamespacesProvider = new SourceTextValueProvider<ApprovedNamespaces>(s => new ApprovedNamespaces(s));
+        private static readonly Regex _testNamespacePattern = new(@".+(\.Tests|\.TestUtilities)");
+        private static readonly SourceTextValueProvider<ApprovedNamespaces> _approvedNamespacesProvider = new(s => new ApprovedNamespaces(s));
 
         private ApprovedNamespaces? _approvedNamespaces;
         private ApprovedNamespaces? _approvedTestNamespaces;
@@ -30,7 +29,7 @@ namespace NationalInstruments.Analyzers.Correctness
         /// <summary>
         /// Rule for namespaces in production code
         /// </summary>
-        public static readonly DiagnosticDescriptor ProductionRule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor ProductionRule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_Title), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_Message), Resources.ResourceManager, typeof(Resources)),
@@ -43,7 +42,7 @@ namespace NationalInstruments.Analyzers.Correctness
         /// <summary>
         /// Rule for namespaces in test/testutilities code
         /// </summary>
-        public static readonly DiagnosticDescriptor TestRule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor TestRule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_TestTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_TestMessage), Resources.ResourceManager, typeof(Resources)),
@@ -56,24 +55,26 @@ namespace NationalInstruments.Analyzers.Correctness
         /// <summary>
         /// Rule for failure to read approved namespaces files.
         /// </summary>
-        public static readonly DiagnosticDescriptor FileReadRule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor FileReadRule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_FileReadErrorTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_FileReadErrorMessage), Resources.ResourceManager, typeof(Resources)),
             Category.Correctness,
             DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true,
+            customTags: WellKnownDiagnosticTags.CompilationEnd);
 
         /// <summary>
         /// Rule for missing approved namespaces files.
         /// </summary>
-        public static readonly DiagnosticDescriptor MissingApprovalFilesRule = new DiagnosticDescriptor(
+        public static readonly DiagnosticDescriptor MissingApprovalFilesRule = new(
             DiagnosticId,
             new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorTitle), Resources.ResourceManager, typeof(Resources)),
             new LocalizableResourceString(nameof(Resources.NI1800_MissingApprovalFilesErrorMessage), Resources.ResourceManager, typeof(Resources)),
             Category.Correctness,
             DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true,
+            customTags: WellKnownDiagnosticTags.CompilationEnd);
 
         /// <inheritdoc/>
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ProductionRule, TestRule, FileReadRule, MissingApprovalFilesRule);
@@ -214,8 +215,8 @@ namespace NationalInstruments.Analyzers.Correctness
         /// </summary>
         private class ApprovedNamespaces
         {
-            private readonly HashSet<string> _namespaces = new HashSet<string>();
-            private readonly List<Regex> _namespacePatterns = new List<Regex>();
+            private readonly HashSet<string> _namespaces = new();
+            private readonly List<Regex> _namespacePatterns = new();
 
             public ApprovedNamespaces(SourceText sourceText)
             {

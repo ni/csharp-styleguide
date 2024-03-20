@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -62,6 +63,10 @@ namespace NationalInstruments.Analyzers.Style
             }
         }
 
+        [SuppressMessage(
+            "MicrosoftCodeAnalysisCorrectness",
+            "RS1035:'CultureInfo.CurrentCulture' is banned for use by analyzers: Analyzers should use the locale given by the compiler command line arguments, not the CurrentCulture",
+            Justification = "No public API available to get the locale given to the compiler, see https://github.com/dotnet/roslyn/issues/66566")]
         private static string FixName(string value)
         {
             var prefix = "_";

@@ -61,11 +61,11 @@ namespace <|>My.Namespace
     }
 }";
 
-        private static readonly Test OneDiagnosticTextTest = new Test(
+        private static readonly Test OneDiagnosticTextTest = new(
             OneDiagnosticTextMarkup,
             new DiagnosticTextMarker(2, 11, "My.Namespace"));
 
-        private static readonly Test ManyDiagnosticTextsTest = new Test(
+        private static readonly Test ManyDiagnosticTextsTest = new(
             ManyDiagnosticTextsMarkup,
             new DiagnosticTextMarker(2, 11, "My.Namespace"),
             new DiagnosticTextMarker(4, 11, "Program"),
@@ -345,13 +345,12 @@ namespace My.Namespace
         [Fact]
         public void ExtremesDiagnosticTextSyntax_TextCaptured()
         {
-            const int ExpectedMarkerCount = 1;
             const string Test = @"<|class Program { }|>";
 
             var markers = new TestMarkup().Parse(Test, out var source);
 
             Assert.NotNull(markers);
-            Assert.Equal(ExpectedMarkerCount, markers.Count);
+            Assert.Single(markers);
         }
     }
 }

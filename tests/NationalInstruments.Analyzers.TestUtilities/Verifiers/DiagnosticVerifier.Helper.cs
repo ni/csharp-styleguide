@@ -333,7 +333,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                     }
                 }
 
-                Xunit.Assert.True(false, builder.ToString());
+                Xunit.Assert.Fail(builder.ToString());
             }
         }
 

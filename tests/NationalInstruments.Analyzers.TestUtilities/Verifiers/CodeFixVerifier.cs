@@ -133,7 +133,7 @@ namespace NationalInstruments.Analyzers.TestUtilities.Verifiers
                     }
                     newCompilerDiagnostics = GetNewDiagnostics(compilerDiagnostics, updatedCompilerDiagnostics);
 
-                    Assert.True(false, string.Format(
+                    Assert.Fail(string.Format(
                         CultureInfo.InvariantCulture,
                         "Fix introduced new compiler diagnostics:\r\n{0}\r\n\r\nNew document:\r\n{1}\r\n",
                         string.Join("\r\n", newCompilerDiagnostics.Select(d => d.ToString())),

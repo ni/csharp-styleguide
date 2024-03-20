@@ -74,7 +74,7 @@ namespace NationalInstruments.Analyzers.Utilities.UnitTests
 
             additionalFileService.ParseXmlFile(additionalFile);
 
-            Assert.Equal(1, additionalFileService.ParsingDiagnostics.Count);
+            Assert.Single(additionalFileService.ParsingDiagnostics);
             Assert.Equal(FileParseRuleId, additionalFileService.ParsingDiagnostics[0].Id);
             Assert.Equal(ExpectedExceptionMessage, additionalFileService.ParsingDiagnostics[0].GetMessage());
         }

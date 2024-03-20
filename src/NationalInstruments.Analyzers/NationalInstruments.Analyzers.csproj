@@ -5,6 +5,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AssemblyName>NationalInstruments.Analyzers</AssemblyName>
     <RootNamespace>NationalInstruments.Analyzers</RootNamespace>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <ItemGroup>

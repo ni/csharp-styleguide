@@ -581,7 +581,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record &apos;{0}&apos; has properties that are enumerable collections, but does not explicitly implement the Equals and GetHashCode methods.
+        ///   Looks up a localized string similar to Record &apos;{0}&apos; has properties that are enumerable collections, but it does not explicitly implement the Equals(TRecord other) and GetHashCode methods.
         /// </summary>
         internal static string NI1019_Message {
             get {

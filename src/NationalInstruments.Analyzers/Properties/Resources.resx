@@ -415,10 +415,10 @@
     <value>Disposable should not have finalizer</value>
   </data>
   <data name="NI1019_Description" xml:space="preserve">
-    <value>The default implicit equality method implementation for records is to compare enumerable types by reference, not the element values;  thus it is important for records with enumerable properties to explicitly implement equality and compare the enumerables using SequenceEqual or UnorderedEquals (depending on whether ordering matters).</value>
+    <value>By default, record equality is determined by calling Equals on property values. IEnumerable.Equals compares the enumerable reference, making it a poor choice for determining whether two enumerables have the same elements . Thus, you must explicitly implement Equals(TRecord other) and compare enumerable elements with SequenceEqual (if order matters) or UnorderedEquals for the comparison to make logical sense.</value>
   </data>
   <data name="NI1019_Message" xml:space="preserve">
-    <value>Record '{0}' has properties that are enumerable collections, but does not explicitly implement the Equals and GetHashCode methods</value>
+    <value>Record '{0}' has properties that are enumerable collections, but it does not explicitly implement the Equals(TRecord other) and GetHashCode methods</value>
     <comment>{0} is the name of the record</comment>
   </data>
   <data name="NI1019_Title" xml:space="preserve">

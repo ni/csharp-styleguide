@@ -572,7 +572,7 @@ namespace NationalInstruments.Analyzers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default implicit equality method implementation for records is to compare enumerable types by reference, not the element values;  thus it is important for records with enumerable properties to explicitly implement equality and compare the enumerables using SequenceEqual or UnorderedEquals (depending on whether ordering matters)..
+        ///   Looks up a localized string similar to By default, record equality is determined by calling Equals on property values. IEnumerable.Equals compares the enumerable reference, making it a poor choice for determining whether two enumerables have the same elements . Thus, you must explicitly implement Equals(TRecord other) and compare enumerable elements with SequenceEqual (if order matters) or UnorderedEquals for the comparison to make logical sense..
         /// </summary>
         internal static string NI1019_Description {
             get {

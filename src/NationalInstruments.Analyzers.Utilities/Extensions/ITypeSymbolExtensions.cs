@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -103,6 +106,66 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
         public static bool IsOrInheritsFromClass(this ITypeSymbol type, string className)
         {
             return type.GetBaseTypesAndThis().OfType<INamedTypeSymbol>().Any(t => t.GetFullName() == className);
+        }
+
+        /// <summary>
+        /// Gets all of the public properties of the type.
+        /// </summary>
+        /// <param name="typeSymbol">The symbol to inspect</param>
+        /// <returns>Array of <see cref="IPropertySymbol"/> of the public properties</returns>
+        public static ImmutableArray<IPropertySymbol> GetPublicPropertySymbols(
+            this ITypeSymbol typeSymbol)
+        {
+            return typeSymbol.GetMembers()
+                .Where(m => m.Kind == SymbolKind.Property
+                    && m.DeclaredAccessibility == Accessibility.Public)
+                .Cast<IPropertySymbol>()
+                .ToImmutableArray();
+        }
+
+        /// <summary>
+        /// Gets whether this type is an enumerable.
+        /// </summary>
+        /// <param name="typeSymbol">The symbol to inspect.</param>
+        /// <returns>True if the type implements IEnumerable, false otherwise.</returns>
+        /// <remarks>
+        /// String types will return false, despite implementing IEnumerable{char}, because
+        /// we don't generally consider strings as enumerables.
+        /// </remarks>
+        public static bool IsEnumerable(
+            this ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol.TypeKind == TypeKind.Array)
+            {
+                return true;
+            }
+
+            if (typeSymbol.Name == nameof(IEnumerable))
+            {
+                return true;
+            }
+
+            if (typeSymbol.Name.Equals("string", StringComparison.OrdinalIgnoreCase))
+            {
+                // strings also implement IEnumerable<char> but we don't generally
+                // consider strings as an "enumerable".
+                return false;
+            }
+
+            return typeSymbol.AllInterfaces.Any(i => i.Name == nameof(IEnumerable));
+        }
+
+        /// <summary>
+        /// Whether the type has an explicitly declared IEquatable{T}.Equals method.
+        /// </summary>
+        /// <param name="typeSymbol">The type symbol to check.</param>
+        /// <returns>True if the type has explicitly declared an IEquatable{T}.Equals method, false otherwise.</returns>
+        public static bool HasExplicitIEquatableEquals(
+            this ITypeSymbol typeSymbol)
+        {
+            return typeSymbol.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Any(m => m.IsExplicitIEquatableEquals());
         }
     }
 }

@@ -82,5 +82,18 @@ namespace NationalInstruments.Analyzers.Utilities.Extensions
 
             return originalDefinitionsBuilder.ToImmutable();
         }
+
+        /// <summary>
+        /// Whether the method is IEquatable{T}.Equals method and explicitly declared
+        /// (i.e. not synthesized by the compiler).
+        /// </summary>
+        /// <param name="method">The method symbol to check.</param>
+        /// <returns>True if the method is the IEquatable{T}.Equals method and explicitly declared, false otherwise.</returns>
+        public static bool IsExplicitIEquatableEquals(this IMethodSymbol method)
+            => method.Name == WellKnownMemberNames.ObjectEquals
+                && method.ReturnType.SpecialType == SpecialType.System_Boolean
+                && method.Parameters.Length == 1
+                && method.Parameters[0].Type.Equals(method.ContainingType, SymbolEqualityComparer.Default)
+                && !method.IsImplicitlyDeclared;
     }
 }

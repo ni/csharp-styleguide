@@ -414,6 +414,16 @@
   <data name="NI1816X_Title" xml:space="preserve">
     <value>Disposable should not have finalizer</value>
   </data>
+  <data name="NI1019_Description" xml:space="preserve">
+    <value>By default, record equality is determined by calling Equals on property values. An enumerable's Equals method compares the enumerable's reference, making it a poor choice for determining whether two enumerables have the same elements. Thus, you must explicitly implement Equals(TRecord other) and compare enumerable elements with SequenceEqual (if order matters) or UnorderedEquals for the comparison to make logical sense.</value>
+  </data>
+  <data name="NI1019_Message" xml:space="preserve">
+    <value>Record '{0}' has properties that are enumerable collections, but it does not explicitly implement the Equals(TRecord other) and GetHashCode methods</value>
+    <comment>{0} is the name of the record</comment>
+  </data>
+  <data name="NI1019_Title" xml:space="preserve">
+    <value>Records that have enumerable properties should explicitly implement both Equals and GetHashCode methods</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Dictionary" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Dictionary.dic;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

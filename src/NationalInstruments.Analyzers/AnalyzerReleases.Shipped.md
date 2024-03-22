@@ -22,3 +22,11 @@ NI1001 | Style | Warning | FieldsCamelCasedWithUnderscoreAnalyzer
 NI1017 | Style | Warning | ChainOfMethodsWithLambdasAnalyzer
 NI1704 | Style | Warning | SpellingAnalyzer
 NI1728 | Style | Disabled | SpellingAnalyzer
+
+## Release 2.0.22
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|-------
+NI1019 | Correctness | Warning | RecordWithEnumerablesShouldOverrideDefaultEqualityAnalyzer

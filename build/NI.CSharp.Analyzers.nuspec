@@ -6,7 +6,7 @@
     <!--TODO: author and owner may have to change if we go to nuget.org -->
     <authors>NI</authors>
     <owners>NI</owners>
-    <copyright>Copyright 2023 National Instruments Corporation</copyright>
+    <copyright>Copyright 2024 National Instruments Corporation</copyright>
     <description>NI's code analyzers and rulesets for C# projects.</description>
     <summary>NI's code analyzers and rulesets for C# projects.</summary>
     <icon>images\icon.png</icon>
@@ -24,8 +24,8 @@
         <dependency id="Microsoft.CodeAnalysis.NetAnalyzers" version="8.0.0" />
         <dependency id="Microsoft.CodeAnalysis.CSharp" version="4.2.0" />
         <dependency id="Microsoft.CodeAnalysis.Analyzers" version="3.3.3" />
-        <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="17.2.32" />
-        <dependency id="StyleCop.Analyzers" version="1.2.0-beta.435" />
+        <dependency id="Microsoft.VisualStudio.Threading.Analyzers" version="17.10.48" />
+        <dependency id="StyleCop.Analyzers" version="1.2.0-beta.556" />
         <dependency id="Roslynator.Analyzers" version="4.1.1" />
       </group>
     </dependencies>

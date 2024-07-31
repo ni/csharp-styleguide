@@ -9,6 +9,7 @@
     <copyright>Copyright 2024 National Instruments Corporation</copyright>
     <description>NI's code analyzers and rulesets for C# projects.</description>
     <summary>NI's code analyzers and rulesets for C# projects.</summary>
+    <developmentDependency>true</developmentDependency>
     <icon>images\icon.png</icon>
     <repository type="git" url="https://github.com/ni/csharp-styleguide" />
     <projectUrl>https://github.com/ni/csharp-styleguide</projectUrl>

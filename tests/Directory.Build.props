@@ -10,7 +10,7 @@
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
-    <NILibraryTargetFramework>net6.0</NILibraryTargetFramework>
+    <NILibraryTargetFramework>net8.0</NILibraryTargetFramework>
     <NIAnalyzersTargetFramework>net48</NIAnalyzersTargetFramework>
   </PropertyGroup>
 

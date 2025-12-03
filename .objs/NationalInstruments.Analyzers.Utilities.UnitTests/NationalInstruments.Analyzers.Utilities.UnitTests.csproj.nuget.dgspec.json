@@ -1,0 +1,340 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.Utilities.UnitTests/NationalInstruments.Analyzers.Utilities.UnitTests.csproj": {}
+  },
+  "projects": {
+    "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj": {
+      "version": "10.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj",
+        "projectName": "NationalInstruments.Analyzers.Utilities",
+        "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/.objs/NationalInstruments.Analyzers.Utilities/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/home/runner/work/csharp-styleguide/csharp-styleguide/nuget.config",
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "target": "Package",
+              "version": "[3.3.4, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.Workspaces.Common": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "target": "Package",
+              "version": "[17.10.48, )",
+              "versionCentrallyManaged": true
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "StyleCop.Analyzers.Unstable": {
+              "target": "Package",
+              "version": "[1.2.0.556, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
+            "Microsoft.CodeAnalysis.CSharp": "4.9.2",
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.9.2",
+            "Microsoft.CodeAnalysis.Workspaces.Common": "4.9.2",
+            "Microsoft.VisualStudio.TestPlatform": "14.0.0",
+            "Microsoft.VisualStudio.Threading": "16.0.102",
+            "Microsoft.VisualStudio.Threading.Analyzers": "17.10.48",
+            "StyleCop.Analyzers.Unstable": "1.2.0.556",
+            "xunit": "2.7.0",
+            "xunit.assert": "2.7.0",
+            "xunit.runner.visualstudio": "2.5.7"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.TestUtilities/NationalInstruments.Analyzers.TestUtilities.csproj": {
+      "version": "10.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.TestUtilities/NationalInstruments.Analyzers.TestUtilities.csproj",
+        "projectName": "NationalInstruments.Analyzers.TestUtilities",
+        "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.TestUtilities/NationalInstruments.Analyzers.TestUtilities.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/.objs/NationalInstruments.Analyzers.TestUtilities/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/home/runner/work/csharp-styleguide/csharp-styleguide/nuget.config",
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj": {
+                "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "target": "Package",
+              "version": "[3.3.4, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.TestPlatform": {
+              "target": "Package",
+              "version": "[14.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading": {
+              "target": "Package",
+              "version": "[16.0.102, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "target": "Package",
+              "version": "[17.10.48, )",
+              "versionCentrallyManaged": true
+            },
+            "StyleCop.Analyzers.Unstable": {
+              "target": "Package",
+              "version": "[1.2.0.556, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.7.0, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.7.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
+            "Microsoft.CodeAnalysis.CSharp": "4.9.2",
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.9.2",
+            "Microsoft.CodeAnalysis.Workspaces.Common": "4.9.2",
+            "Microsoft.VisualStudio.TestPlatform": "14.0.0",
+            "Microsoft.VisualStudio.Threading": "16.0.102",
+            "Microsoft.VisualStudio.Threading.Analyzers": "17.10.48",
+            "StyleCop.Analyzers.Unstable": "1.2.0.556",
+            "xunit": "2.7.0",
+            "xunit.assert": "2.7.0",
+            "xunit.runner.visualstudio": "2.5.7"
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.Utilities.UnitTests/NationalInstruments.Analyzers.Utilities.UnitTests.csproj": {
+      "version": "10.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.Utilities.UnitTests/NationalInstruments.Analyzers.Utilities.UnitTests.csproj",
+        "projectName": "NationalInstruments.Analyzers.Utilities.UnitTests",
+        "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.Utilities.UnitTests/NationalInstruments.Analyzers.Utilities.UnitTests.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/.objs/NationalInstruments.Analyzers.Utilities.UnitTests/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/home/runner/work/csharp-styleguide/csharp-styleguide/nuget.config",
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj": {
+                "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/src/NationalInstruments.Analyzers.Utilities/NationalInstruments.Analyzers.Utilities.csproj"
+              },
+              "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.TestUtilities/NationalInstruments.Analyzers.TestUtilities.csproj": {
+                "projectPath": "/home/runner/work/csharp-styleguide/csharp-styleguide/tests/NationalInstruments.Analyzers.TestUtilities/NationalInstruments.Analyzers.TestUtilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true,
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "target": "Package",
+              "version": "[3.3.4, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+              "target": "Package",
+              "version": "[4.9.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Threading": {
+              "target": "Package",
+              "version": "[16.0.102, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "target": "Package",
+              "version": "[17.10.48, )",
+              "versionCentrallyManaged": true
+            },
+            "StyleCop.Analyzers.Unstable": {
+              "target": "Package",
+              "version": "[1.2.0.556, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.7.0, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.7, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
+            "Microsoft.CodeAnalysis.CSharp": "4.9.2",
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.9.2",
+            "Microsoft.CodeAnalysis.Workspaces.Common": "4.9.2",
+            "Microsoft.VisualStudio.TestPlatform": "14.0.0",
+            "Microsoft.VisualStudio.Threading": "16.0.102",
+            "Microsoft.VisualStudio.Threading.Analyzers": "17.10.48",
+            "StyleCop.Analyzers.Unstable": "1.2.0.556",
+            "xunit": "2.7.0",
+            "xunit.assert": "2.7.0",
+            "xunit.runner.visualstudio": "2.5.7"
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

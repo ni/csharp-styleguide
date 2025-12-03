@@ -48,7 +48,7 @@
     <Analyzer Include="$(PkgStyleCop_Analyzers_Unstable)\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll"/>
 
     <!-- Microsoft's CA analyzers -->
-    <Analyzer Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\Microsoft.CodeAnalysis.NetAnalyzers.dll"/>
+    <Analyzer Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll"/>
     <Analyzer Include="$(PkgMicrosoft_VisualStudio_Threading_Analyzers)\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll"/>
 

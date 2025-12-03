@@ -314,3 +314,4 @@ $RECYCLE.BIN/
 
 # Visual Studio local development settings
 launchSettings.json
+.objs/

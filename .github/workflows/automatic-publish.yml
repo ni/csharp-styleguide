@@ -59,6 +59,6 @@ jobs:
         run: dotnet pack .\src\NationalInstruments.Analyzers\NationalInstruments.Analyzers.csproj -p:NuspecFile=../../build/NI.CSharp.Analyzers.nuspec --no-build -p:NuspecProperties="Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}"
 
       - name: Publish Nuget Package
-        run: dotnet nuget push .\.binaries\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push .\.binaries\Release\NationalInstruments.Analyzers\*.nupkg --skip-duplicate --no-symbols --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
 
 
